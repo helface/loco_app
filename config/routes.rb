@@ -1,4 +1,10 @@
 LocoApp::Application.routes.draw do
+  get "pages/home"
+
+  get "pages/find"
+
+  get "pages/about"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
