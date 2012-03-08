@@ -24,7 +24,7 @@ group :assets do
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
 
-  end
+end
 
 gem 'jquery-rails', '2.0.0'
 
