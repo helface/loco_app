@@ -1,9 +1,15 @@
 <% provide(:title, 'home') %>
-<!DOCTYPE html>
-<html>
-  <body>
-	<div><a href="users"> add users </a></div>
-    <div><a href="find.html"> find locals<a></div>
-    <p>what is this about</p>
-  </body>
-</html>
+<div> class = "center hero-unit">
+  <div style="height: 100px"></div>
+   	<div style="height: 90px">
+	<form name="cities" action="city_form_action.js" method="get">
+		<select name="city" style="width: 140px">
+			<option> Seattle, WA </option>
+			<option> New York, NY </option>
+			<option> London, England </option>
+			<option> Toronto, Canada </option>
+		</select>
+	 </div>	
+	<input type="submit" value="Let's get started" style="background-color:grey; width:140px" />  
+	</form>
+</div>
