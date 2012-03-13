@@ -1,4 +1,6 @@
 LocoApp::Application.routes.draw do
+  get "pages/signup"
+
   resources :users
 
   get "pages/home"
@@ -7,9 +9,12 @@ LocoApp::Application.routes.draw do
 
   get "pages/about"
   
+  get "pages/signup"
+  
   
   match '/about', :to => 'pages#about'
   match '/find', :to => 'pages#find'
+  match '/signup', to: 'pages#signup'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

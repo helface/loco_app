@@ -1,5 +1,18 @@
+<% provide(:title, @user.username) %>
+
 <p id="notice"><%= notice %></p>
 
+<div style="height: 90px"> </div>
+	<div class="row">
+	  <aside class="span4">
+	    <section>
+	      <h1>
+	        <%= gravatar_for @user %>
+	        <%= @user.username %>
+	      </h1>
+	    </section>
+	  </aside>
+	</div>
 <p>
   <b>Username:</b>
   <%= @user.username %>
