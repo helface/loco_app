@@ -1,5 +1,5 @@
 class AddIndexToUsersEmail < ActiveRecord::Migration
   def change
-    add_index :email, :username, unique: true
+    add_index :email, unique: true
   end
 end

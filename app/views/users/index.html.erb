@@ -2,11 +2,9 @@
 
 <table>
   <tr>
-    <th>Username</th>
+    <th>Email</th>
     <th>Firstname</th>
     <th>Lastname</th>
-    <th>Email</th>
-   <!--> <th>Id</th> -->
     <th></th>
     <th></th>
     <th></th>
@@ -14,10 +12,9 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.username %></td>
+    <td><%= user.email %></td>
     <td><%= user.firstname %></td>
     <td><%= user.lastname %></td>
-    <td><%= user.email %></td>
     <!--><td><%= user.id %></td>-->
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>

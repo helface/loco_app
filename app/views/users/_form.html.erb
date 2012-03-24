@@ -5,9 +5,9 @@
 <label for="user_name">Name</label>
 <input id="user_name" name="user[name]" size="30" type="text" />
 -->
-  <div style="top: 50px" class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
@@ -24,10 +24,6 @@
   <div class="field">
     <%= f.label :lastname %><br />
     <%= f.text_field :lastname %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
   </div>
   <div class="actions">
     <%= f.submit  "create account", class: "btn btn-large btn-primary" %>

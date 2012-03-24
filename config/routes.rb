@@ -2,6 +2,7 @@ LocoApp::Application.routes.draw do
   get "pages/signup"
 
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   get "pages/home"
 
@@ -12,9 +13,11 @@ LocoApp::Application.routes.draw do
   get "pages/signup"
   
   
-  match '/about', :to => 'pages#about'
-  match '/find', :to => 'pages#find'
-  match '/signup', to: 'pages#signup'
+  match '/about', to: 'pages#about'
+  match '/find', to: 'pages#find'
+  match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

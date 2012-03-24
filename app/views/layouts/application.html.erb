@@ -10,12 +10,27 @@
 	<header class="navbar navbar-fixed-top">
 	      <div class="navbar-inner">
 	        <div class="container">
-	          <%= link_to "locoapp", '/', id: "logo" %>
+	          <h2> <%= link_to "Lokolit", '/', id: "logo" %> </h2>
 	          <nav>
 	            <ul class="nav pull-right">
 	              <li><%= link_to "about", 'about' %></li>
-	              <li><%= link_to "sign up ", '/users/new' %></li>
-				  <li><%= link_to "login", '/users' %></li>
+				  <% if signed_in? %>
+				  <li> <%= link_to "Users", '#' %></li>
+				  <li id="fat-menu" class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Account <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li> <%= link_to "profile", current_user %></li>
+						<li> <%= link_to "settings", "#" %> </li>
+						<li class="divider"> </li>
+						<li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>
+					
+					</ul>
+				  </li>
+				  <% else %>
+	              <li><%= link_to "sign in ", signin_path %></li>
+				  <% end %>
 	            </ul>
 	          </nav>
 	        </div>
