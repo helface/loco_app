@@ -3,6 +3,8 @@
         <%= gravatar_for user  %>
         <%= link_to user.email, user %>
         <br>
-        <%= link_to 'destroy', user, confirm: 'Are you sure?', method: :delete %>
+        <% if current_user.admin? && !current_user?(user) %>
+            <%= link_to 'delete', user, confirm: 'Are you sure?', method: :delete %>
+        <% end %>
     </td>
 </tr>

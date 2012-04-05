@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-before_filter :signed_in_user, only: [:edit, :update, :index]    
+before_filter :signed_in_user, only: [:edit, :update, :index, :destroy]    
 before_filter :correct_user, only: [:edit, :update]
+before_filter :admin_user, only: :destroy
     
   # GET /users
   # GET /users.json
@@ -89,14 +90,14 @@ before_filter :correct_user, only: [:edit, :update]
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
+    redirect_to users_path
+      # respond_to do |format|
+      #format.html { redirect_to users_url }
+      #format.json { head :no_content }
     end
   end
     
-    private
+private
     
     def signed_in_user
         unless signed_in?
@@ -109,4 +110,7 @@ before_filter :correct_user, only: [:edit, :update]
         @user=User.find(params[:id])
         redirect_to(root_path) unless current_user?(@user)
     end
-end
+
+    def admin_user
+        redirect_to(root_path) unless current_user.admin? && !current_user?(@user)
+    end
