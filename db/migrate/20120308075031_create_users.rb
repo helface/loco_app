@@ -7,7 +7,13 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
         
       t.timestamps
-   end
+    end
+    
+    change_table :users do |t|
+        t.remove username
+        t.index :email, :uniqueness => true
+    end
+      
   end
 end
     
