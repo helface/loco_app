@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration
     
     change_table :users do |t|
         t.remove username
+        t.string firstname
         t.index email
     end
       
