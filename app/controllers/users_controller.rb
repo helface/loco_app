@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
+before_filter :signed_in_user, only: [:edit, :update, :index]    
+before_filter :correct_user, only: [:edit, :update]
+    
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+      @users = User.paginate(page: params[:page], per_page: 10)
 
-    respond_to do |format|
+      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
     end
@@ -34,7 +37,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -56,25 +58,30 @@ class UsersController < ApplicationController
         flash[:success] = "welcome to locoo!"
         redirect_to @user
     else
-        render 'new'
+        render 'edit'
     end
-          
   end
 
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if @user.update_attributes(params[:user])
+        flash[:success] = "Profile successfully updated"
+        sign_in @user
+        redirect_to @user
+    else
+        render 'edit'
     end
+
+      #respond_to do |format|
+      #if @user.update_attributes(params[:user])
+      # format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      # format.json { head :no_content }
+      #else
+      # format.html { render action: "edit" }
+      # format.json { render json: @user.errors, status: :unprocessable_entity }
+      #end
+      #end
   end
 
   # DELETE /users/1
@@ -88,4 +95,18 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+    
+    private
+    
+    def signed_in_user
+        unless signed_in?
+            store_location
+            redirect_to signin_path, notice: "Please sign me in."
+        end
+    end
+    
+    def correct_user
+        @user=User.find(params[:id])
+        redirect_to(root_path) unless current_user?(@user)
+    end
 end
