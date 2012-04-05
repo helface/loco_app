@@ -8,13 +8,6 @@ class CreateUsers < ActiveRecord::Migration
         
       t.timestamps
     end
-    
-    change_table :users do |t|
-        t.remove username
-        t.string firstname
-        t.index email
-    end
-      
   end
 end
     
