@@ -11,7 +11,7 @@ class CreateUsers < ActiveRecord::Migration
     
     change_table :users do |t|
         t.remove username
-        t.index :email, :uniqueness => true
+        t.index email
     end
       
   end
