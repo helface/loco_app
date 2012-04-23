@@ -34,7 +34,7 @@
 	<% if !host_user?(@user) %>
 		<%= link_to 'become a host', becomehost_path %>
 	<% else %>
-		<%= link_to 'unbecosdfsdfme', @user.hostprofile, method: "delete"%>
+		<%= link_to 'unbecome host', @user.hostprofile, method: "delete"%>
 	<% end %>
 <% end %>
 	

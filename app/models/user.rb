@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   private
   
   def create_remember_token
-    debugger
     self.remember_token = SecureRandom.urlsafe_base64
   end
   
