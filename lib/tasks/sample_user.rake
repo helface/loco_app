@@ -1,7 +1,7 @@
 namespace :db do
     desc "fill db with sample users"
     task populate: :environment do
-        User.create!(firstname: "user",
+        User.create!(firstname: "fake",
                      lastname: "fake",
                      email: "fake@gmail.com",
                      password: "fakefake",
@@ -16,6 +16,11 @@ namespace :db do
                          email: email,
                          password: password,
                          password_confirmation: password)
+        end
+        users=User.all(limit: 10)
+        10.times do |n|
+          content = Faker::Lorem.sentence(3)
+          users.each {|user| user.reviews.create!(content: content, reviewer_id:n, reviewee_id:n+1)}
         end
     end
 end

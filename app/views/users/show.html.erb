@@ -2,17 +2,16 @@
 
 <p id="notice"><%= notice %></p>
 
-<div style="height: 90px"> </div>
-	<div class="row">
-	  <aside class="span4">
-	    <section>
-	      <h1>
-	        <%= gravatar_for @user %>
-	        <%= @user.firstname + " " + @user.lastname %>
-	      </h1>
-	    </section>
-	  </aside>
-	</div>
+<div class="row">
+   <aside class="span4">
+      <section>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.firstname %>
+        </h1>
+      </section>
+   </aside>
+</div>
 <p>
   <b>Firstname:</b>
   <%= @user.firstname %>
@@ -27,7 +26,64 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
+<% if host_user?(@user)%>
+<%= render @user.hostprofile %>
+<% end %>
+
+<% if current_user?(@user) %>
+	<% if !host_user?(@user) %>
+		<%= link_to 'become a host', becomehost_path %>
+	<% else %>
+		<%= link_to 'unbecosdfsdfme', @user.hostprofile, method: "delete"%>
+	<% end %>
+<% end %>
+	
+
+<div class="row">
+<div class="span8">
+
+  <% if @user.inverse_reviewees.any? %>
+	<%= will_paginate @reviews %>
+    <h3> Reviews (<%= @user.inverse_reviewees.count %>) </h3>
+    <ol class="microposts">
+      <% for review in @user.inverse_reviews %>
+       <%= render review %>
+       <% @temp = User.find(review.reviewer_id) %>
+	   posted by <%= @temp.firstname %>
+      <% end %>
+    </ol>
+    <%= will_paginate @reviews %>
+  <% end %>
+</div>
+</div>
+
+<% unless current_user?(@user) %>
+<% if signed_in? %>
+ <div class="row">
+    <aside class="span4">
+        <section>
+			<% @review = Review.new%>
+			<%= form_for(@review) do |f| %>
+			<%= render 'shared/error_messages' %>
+			<div class="field">
+			    <%= f.text_area :content, placeholder: "write your review..." %>
+			    <%= f.hidden_field :reviewer_id, value: current_user.id %>
+				<%= f.hidden_field :reviewee_id, value: @user.id%>
+			</div>
+			<%= f.submit "post", class: "btn btn-large btn-primary" %>
+			<% end %>
+        </section>
+    </aside>
+ </div>
+<% else %>
+<div>
+  <%= link_to 'Sign in to review', signin_path %> 
+</div>
+<% end %>
+<% end %>
 
 
+<%if current_user?(@user) %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
+<% end %>
 <%= link_to 'Back', users_path %>

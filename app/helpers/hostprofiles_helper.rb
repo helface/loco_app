@@ -1,0 +1,2 @@
+module HostprofilesHelper
+end

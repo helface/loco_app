@@ -5,5 +5,8 @@ module UsersHelper
     gravatar_url = "http://gravatar.com/avatar/#{gravatar_id}.png"
     image_tag(gravatar_url, alt:user.firstname, class:"gravatar")
   end
-    
+  
+  def host_user?(user)
+    user.is_host
+  end
 end

@@ -11,7 +11,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405232440) do
+ActiveRecord::Schema.define(:version => 20120413212534) do
+
+  create_table "hostprofiles", :force => true do |t|
+    t.string   "tele"
+    t.text     "serviceDesc"
+    t.string   "aboutme"
+    t.string   "price"
+    t.string   "greenDesc"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+  end
+
+  add_index "hostprofiles", ["user_id"], :name => "index_hostprofiles_on_user_id"
+
+  create_table "reviews", :force => true do |t|
+    t.string   "content"
+    t.integer  "reviewer_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "reviewee_id"
+  end
+
+  add_index "reviews", ["created_at"], :name => "index_reviews_on_reviewee_id_and_created_at"
+  add_index "reviews", ["reviewer_id", "created_at"], :name => "index_reviews_on_reviewer_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "lastname"
@@ -22,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120405232440) do
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
     t.string   "firstname"
+    t.boolean  "is_host",         :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

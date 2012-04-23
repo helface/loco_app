@@ -47,7 +47,7 @@ gem 'jquery-rails', '2.0.0'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+ gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
   gem 'capybara', '1.1.2'

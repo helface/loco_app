@@ -2,9 +2,17 @@
     <td>
         <%= gravatar_for user  %>
         <%= link_to user.email, user %>
-        <br>
-        <% if current_user.admin? && !current_user?(user) %>
-            <%= link_to 'delete', user, confirm: 'Are you sure?', method: :delete %>
-        <% end %>
+        <ul>
+            <li> <%= "#{user.firstname} #{user.lastname}" %> </li>
+            <li> reviews: <%= link_to user.reviews.count, user %></li>
+            <% unless current_user.nil? %>
+                <% if current_user?(user) %>
+                    <li> <%= link_to 'edit', edit_user_path(user) %> </li>
+                <% end %>
+                <% if current_user.admin? && !current_user?(user) %>
+                    <li> <%= link_to 'delete', user, confirm: 'Are you sure?', method: :delete %> </li>
+                <% end %>
+            <% end %>
+            </ul>
     </td>
 </tr>

@@ -14,9 +14,30 @@
 
 class User < ActiveRecord::Base
   
+  #TODO: make is_host non accessible
   attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
   has_secure_password
+  #has many reviews
+  has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
+  
+  #has many reviewed users
+  has_many :reviewees, through: :reviews, source: :reviewee
+  
+  #has received many reviews
+  has_many :inverse_reviews, class_name: "Review", foreign_key: "reviewee_id"
+  
+  #has many reviewee
+  has_many :inverse_reviewees, through: :inverse_reviews, source: :reviewer
+  
+  #has one hostprofile
+  has_one :hostprofile
+  
+  #validate
+  validates_associated :reviews
+  validates_associated :reviewees, :through => :reviews
+  
   before_save :create_remember_token
+  before_save {|user| user.email = email.downcase}
   
   validates :firstname, presence:true, length:{maximum: 20}
   validates :lastname, presence: true, length:{maximum: 20}
@@ -31,6 +52,7 @@ class User < ActiveRecord::Base
   private
   
   def create_remember_token
+    debugger
     self.remember_token = SecureRandom.urlsafe_base64
   end
   
