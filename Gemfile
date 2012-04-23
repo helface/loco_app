@@ -14,6 +14,7 @@ group :development do
 	gem 'sqlite3', '1.3.5'
 	gem 'rspec-rails', '2.8.1'
 	gem 'annotate', '~> 2.4.1.beta'
+	gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 group :production do
@@ -47,7 +48,6 @@ gem 'jquery-rails', '2.0.0'
 # gem 'capistrano'
 
 # To use debugger
- gem 'ruby-debug19', :require => 'ruby-debug'
 
 group :test do
   gem 'capybara', '1.1.2'
