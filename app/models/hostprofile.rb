@@ -7,4 +7,5 @@ class Hostprofile < ActiveRecord::Base
   validates :greenDesc, presence: true, length: {maximum: 500}
 
   #Add verification for input here
+  #add options for displayng phone number
 end

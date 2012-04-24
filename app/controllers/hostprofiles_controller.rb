@@ -1,5 +1,6 @@
 class HostprofilesController < UsersController    
 #TODO: fix these verifications!
+#TODO: Save host profile and only flip is_host on destroy
 before_filter :not_host_already, only: [:new, :create]
 
   def new
