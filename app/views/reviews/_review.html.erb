@@ -1,6 +1,8 @@
 <li>
 	<span class="content"> <%= review.content %> </span>
+	<% temp = User.find(review.reviewer_id) %>
+	posted by <%= temp.firstname %>
 	<span class="timestamp">
-		 posted on <%= review.created_at%>
+		 on <%= review.created_at%>
 	</span>
 </li>

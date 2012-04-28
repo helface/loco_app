@@ -1,0 +1,39 @@
+<h1><% provide(:title, "Mailbox") %> </h1>
+<br>
+<div style="height: 200px">
+<% unless current_user.nil? %>
+<div>
+	<%= link_to "inbox", mailbox_path %>
+	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
+</div>
+
+<br>
+ 	
+	<!-- TODO: insert subject line here -->
+	<div style="height: 40px">
+    	<%= "subject: " + @msgthread.subject %>
+	</div>
+	<% @messages.each do |msg| %>
+	<div>		
+		<%= msg.body %> <br>
+		<%= '__________________________________' %>
+	</div>
+	<% end %>
+	<div class="row">
+	    <aside class="span4">
+	        <section>
+				<% @message = Message.new%>
+				<%= form_for(@message) do |f| %>
+				<div class="field">
+				    <%= f.text_area :body, placeholder: "Reply..." %>
+				    <%= f.hidden_field :subject, value: "Re: " + @msgthread.subject %>
+					<%= f.hidden_field :recipient_id, value: thread_to_id(@msgthread)%>
+					<%= f.hidden_field :thread_id, value: params[:id]%>
+				</div>
+				<%= f.submit "reply", class: "btn btn-large btn-primary" %>
+				<% end %>
+	        </section>
+	    </aside>
+	 </div>
+<% end %>
+</div>

@@ -1,9 +1,37 @@
 LocoApp::Application.routes.draw do
 
-  resources :users
+  get "threads/new"
+
+  get "threads/create"
+
+  get "threads/show"
+
+  get "messages/new"
+
+  get "messages/createdestroy"
+
+  get "messages/index"
+
+  get "messages/show"
+
+  get "mailbox/new"
+
+  get "mailbox/index"
+
+  get "mailbox/show"
+
+  resources :users do
+    member do
+      get 'newmessage'
+      get 'newthread'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :reviews, only: [:new, :create, :destroy]
   resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update]
+  resources :mailbox, only: [:create, :show]
+  resources :messages, only: [:new, :index, :show, :create, :destroy]
+  resources :msgthreads, only: [:create, :show, :destroy, :update]
 
   get "pages/home"
   get "pages/signup"
@@ -19,6 +47,7 @@ LocoApp::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/becomehost', to: 'hostprofiles#new'
   match '/unbecomehost', to: 'hostprofiles#destroy', via: :delete
+  match '/newthread', to: 'msgthreads#create'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

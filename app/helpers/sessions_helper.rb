@@ -12,12 +12,12 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
         store_location
-        redirect_to signin_path, notice: "Please sign me in."
+        redirect_to signin_path, notice: "Oops, you need to log in first."
     end
   end
     
   def not_user_self
-      unless !current_user?(@user)
+      if current_user?(@user)
         redirect_to current_user
       end
   end

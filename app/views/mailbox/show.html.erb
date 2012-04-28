@@ -1,0 +1,13 @@
+<h1>Mailbox#show</h1>
+<br>
+<div style="height: 200px">
+<% unless current_user.nil? %>
+
+	<%= link_to "inbox", mailbox_path %>
+	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
+
+	<%= render @messages %>
+
+	
+<% end %>
+</div>

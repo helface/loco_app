@@ -35,6 +35,7 @@ before_filter :not_host_already, only: [:new, :create]
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    debugger
     @hostprofile = Hostprofile.find(params[:id])
     @hostprofile.destroy
     current_user.toggle!(:is_host)

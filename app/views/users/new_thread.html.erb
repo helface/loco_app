@@ -1,0 +1,24 @@
+<div class="row">
+    <aside class="span4">
+        <section>
+			<%= form_for(@msgthread) do |f| %>
+				<%= render 'shared/error_messages' %>
+		 		<div>
+					<div class="field">
+		    		<%= f.label :subject %><br />
+		    		<%= f.text_field :subject %>
+		  			</div>
+					<%= f.fields_for :message do |msg|%>
+		 				<div class="field">
+		    			<%= msg.label :body %> <br />
+		    			<%= msg.text_field :body %>
+		 				</div>
+						<%= msg.hidden_field :recipient_id, value: @user.id %>
+						<%= msg.hidden_field :thread_id, value: @msgthread.id %>
+						<% end %>
+				<%= f.submit "post", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
+        </section>
+    </aside>
+</div>

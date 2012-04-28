@@ -26,6 +26,7 @@
   <b>Email:</b>
   <%= @user.email %>
 </p>
+
 <% if host_user?(@user)%>
 <%= render @user.hostprofile %>
 <% end %>
@@ -34,23 +35,21 @@
 	<% if !host_user?(@user) %>
 		<%= link_to 'become a host', becomehost_path %>
 	<% else %>
-		<%= link_to 'unbecome host', @user.hostprofile, method: "delete"%>
+		<%= link_to 'unbecome host', hostprofile_path(@user.hostprofile), method: "delete"%>
 	<% end %>
+<% else %>
+	<!-- TODO: insert correct link here -->
+	<%= link_to 'message '+ @user.firstname, newmessage_user_path(@user)%> <br>
 <% end %>
 	
 
 <div class="row">
 <div class="span8">
 
-  <% if @user.inverse_reviewees.any? %>
-	<%= will_paginate @reviews %>
+  <% if @user.inverse_reviews.any? %>
     <h3> Reviews (<%= @user.inverse_reviewees.count %>) </h3>
     <ol class="microposts">
-      <% for review in @user.inverse_reviews %>
-       <%= render review %>
-       <% @temp = User.find(review.reviewer_id) %>
-	   posted by <%= @temp.firstname %>
-      <% end %>
+       <%= render @reviews %>
     </ol>
     <%= will_paginate @reviews %>
   <% end %>
@@ -59,7 +58,7 @@
 
 <% unless current_user?(@user) %>
 <% if signed_in? %>
- <div class="row">
+<div class="row">
     <aside class="span4">
         <section>
 			<% @review = Review.new%>

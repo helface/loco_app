@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   #TODO: make is_host non accessible
   attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
   has_secure_password
+  
   #has many reviews
   has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
   
@@ -30,7 +31,14 @@ class User < ActiveRecord::Base
   has_many :inverse_reviewees, through: :inverse_reviews, source: :reviewer
   
   #has one hostprofile
-  has_one :hostprofile
+  has_one :hostprofile, dependent: :destroy
+  
+  #has one mailbox (inbox, sent messages)
+  has_one :mailbox
+  
+  #has many messages
+  has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id"
+  has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id"
   
   #validate
   validates_associated :reviews

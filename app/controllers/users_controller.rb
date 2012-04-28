@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
 before_filter :signed_in_user, only: [:edit, :update, :destroy]    
 before_filter :correct_user, only: [:edit, :update]
-before_filter :admin_user, only: :destroy
+#before_filter :admin_user, only: :destroy
     
   # GET /users
   # GET /users.json
@@ -46,6 +46,7 @@ before_filter :admin_user, only: :destroy
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    @user.build_mailbox
 
       #respond_to do |format|
       #if @user.save
@@ -59,6 +60,7 @@ before_filter :admin_user, only: :destroy
       #end
     if @user.save
         flash[:success] = "welcome to locoo!"
+        sign_in @user 
         redirect_to @user
     else
         render 'edit'
@@ -90,14 +92,22 @@ before_filter :admin_user, only: :destroy
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    debugger
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path
       # respond_to do |format|
       #format.html { redirect_to users_url }
       #format.json { head :no_content }
-    end
   end
+  
+  def newmessage
+    @msgthread = Msgthread.create!(participant1_id: current_user.id, participant2_id: params[:id])
+    @user = User.find(params[:id])
+    render 'new_message'
+  end
+  
+end
     
 private
     

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413212534) do
+ActiveRecord::Schema.define(:version => 20120428150806) do
 
   create_table "hostprofiles", :force => true do |t|
     t.string   "tele"
@@ -25,6 +25,30 @@ ActiveRecord::Schema.define(:version => 20120413212534) do
   end
 
   add_index "hostprofiles", ["user_id"], :name => "index_hostprofiles_on_user_id"
+
+  create_table "mailboxes", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "thread_id"
+  end
+
+  create_table "msgthreads", :force => true do |t|
+    t.integer  "participant2_id"
+    t.integer  "participant1_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "subject"
+  end
 
   create_table "reviews", :force => true do |t|
     t.string   "content"

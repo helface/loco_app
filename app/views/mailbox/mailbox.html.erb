@@ -1,0 +1,19 @@
+<% provide(:title, 'mailbox') %>
+<h1><%= current_user.firstname + "'s mailbox"%></h1>
+<br>
+
+<% unless current_user.nil? %>
+
+	<%= link_to "inbox", mailbox_path(current_user, folder: "inbox" ) %>
+	<%= link_to "sent", mailbox_path(current_user, folder: "sent" )%>
+	
+<% end %>
+
+
+<%= will_paginate @messages%>
+
+<table>
+    <%= render @messages %>
+</table>
+
+<%= will_paginate @messages%>
