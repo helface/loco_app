@@ -1,9 +1,4 @@
 class MsgthreadsController < ApplicationController
-  
-  def new
-    
-  end
-
   def create
     if Msgthread.create!(params[:msgthread])
       if @message.save

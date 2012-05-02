@@ -9,13 +9,6 @@ describe MessagesController do
     end
   end
 
-  describe "GET 'createdestroy'" do
-    it "returns http success" do
-      get 'createdestroy'
-      response.should be_success
-    end
-  end
-
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'

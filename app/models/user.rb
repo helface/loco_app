@@ -13,7 +13,8 @@
 #
 
 class User < ActiveRecord::Base
-  
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   #TODO: make is_host non accessible
   attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
   has_secure_password
@@ -33,9 +34,6 @@ class User < ActiveRecord::Base
   #has one hostprofile
   has_one :hostprofile, dependent: :destroy
   
-  #has one mailbox (inbox, sent messages)
-  has_one :mailbox
-  
   #has many messages
   has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id"
   has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id"
@@ -44,7 +42,7 @@ class User < ActiveRecord::Base
   validates_associated :reviews
   validates_associated :reviewees, :through => :reviews
   
-  before_save :create_remember_token
+  before_save :create_tokens
   before_save {|user| user.email = email.downcase}
   
   validates :firstname, presence:true, length:{maximum: 20}
@@ -59,8 +57,9 @@ class User < ActiveRecord::Base
   
   private
   
-  def create_remember_token
+  def create_tokens
     self.remember_token = SecureRandom.urlsafe_base64
+    self.confirmation_token = SecureRandom.urlsafe_base64
   end
   
 end

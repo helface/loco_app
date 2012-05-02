@@ -16,6 +16,7 @@ group :development do
 	gem 'rspec-rails', '2.8.1'
 	gem 'annotate', '~> 2.4.1.beta'
 	gem 'ruby-debug19', :require => 'ruby-debug'
+	gem 'letter_opener'
 end
 
 group :production do

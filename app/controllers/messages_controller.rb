@@ -5,8 +5,7 @@ before_filter :unique_to_from, only: [:new, :create]
   def new
   end
 
-  def create 
-  
+  def create  
     @message = current_user.sent_msgs.build(params[:message])
     @msgthread = Msgthread.find(params[:message][:thread_id])
     if @message.save
@@ -17,9 +16,6 @@ before_filter :unique_to_from, only: [:new, :create]
       flash[:error] = "Sorry, we were unable to send your message"
       redirect_to current_user
     end
-  end
-
-  def index
   end
 
   def show

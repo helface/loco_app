@@ -8,7 +8,7 @@ describe UsersController do
     end
 
     it "routes to #new" do
-      get("/users/new").should route_to("users#new")
+      get("/signup").should route_to("users#new")
     end
 
     it "routes to #show" do

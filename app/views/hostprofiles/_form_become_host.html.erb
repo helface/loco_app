@@ -1,4 +1,12 @@
 <%= form_for(@hostprofile) do |f| %>
+  <div>
+	<%= f.label :country_name %>
+	<%= f.collection_select :country_id, Country.order(:name), :id, :name %>
+  </div>
+  <div>
+	<%= f.label :city_name %>
+	<%= f.grouped_collection_select :city_id, Country.order(:name), :cities, :name, :id, :name %>
+  </div>
   <div class="field">
     <%= f.label :telephone %><br />
     <%= f.text_field :tele %>

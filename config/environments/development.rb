@@ -14,7 +14,19 @@ LocoApp::Application.configure do
   config.action_controller.perform_caching = true #dev false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "thirtyflights.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "thirtyflights",
+    password: "tselanne"
+  }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -30,7 +42,7 @@ LocoApp::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Do not compress assets
-  config.assets.compress = true #dev false
+  config.assets.compress = false #dev false
 
   # Expands the lines which load the assets
   config.assets.debug = true

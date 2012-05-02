@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 #TODO: send confirmation email upon signup
-
 before_filter :signed_in_user, only: [:edit, :update, :destroy]    
 before_filter :correct_user, only: [:edit, :update]
+#TODO: figure out why this is being called for hostprofile destroy
 #before_filter :admin_user, only: :destroy
     
   # GET /users
@@ -20,7 +20,6 @@ before_filter :correct_user, only: [:edit, :update]
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    #TODO: correct pagination for reviews
     @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 5)
       #respond_to do |format|
       #format.html  show.html.erb
@@ -46,7 +45,6 @@ before_filter :correct_user, only: [:edit, :update]
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.build_mailbox
 
       #respond_to do |format|
       #if @user.save
@@ -59,9 +57,10 @@ before_filter :correct_user, only: [:edit, :update]
       #end
       #end
     if @user.save
-        flash[:success] = "welcome to locoo!"
-        sign_in @user 
-        redirect_to @user
+        flash[:success] = "Congratulations! A confirmation email has been sent to your inbox for activation."
+        #sign_in @user 
+        SignupMailer.signup_confirmation(@user).deliver
+        redirect_to signin_path
     else
         render 'edit'
     end
@@ -92,13 +91,25 @@ before_filter :correct_user, only: [:edit, :update]
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    debugger
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path
       # respond_to do |format|
       #format.html { redirect_to users_url }
       #format.json { head :no_content }
+  end
+  
+  def confirm
+    @user = User.find_by_confirmation_token(params[:token])
+    if @user.nil?
+      flash[:error] = "Sorry, we were not able to find your account."
+      redirect_to signin_path
+    else
+      @user.toggle!(:confirmed)
+      sign_in @user
+      flash[:success] = "Welcome!"
+      redirect_to @user
+    end
   end
   
   def newmessage

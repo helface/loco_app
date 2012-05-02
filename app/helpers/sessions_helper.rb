@@ -22,6 +22,10 @@ module SessionsHelper
       end
   end
   
+  def confirmation_token(user)
+    user.confirmation_token
+  end
+  
   def current_user=(user)
     @current_user = user
   end

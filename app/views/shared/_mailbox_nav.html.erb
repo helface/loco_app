@@ -1,0 +1,7 @@
+<% unless current_user.nil? %>
+<div>
+	<%= link_to "inbox", mailbox_path(:folder => 'inbox') %>
+	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
+</div>
+<br>
+<% end %>

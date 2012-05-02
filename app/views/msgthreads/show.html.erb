@@ -1,15 +1,8 @@
 <h1><% provide(:title, "Mailbox") %> </h1>
 <br>
 <div style="height: 200px">
-<% unless current_user.nil? %>
-<div>
-	<%= link_to "inbox", mailbox_path %>
-	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
-</div>
-
-<br>
+<%= render 'shared/mailbox_nav' %>
  	
-	<!-- TODO: insert subject line here -->
 	<div style="height: 40px">
     	<%= "subject: " + @msgthread.subject %>
 	</div>
@@ -35,5 +28,4 @@
 	        </section>
 	    </aside>
 	 </div>
-<% end %>
 </div>

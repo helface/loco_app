@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428150806) do
+ActiveRecord::Schema.define(:version => 20120501222315) do
+
+  create_table "cities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "country_id"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "hostprofiles", :force => true do |t|
     t.string   "tele"
@@ -22,15 +36,11 @@ ActiveRecord::Schema.define(:version => 20120428150806) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
+    t.integer  "city_id"
+    t.integer  "country_id"
   end
 
   add_index "hostprofiles", ["user_id"], :name => "index_hostprofiles_on_user_id"
-
-  create_table "mailboxes", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "messages", :force => true do |t|
     t.text     "body"
@@ -61,18 +71,28 @@ ActiveRecord::Schema.define(:version => 20120428150806) do
   add_index "reviews", ["created_at"], :name => "index_reviews_on_reviewee_id_and_created_at"
   add_index "reviews", ["reviewer_id", "created_at"], :name => "index_reviews_on_reviewer_id_and_created_at"
 
+  create_table "services", :force => true do |t|
+    t.string   "title"
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "lastname"
     t.string   "email"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           :default => false
+    t.boolean  "admin",              :default => false
     t.string   "firstname"
-    t.boolean  "is_host",         :default => false
+    t.boolean  "is_host",            :default => false
+    t.string   "confirmation_token"
+    t.boolean  "confirmed",          :default => false
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 

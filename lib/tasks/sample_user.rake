@@ -21,9 +21,10 @@ namespace :db do
         10.times do |n|
           content = Faker::Lorem.sentence(3)
           users.each {|user| user.reviews.create!(content: content, reviewer_id:n, reviewee_id:n+1)}
-          users.each {|user| user.build_hostprofile(tele: 44553322, serviceDesc: 'kalkjsojojlaskjdfjasldfkj', aboutme: 'asdfasdfasdfsadfasdf', price: '$23', greenDesc: 'grenn green green')}
-          users.each {|user| user.toggle!(:is_host)}
-        end
+        end 
+        
+        users.each {|user| user.build_hostprofile(tele: 44553322, serviceDesc: 'kalkjsojojlaskjdfjasldfkj', aboutme: 'asdfasdfasdfsadfasdf', price: '$23', greenDesc: 'grenn green green')}
+        users.each {|user| user.toggle!(:is_host)}
     end
 end
 

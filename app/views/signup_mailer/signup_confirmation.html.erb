@@ -1,0 +1,5 @@
+<p> Hello, <%= @user.firstname %> </p>
+
+<p> Thanks for registering with yela. Please click on the link below or paste it into your browser for activation.</p>
+
+<%= link_to url_for(controller: "users", action: "confirm", token: @user.confirmation_token, host: "localhost:3000"), url_for(controller: "users", action: "confirm", token: @user.confirmation_token, host: "localhost:3000") %>
