@@ -120,7 +120,6 @@ before_filter :correct_user, only: [:edit, :update]
       redirect_to @user
     end
   end
-    
 private
     
     def correct_user

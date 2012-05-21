@@ -7,6 +7,12 @@
       <section>
         <h1>
           <%= gravatar_for @user %>
+          <% @user.images.each do |img|%>
+             <%= link_to (image_tag img.photo.url(:medium)), img.photo.url(:original)%>
+             <% if current_user?(@user) %>   
+                <%=link_to "delete", img, confirm: "are you sure", method: :delete%>
+             <%end%>
+          <%end%>
           <%= @user.firstname %>
         </h1>
       </section>
@@ -28,10 +34,11 @@
 </p>
 
 <% if host_user?(@user)%>
-<%= render @user.hostprofile %>
+   <%= render @user.hostprofile %>
 <% end %>
 
 <% if current_user?(@user) %>
+   <div> <%=link_to "upload img", new_image_path %> </div>
 	<% if !host_user?(@user) %>
 		<%= link_to 'become a host', becomehost_path %>
 	<% else %>

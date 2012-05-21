@@ -1,5 +1,11 @@
 LocoApp::Application.routes.draw do
 
+  get "images/new"
+
+  get "images/create"
+
+  get "images/destroy"
+
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :msgthreads, only: [:create, :show, :destroy]
@@ -12,14 +18,13 @@ LocoApp::Application.routes.draw do
   resources :reviews, only: [:new, :create, :destroy]
   resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update]
   resources :mailbox, only: :show
-  #resources :messages, only: [:new, :show, :create, :destroy]
-  #resources :msgthreads, only: [:create, :show, :destroy]
   resources :forumposts do
     member do
       get 'respond'
       post 'create_response'
     end
   end
+  resources :images, only: [:new, :create, :destroy]
   
   get "pages/home"
   get "pages/signup"
