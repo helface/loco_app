@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-#TODO: send confirmation email upon signup
+#TODO: correct signup email configuration
+#TODO: user friendly URL to hide user id. Use to_param or something similar
+
 before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend]    
 before_filter :correct_user, only: [:edit, :update]
 #TODO: figure out why this is being called for hostprofile destroy
@@ -112,7 +114,7 @@ before_filter :correct_user, only: [:edit, :update]
     else
       @email = params[:email]
       @note = params[:note]
-      #TODO: move this to its own thread
+      #TODO: move emailer to its own thread
       SiteMailer.mail_recommendation(@email, current_user, @user, @note).deliver
       flash[:success] = "Email recommendation has been sent to your friend!"
       redirect_to @user
