@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   #TODO: make is_host non accessible
   attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
   has_secure_password
+  has_attached_file :photo
   
   #has many reviews
   has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy

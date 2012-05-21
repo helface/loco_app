@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517233157) do
+ActiveRecord::Schema.define(:version => 20120521171011) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,10 @@ ActiveRecord::Schema.define(:version => 20120517233157) do
     t.boolean  "is_host",            :default => false
     t.string   "confirmation_token"
     t.boolean  "confirmed",          :default => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
