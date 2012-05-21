@@ -1,0 +1,8 @@
+<%= form_tag recommend_user_path(@user), :method=>'post' do %>
+<%= label_tag "friend's email:" %>
+<%= text_field_tag "email"%>
+<%= label_tag "add a note (optional)"%>
+<%= text_field_tag "note"%>
+<%= submit_tag "email", :name => nil %>
+<% end %>
+	

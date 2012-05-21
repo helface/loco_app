@@ -21,9 +21,11 @@ before_filter :confirmed_user, only: :create
   
   def confirmed_user
     @user = User.find_by_email(params[:session][:email])
-    unless @user.confirmed?
-      flash.now[:error] = "You must confirm your account first. Look for activation link in your inbox."
-      render 'new'
+    unless @user.nil?
+      if !@user.confirmed?
+        flash.now[:error] = "You must confirm your account first. Look for activation link in your inbox."
+        render 'new'
+      end
     end 
   end
   

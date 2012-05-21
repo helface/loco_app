@@ -1,0 +1,21 @@
+<div class="row">
+    <aside class="span4">
+		<section>		
+			<%= form_for([:user, @message]) do |f| %>
+		 		<div>
+					<div class="field">
+		    		<%= f.label :subject %><br />
+		    		<%= f.text_field :subject %>
+		  		</div>
+		 		<div class="field">
+		    		<%= f.label :body %><br />
+		    		<%= f.text_field :body %>
+		 		</div>
+				<%= f.hidden_field :recipient_id, value: @user.id%>
+
+				<%= f.submit "post", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
+        </section>
+    </aside>
+</div>

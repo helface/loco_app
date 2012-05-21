@@ -1,0 +1,19 @@
+<div class="row">
+    <aside class="span4">
+		<section>		
+		   <div>
+		   RE: <%= @post.title%>
+			<%= form_for(:message, url: create_response_forumpost_path) do |f| %>
+		 		<div class="field">
+		    		<%= f.label :body %><br />
+		    		<%= f.text_field :body %>
+		 		</div>
+				<%= f.hidden_field :recipient_id, value: @post.user_id %>
+				<%= f.hidden_field :subject, value: "RE: " + @post.title%>
+
+				<%= f.submit "respond", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
+        </section>
+    </aside>
+</div>

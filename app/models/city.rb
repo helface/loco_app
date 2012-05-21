@@ -3,4 +3,5 @@ class City < ActiveRecord::Base
   belongs_to :country
   has_many :hostprofiles
   has_many :hosts, through: :hostprofiles, source: :user
+  has_many :forumposts
 end

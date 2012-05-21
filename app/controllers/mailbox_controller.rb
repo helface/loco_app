@@ -1,8 +1,5 @@
 class MailboxController < ApplicationController
 before_filter :signed_in_user
-  
-  def new
-  end
 
   def index
   end
@@ -13,6 +10,5 @@ before_filter :signed_in_user
     elsif params[:folder] == 'sent'
       @messages = current_user.sent_msgs.paginate(page: params[:page], per_page: 10)
     end
-    render 'mailbox'
   end
 end

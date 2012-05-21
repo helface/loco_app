@@ -1,13 +1,12 @@
-<h1>Mailbox#show</h1>
-<br>
-<div style="height: 200px">
-<% unless current_user.nil? %>
+<% provide(:title, 'mailbox') %>
+<h1><%= current_user.firstname + "'s mailbox"%></h1>
 
-	<%= link_to "inbox", mailbox_path %>
-	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
+<%= render 'shared/mailbox_nav' %>
 
-	<%= render @messages %>
+<%= will_paginate @messages%>
 
-	
-<% end %>
-</div>
+<table>
+    <%= render @messages %>
+</table>
+
+<%= will_paginate @messages%>

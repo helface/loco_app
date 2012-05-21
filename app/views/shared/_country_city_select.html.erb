@@ -1,0 +1,8 @@
+<div>
+<%= f.label :select_country %>
+<%= f.collection_select :country_id, Country.order(:name), :id, :name %>
+</div>
+<div>
+<%= f.label :select_city %>
+<%= f.grouped_collection_select :city_id, Country.order(:name), :cities, :name, :id, :name %>
+</div>

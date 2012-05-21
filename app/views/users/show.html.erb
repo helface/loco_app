@@ -38,8 +38,11 @@
 		<%= link_to 'unbecome host', hostprofile_path(@user.hostprofile), method: "delete"%>
 	<% end %>
 <% else %>
+	
+	<%= link_to 'message '+ @user.firstname, new_user_message_path(@user)%> <br>
 	<!-- TODO: insert correct link here -->
-	<%= link_to 'message '+ @user.firstname, newmessage_user_path(@user)%> <br>
+	<!-- TODO: two divs, one of email form hidden until first div is clicked. JQuery -->
+	<%= link_to 'Email a friend', recommend_user_path(@user) %>
 <% end %>
 	
 

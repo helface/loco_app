@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501222315) do
+ActiveRecord::Schema.define(:version => 20120517233157) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(:version => 20120501222315) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "forumposts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "city_id"
+    t.integer  "country_id"
+    t.integer  "responded_count", :default => 0
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "forumposts", ["city_id", "created_at"], :name => "index_forumposts_on_city_id_and_created_at"
+  add_index "forumposts", ["user_id", "created_at"], :name => "index_forumposts_on_user_id_and_created_at"
 
   create_table "hostprofiles", :force => true do |t|
     t.string   "tele"

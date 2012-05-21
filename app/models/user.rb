@@ -13,8 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  
   #TODO: make is_host non accessible
   attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
   has_secure_password
@@ -33,6 +32,8 @@ class User < ActiveRecord::Base
   
   #has one hostprofile
   has_one :hostprofile, dependent: :destroy
+  
+  has_many :forumposts, dependent: :destroy
   
   #has many messages
   has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id"

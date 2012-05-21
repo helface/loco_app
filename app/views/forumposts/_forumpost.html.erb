@@ -1,0 +1,5 @@
+<div>
+   title: <%= @post.title %><br>
+   content: <%= @post.content %><br>
+   posted by : <%=User.find(@post.user_id).firstname%>
+</div>

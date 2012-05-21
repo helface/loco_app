@@ -2,9 +2,10 @@
 <br>
 <div style="height: 200px">
 <%= render 'shared/mailbox_nav' %>
- 	
+ 	<% recipient = User.find(find_recipient_id(@msgthread))%>
 	<div style="height: 40px">
-    	<%= "subject: " + @msgthread.subject %>
+      <%= "to: #{recipient.firstname}"%> <br>
+      <%= "subject: " + @msgthread.subject %>
 	</div>
 	<% @messages.each do |msg| %>
 	<div>		
@@ -16,11 +17,11 @@
 	    <aside class="span4">
 	        <section>
 				<% @message = Message.new%>
-				<%= form_for(@message) do |f| %>
+				<%= form_for([:user, @message]) do |f| %>
 				<div class="field">
 				    <%= f.text_area :body, placeholder: "Reply..." %>
 				    <%= f.hidden_field :subject, value: "Re: " + @msgthread.subject %>
-					<%= f.hidden_field :recipient_id, value: thread_to_id(@msgthread)%>
+					<%= f.hidden_field :recipient_id, value: recipient.id%>
 					<%= f.hidden_field :thread_id, value: params[:id]%>
 				</div>
 				<%= f.submit "reply", class: "btn btn-large btn-primary" %>

@@ -1,0 +1,4 @@
+<%= render 'forumpost'%>
+<%if signed_in? && not_post_author(params[:id]) %>
+<%= link_to 'respond', respond_forumpost_path %>
+<%end%>

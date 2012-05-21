@@ -8,5 +8,5 @@
 	<% end %>
 	<br>
 	<% msgthread = Msgthread.find(message.thread_id) %>
-	<%= link_to message.subject, msgthread_path(msgthread) %>
+	<%= link_to message.subject, user_msgthread_path(current_user, msgthread) %>
 </div>

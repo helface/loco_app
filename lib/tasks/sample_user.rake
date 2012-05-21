@@ -25,6 +25,7 @@ namespace :db do
         
         users.each {|user| user.build_hostprofile(tele: 44553322, serviceDesc: 'kalkjsojojlaskjdfjasldfkj', aboutme: 'asdfasdfasdfsadfasdf', price: '$23', greenDesc: 'grenn green green')}
         users.each {|user| user.toggle!(:is_host)}
+        users.each { |user| user.toggle!(:confirmed) }
     end
 end
 

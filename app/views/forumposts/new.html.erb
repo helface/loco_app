@@ -1,0 +1,14 @@
+<%= form_for(@post) do |f| %>
+   <%=render 'shared/country_city_select', :f => f%>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+     <%= f.label :describe_what_you_are_looking_for %> <br>
+     <%= f.text_field :content%>
+  </div>	
+  <div class="actions">
+    <%= f.submit  "Post", class: "btn btn-large btn-primary" %>
+  </div>
+<%end%>
