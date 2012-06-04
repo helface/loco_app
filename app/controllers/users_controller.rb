@@ -4,13 +4,14 @@ class UsersController < ApplicationController
 
 before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend]    
 before_filter :correct_user, only: [:edit, :update]
+before_filter :location_specified, only: :index
 #TODO: figure out why this is being called for hostprofile destroy
 #before_filter :admin_user, only: :destroy
     
   # GET /users
   # GET /users.json
-  def index
-      @users = User.paginate(page: params[:page], per_page: 7)
+  def index  
+      @users = @city.hosts.paginate(page: params[:page], per_page: 7)
 
       #respond_to do |format|
       #format.html # index.html.erb
@@ -23,9 +24,7 @@ before_filter :correct_user, only: [:edit, :update]
   def show
     @user = User.find(params[:id])
     @token = params[:token]  
-     
     #for first time confirmation from confirmation email
-    confirm_user unless @token.nil?
     @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 5)
       #respond_to do |format|
       #format.html  show.html.erb
@@ -75,7 +74,6 @@ before_filter :correct_user, only: [:edit, :update]
   # PUT /users/1
   # PUT /users/1.json
   def update
-    
     if @user.update_attributes(params[:user])
       debugger
         flash[:success] = "Profile successfully updated"
@@ -107,39 +105,75 @@ before_filter :correct_user, only: [:edit, :update]
       #format.json { head :no_content }
   end
   
-  def recommend
-    @user = User.find(params[:id])
+  def mailfriend
+    @user = User.find(params[:id])  
     if params[:email].nil?
       render 'shared/friend_email', :user => @user
     else
       @email = params[:email]
       @note = params[:note]
       #TODO: move emailer to its own thread
-      SiteMailer.mail_recommendation(@email, current_user, @user, @note).deliver
+      SiteMailer.mail_friend(@email, current_user, @user, @note).deliver
       flash[:success] = "Email recommendation has been sent to your friend!"
       redirect_to @user
     end
   end
+  
+  def confirm
+    @user = User.find(params[:id])
+    @token = params[:token]
+
+    if @token.nil?
+      redirect_to root_path
+    elsif @user.confirm_status?(@token)
+      sign_in @user
+      flash[:success] = "Welcome!"
+      redirect_to @user
+    else
+      flash[:error] = "Confirmation failed"
+      redirect_to signin_path
+    end
+  end
+  
+  def filter
+    if remembered_city.nil? || params[:category].nil?
+      redirect_to root_path
+    else
+      @city = remembered_city
+      @country = remembered_country
+      @profiles = @city.hostprofiles.by_service(params[:category])
+      @users = []
+      @users = @profiles.collect(&:user).paginate(page: params[:page], per_page: 7)
+      render 'index'
+    end
+  end
+  
 private
     
-    def correct_user
-        @user=User.find(params[:id])
-        redirect_to(root_path) unless current_user?(@user)
-    end
-
-    def admin_user
-        redirect_to(root_path) unless current_user.admin? && !current_user?(@user)
-    end
+  def correct_user
+    @user=User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
     
-    def confirm_user 
-      if @token == @user.confirmation_token
-        @user.toggle!(:confirmed)
-        sign_in @user
-        flash[:success] = "Welcome!"
-        redirect_to @user
+  def admin_user
+      redirect_to(root_path) unless current_user.admin? && !current_user?(@user)
+  end
+  
+  #TODO: this code might need a bit of refactoring
+  def location_specified
+    #debugger
+    if params[:city].nil? || params[:country].nil?
+      if remembered_city.nil? || remembered_country.nil?
+        flash[:error] = "Please specify a location first"
+        redirect_to root_path
       else
-        flash[:error] = "Confirmation failed"
-        redirect_to signin_path
+        @city = City.find_by_id(remembered_city)
+        @country = Country.find_by_id(remembered_country)
       end
-    end
+    else
+      @city = City.find(params[:city][:id])
+      @country = Country.find(params[:country][:id])
+      remember_destination(@city.id, @country.id)
+    end 
+  end 
 end

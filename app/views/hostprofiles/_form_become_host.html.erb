@@ -1,5 +1,10 @@
 <%= form_for(@hostprofile) do |f| %>
-  <%= render 'shared/country_city_select', :f => f %>
+  <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
+  
+  <div class="field">
+    <%= f.label :select_service %>
+    <%= f.collection_select :service, Service.all, :id, :title %>
+  </div>
   <div class="field">
     <%= f.label :telephone %><br />
     <%= f.text_field :tele %>

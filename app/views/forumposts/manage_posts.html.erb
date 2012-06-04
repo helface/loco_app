@@ -1,0 +1,17 @@
+<% if @posts.nil? %>
+   You current have no forum posts
+<% else %>
+   <% @posts.each do |p|%>
+      <div id="name">
+         <%= p.title %>
+      </div>
+      <div id="name">
+         <%= p.content %>
+      </div>
+      <!--TODO: insert proper link here for delete-->
+      <%= link_to "delete", '#' %>
+   <% end %>
+<% end %>
+<div id="name">
+   <%= link_to "Post a request", new_forumpost_path %>
+</div>

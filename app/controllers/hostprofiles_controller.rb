@@ -10,13 +10,13 @@ before_filter :is_user_self, only: :destroy
   def create  
     @hostprofile = current_user.build_hostprofile(params[:hostprofile])
     if @hostprofile.save 
-        current_user.toggle!(:is_host)
+        current_user.toggle_host_status
         sign_in current_user
         flash[:success] = "Host profile successfully created"
         redirect_to current_user
     else
         flash[:error] = "Failed to create host profile"
-        redirect_to users_path
+        redirect_to current_user
     end
   end
 
@@ -34,26 +34,27 @@ before_filter :is_user_self, only: :destroy
 
   def destroy
     if @hostprofile.destroy
-      current_user.toggle!(:is_host)
+      current_user.toggle_host_status
       sign_in current_user
     else
       flash[:error] = "sorry, host profile failed to delete"
     end
     redirect_to current_user
   end
-    #making sure only non-hosts can become hosts
-    def not_host_already
-      if host_user?(current_user)
-        redirect_to(root_path)
-      end
-    end 
-    
-    #making sure that only the user self can delete its own profile
-    def is_user_self
-      @hostprofile = Hostprofile.find(params[:id])
-      unless @hostprofile.user_id == current_user.id       
-        redirect_to root_path
-      end
+  
+  #making sure only non-hosts can become hosts
+  def not_host_already
+    if host_user?(current_user)
+      redirect_to(root_path)
     end
-
+  end 
+    
+  #making sure that only the user self can delete his/her own profile
+  def is_user_self
+    @hostprofile = Hostprofile.find(params[:id])
+    unless current_user?(User.find(@hostprofile.user_id))
+      #unless @hostprofile.user_id == current_user.id       
+      redirect_to root_path
+    end
+  end
 end

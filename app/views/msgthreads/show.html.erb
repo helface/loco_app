@@ -4,8 +4,8 @@
 <%= render 'shared/mailbox_nav' %>
  	<% recipient = User.find(find_recipient_id(@msgthread))%>
 	<div style="height: 40px">
-      <%= "to: #{recipient.firstname}"%> <br>
-      <%= "subject: " + @msgthread.subject %>
+      To: <%= link_to recipient.firstname, user_path(recipient) %> <br>
+      Subject: <%= @msgthread.subject %>
 	</div>
 	<% @messages.each do |msg| %>
 	<div>		

@@ -10,8 +10,9 @@ LocoApp::Application.routes.draw do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :msgthreads, only: [:create, :show, :destroy]
     member do
-      get :recommend
-      post :recommend
+      get :mailfriend
+      post :mailfriend
+      get :confirm
     end
   end
   resources :sessions, only: [:create, :destroy]
@@ -34,7 +35,7 @@ LocoApp::Application.routes.draw do
   
   
   match '/about', to: 'pages#about'
-  match '/find', to: 'pages#find'
+  match '/hosts', to: 'pages#find'
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -43,6 +44,8 @@ LocoApp::Application.routes.draw do
   match '/newthread', to: 'msgthreads#new'
   #match '/newmessage', to: 'messages#new'
   match '/forum', to: 'forumposts#index'
+  match 'myposts', to: 'forumposts#manage_posts'
+  match 'filter', to: 'users#filter'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

@@ -1,30 +1,21 @@
-Welcome to forum!
-
-<% @countries = Country.order(:name)%>
+Welcome to forum! <b>#TODO: insert commentary here<b>
 
 <%= form_tag forum_path, method: 'get' do %>
-
-<% selected_country = params[:country]%>
-
-<%= collection_select :country, :id, @countries, :id, :name, :selected => (selected_country.nil? ? 2 : selected_country[:id]) %>
-
-<!--TODO: figure out how to retain the selected value after filter is applied -->
-<%= grouped_collection_select :city, :id, @countries, :cities, :name, :id, :name %>
-
+   <%=render 'shared/country_city_select', :inline_search => true%>
 <%= submit_tag "Search", :name => nil %>
 <%end%>
 
-
 <div>
 <% if signed_in? %>
-	<%= link_to "Post a request", new_forumpost_path %>
+	<%= link_to "Post a request", new_forumpost_path %> |
+	<%= link_to "My posts", myposts_path %>
 <% else %>
 	<%= link_to "sign in to post", signin_path %>
 <%end%>
+</div>
 
 <% @posts.each do |p| %>
 <div>
 <%= link_to p.title, forumpost_path(p) %> responded times <%= p.responded_count %>
-<div>
-<%end%>
 </div>
+<%end%>

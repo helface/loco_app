@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-   #before_filter :not_user_sel, only: :create
+
 before_filter :signed_in_user, only: :create
 before_filter :admin_user, only: :destroy
     

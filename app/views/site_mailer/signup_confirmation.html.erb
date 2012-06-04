@@ -1,5 +1,6 @@
+<!-- TODO: change host path for production environment -->
 <p> Hello, <%= @user.firstname %> </p>
 
-<p> Thanks for registering with yela. Please click on the link below or paste it into your browser for activation.</p>
+<p> Thanks for registering with TiniHost. Please click on the link below or paste it into your browser for activation.</p>
 
-<%= link_to user_url(@user, token: @user.confirmation_token, host: "localhost:3000"), user_url(@user, token: @user.confirmation_token, host: "localhost:3000") %>
+<%= link_to confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false), confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false) %>

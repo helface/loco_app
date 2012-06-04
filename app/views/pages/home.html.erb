@@ -1,14 +1,11 @@
 <% provide(:title, 'home') %>
 <div class = "center hero-unit">
-   	<div style="height: 90px">
-	<form name="cities" action="city_form_action.js" method="get">
-		<select name="city" style="width: 140px">
-			<option> Seattle, WA </option>
-			<option> New York, NY </option>
-			<option> London, England </option>
-			<option> Toronto, Canada </option>
-		</select>
-	 </div>	
-	<input type="submit" value="Let's get started" style="background-color:grey; width:140px" />  
-	</form>
+   <div id="name">
+      Which city are you visiting?
+   </div>
+   
+   <%= form_tag users_path, method: 'get' do %>
+      <%= render 'shared/country_city_select', :inline_search => true %>
+   <%= submit_tag "Go!", :name => nil %>
+   <% end %>
 </div>

@@ -1,10 +1,10 @@
  <div style="height: 50px">
 	<% if params[:folder] == 'sent'%>
 		<% recipient = User.find(message.recipient_id) %>		
-		<%= "To: " + recipient.firstname %>
+		To: <%= link_to recipient.firstname, user_path(recipient) %>
 	<% else %>
 		<% sender = User.find(message.sender_id) %>
-		<%= "from: " + sender.firstname %>	
+		from: <%=  link_to sender.firstname, user_path(sender) %>	
 	<% end %>
 	<br>
 	<% msgthread = Msgthread.find(message.thread_id) %>

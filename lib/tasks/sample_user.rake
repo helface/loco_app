@@ -18,6 +18,8 @@ namespace :db do
                          password_confirmation: password)
         end
         users=User.all(limit: 10)
+        cities = City.all
+        countries = Country.all
         10.times do |n|
           content = Faker::Lorem.sentence(3)
           users.each {|user| user.reviews.create!(content: content, reviewer_id:n, reviewee_id:n+1)}
@@ -26,7 +28,14 @@ namespace :db do
         users.each {|user| user.build_hostprofile(tele: 44553322, serviceDesc: 'kalkjsojojlaskjdfjasldfkj', aboutme: 'asdfasdfasdfsadfasdf', price: '$23', greenDesc: 'grenn green green')}
         users.each {|user| user.toggle!(:is_host)}
         users.each { |user| user.toggle!(:confirmed) }
+        
+        n = 0
+        users.each {|user| user.hostprofile.update_attributes(:city_id => cities[n+=1].id)}
+        
+        j=0
+        users.each {|user| user.hostprofile.update_attributes(:service => j+=1)}
     end
+    
 end
 
             

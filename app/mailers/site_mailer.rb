@@ -3,10 +3,10 @@ class SiteMailer < ActionMailer::Base
   
   def signup_confirmation(user)
     @user = user
-    mail to: user.email, subject: "Yela confirmation"
+    mail to: user.email, subject: "TiniHost confirmation"
   end
   
-  def mail_recommendation(email, current_user, user, note)
+  def mail_friend(email, current_user, user, note)
     @email = email
     @recommender = current_user
     @user = user

@@ -1,8 +1,17 @@
-<div>
-<%= f.label :select_country %>
-<%= f.collection_select :country_id, Country.order(:name), :id, :name %>
-</div>
-<div>
-<%= f.label :select_city %>
-<%= f.grouped_collection_select :city_id, Country.order(:name), :cities, :name, :id, :name %>
-</div>
+<% @countries = Country.order(:name)%>
+<% if inline_search == true %>
+   <% selected_country = params[:country]%>
+   <%= collection_select :country, :id, @countries, :id, :name, :selected => (selected_country.nil? ? 2 : selected_country[:id]) %>
+   <!--TODO: figure out how to retain the selected value after filter is applied -->
+   <%= grouped_collection_select :city, :id, @countries, :cities, :name, :id, :name %>
+<%else%>
+   <div>
+   <%= f.label :select_country %>
+   <%= f.collection_select :country_id, @countries, :id, :name %>
+   </div>
+   <div>
+   <%= f.label :select_city %>
+   <%= f.grouped_collection_select :city_id, @countries, :cities, :name, :id, :name %>
+   </div>
+<%end%>
+

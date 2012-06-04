@@ -6,7 +6,7 @@
    <aside class="span4">
       <section>
         <h1>
-          <%= gravatar_for @user %>
+          
           <% @user.images.each do |img|%>
              <%= link_to (image_tag img.photo.url(:medium)), img.photo.url(:original)%>
              <% if current_user?(@user) %>   
@@ -49,9 +49,8 @@
 	<%= link_to 'message '+ @user.firstname, new_user_message_path(@user)%> <br>
 	<!-- TODO: insert correct link here -->
 	<!-- TODO: two divs, one of email form hidden until first div is clicked. JQuery -->
-	<%= link_to 'Email a friend', recommend_user_path(@user) %>
+	<%= link_to 'Email a friend', mailfriend_user_path(@user) %>
 <% end %>
-	
 
 <div class="row">
 <div class="span8">

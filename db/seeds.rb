@@ -14,3 +14,13 @@ open("lib/data/cities.txt") do |cities|
     City.create!(:name => name, :country_id => cid) unless cid.nil?
   end
 end
+
+Service.delete_all
+Service.create!(title: "local know-it-all", desc: "show you city")
+Service.create!(title: "meal companion")
+Service.create!(title: "schoefer")
+Service.create!(title: "translator")
+Service.create!(title: "shopping buddy")
+Service.create!(title: "advanture guide")
+Service.create!(title: "nightlife expert")
+

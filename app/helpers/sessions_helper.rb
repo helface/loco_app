@@ -61,6 +61,23 @@ module SessionsHelper
       session[:return_to] = request.fullpath
   end
   
+  def remembered_city
+    unless cookies[:city_id].nil?
+      City.find_by_id(cookies[:city_id])
+    end
+  end
+  
+  def remembered_country
+    unless cookies[:country_id].nil?
+      Country.find_by_id(cookies[:country_id])
+    end
+  end
+  
+  def remember_destination(city_id, country_id)
+    cookies[:country_id] = country_id
+    cookies[:city_id] = city_id
+  end
+  
 private
   
   def user_from_remember_token

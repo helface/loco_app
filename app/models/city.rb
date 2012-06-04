@@ -4,4 +4,9 @@ class City < ActiveRecord::Base
   has_many :hostprofiles
   has_many :hosts, through: :hostprofiles, source: :user
   has_many :forumposts
+  
+  def is_city_of(country)
+    self.country == country
+  end
+  
 end

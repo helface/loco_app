@@ -1,12 +1,25 @@
+<%= provide(:title, 'search') %>
+<%= form_tag users_path, method: 'get' do %>
+  <%= render "shared/country_city_select", :inline_search => true%>
+<%= submit_tag "Go!", :name => nil %>
+<% end %>
 
-<%= provide(:title, 'All users') %>
-<h1>All users</h1>
+<!--TODO: if link for service categories, city needs to be remembered -->
+<% Service.all.each do |s| %>
+   <div id="name">
+      <%= link_to s.title, filter_path(:category => s.id) %>
+   </div>
+<% end %>
 
-<%= will_paginate %>
-
-<table class="users">
-    <%= render @users %>
-</table>
-
-<%= will_paginate %>
-</ul>
+<% if @users.empty? %>
+   <div id="name">
+      Shoot, there aren't any hosts in <%= "#{@city.name}, #{@country.name}" %> yet. 
+   </div>
+<%else%>
+   <h1>hosts in <%= "#{@city.name}, #{@country.name}" %></h1>
+   <%= will_paginate %>
+   <table class="users">
+      <%= render @users %>
+   </table>
+   <%= will_paginate %>
+<% end %>

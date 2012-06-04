@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521174048) do
+ActiveRecord::Schema.define(:version => 20120602142903) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -47,14 +47,17 @@ ActiveRecord::Schema.define(:version => 20120521174048) do
     t.string   "aboutme"
     t.string   "price"
     t.string   "greenDesc"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "user_id"
     t.integer  "city_id"
     t.integer  "country_id"
+    t.integer  "recommend_count",   :default => 0
+    t.integer  "unrecommend_count", :default => 0
+    t.integer  "contacted_count",   :default => 0
+    t.integer  "responded_count",   :default => 0
+    t.integer  "service"
   end
-
-  add_index "hostprofiles", ["user_id"], :name => "index_hostprofiles_on_user_id"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"

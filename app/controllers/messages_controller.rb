@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
 before_filter :signed_in_user
-#before_filter :unique_to_from, only: [:create]
 
   def new
     @user = User.find(params[:user_id])

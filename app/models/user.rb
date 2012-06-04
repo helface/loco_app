@@ -47,15 +47,33 @@ class User < ActiveRecord::Base
   before_save :create_tokens
   before_save {|user| user.email = email.downcase}
   
-  validates :firstname, presence:true, length:{maximum: 20}
-  validates :lastname, presence: true, length:{maximum: 20}
+  #TODO remove these for production
+  #validates :firstname, presence:true, length:{maximum: 20}
+  #validates :lastname, presence: true, length:{maximum: 20}
   
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
+  #validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
 
-  validates :password, length:{minimum: 6}
-  validates :password_confirmation, presence: true
+  #validates :password, length:{minimum: 6}
+  #validates :password_confirmation, presence: true
+  
+  def toggle_host_status
+    self.toggle!(:is_host)
+  end
+  
+  def toggle_confirm_status
+    self.toggle!(:confirmed)
+  end
+  
+  def confirm_status?(token) 
+    if token && token == self.confirmation_token
+      self.toggle_confirm_status
+      return true
+    else
+      return false
+    end
+  end
   
   private
   
