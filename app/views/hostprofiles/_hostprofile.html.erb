@@ -8,4 +8,12 @@
 		<p> <%= hostprofile.serviceDesc %> </p>
 		Price <br>
 		<p> <%= hostprofile.price %> </p>
+		<div id="name">
+		   Languages <%= "#{hostprofile.languages.count}" %>
+		   <% hostprofile.languages.each do |lan|%>
+		   <div id="name">
+		    <%=" #{lan}" %>
+		   </div>
+		   <% end %>
+		</div>
 	</span>

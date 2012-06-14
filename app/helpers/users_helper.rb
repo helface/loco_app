@@ -7,6 +7,6 @@ module UsersHelper
   end
   
   def host_user?(user)
-    user.is_host
+    user.try(:is_host)
   end
 end

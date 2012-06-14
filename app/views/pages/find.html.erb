@@ -2,7 +2,9 @@
 <div id="name">
    Where are you going?
 </div>
-<%= form_tag users_path, method: 'get' do %>
-  <%= render "shared/country_city_select", :inline_search => true%>
+<%= form_tag fill_location_path, method: 'get' do %>
+<div id="name">
+   <%= render "shared/country_city_select", :inline_search => true%>
+</div>
 <%= submit_tag "Go!", :name => nil %>
 <% end %>

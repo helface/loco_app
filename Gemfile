@@ -8,7 +8,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.5'
 gem 'state_machine', '1.1.2'
 gem 'paperclip', '3.0.4'
-gem 'classy_enum', '2.0.3'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -30,11 +30,13 @@ group :assets do
   gem 'sass-rails',   '3.2.3'
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.3'
+  gem 'chosen-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
-
 end
+
+gem 'best_in_place', '1.1.2'
 
 gem 'jquery-rails', '2.0.0'
 

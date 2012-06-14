@@ -1,6 +1,11 @@
 <%= form_for(@hostprofile) do |f| %>
-  <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
-  
+  <div id="name">
+     <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
+  </div>
+  <div class="field">
+     <%= f.label :what_languages_do_you_speak %>
+     <%= f.collection_select :languages, Language.order(:name), :name, :name, {placeholder: "asdfasdfasdfasfdasdf"}, {multiple: true}%>
+  </div>
   <div class="field">
     <%= f.label :select_service %>
     <%= f.collection_select :service, Service.all, :id, :title %>

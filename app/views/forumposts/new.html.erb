@@ -1,5 +1,7 @@
 <%= form_for(@post) do |f| %>
+<div id="name">
    <%=render 'shared/country_city_select', :f=>f, :inline_search => false %>
+</div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>

@@ -1,6 +1,10 @@
 ---
-rails.png: rails-782b548cc1ba7f898cdad2d9eb8420d2.png
-application.js: application-cf5a60983aac3b778c29aaf157129ee4.js
-application.css: application-c569ff05c2b1361c7eca32e8e08ba5d2.css
-glyphicons-halflings-white.png: glyphicons-halflings-white-4fbb6a0b9b4e61912f486ac494a858f1.png
-glyphicons-halflings.png: glyphicons-halflings-2ed0cba6eca0f44737ab78f1e58bc11e.png
+glasses.png: glasses.png
+hat.png: hat.png
+luggage.png: luggage.png
+rails.png: rails.png
+application.js: application.js
+application.css: application.css
+chosen-sprite.png: chosen-sprite.png
+glyphicons-halflings-white.png: glyphicons-halflings-white.png
+glyphicons-halflings.png: glyphicons-halflings.png

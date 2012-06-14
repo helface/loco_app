@@ -2,16 +2,18 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-JQuery ->
-	cities = $('#hostprofile_city_name').html()
+jQuery ->
+	$('#hostprofile_languages').chosen()
+
+	cities = $('#hostprofile_city_id').html()
 	console.log(cities)
-	$('#person_country_name').change ->
-		country = $('#hostprofile_country_name :select').text()
-		escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1') 	
-		options = $(cities).filter("optgroup[lable=#{escaped_country}]").html()
-		console.log(options)
+	$('#hostprofile_country_id').change ->
+		country = $('#hostprofile_country_id :selected').text()
+		escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1') 
+		options = $(cities).filter("optgroup[label=#{escaped_country}]").html()
 		if options
-			$('#person_city_name').html(options)
+			$('#hostprofile_city_id').html(options)
+			$('#hostprofile_city_id').parent().show()
 		else
-			$('#person_city_name').empty()
-			$('#person_city_name').parent().hide()
+			$('#hostprofile_city_id').empty()
+			$('#hostprofile_city_id').parent().hide()

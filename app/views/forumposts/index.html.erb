@@ -1,7 +1,9 @@
 Welcome to forum! <b>#TODO: insert commentary here<b>
 
 <%= form_tag forum_path, method: 'get' do %>
+<div id="name">
    <%=render 'shared/country_city_select', :inline_search => true%>
+</div>
 <%= submit_tag "Search", :name => nil %>
 <%end%>
 
@@ -13,7 +15,16 @@ Welcome to forum! <b>#TODO: insert commentary here<b>
 	<%= link_to "sign in to post", signin_path %>
 <%end%>
 </div>
-
+<div id="name">
+   <%= will_paginate @posts%>
+   <% if !params[:city_country_location].nil? %>
+      <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
+   <% else %>
+      <%= "All posts"%>
+   <% end %>
+   <%= will_paginate @posts %>
+        
+</div>
 <% @posts.each do |p| %>
 <div>
 <%= link_to p.title, forumpost_path(p) %> responded times <%= p.responded_count %>

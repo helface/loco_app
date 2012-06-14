@@ -2,12 +2,16 @@ class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
   def index
-    if !params[:city].nil?
-      city = City.find(params[:city][:id]) 
-      @posts = city.forumposts
+    unless params[:city_country_location].nil?
+      if find_location(params[:city_country_location])
+        remember_destination(@city.id, @country.id)
+        @posts = @city.forumposts.paginate(page: params[:page], per_page: 15)
+      else
+        flash[:error] = "Sorry, we don't have entries for #{params[:city_country_location]} yet"
+        redirect_to forum_path
+      end
     else
-      #TODO: do i want this?
-      @posts = Forumpost.all
+      @posts = Forumpost.order(:created_at).paginate(page: params[:page], per_page: 15)
     end
   end
   

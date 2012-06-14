@@ -3,6 +3,7 @@ module SessionsHelper
   def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     current_user = user
+    clear_destination
   end
   
   def signed_in?
@@ -49,6 +50,7 @@ module SessionsHelper
   
   def sign_out
     current_user = nil
+    clear_destination
     cookies.delete(:remember_token)
   end
     
@@ -59,23 +61,6 @@ module SessionsHelper
     
   def store_location
       session[:return_to] = request.fullpath
-  end
-  
-  def remembered_city
-    unless cookies[:city_id].nil?
-      City.find_by_id(cookies[:city_id])
-    end
-  end
-  
-  def remembered_country
-    unless cookies[:country_id].nil?
-      Country.find_by_id(cookies[:country_id])
-    end
-  end
-  
-  def remember_destination(city_id, country_id)
-    cookies[:country_id] = country_id
-    cookies[:city_id] = city_id
   end
   
 private

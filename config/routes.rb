@@ -26,6 +26,7 @@ LocoApp::Application.routes.draw do
     end
   end
   resources :images, only: [:new, :create, :destroy]
+  resources :locations, only: [:index]
   
   get "pages/home"
   get "pages/signup"
@@ -42,10 +43,10 @@ LocoApp::Application.routes.draw do
   match '/becomehost', to: 'hostprofiles#new'
   match '/unbecomehost', to: 'hostprofiles#destroy', via: :delete
   match '/newthread', to: 'msgthreads#new'
-  #match '/newmessage', to: 'messages#new'
   match '/forum', to: 'forumposts#index'
   match 'myposts', to: 'forumposts#manage_posts'
   match 'filter', to: 'users#filter'
+  match 'fill_location', to:'locations#fill_location'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

@@ -24,3 +24,17 @@ Service.create!(title: "shopping buddy")
 Service.create!(title: "advanture guide")
 Service.create!(title: "nightlife expert")
 
+Language.delete_all
+Language.create!(name: "English", code: "EN" )
+Language.create!(name: "French", code: "FR")
+Language.create!(name: "German", code: "AL")
+Language.create!(name: "Chinese", code: "CH")
+Language.create!(name: "Japanese", code: "JP")
+Language.create!(name: "Spanish", code: "SP")
+Language.create!(name: "Arabic", code: "AR")
+Language.create!(name: "Korean", code: "KO")
+Language.create!(name: "Russian", code: "RU")
+Language.create!(name: "Portugese", code: "PT")
+Language.create!(name: "Hindi", code: "HD")
+Language.create!(name: "Swahili", code: "SW")
+

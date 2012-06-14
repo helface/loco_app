@@ -8,6 +8,7 @@ before_filter :is_user_self, only: :destroy
   end
 
   def create  
+    #debugger
     @hostprofile = current_user.build_hostprofile(params[:hostprofile])
     if @hostprofile.save 
         current_user.toggle_host_status
@@ -43,11 +44,12 @@ before_filter :is_user_self, only: :destroy
   end
   
   #making sure only non-hosts can become hosts
+  #TODO: make this into a user class method
   def not_host_already
-    if host_user?(current_user)
+    if host_user?(current_user) || current_user.nil?
       redirect_to(root_path)
     end
-  end 
+  end  
     
   #making sure that only the user self can delete his/her own profile
   def is_user_self

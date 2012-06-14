@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 #TODO: correct signup email configuration
 #TODO: user friendly URL to hide user id. Use to_param or something similar
-
+respond_to :html, :json
 before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend]    
 before_filter :correct_user, only: [:edit, :update]
 before_filter :location_specified, only: :index
@@ -74,24 +74,26 @@ before_filter :location_specified, only: :index
   # PUT /users/1
   # PUT /users/1.json
   def update
+    #debugger
+    @user = User.find_by_id(params[:id])
     if @user.update_attributes(params[:user])
-      debugger
-        flash[:success] = "Profile successfully updated"
+      flash[:success] = "Profile successfully updated"
         sign_in @user
         redirect_to @user
+        respond_with @user
     else
         render 'edit'
     end
 
-      #respond_to do |format|
-      #if @user.update_attributes(params[:user])
-      # format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      # format.json { head :no_content }
+     # respond_to do |format|
+      #if @user.update_attributes(:firstname => "asdfasdf")
+       #format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      #format.json { head :no_content }
       #else
       # format.html { render action: "edit" }
       # format.json { render json: @user.errors, status: :unprocessable_entity }
-      #end
-      #end
+     # end
+     # end
   end
 
   # DELETE /users/1
@@ -136,6 +138,7 @@ before_filter :location_specified, only: :index
   end
   
   def filter
+    #debugger
     if remembered_city.nil? || params[:category].nil?
       redirect_to root_path
     else
@@ -161,19 +164,10 @@ private
   
   #TODO: this code might need a bit of refactoring
   def location_specified
-    #debugger
-    if params[:city].nil? || params[:country].nil?
-      if remembered_city.nil? || remembered_country.nil?
-        flash[:error] = "Please specify a location first"
-        redirect_to root_path
-      else
-        @city = City.find_by_id(remembered_city)
-        @country = Country.find_by_id(remembered_country)
-      end
-    else
-      @city = City.find(params[:city][:id])
-      @country = Country.find(params[:country][:id])
-      remember_destination(@city.id, @country.id)
-    end 
-  end 
+    @city = remembered_city
+    @country = remembered_country
+    if @city.nil? || @country.nil?
+      redirect_to root_path
+    end
+  end
 end

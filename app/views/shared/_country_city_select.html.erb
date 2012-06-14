@@ -1,9 +1,7 @@
 <% @countries = Country.order(:name)%>
 <% if inline_search == true %>
-   <% selected_country = params[:country]%>
-   <%= collection_select :country, :id, @countries, :id, :name, :selected => (selected_country.nil? ? 2 : selected_country[:id]) %>
-   <!--TODO: figure out how to retain the selected value after filter is applied -->
-   <%= grouped_collection_select :city, :id, @countries, :cities, :name, :id, :name %>
+  <% placeholder = location_is_specified ? "#{remembered_city.name}, #{remembered_country.name}" : 'enter your location here' %>
+  <%= text_field_tag "city_country_location", nil, :placeholder=>placeholder, :size=>156, :data=>{autocomplete_source: locations_path} %>
 <%else%>
    <div>
    <%= f.label :select_country %>

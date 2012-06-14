@@ -40,10 +40,6 @@ class User < ActiveRecord::Base
   has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id"
   has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id"
   
-  #validate
-  validates_associated :reviews
-  validates_associated :reviewees, :through => :reviews
-  
   before_save :create_tokens
   before_save {|user| user.email = email.downcase}
   

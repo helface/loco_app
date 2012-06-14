@@ -1,11 +1,35 @@
 <% provide(:title, 'home') %>
-<div class = "center hero-unit">
-   <div id="name">
-      Which city are you visiting?
+<div class = "center">
+   <div class="homepage">
+      <h2> Which city are you visiting?</h2>
+      <%= form_tag fill_location_path, method: 'get' do %>
+      <div id="name">
+         <%= render 'shared/country_city_select', :inline_search => true %>
+         <%= submit_tag "Go!", :name => nil, :class => "bnt bnt-large bnt-inverse" %>
+      </div>
+      <div style="height:150px"></div>
+      <div class="bottomnav">
+         <div class="row">
+            <div id = "navlogo" class="span6">
+               <div class="row">
+                  <div  class="span2">
+                     <%= link_to image_tag("luggage.png", alt: "Rails", :size=>"100x80"), about_path %>           
+                  </div>
+                  <div  class="span2">
+                     <%= link_to image_tag("hat.png", alt: "Rails", :size=>"100x80"), about_path %>           
+                  </div>
+                  <div  class="span2">
+                     <%= link_to image_tag("glasses.png", alt: "Rails", :size=>"100x80", :class=>"displayed"), about_path %>
+                  </div>
+               </div>
+         </div>
+      </div>
+      </div>
+      <% end %>
    </div>
-   
-   <%= form_tag users_path, method: 'get' do %>
-      <%= render 'shared/country_city_select', :inline_search => true %>
-   <%= submit_tag "Go!", :name => nil %>
-   <% end %>
+</div>
+<div id="footer" class="container">
+   <div class="center hero-unit">
+      asdfasdfafd
+   </div>
 </div>
