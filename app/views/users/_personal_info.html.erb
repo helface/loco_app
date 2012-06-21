@@ -1,0 +1,33 @@
+<% if current_user?(@user) %>
+<h3>
+   <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirstname", :html_attrs => {size: 5} %> 
+   <small><a id="editfirstname" href="#">edit</a></small>
+</h3>
+<% else %>
+   <div id="name">
+      <h2> <%= @user.firstname%> </h2>
+   </div>
+<% end %>
+
+<%= "Reviews: #{@user.reviews.count}"%> <br>
+<%= "Reviewed: #{@user.inverse_reviewees.count}" %>
+<% if host_user?(@user)%>
+   <% profile = @user.hostprofile%>
+   recommended by <%= "#{profile.recommend_count} guests"%> <br>
+   not recommended by <%= "#{profile.unrecommend_count} guests"%>
+   response rate: <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%"%><br><br>
+   <h3> host quickview </h3>
+   <%= Service.find_by_id(profile.service).title%> <br>
+   <%= profile.city.name%>, <%= profile.city.country.name%> <br>
+   
+   Languages (<%= "#{profile.languages.count}" %>)<br>
+   
+   <% profile.languages.each do |lan|%>
+   <ul id="name">
+    <li><%=" #{lan}" %> </li>
+   </ul>
+   <% end %>
+<% else %>
+   <h3> <%= "#{@user.firstname} is not a host"%></h3>
+   <small> <%= link_to 'become a host', becomehost_path if current_user?(@user) %> </small>
+<% end %>

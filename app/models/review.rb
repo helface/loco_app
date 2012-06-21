@@ -7,4 +7,8 @@ class Review < ActiveRecord::Base
    validates_presence_of :reviewer_id, :reviewee_id
    validates :content, presence: true, length: {maximum: 500}
    default_scope order: 'reviews.created_at DESC'
+   
+   def calculate_score
+
+   end
 end

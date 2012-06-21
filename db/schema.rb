@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608131835) do
+ActiveRecord::Schema.define(:version => 20120619191400) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20120608131835) do
     t.string   "tele"
     t.text     "serviceDesc"
     t.string   "aboutme"
-    t.string   "price"
+    t.string   "other_exchange"
     t.string   "greenDesc"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20120608131835) do
     t.integer  "responded_count",   :default => 0
     t.integer  "service"
     t.string   "languages"
+    t.integer  "price"
   end
 
   create_table "images", :force => true do |t|
@@ -99,9 +100,11 @@ ActiveRecord::Schema.define(:version => 20120608131835) do
   create_table "reviews", :force => true do |t|
     t.string   "content"
     t.integer  "reviewer_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "reviewee_id"
+    t.integer  "score",       :default => 0
+    t.boolean  "recommend"
   end
 
   add_index "reviews", ["created_at"], :name => "index_reviews_on_reviewee_id_and_created_at"

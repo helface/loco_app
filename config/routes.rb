@@ -19,6 +19,7 @@ LocoApp::Application.routes.draw do
   resources :reviews, only: [:new, :create, :destroy]
   resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update]
   resources :mailbox, only: :show
+  resources :languages, only: [:index]
   resources :forumposts do
     member do
       get 'respond'
@@ -33,7 +34,6 @@ LocoApp::Application.routes.draw do
   get "pages/find"
   get "pages/about"
   get "pages/signup"
-  
   
   match '/about', to: 'pages#about'
   match '/hosts', to: 'pages#find'

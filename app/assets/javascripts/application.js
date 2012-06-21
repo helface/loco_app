@@ -15,6 +15,6 @@
 //= require jquery_ujs
 //= require jquery.purr
 //= require best_in_place
-//= require chosen-jquery
+//= require jquery.tokeninput
 //= require jquery-ui
 //= require_tree .

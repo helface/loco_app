@@ -14,491 +14,129 @@
 */
 
 
-/* @group Base */
-/* line 3, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container {
-  font-size: 13px;
-  position: relative;
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-}
-/* line 9, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-drop {
-  background: white;
-  border: 1px solid #aaaaaa;
-  border-top: 0;
-  position: absolute;
-  top: 29px;
-  left: 0;
-  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  -o-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-  z-index: 999;
+/* Example tokeninput style #2: Facebook style */
+
+ul.token-input-list-facebook {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 1%;
+    width: 300px;
+    border: 1px solid #8496ba;
+    cursor: text;
+    font-size: 12px;
+    font-family: Verdana;
+    min-height: 1px;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+    list-style-type: none;
+    clear: left;
 }
 
-/* @end */
-/* @group Single Chosen */
-/* line 27, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single {
-  background-color: white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0 );
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, white), color-stop(50%, #f6f6f6), color-stop(52%, #eeeeee), color-stop(100%, #f4f4f4));
-  background-image: -webkit-linear-gradient(top, white 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
-  background-image: -moz-linear-gradient(top, white 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
-  background-image: -o-linear-gradient(top, white 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
-  background-image: -ms-linear-gradient(top, white 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
-  background-image: linear-gradient(top, white 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border: 1px solid #aaaaaa;
-  -webkit-box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  height: 23px;
-  line-height: 24px;
-  padding: 0 0 0 8px;
-  color: #444444;
-  text-decoration: none;
-}
-/* line 55, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-default {
-  color: #999999;
-}
-/* line 58, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single span {
-  margin-right: 26px;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}
-/* line 66, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single abbr {
-  display: block;
-  position: absolute;
-  right: 26px;
-  top: 6px;
-  width: 12px;
-  height: 13px;
-  font-size: 1px;
-  background: url(/assets/chosen-sprite.png) right top no-repeat;
-}
-/* line 75, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single abbr:hover {
-  background-position: right -11px;
-}
-/* line 77, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single div {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: block;
-  height: 100%;
-  width: 18px;
-}
-/* line 84, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-single div b {
-  background: url(/assets/chosen-sprite.png) no-repeat 0 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-/* line 89, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-search {
-  padding: 3px 4px;
-  position: relative;
-  margin: 0;
-  white-space: nowrap;
-  z-index: 1010;
-}
-/* line 95, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-search input {
-  background: white url(/assets/chosen-sprite.png) no-repeat 100% -22px;
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, -webkit-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, -moz-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, -o-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, -ms-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat 100% -22px, linear-gradient(top, #eeeeee 1%, white 15%);
-  margin: 1px 0;
-  padding: 4px 20px 4px 5px;
-  outline: 0;
-  border: 1px solid #aaaaaa;
-  font-family: sans-serif;
-  font-size: 1em;
-}
-/* line 109, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single .chzn-drop {
-  -webkit-border-radius: 0 0 4px 4px;
-  -moz-border-radius: 0 0 4px 4px;
-  border-radius: 0 0 4px 4px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
+ul.token-input-list-facebook li input {
+    border: 0;
+    width: 100px;
+    padding: 3px 8px;
+    background-color: white;
+    margin: 2px 0;
+    -webkit-appearance: caret;
 }
 
-/* @end */
-/* line 119, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-single-nosearch .chzn-search input {
-  position: absolute;
-  left: -9000px;
+li.token-input-token-facebook {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 15px;
+    margin: 3px;
+    padding: 1px 3px;
+    background-color: #eff2f7;
+    color: #000;
+    cursor: default;
+    border: 1px solid #ccd5e4;
+    font-size: 11px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    float: left;
+    white-space: nowrap;
 }
 
-/* @group Multi Chosen */
-/* line 125, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices {
-  background-color: white;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background-image: -webkit-linear-gradient(top, #eeeeee 1%, white 15%);
-  background-image: -moz-linear-gradient(top, #eeeeee 1%, white 15%);
-  background-image: -o-linear-gradient(top, #eeeeee 1%, white 15%);
-  background-image: -ms-linear-gradient(top, #eeeeee 1%, white 15%);
-  background-image: linear-gradient(top, #eeeeee 1%, white 15%);
-  border: 1px solid #aaaaaa;
-  margin: 0;
-  padding: 0;
-  cursor: text;
-  overflow: hidden;
-  height: auto !important;
-  height: 1%;
-  position: relative;
-}
-/* line 141, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices li {
-  float: left;
-  list-style: none;
-}
-/* line 144, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-field {
-  white-space: nowrap;
-  margin: 0;
-  padding: 0;
-}
-/* line 148, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-field input {
-  color: #666666;
-  background: transparent !important;
-  border: 0 !important;
-  font-family: sans-serif;
-  font-size: 100%;
-  height: 15px;
-  padding: 5px;
-  margin: 1px 0;
-  outline: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  box-shadow: none;
-}
-/* line 162, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-field .default {
-  color: #999999;
-}
-/* line 164, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-choice {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  background-color: #e4e4e4;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f4f4', endColorstr='#eeeeee', GradientType=0 );
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
-  background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: -o-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: -ms-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  -webkit-box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-  box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-  color: #333333;
-  border: 1px solid #aaaaaa;
-  line-height: 13px;
-  padding: 3px 20px 3px 5px;
-  margin: 3px 0 3px 5px;
-  position: relative;
-  cursor: default;
-}
-/* line 189, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-choice-focus {
-  background: #d4d4d4;
-}
-/* line 191, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-choice .search-choice-close {
-  display: block;
-  position: absolute;
-  right: 3px;
-  top: 4px;
-  width: 12px;
-  height: 13px;
-  font-size: 1px;
-  background: url(/assets/chosen-sprite.png) right top no-repeat;
-}
-/* line 200, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-choice .search-choice-close:hover {
-  background-position: right -11px;
-}
-/* line 202, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-choices .search-choice-focus .search-choice-close {
-  background-position: right -11px;
+li.token-input-token-facebook p {
+    display: inline;
+    padding: 0;
+    margin: 0;
 }
 
-/* @end */
-/* @group Results */
-/* line 209, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results {
-  margin: 0 4px 4px 0;
-  max-height: 240px;
-  padding: 0 0 0 4px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+li.token-input-token-facebook span {
+    color: #a6b3cf;
+    margin-left: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* line 217, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-results {
-  margin: -1px 0 0;
-  padding: 0;
+li.token-input-selected-token-facebook {
+    background-color: #5670a6;
+    border: 1px solid #3b5998;
+    color: #fff;
 }
 
-/* line 222, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results li {
-  display: none;
-  line-height: 15px;
-  padding: 5px 6px;
-  margin: 0;
-  list-style: none;
-}
-/* line 228, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .active-result {
-  cursor: pointer;
-  display: list-item;
-}
-/* line 231, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .highlighted {
-  background-color: #3875d7;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3875d7', endColorstr='#2a62bc', GradientType=0 );
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #3875d7), color-stop(90%, #2a62bc));
-  background-image: -webkit-linear-gradient(top, #3875d7 20%, #2a62bc 90%);
-  background-image: -moz-linear-gradient(top, #3875d7 20%, #2a62bc 90%);
-  background-image: -o-linear-gradient(top, #3875d7 20%, #2a62bc 90%);
-  background-image: -ms-linear-gradient(top, #3875d7 20%, #2a62bc 90%);
-  background-image: linear-gradient(top, #3875d7 20%, #2a62bc 90%);
-  color: white;
-}
-/* line 241, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results li em {
-  background: #feffde;
-  font-style: normal;
-}
-/* line 244, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .highlighted em {
-  background: transparent;
-}
-/* line 246, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .no-results {
-  background: #f4f4f4;
-  display: list-item;
-}
-/* line 249, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .group-result {
-  cursor: default;
-  color: #999999;
-  font-weight: bold;
-}
-/* line 253, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results .group-option {
-  padding-left: 15px;
+li.token-input-input-token-facebook {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
-/* line 256, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-multi .chzn-drop .result-selected {
-  display: none;
+div.token-input-dropdown-facebook {
+    position: absolute;
+    width: 300px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    font-size: 11px;
+    font-family: Verdana;
+    z-index: 1;
 }
 
-/* line 260, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results-scroll {
-  background: white;
-  margin: 0 4px;
-  position: absolute;
-  text-align: center;
-  width: 321px;
-  /* This should by dynamic with js */
-  z-index: 1;
-}
-/* line 268, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results-scroll span {
-  display: inline-block;
-  height: 17px;
-  text-indent: -5000px;
-  width: 9px;
-}
-/* line 273, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results-scroll-down {
-  bottom: 0;
-}
-/* line 275, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results-scroll-down span {
-  background: url(/assets/chosen-sprite.png) no-repeat -4px -3px;
-}
-/* line 277, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container .chzn-results-scroll-up span {
-  background: url(/assets/chosen-sprite.png) no-repeat -22px -3px;
+div.token-input-dropdown-facebook p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    color: #777;
 }
 
-/* @end */
-/* @group Active */
-/* line 285, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-single {
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border: 1px solid #5897fb;
-}
-/* line 291, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-single-with-drop {
-  border: 1px solid #aaaaaa;
-  -webkit-box-shadow: 0 1px 0 white inset;
-  -moz-box-shadow: 0 1px 0 white inset;
-  -o-box-shadow: 0 1px 0 white inset;
-  box-shadow: 0 1px 0 white inset;
-  background-color: #eeeeee;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0 );
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #eeeeee), color-stop(80%, white));
-  background-image: -webkit-linear-gradient(top, #eeeeee 20%, white 80%);
-  background-image: -moz-linear-gradient(top, #eeeeee 20%, white 80%);
-  background-image: -o-linear-gradient(top, #eeeeee 20%, white 80%);
-  background-image: -ms-linear-gradient(top, #eeeeee 20%, white 80%);
-  background-image: linear-gradient(top, #eeeeee 20%, white 80%);
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-bottom-right-radius: 0;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-bottomright: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-/* line 311, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-single-with-drop div {
-  background: transparent;
-  border-left: none;
-}
-/* line 314, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-single-with-drop div b {
-  background-position: -18px 1px;
-}
-/* line 316, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-choices {
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -o-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  border: 1px solid #5897fb;
-}
-/* line 322, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-container-active .chzn-choices .search-field input {
-  color: #111111 !important;
+div.token-input-dropdown-facebook ul {
+    margin: 0;
+    padding: 0;
 }
 
-/* @end */
-/* @group Disabled Support */
-/* line 329, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-disabled {
-  cursor: default;
-  opacity: 0.5 !important;
-}
-/* line 332, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-disabled .chzn-single, .chzn-disabled .chzn-choices .search-choice .search-choice-close {
-  cursor: default;
+div.token-input-dropdown-facebook ul li {
+    background-color: #fff;
+    padding: 3px;
+    margin: 0;
+    list-style-type: none;
 }
 
-/* @group Right to Left */
-/* line 337, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl {
-  text-align: right;
-}
-/* line 339, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-single {
-  padding: 0 8px 0 0;
-  overflow: visible;
-}
-/* line 342, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-single span {
-  margin-left: 26px;
-  margin-right: 0;
-  direction: rtl;
-}
-/* line 346, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-single div {
-  left: 3px;
-  right: auto;
-}
-/* line 349, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-single abbr {
-  left: 26px;
-  right: auto;
-}
-/* line 353, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-choices .search-field input {
-  direction: rtl;
-}
-/* line 355, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-choices li {
-  float: right;
-}
-/* line 357, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-choices .search-choice {
-  padding: 3px 5px 3px 19px;
-  margin: 3px 5px 3px 0;
-}
-/* line 360, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-choices .search-choice .search-choice-close {
-  left: 4px;
-  right: auto;
-  background-position: right top;
-}
-/* line 364, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl.chzn-container-single .chzn-results {
-  margin: 0 0 4px 4px;
-  padding: 0 4px 0 0;
-}
-/* line 367, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-results .group-option {
-  padding-left: 0;
-  padding-right: 15px;
-}
-/* line 370, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl.chzn-container-active .chzn-single-with-drop div {
-  border-right: none;
-}
-/* line 372, ../../../../.rvm/gems/ruby-1.9.2-p290/gems/chosen-rails-0.9.8/vendor/assets/stylesheets/chosen.css.sass */
-.chzn-rtl .chzn-search input {
-  background: white url(/assets/chosen-sprite.png) no-repeat -38px -22px;
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, -webkit-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, -moz-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, -o-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, -ms-linear-gradient(top, #eeeeee 1%, white 15%);
-  background: url(/assets/chosen-sprite.png) no-repeat -38px -22px, linear-gradient(top, #eeeeee 1%, white 15%);
-  padding: 4px 5px 4px 20px;
-  direction: rtl;
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item-facebook {
+    background-color: #fff;
 }
 
-/* @end */
+div.token-input-dropdown-facebook ul li.token-input-dropdown-item2-facebook {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-facebook ul li em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+div.token-input-dropdown-facebook ul li.token-input-selected-dropdown-item-facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
 /*$navbarBackground: blue;
 $navbarBackgroundHighlight: #888;
 $navbarText: #eee;
@@ -4925,34 +4563,46 @@ body {
 
 /* line 48, ../../app/assets/stylesheets/custom.css.scss */
 .thumbnail {
-  background-color: #070;
+  background-color: #222;
   padding: 1px;
 }
 
 /* line 53, ../../app/assets/stylesheets/custom.css.scss */
+#displayimg {
+  width: 100%;
+  height: 350px;
+}
+
+/* line 58, ../../app/assets/stylesheets/custom.css.scss */
+#displayimg-nocap {
+  width: 100%;
+  height: 380px;
+}
+
+/* line 63, ../../app/assets/stylesheets/custom.css.scss */
 #caption {
   padding: 2px 5px 2px 5px;
   color: white;
 }
 
-/* line 57, ../../app/assets/stylesheets/custom.css.scss */
+/* line 67, ../../app/assets/stylesheets/custom.css.scss */
 #footer {
   padding-top: 50px;
 }
 
-/* line 61, ../../app/assets/stylesheets/custom.css.scss */
+/* line 71, ../../app/assets/stylesheets/custom.css.scss */
 .bottomnav {
   padding-top: 50px;
   text-align: center;
 }
-/* line 65, ../../app/assets/stylesheets/custom.css.scss */
+/* line 75, ../../app/assets/stylesheets/custom.css.scss */
 .bottomnav #navlogo {
   margin: 0 auto;
   float: none;
   text-align: center;
 }
 
-/* line 72, ../../app/assets/stylesheets/custom.css.scss */
+/* line 82, ../../app/assets/stylesheets/custom.css.scss */
 .debug_dump {
   clear: both;
   float: left;
@@ -4963,23 +4613,23 @@ body {
   box-sizing: border-box;
 }
 
-/* line 81, ../../app/assets/stylesheets/custom.css.scss */
+/* line 91, ../../app/assets/stylesheets/custom.css.scss */
 aside section {
   padding: 10px 0;
   border-top: 1px solid #eeeeee;
 }
-/* line 84, ../../app/assets/stylesheets/custom.css.scss */
+/* line 94, ../../app/assets/stylesheets/custom.css.scss */
 aside section:first-child {
   border: 0;
   padding-top: 0;
 }
-/* line 88, ../../app/assets/stylesheets/custom.css.scss */
+/* line 98, ../../app/assets/stylesheets/custom.css.scss */
 aside section span {
   display: block;
   margin-bottom: 3px;
   line-height: 1;
 }
-/* line 93, ../../app/assets/stylesheets/custom.css.scss */
+/* line 103, ../../app/assets/stylesheets/custom.css.scss */
 aside section h1 {
   font-size: 1.6em;
   text-align: left;
@@ -4987,64 +4637,64 @@ aside section h1 {
   margin-bottom: 3px;
 }
 
-/* line 102, ../../app/assets/stylesheets/custom.css.scss */
+/* line 112, ../../app/assets/stylesheets/custom.css.scss */
 .users {
   list-style: none;
   margin: 0;
 }
-/* line 105, ../../app/assets/stylesheets/custom.css.scss */
+/* line 115, ../../app/assets/stylesheets/custom.css.scss */
 .users li {
   overflow: auto;
   padding: 10px 0;
   border-top: 1px solid #eeeeee;
 }
-/* line 109, ../../app/assets/stylesheets/custom.css.scss */
+/* line 119, ../../app/assets/stylesheets/custom.css.scss */
 .users li:last-child {
   border-bottom: 1px solid #eeeeee;
 }
 
-/* line 115, ../../app/assets/stylesheets/custom.css.scss */
+/* line 125, ../../app/assets/stylesheets/custom.css.scss */
 .gravatar {
   float: left;
   margin-right: 10px;
 }
 
 /* microposts */
-/* line 121, ../../app/assets/stylesheets/custom.css.scss */
+/* line 131, ../../app/assets/stylesheets/custom.css.scss */
 .microposts {
   list-style: none;
   margin: 10px 0 0 0;
 }
-/* line 125, ../../app/assets/stylesheets/custom.css.scss */
+/* line 135, ../../app/assets/stylesheets/custom.css.scss */
 .microposts li {
   padding: 10px 0;
   border-top: 1px solid #e8e8e8;
 }
 
-/* line 130, ../../app/assets/stylesheets/custom.css.scss */
+/* line 140, ../../app/assets/stylesheets/custom.css.scss */
 .content {
   display: block;
 }
 
-/* line 133, ../../app/assets/stylesheets/custom.css.scss */
+/* line 143, ../../app/assets/stylesheets/custom.css.scss */
 .timestamp {
   color: #999999;
 }
 
-/* line 136, ../../app/assets/stylesheets/custom.css.scss */
+/* line 146, ../../app/assets/stylesheets/custom.css.scss */
 .gravatar {
   float: left;
   margin-right: 10px;
 }
 
-/* line 141, ../../app/assets/stylesheets/custom.css.scss */
+/* line 151, ../../app/assets/stylesheets/custom.css.scss */
 aside textarea {
   height: 100px;
   margin-bottom: 5px;
 }
 
 /* forms */
-/* line 148, ../../app/assets/stylesheets/custom.css.scss */
+/* line 158, ../../app/assets/stylesheets/custom.css.scss */
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 30%;
@@ -5056,7 +4706,7 @@ input, textarea, select, .uneditable-input {
   box-sizing: border-box;
 }
 
-/* line 157, ../../app/assets/stylesheets/custom.css.scss */
+/* line 167, ../../app/assets/stylesheets/custom.css.scss */
 ul.ui-autocomplete {
   position: absolute;
   list-style: none;
@@ -5065,27 +4715,22 @@ ul.ui-autocomplete {
   border: solid 1px #999;
   cursor: default;
 }
-/* line 164, ../../app/assets/stylesheets/custom.css.scss */
+/* line 174, ../../app/assets/stylesheets/custom.css.scss */
 ul.ui-autocomplete li {
   background-color: #FFF;
   border-top: solid 1px #DDD;
   margin: 0;
   padding: 0;
 }
-/* line 169, ../../app/assets/stylesheets/custom.css.scss */
+/* line 179, ../../app/assets/stylesheets/custom.css.scss */
 ul.ui-autocomplete li a {
   color: #000;
   display: block;
   padding: 3px;
 }
-/* line 174, ../../app/assets/stylesheets/custom.css.scss */
+/* line 184, ../../app/assets/stylesheets/custom.css.scss */
 ul.ui-autocomplete li a.ui-state-hover, ul.ui-autocomplete li a.ui-state-active {
   background-color: #FFFCB2;
-}
-/* line 5, ../../app/assets/stylesheets/hostprofiles.css.scss */
-#hostprofile_languages.select {
-  height: 300px;
-  width: 300px;
 }
 /* line 1, ../../app/assets/stylesheets/scaffolds.css.scss */
 body {

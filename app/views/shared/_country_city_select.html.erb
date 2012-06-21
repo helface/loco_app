@@ -3,13 +3,15 @@
   <% placeholder = location_is_specified ? "#{remembered_city.name}, #{remembered_country.name}" : 'enter your location here' %>
   <%= text_field_tag "city_country_location", nil, :placeholder=>placeholder, :size=>156, :data=>{autocomplete_source: locations_path} %>
 <%else%>
-   <div>
-   <%= f.label :select_country %>
-   <%= f.collection_select :country_id, @countries, :id, :name %>
-   </div>
-   <div>
-   <%= f.label :select_city %>
-   <%= f.grouped_collection_select :city_id, @countries, :cities, :name, :id, :name %>
+   <div class="row">
+      <div class="span4">
+         <%= f.label :country %>
+         <%= f.collection_select :country_id, @countries, :id, :name, {}, {style: "width: 150px"} %>
+      </div>
+      <div id="name">
+         <%= f.label :city %>
+         <%= f.grouped_collection_select :city_id, @countries, :cities, :name, :id, :name %>
+      </div>
    </div>
 <%end%>
 

@@ -10,16 +10,12 @@ jQuery ->
       $("#imgthumb#{num}").click ->
          caption = $("#imgthumb#{num}").attr("caption")
          oldcaption = $('#displaycaption').html()
-         if caption && oldcaption
+         if caption
             $("#displaycaption").replaceWith("<p id='displaycaption'>#{caption}</p>")
-         else if caption
-            $("#caption").append("<p id='displaycaption'>#{caption}</p>")
          else if oldcaption
-            $("#displaycaption").detach()
+            $("#displaycaption").replaceWith("<p id='displaycaption' style='height: 18px'></p>")   
          newsrc = $("#imgthumb#{num}").attr("src")
-         adjust = if !caption then "width: 100%; height: 380px" else ""
-         alert(adjust)
-         $("#displayimg").replaceWith("<img id='displayimg' src='#{newsrc}' style='#{adjust}' />")
+         $("#displayimg").replaceWith("<img id='displayimg' src='#{newsrc}' />")
       
    thumbrange x for x in [1..7]
    
