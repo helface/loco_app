@@ -1,21 +1,13 @@
-<div class="row">
-    <aside class="span4">
-		<section>		
-			<%= form_for([:user, @message]) do |f| %>
-		 		<div>
-					<div class="field">
-		    		<%= f.label :subject %><br />
-		    		<%= f.text_field :subject %>
-		  		</div>
-		 		<div class="field">
-		    		<%= f.label :body %><br />
-		    		<%= f.text_field :body %>
-		 		</div>
-				<%= f.hidden_field :recipient_id, value: @user.id%>
-
-				<%= f.submit "post", class: "btn btn-large btn-primary" %>
-			<% end %>
-		</div>
-        </section>
-    </aside>
-</div>
+<div class="span10" id="messageform" style="background-color: #dff0d8; padding: 20px 0px 0 15px">
+   <%= form_for([:user, @message]) do |f| %>
+ 		<div>
+			<div class="field">
+    		<%= f.text_field :subject, :placeholder=>"Subject (max 100 characters) ...", :style=>"width:80%" %>
+  		</div>
+ 		<div class="field">
+    		<%= f.text_area :body, :placeholder=>"Your message ...", :style=>"width:80%; height:200px" %>
+ 		</div>
+		<%= f.submit "send", class: "btn" %>
+	<% end %>
+</div>	
+			

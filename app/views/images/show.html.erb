@@ -1,0 +1,13 @@
+<div class="span9">
+   <%= image_tag @img.photo.url(:large) %>
+</div>
+<div class="row">
+   <div id="name">
+      <%= button_to "delete", @img, :confirm=>"are you sure", :method => :delete, :class=>"btn-large btn-danger" %>
+      <%= link_to "make profile picture", update_profile_pic_user_path(@img.user, img_id: @img.id)%>
+   </div> 
+   
+</div>
+
+
+

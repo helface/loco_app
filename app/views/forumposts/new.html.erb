@@ -1,16 +1,23 @@
-<%= form_for(@post) do |f| %>
-<div id="name">
-   <%=render 'shared/country_city_select', :f=>f, :inline_search => false %>
-</div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-     <%= f.label :describe_what_you_are_looking_for %> <br>
-     <%= f.text_field :content%>
-  </div>	
-  <div class="actions">
-    <%= f.submit  "Post", class: "btn btn-large btn-primary" %>
-  </div>
-<%end%>
+ <div class='filler'></div>
+   <div class="row">
+      <div class="span10" id="messageform">
+         <%= form_for @post, do |f| %>
+         <%= render 'error_message'%>
+         
+         <div id="name">
+            <%=render 'shared/country_city_select', :f=>f, :inline_search => false %>
+         </div>
+         <div class="field">
+            <%= f.text_field :title, :placeholder=>"Post title...", :style=>"width:80%"%>
+         </div>
+         <div class="field">
+            <%= f.text_area :content, :placeholder=>"What are you looking for?", :style=>"width:80%; height:150px"%>
+         </div>	
+         <div class="actions">
+            <%= f.submit  "Post", class: "btn btn-primary" %>
+         </div>
+         <%end%>
+      </div>
+   </div>
+
+

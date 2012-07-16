@@ -26,7 +26,7 @@ namespace :db do
         end 
         
         users.each {|user| user.build_hostprofile(tele: 44553322, languages: ["English"], serviceDesc: 'kalkjsojojlaskjdfjasldfkj', aboutme: 'asdfasdfasdfsadfasdf', price: '$23', greenDesc: 'grenn green green')}
-        users.each {|user| user.toggle!(:is_host)}
+#        users.each {|user| user.toggle!(:is_host)}
         users.each { |user| user.toggle!(:confirmed) }        
         n = 0
         users.each {|user| user.hostprofile.update_attributes(:city_id => cities[n+=1].id)}

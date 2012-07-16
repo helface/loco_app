@@ -1,8 +1,27 @@
-<li>
-	<span class="content"> <%= review.content %> </span>
-	<% temp = User.find(review.reviewer_id) %>
-	posted by <%= temp.firstname %>
+<!-- TODO: div color depending on review score -->
+
+<% case review.score %>
+   <% when 0..0.99 then color = ""%>
+   <% when 1..2.5 then color = "#fbc" %>
+   <% when 2.5..4 then color = "yellow" %>
+   <% when 4..5 then color = "green" %>
+<% end %>
+  
+<div class="span11 host_info" style = "<%= "background-color: #{color}"%>" >
+   <% temp = User.find(review.reviewer_id) %>
+	<p class="review_author"> posted by <%= link_to temp.firstname, user_path(temp) %>
 	<span class="timestamp">
 		 on <%= review.created_at%>
 	</span>
-</li>
+	<p/>	
+	<div id="name">
+	<% if !review.score.nil? %>
+	  <% if review.score < 1 %>
+	     N/A
+	  <% else %>
+	    <%= review.score %>
+	  <% end %>
+	<% end %>
+	</div>	
+	<span class="content"> <%= review.content %> </span>
+</div>

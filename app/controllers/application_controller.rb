@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
   include UsersHelper
   include MessagesHelper
   include LocationsHelper
+  include ImagesHelper
 end

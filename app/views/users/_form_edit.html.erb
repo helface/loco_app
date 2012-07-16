@@ -1,23 +1,61 @@
-<% provide(:title, "Edit user") %> 
-<h1>Update your profile</h1>
-
-<div class="row">
-<div class="span6 offset3">
-<%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages', :object => f.object %>
-
-<%= f.label :first_name, "Email: #{@user.email}" %> <%= f.text_field :email, placeholder: "change ..." %>
-
-<%= f.label :first_name %>
-<%= f.text_field :firstname %>
-
-<%= f.label :last_name,  %>
-<%= f.text_field :lastname %>
-
-<%= f.submit "Save changes", :class => "btn btn-large btn-primary" %>
-<% end %>
-
-<%= gravatar_for @user %>
-<a href="http://gravatar.com/emails">change</a>
-</div>
-</div>
+ <div class="edit_page">
+   
+ <h3 class="row"> Personal information </h3>
+ <div class="row host_info edit_section">
+    <div class="field">
+         First Name <br> 
+         <h3> <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirst", :html_attrs => {size: 20} %> 
+         <small><a id="editfirst" href="#">edit</a></small>   
+         </h3>   
+      </div>
+      <div class="field">
+         Last Name <br> 
+           <h3> <%= best_in_place @user, :lastname, :type=>:input, :activator=> "#editlast", :html_attrs => {size: 20} %> 
+           <small><a id="editlast" href="#">edit</a></small>   
+           </h3>
+      </div>
+      <div class="field">
+         Email <br> 
+         <h3><%= best_in_place @user, :email, :type=>:input, :activator=> "#editemail", :html_attrs => {size: 20} %> 
+         <small><a id="editemail" href="#">edit</a></small>
+         </h3>
+      </div>
+ </div>
+ <div class="filler"></div>
+  <h3 class="row"> Security </h3>
+ <div class="row host_info edit_section">
+  <div id="password_update" >
+     <div class="filler"> </div>
+     <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages' %>
+        <div class="field">
+           <%= f.label :password %>
+           <%= f.password_field :password %>
+        </div>
+        <div class="field">
+           <%= f.label :password_confirmation %>
+           <%= f.password_field :password_confirmation %>
+        </div>
+        <div class="actions">
+            <%= f.submit  "update", class: "btn btn-danger" %>
+        </div>
+     <% end %>
+  </div>
+ </div>
+ <div class="filler"></div>
+ <h3 class="row"> Pictures </h3>
+ <div class="row host_info edit_section">
+   You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.<br>
+   <br>
+   <div class="row">
+      <% @user.images.each do |img|%>      
+      <div class="span1">
+         <%= link_to image_tag(img.photo.url(:thumb), class: "thumbnail thumbindex" ), image_path(img) %>
+      </div>
+      <% end %>
+   </div>
+   <div class="filler"></div>
+   <%=render 'images/img_upload'%>
+   
+ </div>
+ </div>

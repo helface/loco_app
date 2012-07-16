@@ -1,12 +1,15 @@
-<% provide(:title, 'mailbox') %>
-<h1><%= current_user.firstname + "'s mailbox"%></h1>
+<% title = params[:folder] || ""%>
+<% provide(:title, title) %>
+<div class="span10">
+   <div class="row">
 
-<%= render 'shared/mailbox_nav' %>
+      <h3><%= current_user.firstname.capitalize + "'s mailbox"%></h3>
+      <div class="filler"></div>
+      <%= render 'shared/mailbox_nav' %>
 
-<%= will_paginate @messages%>
-
-<table>
-    <%= render @messages %>
-</table>
-
-<%= will_paginate @messages%>
+      <%= will_paginate @messages%>
+      <%= render @messages%>
+      <%= will_paginate @messages%>
+   </div>
+   
+</div>

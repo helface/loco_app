@@ -1,12 +1,27 @@
- <div style="height: 50px">
-	<% if params[:folder] == 'sent'%>
-		<% recipient = User.find(message.recipient_id) %>		
-		To: <%= link_to recipient.firstname, user_path(recipient) %>
-	<% else %>
-		<% sender = User.find(message.sender_id) %>
-		from: <%=  link_to sender.firstname, user_path(sender) %>	
-	<% end %>
-	<br>
-	<% msgthread = Msgthread.find(message.thread_id) %>
-	<%= link_to message.subject, user_msgthread_path(current_user, msgthread) %>
+<div class="email">
+   <li>
+    <div class="span2">
+   	<% if params[:folder] == 'sent'%>
+   		<% recipient = User.find(message.recipient_id) %>		
+   		To: <%= link_to recipient.firstname.capitalize, user_path(recipient) %>
+   	<% else %>	
+   	   <%sender = User.find_by_id(message.sender_id)%>
+   		<%= image_tag find_display_imgurl(sender.id, "thumb"), size: "40x40" %>	
+   	   <br>
+         <%=  link_to sender.firstname.capitalize, user_path(sender) %>
+   	<% end %>
+   </div>
+   <div class="span7">
+      <% msgthread = Msgthread.find(message.thread_id) %>
+   	<small><b><%= link_to "#{message.subject}", user_msgthread_path(msgthread.find_recipient_id(current_user), msgthread) %></b></small> 	
+   	<span class="timestamp">
+   	   <%= message.created_at%>
+   	</span>
+   	<div style="padding-top: 8px"><%= truncate(message.body, length: 160)%></div>
+   </div>
+   <div class="span1">
+      <%= link_to "delete", user_message_path(current_user, message), :confirm=>"are you sure", :method=> :delete%>
+   </div>
+   </li>
 </div>
+   

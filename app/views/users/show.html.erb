@@ -1,78 +1,51 @@
 <% provide(:title, @user.firstname) %>
-
 <p id="notice"><%= notice %></p>
 
 <div class="row" >
    <div class="span4" style="background-color: #eee; height: 385px">
-      <div style="margin:15px">
+      <div class = "row" style="margin:5px 15px; height: 350px">
          <%= render "personal_info" %>
+      </div>
+      <div class = "row" style="height:22px; margin: 0px 15px">
+         <%= link_to_unless current_user?(@user), 'message ', new_user_message_path(@user) %> | 
+         <%= link_to 'tell a friend', mailfriend_user_path(@user) %>
       </div>
    </div>
    <div class="span8"> 
          <%= render "picture_gallery" %>  
    </div>
 </div> 
+<div class="filler"> </div>
+<ul class="nav nav-tabs">
+   <% if params[:view] == "review" %>
+     <li>
+   <% else %>
+     <li class="active">  
+   <% end %>
+     <%= link_to "profile", user_path(@user, view: "profile") %>
+   </li>
+   <% if params[:view] == "review" %>
+      <li class="active">
+   <% else %>
+      <li>
+   <% end %>
+      <%= link_to "reviews(#{@user.inverse_reviewees.count})", user_path(@user, view: "review") %>
+  </li>
+</ul>
 
-
-<% if host_user?(@user)%>
-   <%= render @user.hostprofile %>
-<% end %>
-
-<% if current_user?(@user) %>
-   <div> <%=link_to "upload img", new_image_path %> </div>
-	<% if !host_user?(@user) %>
-		<%= link_to 'become a host', becomehost_path %>
-	<% else %>
-		<%= link_to 'unbecome host', hostprofile_path(@user.hostprofile), method: "delete"%>
-	<% end %>
-<% else %>
-	
-	<%= link_to 'message '+ @user.firstname, new_user_message_path(@user)%> <br>
-	<!-- TODO: insert correct link here -->
-	<!-- TODO: two divs, one of email form hidden until first div is clicked. JQuery -->
-	<%= link_to 'Email a friend', mailfriend_user_path(@user) %>
-<% end %>
-
+<% if params[:view] == "review" %>
 <div class="row">
-<div class="span8">
-
-  <% if @user.inverse_reviews.any? %>
-    <h3> Reviews (<%= @user.inverse_reviewees.count %>) </h3>
-    <ol class="microposts">
-       <%= render @reviews %>
-    </ol>
-    <%= will_paginate @reviews %>
-  <% end %>
+   <div class="span8">
+   <% if @user.inverse_reviews.any? %>
+      <ol class="microposts">
+         <%= render @reviews %>
+      </ol>
+  <% end %> 
+  </div> 
 </div>
-</div>
-
-<% unless current_user?(@user) %>
-<% if signed_in? %>
-<div class="row">
-    <aside class="span4">
-        <section>
-			<% @review = Review.new%>
-			<%= form_for(@review) do |f| %>
-			<%= render 'shared/error_messages' %>
-			<div class="field">
-			    <%= f.text_area :content, placeholder: "write your review..." %>
-			    <%= f.hidden_field :reviewer_id, value: current_user.id %>
-				<%= f.hidden_field :reviewee_id, value: @user.id%>
-			</div>
-			<%= f.submit "post", class: "btn btn-large btn-primary" %>
-			<% end %>
-        </section>
-    </aside>
- </div>
+<%= will_paginate @reviews %>
 <% else %>
-<div>
-  <%= link_to 'Sign in to review', signin_path %> 
-</div>
+   <% if host_user?(@user)%>
+      <%= render @user.hostprofile %>
+   <% end %>
 <% end %>
-<% end %>
-
-
-<%if current_user?(@user) %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<%= link_to 'Back', users_path %>

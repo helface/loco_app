@@ -16,13 +16,13 @@ open("lib/data/cities.txt") do |cities|
 end
 
 Service.delete_all
-Service.create!(title: "local know-it-all", desc: "show you city")
-Service.create!(title: "meal companion")
-Service.create!(title: "schoefer")
-Service.create!(title: "translator")
-Service.create!(title: "shopping buddy")
-Service.create!(title: "advanture guide")
-Service.create!(title: "nightlife expert")
+Service.create!(title: "local insider", desc: "show you city")
+Service.create!(title: "meal companion", desc: "you have food")
+Service.create!(title: "schoefer", desc: "you drive around")
+Service.create!(title: "translator", desc: "you translate")
+Service.create!(title: "shopping buddy", desc: "you go shopping")
+Service.create!(title: "adventure guide", desc: "you try not to die")
+Service.create!(title: "nightlife expert", desc: "you party")
 
 Language.delete_all
 Language.create!(name: "English", code: "EN" )
@@ -37,4 +37,6 @@ Language.create!(name: "Russian", code: "RU")
 Language.create!(name: "Portugese", code: "PT")
 Language.create!(name: "Hindi", code: "HD")
 Language.create!(name: "Swahili", code: "SW")
+Language.create!(name: "Italian", code: "IT")
+
 

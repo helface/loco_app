@@ -3,8 +3,9 @@ class MsgthreadsController < ApplicationController
     @msgthread = Msgthread.new
   end
   def show
-    @user = User.find(params[:user_id])
     @msgthread = Msgthread.find(params[:id])
-    @messages = @msgthread.messages
+    recipient_id = @msgthread.find_recipient_id(current_user)
+    @recipient = User.find_by_id(recipient_id)    
+    @messages = @msgthread.messages.order('created_at DESC')
   end
 end

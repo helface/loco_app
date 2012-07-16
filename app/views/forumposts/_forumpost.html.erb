@@ -1,5 +1,28 @@
-<div>
-   title: <%= @post.title %><br>
-   content: <%= @post.content %><br>
-   posted by : <%=User.find(@post.user_id).firstname%>
+<div class="filler"></div>
+<div class="row">
+   <div class="span1">
+      <%= link_to (image_tag find_display_imgurl(@post.user_id, "thumb"), size: "50x50"), user_path(User.find_by_id(@post.user_id)) %>	
+   </div>
+   <div class="span6">
+      <h3><%=User.find(@post.user_id).firstname.capitalize%></h3>
+   </div>
+</div>
+
+<div class="row">  
+   <div class="span8 microposts">
+      <li><h4><%= @post.title %></h4></li>
+       <li> 
+       <div class="row">
+          <div class="span7">
+             <%= @post.content %>
+           </div>
+           <div class="span1">
+              <%if signed_in? && @post.user_id != current_user.id %>
+              <%= button_to 'Respond', respond_forumpost_path, :method=> "get", :class=>"btn, btn-small" %>
+              <%end%>
+           </div>
+       </div>
+       
+      </li>
+   </div> 
 </div>

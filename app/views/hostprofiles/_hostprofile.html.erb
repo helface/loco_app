@@ -1,19 +1,25 @@
-<!-- TODO: render the complete hostprofile -->
-	
-	<span class="content"> 
-		<br>
-		<div> About me </div>
-		<p> <%= hostprofile.aboutme %> </p>
-		Service Description <br>
-		<p> <%= hostprofile.serviceDesc %> </p>
-		Price <br>
-		<p> <%= hostprofile.price %> </p>
-		<div id="name">
-		   Languages <%= "#{hostprofile.languages.count}" %>
-		   <% hostprofile.languages.each do |lan|%>
-		   <div id="name">
-		    <%=" #{lan}" %>
-		   </div>
-		   <% end %>
-		</div>
-	</span>
+
+<div class="span12"> 
+	<br>
+	<div class="row host_info"> 
+	   <h4> About me </h4>
+	   <p> <%= hostprofile.aboutme %> </p>
+	</div>
+	<div class="row host_info">
+	   <h4> Service Description </h4>
+	   <p> <%= hostprofile.serviceDesc %> </p>
+	</div>
+	<div class="row host_info green" >
+	   <h4> My green points </h4>
+		<p> <%= hostprofile.greenDesc %> </p>
+	</div>
+	<% unless current_user?(@user) %>
+      <% if signed_in? %>
+      <div class="row host_info">
+   			 <% @review = Review.new%>
+   			 <%= form_for([@user, @review]) do |f| %>
+   			    <%= render 'shared/new_review', :f=>f%>
+   			<% end %>
+      </div> 
+    <% end %>
+<% end %>

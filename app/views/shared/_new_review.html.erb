@@ -1,0 +1,32 @@
+<% if !current_user?(@user) && signed_in? %>
+<div style= "padding: 0px">
+    <%= f.label :did_you_find_the_service_as_advertised? %>
+    <%= f.select :accuracy, 1..5 %>
+    <%= f.label :did_you_find_your_host_friendly_and_helpful? %> 
+    <%= f.select :friendliness, 1..5 %> 
+    <%= f.label :how_enjoyable_was_your_overall_experience? %>
+    <%= f.select :enjoybility, 1..5 %>
+    <%= f.label :how_easy_was_arranging_the_meetup? %>
+    <%= f.select :easiness, 1..5 %>
+    <%= f.label :please_leave_any_comments_you_have, "Please Leave Any Comments You Have" %>
+    <%= f.text_area :content, id: 'inline_review', placeholder: "write your review..."%> 
+    <!-- %= f.hidden_field :reviewer_id, value: current_user.id % -->
+	 <!-- %= f.hidden_field :reviewee_id, value: @user.id% -->
+    <div class="filler"></div>
+    <div class="row alert alert-info" style="margin-left: 0px; margin-right:115px">
+       <div class="span4" style="padding-top: 5px">
+          <p> would you recommend <%= "#{@user.firstname}"%>? </p>
+       </div>
+       <div class="span2">
+          <%= f.radio_button :recommend, 'true', :label=>"asdf" %>
+          <%= f.label :recommend, "yes" %>
+       </div>
+       <div class="span2">
+          <%= f.radio_button :recommend, 'false', :label=>"ewefe" %>
+          <%= f.label :recommend, "no" %>
+       </div>
+    </div>
+    
+    <%= f.submit "post" %>    
+</div>
+<% end %>

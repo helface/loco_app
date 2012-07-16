@@ -2,8 +2,8 @@ class UsersController < ApplicationController
 #TODO: correct signup email configuration
 #TODO: user friendly URL to hide user id. Use to_param or something similar
 respond_to :html, :json
-before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend]    
-before_filter :correct_user, only: [:edit, :update]
+before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend, :update_profile_pic]    
+before_filter :correct_user, only: [:edit, :update, :update_profile_pic]
 before_filter :location_specified, only: :index
 #TODO: figure out why this is being called for hostprofile destroy
 #before_filter :admin_user, only: :destroy
@@ -22,6 +22,8 @@ before_filter :location_specified, only: :index
   # GET /users/1
   # GET /users/1.json
   def show
+    #TODO: remove this 
+      session[:form_step] = session[:form_params] = nil
     @user = User.find(params[:id])
     @token = params[:token]  
     #for first time confirmation from confirmation email
@@ -44,6 +46,8 @@ before_filter :location_specified, only: :index
 
   # GET /users/1/edit
   def edit
+    @hostprofile = @user.hostprofile
+    @image = Image.new
   end
 
   # POST /users
@@ -74,16 +78,17 @@ before_filter :location_specified, only: :index
   # PUT /users/1
   # PUT /users/1.json
   def update
-    #debugger
+  if params[:controller] == 'users'
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile successfully updated"
         sign_in @user
-        #redirect_to @user
         respond_with @user, location: user_path(@user)
     else
+        flash.now[:error] = "failed to update profile"
         render 'edit'
     end
+  end
 
      # respond_to do |format|
       #if @user.update_attributes(:firstname => "asdfasdf")
@@ -96,6 +101,15 @@ before_filter :location_specified, only: :index
      # end
   end
 
+  def update_profile_pic
+    @user = User.find_by_id(params[:id])
+    if @user.update_attributes(:profile_pic_id => params[:img_id])
+      flash[:success] = "Profile picture successfully updated"
+      debugger
+      sign_in @user
+      redirect_to edit_user_path(@user)
+    end
+  end
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -144,6 +158,7 @@ before_filter :location_specified, only: :index
     else
       @city = remembered_city
       @country = remembered_country
+      @service = Service.find_by_id(params[:category])
       @profiles = @city.hostprofiles.by_service(params[:category])
       @users = []
       @users = @profiles.collect(&:user).paginate(page: params[:page], per_page: 7)
@@ -154,8 +169,12 @@ before_filter :location_specified, only: :index
 private
     
   def correct_user
-    @user=User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
+    #adding a check for the correct controller since hostprofile update seems to be triggering these before filters
+    #possibly due to the 1:1 association.
+    if params[:controller]=="users"
+       @user=User.find_by_id(params[:id])
+       redirect_to(root_path) unless current_user?(@user)
+    end
   end
     
   def admin_user

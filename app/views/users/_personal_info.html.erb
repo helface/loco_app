@@ -1,33 +1,40 @@
+<div id="name">
+   <h2> <%= @user.firstname.capitalize%> </h2>
+</div>
 <% if current_user?(@user) %>
 <h3>
-   <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirstname", :html_attrs => {size: 5} %> 
-   <small><a id="editfirstname" href="#">edit</a></small>
+   <small> <%= link_to "edit", edit_user_path(@user) %> </small>
 </h3>
-<% else %>
-   <div id="name">
-      <h2> <%= @user.firstname%> </h2>
-   </div>
 <% end %>
 
-<%= "Reviews: #{@user.reviews.count}"%> <br>
-<%= "Reviewed: #{@user.inverse_reviewees.count}" %>
+<%= "Reviews: #{@user.inverse_reviewees.count}" %>
+<br>
 <% if host_user?(@user)%>
    <% profile = @user.hostprofile%>
    recommended by <%= "#{profile.recommend_count} guests"%> <br>
-   not recommended by <%= "#{profile.unrecommend_count} guests"%>
+   not recommended by <%= "#{profile.unrecommend_count} guests"%><br>
    response rate: <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%"%><br><br>
-   <h3> host quickview </h3>
-   <%= Service.find_by_id(profile.service).title%> <br>
+   <h3> 
+      <%= Service.find_by_id(profile.service).title%> 
+      <small><%= link_to "edit", edit_hostprofile_path(@user.hostprofile) if current_user?(@user) %><small>
+   </h3>
    <%= profile.city.name%>, <%= profile.city.country.name%> <br>
-   
-   Languages (<%= "#{profile.languages.count}" %>)<br>
-   
-   <% profile.languages.each do |lan|%>
-   <ul id="name">
-    <li><%=" #{lan}" %> </li>
-   </ul>
+   <br>
+   Languages <%= "(#{profile.languages.count})" %><br>
+   <% profile.languages.each do |l|%>
+    <%= Language.find_by_id(l).name %>
    <% end %>
+   <div class="filler"> </div>
+   <div id="name" class="alert alert-info" style="margin-left: -5px; padding-left: 5px">
+      <h4> asking for </h4>
+      <% if profile.exchange_type == "money"%>
+        <%= "Price: #{profile.price} #{profile.currency}"%>
+      <% else %>
+        <%= profile.exchange_type %>
+      <% end %>
+   </div>  
 <% else %>
    <h3> <%= "#{@user.firstname} is not a host"%></h3>
    <small> <%= link_to 'become a host', becomehost_path if current_user?(@user) %> </small>
 <% end %>
+<br>

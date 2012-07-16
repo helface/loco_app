@@ -8,8 +8,7 @@ class LocationsController < ApplicationController
   end
   
   def fill_location
-    #debugger
-    if params[:city_country_location].nil?
+    if params[:city_country_location].empty?
       flash[:error] = "Please enter a valid location"
       redirect_to root_path
     else

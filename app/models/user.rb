@@ -14,8 +14,7 @@
 
 class User < ActiveRecord::Base
   
-  #TODO: make is_host non accessible
-  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation
+  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation, :profile_pic_id
   has_secure_password
   has_many :images, :dependent => :destroy
   
@@ -37,8 +36,8 @@ class User < ActiveRecord::Base
   has_many :forumposts, dependent: :destroy
   
   #has many messages
-  has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id"
-  has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id"
+  has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id", :conditions =>['removed_by_recipient = ?', false]
+  has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id", :conditions =>['removed_by_sender = ?', false]
   
   before_save :create_tokens
   before_save {|user| user.email = email.downcase}
@@ -54,6 +53,19 @@ class User < ActiveRecord::Base
   #validates :password, length:{minimum: 6}
   #validates :password_confirmation, presence: true
   
+  MAX_NUM_PICTURES = 7;
+  
+  def calc_host_avg_score
+     score_sum = 0
+     review_sum = 0
+  end
+  
+  def calc_guest_abg_score
+  end
+  
+  def at_max_picture?
+    self.images.count == MAX_NUM_PICTURES
+  end
   def toggle_host_status
     self.toggle!(:is_host)
   end
@@ -71,11 +83,21 @@ class User < ActiveRecord::Base
     end
   end
   
+  def set_default_profile_pic
+    if self.profile_pic_id.nil? 
+      self.profile_pic_id = self.images.first.nil? ? nil : self.images.first.id  
+    end
+  end
+
   private
-  
+
   def create_tokens
     self.remember_token = SecureRandom.urlsafe_base64
     self.confirmation_token = SecureRandom.urlsafe_base64
   end
   
+  
+  
 end
+
+User.includes([:sent_msgs, :received_msgs])

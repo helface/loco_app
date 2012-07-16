@@ -1,32 +1,46 @@
-<h1><% provide(:title, "Mailbox") %> </h1>
-<br>
-<div style="height: 200px">
-<%= render 'shared/mailbox_nav' %>
- 	<% recipient = User.find(find_recipient_id(@msgthread))%>
-	<div style="height: 40px">
-      To: <%= link_to recipient.firstname, user_path(recipient) %> <br>
-      Subject: <%= @msgthread.subject %>
-	</div>
-	<% @messages.each do |msg| %>
-	<div>		
-		<%= msg.body %> <br>
-		<%= '__________________________________' %>
-	</div>
-	<% end %>
-	<div class="row">
-	    <aside class="span4">
-	        <section>
-				<% @message = Message.new%>
-				<%= form_for([:user, @message]) do |f| %>
-				<div class="field">
-				    <%= f.text_area :body, placeholder: "Reply..." %>
-				    <%= f.hidden_field :subject, value: "Re: " + @msgthread.subject %>
-					<%= f.hidden_field :recipient_id, value: recipient.id%>
-					<%= f.hidden_field :thread_id, value: params[:id]%>
-				</div>
-				<%= f.submit "reply", class: "btn btn-large btn-primary" %>
-				<% end %>
-	        </section>
-	    </aside>
-	 </div>
+<% provide(:title, params[:folder]) %>
+   <%= render 'shared/mailbox_nav' %>
+   <div class="row">
+   	<div class="span1">
+         <%= image_tag find_display_imgurl(@recipient.id, "thumb"), size: "50x50", :style=>"text-align: left" %>  	   
+   	</div>
+   	<div class="span6">
+   	   <h3> <%= link_to @recipient.firstname.capitalize, user_path(@recipient) %> </h3>
+   	</div>
+   </div>
+   
+   <div class="filler"></div>
+   <h3> <%= @msgthread.subject.capitalize %> </h3>
+   
+   
+   <div class="span8" style="background-color:">    
+   <div class = "row" style="margin-top: 15px">
+      <div class="thread">
+         <% @messages.each do |msg| %>
+      	<li>
+      	   <div class="span1" style="text-align: left" %>         	   
+      	      <%= image_tag find_display_imgurl(msg.sender_id, "thumb"), size: "45x45", :style=>"text-align: left" %>	
+      	   </div>
+      	   <div class="span6">
+      	     	<%= msg.body %> 
+      	   </div>		
+      	</li>
+      	<% end %>
+      </div>     
+   </div>   
+   <div class="filler"></div>
+   	<div class="row">
+   				<% @message = Message.new%>
+   				<%= form_for([@recipient, @message]) do |f| %>
+   				<div id="span8"> 				  
+   				   <%= f.text_area :body, placeholder: "Reply...", :style => "width: 100%; height: 100px" %>
+   				   <%= f.hidden_field :subject, value: "Re: #{@msgthread.subject}" %>
+   					<%= f.hidden_field :thread_id, value: params[:id]%>
+   				</div>
+   				
+   				   <%= f.submit "reply", class: "btn" %>
+   				
+   				<% end %>
+   	 </div>
+   </div>
 </div>

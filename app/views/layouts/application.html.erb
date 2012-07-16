@@ -15,6 +15,7 @@
 </div>
             <nav>
                <ul class="nav pull-right">
+                  <li> <%= link_to "hosts", hosts_path %></li>
                   <% if signed_in? %>
                      <%= render 'shared/signedin_header' %>
 				      <% else %>
@@ -29,9 +30,9 @@
 	<div class="container">
       <% flash.each do |key, value| %>
          <% if "#{key}" == "error" %>
-            <%= content_tag(:div, value, style: "color: red") %>
+            <%= content_tag(:div, value, class: "alert alert-error") %>
          <% else %>
-            <%= content_tag(:div, value, style: "color: green") %>
+            <%= content_tag(:div, value, class: "alert alert-success") %>
          <% end %>
       <% end %>
 

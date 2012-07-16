@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619191400) do
+ActiveRecord::Schema.define(:version => 20120703193443) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20120619191400) do
     t.string   "tele"
     t.text     "serviceDesc"
     t.string   "aboutme"
-    t.string   "other_exchange"
+    t.string   "exchange_type"
     t.string   "greenDesc"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20120619191400) do
     t.integer  "service"
     t.string   "languages"
     t.integer  "price"
+    t.string   "currency"
   end
 
   create_table "images", :force => true do |t|
@@ -84,9 +85,11 @@ ActiveRecord::Schema.define(:version => 20120619191400) do
     t.integer  "sender_id"
     t.integer  "recipient_id"
     t.string   "subject"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
     t.integer  "thread_id"
+    t.boolean  "removed_by_sender",    :default => false
+    t.boolean  "removed_by_recipient", :default => false
   end
 
   create_table "msgthreads", :force => true do |t|
@@ -100,11 +103,17 @@ ActiveRecord::Schema.define(:version => 20120619191400) do
   create_table "reviews", :force => true do |t|
     t.string   "content"
     t.integer  "reviewer_id"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "reviewee_id"
-    t.integer  "score",       :default => 0
     t.boolean  "recommend"
+    t.integer  "accuracy",       :default => 0
+    t.integer  "enjoybility",    :default => 0
+    t.integer  "easiness",       :default => 0
+    t.integer  "friendliness",   :default => 0
+    t.float    "score"
+    t.boolean  "is_host_review"
+    t.float    "guest_score"
   end
 
   add_index "reviews", ["created_at"], :name => "index_reviews_on_reviewee_id_and_created_at"
@@ -129,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20120619191400) do
     t.boolean  "is_host",            :default => false
     t.string   "confirmation_token"
     t.boolean  "confirmed",          :default => false
+    t.integer  "profile_pic_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"

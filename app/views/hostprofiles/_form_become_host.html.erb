@@ -1,42 +1,7 @@
-<%= form_for(@hostprofile) do |f| %>
-  <div class="field">
-     <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
-  </div>
-  <div class="field">
-     <%= f.label :what_do_you_speak %>
-     <%= f.text_field :language_tokens %>
-  </div>
-  <div class="field">
-    <%= f.label :select_service %>
-    <%= f.collection_select :service, Service.all, :id, :title %>
-  </div>
-  <div class="field">
-    <%= f.label :exchanging_service_for %>
-    <%= f.select :other_exchange, Hostprofile::EXCHANGE_METHODS, {}, :selected=>"money" %>
-  </div>
-  <div id="exchange_option" class="field"> 
-  </div>
-  <div class="field">
-    <%= f.label :telephone %>
-    <%= f.text_field :tele %>
-  </div>
-  <div class="field">
-    <%= f.label :Service_Description %>
-    <%= f.text_field :serviceDesc %>
-  </div>
-  <div class="field">
-    <%= f.label :about_me %>
-    <%= f.text_field :aboutme %>
-  </div>
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :green_description %>
-    <%= f.text_field :greenDesc %>
-  </div>
+<%= form_for @hostprofile do |f| %>
+  <%= render "shared/#{@hostprofile.current_step}", :f => f %>
   <div class="actions">
-    <%= f.submit  "create host profile", class: "btn btn-large btn-primary" %>
+     <%= f.submit "back", class: "btn btn-primary", name: "back_button" unless @hostprofile.first_step? %>
+     <%= f.submit "next", class: "btn btn-primary", name: "next_button" %>
   </div>
 <% end %>

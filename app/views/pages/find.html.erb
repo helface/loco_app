@@ -1,10 +1,8 @@
 <% provide(:title, 'find a host') %>
+<%= form_tag fill_location_path, method: 'get', class: "well form-inline" do %>
 <div id="name">
-   Where are you going?
+   <%=render 'shared/country_city_select', :inline_search => true%>
+<%= submit_tag "Search", :name => nil, :class=>"bnt" %>
 </div>
-<%= form_tag fill_location_path, method: 'get' do %>
-<div id="name">
-   <%= render "shared/country_city_select", :inline_search => true%>
-</div>
-<%= submit_tag "Go!", :name => nil %>
-<% end %>
+<%end%>
+<div class="filler"></div>

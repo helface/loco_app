@@ -1,23 +1,16 @@
-<%= form_for(image, :html=>{:multipart=>true}) do |img| %>
-<div id="name">
+<%= form_for(@image, :html=>{:multipart=>true}) do |img| %>
+<div> 
       <%if img.object.new_record? %>
-         <div id="name">
-            <%= img.label :choose_a_picture%>
-            <%= img.file_field :photo %>
+      
+         <div class="controls">
+            <%= img.label :choose_a_picture, :class=>"control-label"%>
+            <%= img.file_field :photo, :class=>"input-file" %>
          </div>
-         <div id="name">
+         <div class="field" >
             <%= img.label :enter_a_caption%>
             <%= img.text_field :caption %>
          </div>
       <%end%>
 </div>
-   <div id="name">
-         <% unless img.object.new_record? %>
-         <div id="name">
-            <%= link_to( image_tag(img.object.image.url(:thumb)), img.object.image.url(:original) ) %>
-            <%= img.check_box :delete %>
-         </div>      
-      <%end%>
-   </div>
-   <%= img.submit "upload", :class => "btn btn-large btn-primary" %>
+   <%= img.submit "upload", :class => "btn btn-primary" %>
 <%end%>

@@ -1,16 +1,17 @@
 <% @countries = Country.order(:name)%>
 <% if inline_search == true %>
-  <% placeholder = location_is_specified ? "#{remembered_city.name}, #{remembered_country.name}" : 'enter your location here' %>
-  <%= text_field_tag "city_country_location", nil, :placeholder=>placeholder, :size=>156, :data=>{autocomplete_source: locations_path} %>
+  <% placeholder = location_is_specified ? "#{remembered_city.name}, #{remembered_country.name}" : 'where are you going?' %>
+  <% value = location_is_specified ? placeholder : nil %>
+  <%= text_field_tag "city_country_location", nil, :placeholder=>placeholder, :value=>value, :size=>156, :data=>{autocomplete_source: locations_path} %>
 <%else%>
    <div class="row">
-      <div class="span4">
-         <%= f.label :country %>
-         <%= f.collection_select :country_id, @countries, :id, :name, {}, {style: "width: 150px"} %>
+      <div class="span3">
+         <% selected = @hostprofile.try(:country_id) %>
+         <%= f.collection_select :country_id, @countries, :id, :name, {:include_blank => "select a country"}, {style: "width: 200px", selected: selected} %>
       </div>
-      <div id="name">
-         <%= f.label :city %>
-         <%= f.grouped_collection_select :city_id, @countries, :cities, :name, :id, :name %>
+      <div id="span3">
+         <% selected = @hostprofile.try(:city_id)%>
+         <%= f.grouped_collection_select :city_id, @countries, :cities, :name, :id, :name, {:prompt => "select a city"}, {style:"width: 200px",selected: selected} %>
       </div>
    </div>
 <%end%>

@@ -1,0 +1,25 @@
+<% provide(:title, "Edit") %> 
+<div class="filler"></div>
+<div class="nav nav-tabs">
+   <% if params[:controller] == "users" %>
+      <li class="active">
+   <% else %>
+     <li>
+   <% end %>
+   <%= link_to "General", edit_user_path(@user, :view=>"general") %>
+   </li>
+
+   
+   <% if params[:controller] == "hostprofiles" %>
+      <li class ="active"> 
+   <% else %>
+      <li>
+   <% end %>
+   
+   <% if @user.is_host? %>
+      <%= link_to "Host profile", edit_hostprofile_path(@hostprofile, :view=>"profile") %>
+   <% else %>
+      <%= link_to "Become a host", becomehost_path, :style=>"color: #7D053F; font-weight: bold " %>
+   <% end %>
+   </li>       
+</div>

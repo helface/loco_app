@@ -1,31 +1,28 @@
 <div class="row">
-   <div class="span7" style="background-color: purple">
+   <div class="span7" style="background-color: purple; margin-left:10px">
       <div class="thumbnail">
          <% if @user.images.empty? %>
             <%= image_tag "http://placehold.it/260x180", id: "displayimg" %> <!-- TODO: change default -->
-         <% else %>
-            <% firstimg = @user.images.first %>
-            <%= image_tag firstimg.photo.url(:large), id: "displayimg" %>
-            <div id="caption">    
-               <% if !firstimg.caption.empty? %>
-                  <p id="displaycaption"><%= firstimg.caption %></p>
-               <% else %>
-                  <p style="height: 18px"></p>
-               <% end %>
+            <div id="name" style="height: 18px">
+               <%= link_to "add image", edit_user_path(@user) %>
             </div>
-          <% end %>
+         <% else %>
+            <% firstimg = Image.find_by_id(@user.profile_pic_id) || @user.images.first %>
+            <%= link_to image_tag(firstimg.photo.url(:large), id: "displayimg", :data=>{:id=>firstimg.id}), image_path(firstimg) %>            
+            <div id="caption">    
+               <p id="displaycaption" style="height: 18px"><%= firstimg.caption %></p>
+            </div>
+         <% end %>
        </div>
    </div> <!-- end of display image -->
    <%if @user.images.count > 1%>
       <div class="span1">
          <% n = 0 %>
             <% @user.images.each do |img|%>
-               <div class="span2" style="text-align:left; margin-left:0px">
-                  <%= image_tag img.photo.url(:large), class: "thumbnail", id: "imgthumb#{n+=1}", :caption=>img.caption, :size=>"72x100" %>
+               <div class="span2" style="text-align:left; margin-left:-10px">
+                  <%= image_tag img.photo.url(:medium), class: "thumbnail thumbindex", id: "imgthumb#{n+=1}", :data=>{:caption=>img.caption, :id=>img.id} %>
                </div>
             <% end %>
       </div>
    <% end %>
 </div>
-
-<!-- link_to delete, img, confirm are you sure, method delete -->

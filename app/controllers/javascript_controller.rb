@@ -6,4 +6,8 @@ class JavascriptController < ApplicationController
     render json: @cities.map{|c| "#{c.name}, #{Country.find_by_id(c.country_id).name}"}
   end
   
+  def prefill_languages(langs)
+    render json: langs.map{|l| Language.find_by_id(l)}
+  end
+  
 end

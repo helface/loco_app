@@ -1,19 +1,48 @@
 <!--TODO: Add link for message -->
-<tr>
-    <td>
-        <%= gravatar_for user  %>
-        <%= link_to user.email, user %>
-        <ul>
-            <li> <%= "#{user.firstname} #{user.lastname}" %> </li>
-            <li> reviews: <%= link_to user.reviews.count, user %></li>
-            <% unless current_user.nil? %>
-                <% if current_user?(user) %>
-                    <li> <%= link_to 'edit', edit_user_path(user) %> </li>
-                <% end %>
-                <% if current_user.admin? && !current_user?(user) %>
-                    <li> <%= link_to 'delete', user, confirm: 'Are you sure?', method: :delete %> </li>
-                <% end %>
+<% profile = user.hostprofile%>
+   <div class="span4">
+       <div class="thumbnail" id="badge">
+         <%= link_to image_tag(find_display_imgurl(user.id, "medium")), user%>
+         <div class="row">
+            <div class="span2">
+               <h5><%=user.firstname.capitalize %>
+               <i class="icon-ok" style="color:green"></i>
+               <small style="color:green"><%= profile.recommend_count%></small>
+               <i class="icon-remove"></i>
+               <small style="color:red"><%= profile.unrecommend_count%></small>
+               <%= %>
+               </h5>       
+            </div>
+            <div class="span2" style="margin-left: 8px; text-align:right">
+            <span class="label"><%= Service.find_by_id(profile.service).title%></span>
+            </div>
+         </div>
+         <div class="row" style="margin-top:3px">
+            <div class="span4" style="margin-left: 8px; text-align: right">
+               <div style="color: #4863A0; font-weight:bold; font-size: 0.9em">
+               <% profile.languages.each do |l|%>
+                     <%= Language.find_by_id(l).name %>
+                     <%= "," if profile.languages.last != l%>
+               <% end %> 
+               </div>               
+            </div>
+         </div>
+         <div class="row">            
+            <%if profile.exchange_type == "money"%>
+               <div class="span3" style="color:#ee5f5b; margin-top:8px">                 
+               <b> <%= "asking for #{profile.price} #{profile.currency}"%> </b>
+            <% else %>
+               <div class="span3" style="color:#51a351; margin-top:8px">     
+               <b><%= profile.exchange_type%></b>
             <% end %>
-            </ul>
-    </td>
-</tr>
+            </div>
+         </div>
+         <div class="row">
+            <div class="span4" style="margin-top:0px">
+               <div style="background-color:white; width: 93%; height: 60px; padding: 5px">
+                  <%= truncate(profile.serviceDesc, length:140)%>
+               </div> 
+            </div>   
+         </div>
+       </div>
+     </div>

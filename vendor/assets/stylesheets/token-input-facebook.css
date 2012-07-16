@@ -12,7 +12,7 @@ ul.token-input-list-facebook {
     z-index: 999;
     margin: 0;
     padding: 0;
-    background-color: #eee;
+    background-color: #fff;
     list-style-type: none;
     clear: left;
 }
@@ -87,7 +87,7 @@ div.token-input-dropdown-facebook {
 div.token-input-dropdown-facebook p {
     margin: 0;
     padding: 5px;
-    font-weight: bold;
+    font-weight: normal;
     color: #777;
 }
 
@@ -112,7 +112,7 @@ div.token-input-dropdown-facebook ul li.token-input-dropdown-item2-facebook {
 }
 
 div.token-input-dropdown-facebook ul li em {
-    font-weight: bold;
+    font-weight: normal;
     font-style: normal;
 }
 

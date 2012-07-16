@@ -1,0 +1,13 @@
+<!-- Refactor this code so it can be used for all the other models -->
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      Oops, you have <%= pluralize(@post.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

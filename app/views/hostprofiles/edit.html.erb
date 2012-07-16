@@ -1,0 +1,29 @@
+<%= render 'shared/edit_tabs'%>
+
+<div class="span8">
+   <div id="row host_info edit_section">
+      <%if @user.is_host?%>
+      <div class="row host_info">
+         <blockquote>
+            By removing your host status, we will erase all of your host profile information from our system. Should you ever want to become host again, you will have to re-enter all your information. Click the red button to proceed.
+         </blockquote> 
+         <div id="name" style="text-align: right; height: 45px">
+            <%= button_to 'Remove my host status', hostprofile_path(@hostprofile), method: "delete", :class => "btn btn-large btn-danger" %>
+         </div>
+      </div>	
+   	<% end %>
+   </div>
+   
+   <div class="filler"></div>
+      <%= form_for @hostprofile do |f| %>
+      <div class = "row host_info edit_section">
+        <%= render 'shared/host_information', :f => f%>
+      </div>
+      <div class = "row host_info edit_section">
+        <%= render 'shared/service_information', :f => f%>
+      </div>
+        <%= f.submit 'done', class: "bnt"%>
+      <% end %>
+   </div>  
+</div>
+

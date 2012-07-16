@@ -8,4 +8,5 @@ class LanguagesController < ApplicationController
        format.json {render json: @languages.where("name LIKE ?", "%#{params[:q]}%")}
      end
   end
+  
 end

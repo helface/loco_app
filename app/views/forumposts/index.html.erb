@@ -1,32 +1,52 @@
-Welcome to forum! <b>#TODO: insert commentary here<b>
-
-<%= form_tag forum_path, method: 'get' do %>
+<%= form_tag forum_path, method: 'get', class: "well form-inline" do %>
 <div id="name">
    <%=render 'shared/country_city_select', :inline_search => true%>
+<%= submit_tag "Search", :name => nil, :class=>"bnt" %>
 </div>
-<%= submit_tag "Search", :name => nil %>
 <%end%>
+<div class="filler"></div>
 
-<div>
-<% if signed_in? %>
-	<%= link_to "Post a request", new_forumpost_path %> |
-	<%= link_to "My posts", myposts_path %>
-<% else %>
-	<%= link_to "sign in to post", signin_path %>
-<%end%>
+<div class="row">
+   <div class="span8">
+      <h3>
+      <% if !params[:city_country_location].nil? %>
+         <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
+      <% else %>
+         <%= "Recent posts"%>
+      <% end %>
+      </h3>
+   </div>
+   <div class="span2">
+      <% if signed_in? %>
+      	<%= link_to "Post a request", new_forumpost_path %>
+      <% end %>
+   </div>
 </div>
-<div id="name">
-   <%= will_paginate @posts%>
-   <% if !params[:city_country_location].nil? %>
-      <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
-   <% else %>
-      <%= "All posts"%>
-   <% end %>
-   <%= will_paginate @posts %>
-        
+<div class="row" style="margin-top:15px">
+   <div class="span10">
+      <%= will_paginate @posts%>
+      <div class="email" style="margin-left:8px">
+      <% @posts.each do |p| %>
+      <li>   
+      <div class="row">
+         <div class="span1">
+            <%= link_to image_tag(find_display_imgurl(p.user_id, "thumb"), size: "50x40"), user_path(p.user_id) %>	
+         </div>
+         <div class="span7">
+             <div><b><%= link_to p.title.capitalize, forumpost_path(p) %> </b>
+                	<span class="timestamp">
+                	   <%= p.created_at%>
+                	</span></div>
+             <small><%= City.find_by_id(p.city_id).name %></small><br>
+             <small> responses(<%= p.responded_count %>)</small>         
+         </div>
+
+      </div>
+      </li>
+      <%end%>
+      </div>
+      
+      <%= will_paginate @posts %>
+   </div>
 </div>
-<% @posts.each do |p| %>
-<div>
-<%= link_to p.title, forumpost_path(p) %> responded times <%= p.responded_count %>
-</div>
-<%end%>
+

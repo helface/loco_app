@@ -1,19 +1,13 @@
 <div class="row">
-    <aside class="span4">
-		<section>		
-		   <div>
-		   RE: <%= @post.title%>
+    <div class="span8" id="messageform">
+	
+		   <h3>RE: <%= @post.title%></h3>
 			<%= form_for(:message, url: create_response_forumpost_path) do |f| %>
 		 		<div class="field">
-		    		<%= f.label :body %><br />
-		    		<%= f.text_field :body %>
+		    		<%= f.text_area :body%>
 		 		</div>
-				<%= f.hidden_field :recipient_id, value: @post.user_id %>
-				<%= f.hidden_field :subject, value: "RE: " + @post.title%>
-
-				<%= f.submit "respond", class: "btn btn-large btn-primary" %>
+			
+				<%= f.submit "respond", class: "btn" %>
 			<% end %>
-		</div>
-        </section>
-    </aside>
+    </div>
 </div>

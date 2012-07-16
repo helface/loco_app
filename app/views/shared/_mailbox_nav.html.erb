@@ -1,7 +1,21 @@
-<% unless current_user.nil? %>
-<div>
+<% unless !signed_in? %>
+<div class="nav nav-tabs">
+   <% if params[:folder] == 'inbox' %>
+      <li class="active">
+   <% else %>
+      <li>
+   <% end %>
 	<%= link_to "inbox", mailbox_path(:folder => 'inbox') %>
+	</li>
+	
+	<% if params[:folder] == "sent" %>
+	   <li class="active">
+	<% else %>
+	   <li>
+	<% end %>
 	<%= link_to "sent", mailbox_path(:folder => 'sent') %>
+	</li>
+	      
 </div>
 <br>
 <% end %>

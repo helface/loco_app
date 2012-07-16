@@ -1,10 +1,8 @@
-<div id="name">
-   Name <%= @user.firstname%> <%link_to "edit", ""%>
-   email <%= @user.email%> <%link_to "edit", ""%>
-   
+<%= render 'shared/edit_tabs'%>
+
+<div class="span8">
+   <%= render 'form_edit' %>
 </div>
 
-<%= render 'form_edit' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+

@@ -1,22 +1,22 @@
 LocoApp::Application.routes.draw do
 
   get "images/new"
-
   get "images/create"
-
   get "images/destroy"
 
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :msgthreads, only: [:create, :show, :destroy]
+    resources :reviews, only: [:new, :create, :destroy]
+    
     member do
       get :mailfriend
       post :mailfriend
       get :confirm
+      get :update_profile_pic
     end
   end
   resources :sessions, only: [:create, :destroy]
-  resources :reviews, only: [:new, :create, :destroy]
   resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update]
   resources :mailbox, only: :show
   resources :languages, only: [:index]
@@ -26,7 +26,7 @@ LocoApp::Application.routes.draw do
       post 'create_response'
     end
   end
-  resources :images, only: [:new, :create, :destroy]
+  resources :images, only: [:new, :create, :destroy, :show]
   resources :locations, only: [:index]
   
   get "pages/home"
@@ -47,6 +47,7 @@ LocoApp::Application.routes.draw do
   match 'myposts', to: 'forumposts#manage_posts'
   match 'filter', to: 'users#filter'
   match 'fill_location', to:'locations#fill_location'
+  match 'updateprofile', to:'hostprofiles#update'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:
