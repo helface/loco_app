@@ -1,0 +1,16 @@
+<div class="filler"></div>
+
+<div class="span11">
+   <div class="row">
+        <h3> <%= image_tag find_display_imgurl(@user.id, "thumb"), size: "40x40" %>	  
+       Please review your experience with <%= link_to @user.firstname.capitalize, user_path(@user) %> </h3>
+       <br>     
+       <small style="color:#319292" id="light"><i class="icon-info-sign"></i> Your review is much appreciated by the community! Meetup status and your personal stats will be updated after you answer a few short questions about <%= @user.firstname.capitalize %>. </small>
+   </div>
+   <div class="row host_info">
+      <%= simple_form_for([@user, @review]) do |f| %>
+		   <%= render 'shared/new_review', :f=>f%>
+		<% end %>
+   </div>
+		 
+</div> 

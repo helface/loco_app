@@ -11,6 +11,7 @@ before_filter :location_specified, only: :index
   # GET /users
   # GET /users.json
   def index  
+      store_nav_history
       @users = @city.hosts.paginate(page: params[:page], per_page: 7)
 
       #respond_to do |format|
@@ -22,16 +23,10 @@ before_filter :location_specified, only: :index
   # GET /users/1
   # GET /users/1.json
   def show
-    #TODO: remove this 
-      session[:form_step] = session[:form_params] = nil
+    session[:form_step] = session[:form_params] = nil
     @user = User.find(params[:id])
     @token = params[:token]  
-    #for first time confirmation from confirmation email
-    @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 5)
-      #respond_to do |format|
-      #format.html  show.html.erb
-      #format.json { render json: @user }
-      #end
+    @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /users/new
@@ -54,20 +49,10 @@ before_filter :location_specified, only: :index
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
-      #respond_to do |format|
-      #if @user.save
-      # format.html { redirect_to @user, notice: 'User was successfully created.' }
-      # format.json { render json: @user, status: :created, location: @user }
-      #else
-      # format.html { render action: "new" }
-      # format.json { render json: @user.errors, status: :unprocessable_entity }
-        #render 'new'
-      #end
-      #end
     if @user.save
+        debugger
+        
         flash[:success] = "Congratulations! A confirmation email has been sent to your inbox for activation."
-        #sign_in @user 
         SiteMailer.signup_confirmation(@user).deliver
         redirect_to signin_path
     else
@@ -77,28 +62,27 @@ before_filter :location_specified, only: :index
 
   # PUT /users/1
   # PUT /users/1.json
-  def update
-  if params[:controller] == 'users'
-    @user = User.find_by_id(params[:id])
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile successfully updated"
-        sign_in @user
-        respond_with @user, location: user_path(@user)
-    else
-        flash.now[:error] = "failed to update profile"
-        render 'edit'
-    end
-  end
-
-     # respond_to do |format|
-      #if @user.update_attributes(:firstname => "asdfasdf")
-       #format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      #format.json { head :no_content }
-      #else
-      # format.html { render action: "edit" }
-      # format.json { render json: @user.errors, status: :unprocessable_entity }
-     # end
-     # end
+  def update   
+     if params[:controller] == 'users'
+        @user = User.find_by_id(params[:id])
+        if params[:user][:old_password]
+          if !@user.authenticate(params[:user][:old_password])
+            flash[:error] = "Must enter your current password correctly"
+            redirect_to edit_user_path(@user)
+            return
+          else
+            params[:user].delete :old_password
+          end
+        end
+        if @user.update_attributes(params[:user])
+           flash[:success] = "Profile successfully updated"
+           sign_in @user
+           respond_with @user, location: user_path(@user)
+        else
+           flash.now[:error] = "failed to update profile"
+           render 'edit'
+        end
+     end
   end
 
   def update_profile_pic
@@ -152,7 +136,8 @@ before_filter :location_specified, only: :index
   end
   
   def filter
-    #debugger
+    store_nav_history
+    
     if remembered_city.nil? || params[:category].nil?
       redirect_to root_path
     else

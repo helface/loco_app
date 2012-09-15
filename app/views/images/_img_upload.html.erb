@@ -2,15 +2,15 @@
 <div> 
       <%if img.object.new_record? %>
       
-         <div class="controls">
-            <%= img.label :choose_a_picture, :class=>"control-label"%>
-            <%= img.file_field :photo, :class=>"input-file" %>
+         <div class="controls edit_link">
+            <small> Upload a picture </small><br>
+            <%= img.file_field :photo %>
          </div>
          <div class="field" >
-            <%= img.label :enter_a_caption%>
-            <%= img.text_field :caption %>
+            <small> Enter caption (optional) </small><br>
+            <%= img.text_area :caption, style: "width: 400px; height: 50px", placeholder: "100 characters ..."%>
          </div>
       <%end%>
 </div>
-   <%= img.submit "upload", :class => "btn btn-primary" %>
+   <%= img.submit "upload", id: "pink-button" %>
 <%end%>

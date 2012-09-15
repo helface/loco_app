@@ -1,28 +1,39 @@
-<div class="filler"></div>
-<div class="row">
-   <div class="span1">
-      <%= link_to (image_tag find_display_imgurl(@post.user_id, "thumb"), size: "50x50"), user_path(User.find_by_id(@post.user_id)) %>	
-   </div>
-   <div class="span6">
-      <h3><%=User.find(@post.user_id).firstname.capitalize%></h3>
-   </div>
-</div>
-
-<div class="row">  
-   <div class="span8 microposts">
-      <li><h4><%= @post.title %></h4></li>
-       <li> 
-       <div class="row">
-          <div class="span7">
-             <%= @post.content %>
-           </div>
-           <div class="span1">
-              <%if signed_in? && @post.user_id != current_user.id %>
-              <%= button_to 'Respond', respond_forumpost_path, :method=> "get", :class=>"btn, btn-small" %>
-              <%end%>
-           </div>
-       </div>
-       
+<div class="row email">
+      <% date = @posts.first.created_at.to_date unless @posts.empty? %>    
+      <% if date %>
+      <li id="seperator">
+         <b style="color:white"> Posted <%= date.to_date.to_formatted_s(:long) %></b>
       </li>
-   </div> 
+      <% end %>
+   <br>
+   <% @posts.each do |p| %>
+      <% if p.created_at.to_date != date %>
+      </div> 
+      <br>
+      <div class="row email">
+      <li id="seperator">
+         <% date = p.created_at.to_date %>
+         <b style="color:white">Posted <%= date.to_formatted_s(:long) unless date.nil?%></b>
+      </li>
+      <br>
+      <% end %>
+      <li>
+      <div class ="row" >
+      <div class="span1">
+            <%= link_to image_tag(find_display_imgurl(p.user_id, "thumb"), size: "50x40"), user_path(p.user_id) %>	
+         </div>
+
+         <div class="span7">
+             <div>
+                <b><%= link_to p.title.capitalize, forumpost_path(p) %> </b>
+                <span class="timestamp" style="color:#3a87ad">
+                for <%= p.date.to_formatted_s(:long) unless p.date.nil?%>
+                </span>
+             </div>
+             <small><%= City.find_by_id(p.city_id).name %></small><br>
+             <small style="font-size:0.9em; color:gray"> responses <%= p.responded_count %></small>         
+         </div>
+      </div> 
+      </li>    
+   <%end%>
 </div>

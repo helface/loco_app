@@ -2,8 +2,7 @@ class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
   def index
-    @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)
-    
+    @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
     unless params[:city_country_location].nil?
       if find_location(params[:city_country_location])
         remember_destination(@city.id, @country.id)
@@ -41,21 +40,23 @@ include ForumpostsHelper
     #TODO: maybe limit the number of posts you can respond to at any given time.
     @post = Forumpost.find(params[:id])
     @post.increment_respond_count
+    sender = current_user
     	
     #Make the response into an email thread for ongoing communication	
-    @message = current_user.sent_msgs.build(params[:message])
+    @message = sender.sent.build(params[:message])
     @message.recipient_id = @post.user_id
     @message.subject = "RE: #{@post.title}"
+    @message.owner_id = sender.id
+    @message_copy = @message.copy_message(@post.user_id) #making a copy of email for the recipient   
     @msgthread = Msgthread.build_message_thread(@message)
-    @message.thread_id = @msgthread.id
-    if @message.save
+    @message.thread_id = @message_copy.thread_id = @msgthread.id
+    if @message.save && @message_copy.save
       flash[:success] = "your message has been sent"
-      redirect_to user_msgthread_path(current_user, @msgthread)
+      redirect_to user_message_path(@post.user_id, @message)
     else
       flash[:error] = "Sorry, we were unable to send your message"
       redirect_to current_user
-    end
-    
+    end   
   end
   
   def show

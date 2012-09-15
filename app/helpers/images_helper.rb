@@ -2,7 +2,10 @@ module ImagesHelper
  
   def find_display_imgurl(user_id, size)
     user = User.find_by_id(user_id)
-    if user
+    
+    if (user_id.nil? || user.nil?)
+      return "http://placehold.it/260x180"
+    else
       img = Image.find_by_id(user.profile_pic_id)
       if img
          if size=="large"
@@ -13,7 +16,7 @@ module ImagesHelper
            return img.photo.url(:thumb)
          end
       else
-         return "http://placehold.it/260x180"
+        return "full_hat.png"
       end
     end  
   end

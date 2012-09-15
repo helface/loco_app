@@ -1,51 +1,74 @@
 <% provide(:title, @user.firstname) %>
 <p id="notice"><%= notice %></p>
-
+<div class="edit_link">
+   <%= link_to "Back to search results", session[:prev] %>
+</div>
+<br>
+  
 <div class="row" >
-   <div class="span4" style="background-color: #eee; height: 385px">
-      <div class = "row" style="margin:5px 15px; height: 350px">
-         <%= render "personal_info" %>
+   
+   <div class="span4 side-profile">
+      <div class="row" style="margin:5px 15px; height: 340px;">
+         <%= render "personal_info" %>   
       </div>
-      <div class = "row" style="height:22px; margin: 0px 15px">
-         <%= link_to_unless current_user?(@user), 'message ', new_user_message_path(@user) %> | 
-         <%= link_to 'tell a friend', mailfriend_user_path(@user) %>
+          
+      <div class="row no_link" style="margin: 0px 15px">
+         <i id="message_icon" class="icon-envelope-alt"> <small id="review_count"><%= link_to 'message ', new_user_message_path(@user) %></small></i>
+         <i id="message_icon" class="icon-share-alt"> <small id="review_count"><%= link_to 'tell a friend', mailfriend_user_path(@user) %></small></i>               
       </div>
    </div>
    <div class="span8"> 
          <%= render "picture_gallery" %>  
    </div>
 </div> 
+
 <div class="filler"> </div>
 <ul class="nav nav-tabs">
    <% if params[:view] == "review" %>
      <li>
    <% else %>
      <li class="active">  
-   <% end %>
-     <%= link_to "profile", user_path(@user, view: "profile") %>
-   </li>
+   <% end %> 
+   <%= link_to "profile", user_path(@user, view: "profile") %> </li>
+   
    <% if params[:view] == "review" %>
       <li class="active">
    <% else %>
       <li>
    <% end %>
-      <%= link_to "reviews(#{@user.inverse_reviewees.count})", user_path(@user, view: "review") %>
-  </li>
+      <%= link_to "reviews (#{@user.inverse_reviewees.count})", user_path(@user, view: "review") %> </li>
 </ul>
 
 <% if params[:view] == "review" %>
 <div class="row">
-   <div class="span8">
-   <% if @user.inverse_reviews.any? %>
-      <ol class="microposts">
-         <%= render @reviews %>
-      </ol>
-  <% end %> 
-  </div> 
+   <div class="span10">
+      <% if !@reviews.nil? %>
+         <div class="row">
+            <%= render @reviews %>
+         </div>
+      <% else %>
+          <%= "#{@user.firstname.capitalize} has no reviews at the moment." %>
+     <% end %>
+   </div> 
 </div>
 <%= will_paginate @reviews %>
 <% else %>
-   <% if host_user?(@user)%>
-      <%= render @user.hostprofile %>
+   <% if !host_user?(@user) %>
+   <strong> About me </strong> <br>
+   <% if @user.self_intro.empty? %>
+      <div class="edit_link">
+         No self introduction yet. 
+         <small> <%= link_to 'Enter one.', edit_user_path(@user) if current_user?(@user) %> </small>
+      </div>   
+   <% else %>
+        <div class="span11" style="margin-left:0px; margin-top:10px">
+           <p> <%= @user.self_intro %> </p>
+        </div>
+   <% end %>
+   <div class="filler"></div>
+   <% else %>
+      <%= render @user.hostprofile %>  
    <% end %>
 <% end %>
+
+<div class="filler"></div>

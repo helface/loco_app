@@ -1,61 +1,71 @@
- <div class="edit_page">
-   
- <h3 class="row"> Personal information </h3>
- <div class="row host_info edit_section">
-    <div class="field">
-         First Name <br> 
-         <h3> <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirst", :html_attrs => {size: 20} %> 
-         <small><a id="editfirst" href="#">edit</a></small>   
-         </h3>   
-      </div>
-      <div class="field">
-         Last Name <br> 
-           <h3> <%= best_in_place @user, :lastname, :type=>:input, :activator=> "#editlast", :html_attrs => {size: 20} %> 
-           <small><a id="editlast" href="#">edit</a></small>   
-           </h3>
-      </div>
-      <div class="field">
-         Email <br> 
-         <h3><%= best_in_place @user, :email, :type=>:input, :activator=> "#editemail", :html_attrs => {size: 20} %> 
-         <small><a id="editemail" href="#">edit</a></small>
-         </h3>
-      </div>
- </div>
+ <div class="filler"></div> 
+ <h3 class="row"> General information </h3> 
+ <div class="row host_info">
+    <div class="edit-section no_link">
+         <div class="field edit_link">
+            <small> First name </small><br> 
+            <strong> <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirst", :html_attrs => {size: 20} %> </strong>
+            <%= link_to 'edit', '#', id: "editfirst" %>       
+         </div>
+        
+         <div class="field edit_link">
+            <small> Last name </small> <br> 
+            <strong> <%= best_in_place @user, :lastname, :type=>:input, :activator=> "#editlast", :html_attrs => {size: 30} %> </strong>
+            <%= link_to 'edit', '#', id: "editlast" %>
+         </div>
+          
+         <div class="field edit_link">
+            <small> Email </small> <br> 
+            <strong><%= best_in_place @user, :email, :type=>:input, :activator=> "#editemail", :html_attrs => {size: 20} %> </strong>
+            <%= link_to 'edit', '#', id: "editemail" %>            
+         </div>
+         <br>
+         <div class="field edit_link">
+            <strong> Self introduction </strong> <%= link_to 'edit', '#', id: "editintro" %>            
+            <br> 
+         </div>        
+         <p style="color:#777; margin-top:3px"><%= best_in_place @user, :self_intro, :type=>:textarea, :nil => "You have no self intro", :sanitize=>"false", :activator=> "#editintro", :html_attrs => {class: "edit_link", :style=>"width:80%"} %> </p>            
+            
+    </div>
+</div>
+ 
  <div class="filler"></div>
-  <h3 class="row"> Security </h3>
- <div class="row host_info edit_section">
-  <div id="password_update" >
-     <div class="filler"> </div>
-     <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages' %>
-        <div class="field">
-           <%= f.label :password %>
-           <%= f.password_field :password %>
-        </div>
-        <div class="field">
-           <%= f.label :password_confirmation %>
-           <%= f.password_field :password_confirmation %>
-        </div>
-        <div class="actions">
-            <%= f.submit  "update", class: "btn btn-danger" %>
-        </div>
-     <% end %>
+  <h3 class="row"> Pictures </h3>
+  <div class="row host_info">
+    <div class="edit-section edit_link">
+       <small> You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures. </small>
+       <div class="row">
+          <br>
+          <% @user.images.each do |img|%>      
+          <div class="span1">
+             <%= link_to image_tag(img.photo.url(:thumb), class: "thumbnail thumbindex" ), image_path(img) %>
+          </div>
+          <% end %>
+       </div>
+       <div class="filler"></div>
+       <%=render 'images/img_upload'%>
+    </div>
   </div>
- </div>
+  
  <div class="filler"></div>
- <h3 class="row"> Pictures </h3>
- <div class="row host_info edit_section">
-   You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.<br>
-   <br>
-   <div class="row">
-      <% @user.images.each do |img|%>      
-      <div class="span1">
-         <%= link_to image_tag(img.photo.url(:thumb), class: "thumbnail thumbindex" ), image_path(img) %>
-      </div>
-      <% end %>
-   </div>
-   <div class="filler"></div>
-   <%=render 'images/img_upload'%>
-   
- </div>
+ <h3 class="row"> Security </h3>
+ <div class="row host_info" id="edit-section">
+    <div class="edit-section">
+       <%= form_for(@user) do |f| %>
+          <%= render 'shared/error_messages', :obj=>@user %>
+          <div class="field edit_link">
+              <small> Enter your current password </small><br>
+              <%= f.password_field :old_password %>
+           </div>
+          <div class="field edit_link">
+             <small> Change your password </small><br>
+             <%= f.password_field :password %>
+          </div>
+          <div class="field edit_link">
+              <small> Confirm new password </small><br>
+              <%= f.password_field :password_confirmation %>
+          </div>    
+          <%= f.submit "update", :id=>"pink-button", :style=>"margin-bottom:0px" %>
+       <% end %>
+    </div>
  </div>

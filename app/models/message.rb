@@ -9,4 +9,11 @@ class Message < ActiveRecord::Base
   validates :subject, presence:true, length:{maximum: 100}
   
   #state_machine :state, :initial => :unsent
+  
+  def copy_message(owner)
+    message_copy = self.dup
+    message_copy.owner_id = owner
+    return message_copy
+  end
+  
 end

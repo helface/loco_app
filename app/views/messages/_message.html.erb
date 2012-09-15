@@ -1,27 +1,34 @@
-<div class="email">
    <li>
-    <div class="span2">
+   <div class="span1" style="margin: 5px 0px">
    	<% if params[:folder] == 'sent'%>
-   		<% recipient = User.find(message.recipient_id) %>		
-   		To: <%= link_to recipient.firstname.capitalize, user_path(recipient) %>
+   		<% user = User.find(message.recipient_id) %>		
    	<% else %>	
-   	   <%sender = User.find_by_id(message.sender_id)%>
-   		<%= image_tag find_display_imgurl(sender.id, "thumb"), size: "40x40" %>	
-   	   <br>
-         <%=  link_to sender.firstname.capitalize, user_path(sender) %>
+   	   <% user = User.find_by_id(message.sender_id)%>
    	<% end %>
+   	<%= link_to image_tag( find_display_imgurl(user.id, "thumb"), id: "profile-thumb"), user_path(user) %>	
    </div>
-   <div class="span7">
+   <div class="span2" style="width:10%; padding-top:20px; margin:5px 0px;">
+      <%= link_to user.firstname.capitalize, user_path(user) %>
+   </div>
+   <div class="span6 no_link" style="margin: 5px 0px">
       <% msgthread = Msgthread.find(message.thread_id) %>
-   	<small><b><%= link_to "#{message.subject}", user_msgthread_path(msgthread.find_recipient_id(current_user), msgthread) %></b></small> 	
-   	<span class="timestamp">
-   	   <%= message.created_at%>
-   	</span>
-   	<div style="padding-top: 8px"><%= truncate(message.body, length: 160)%></div>
+   	   <% if !message.read %>
+   	    <i class="icon-envelope-alt" style="color:#45E0AA"></i>
+   	   <% end %>
+   	   <%= link_to "#{message.subject}", user_message_path(msgthread.find_recipient_id(current_user), message) %>
+   	    <br> 
+   	<p id="hint" style="padding-top: 5px"><%= truncate(message.body, length: 160)%></p>
    </div>
-   <div class="span1">
-      <%= link_to "delete", user_message_path(current_user, message), :confirm=>"are you sure", :method=> :delete%>
+   <div class="span2" style="text-align:right">
+      <span class="timestamp">
+         <% if message.created_at < Date.today %>
+      	   <%= message.created_at.strftime("%b %d") %>  
+         <% else %>
+   	      <%= message.created_at.strftime("%I:%M %p") %>    
+     	   <% end %>
+      </span> <br>
+       <%= link_to '<i class="icon-trash" style="color:#e0467c"></i>'.html_safe, user_message_path(current_user, message, folder: params[:folder]), :confirm=>"Are you sure you want to delete this message?", :method=> :delete%>
    </div>
-   </li>
-</div>
+   <br>
+</li>
    

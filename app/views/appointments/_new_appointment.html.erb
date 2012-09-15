@@ -1,0 +1,27 @@
+<div class="span10" id="messageform">
+   <div class= "row">
+      <div class="span1">
+         <%= image_tag find_display_imgurl(@user.id, "thumb"), size: "40x40" %>	  
+      </div>
+      <div class="span4">
+         <h3> Meetup Request for <%= link_to "#{@user.firstname.capitalize}", user_path(@user)%> </h3>
+      </div> 
+   </div>
+   <%= simple_form_for ([@user, @appointment])  do |f| %>
+      <div id="clear_float" style="width:350px">
+         <%= f.input :date, :label=>"When do you want to meetup?", :start_year => Date.today.year, :end_year => Date.today.year + 1, order: [:month, :day, :year] %>
+      </div>
+       <div id="clear_float" style="width:300px">
+         <%= f.input :time, :collection => Appointment::TIME, :label=>"Approximate time of day for meeting", :prompt=>"select a time", :input_html=>{:id => "input_field"} %>   
+       </div>
+
+      <div id="clear_float inline_review">
+         <%= f.input :message, :as => :ckeditor, label: "Additional message", :as=>"text", :input_html => {:id=>"inline_review", :toolbar=>'Basic'}, :placeholder=>"max 400 characters..."%>
+      </div> 
+
+       <%= f.button :submit, "send request", :class=>"btn" %> 
+
+   <% end %>
+</div>
+
+

@@ -1,25 +1,34 @@
 
-<div class="span12"> 
-	<br>
-	<div class="row host_info"> 
-	   <h4> About me </h4>
-	   <p> <%= hostprofile.aboutme %> </p>
+<div class="span12" style="margin-left:0px; padding:0px"> 
+
+
+<div class="span7" style="width: 57%; padding: 10px 20px 10px 5px">   
+	<div class="row" style="margin-top:0px">
+	   <strong>My Service </strong>
+   	<br>
+	   <p><%= simple_format(hostprofile.serviceDesc, :class=>"content") %></p>
+	</div>	
+</div>
+<div class="span4 host_info" style="background-color:#777; border-radius: 3px; padding: 20px 15px 10px 35px; margin-left:0px">    
+  	<div class="row"> 
+  	   <strong style="color: #ccc"> About me </strong>	   
+  	   <% if @user.self_intro.empty? %>
+         <div class="edit_link">
+            No self introduction yet. 
+            <small> <%= link_to 'Enter one.', edit_user_path(@user) if current_user?(@user) %> </small>
+         </div>   
+      <% else %>
+        	   <p><%= simple_format(@user.self_intro, :style=>"color:#eee") %></p>
+      <% end %>
 	</div>
-	<div class="row host_info">
-	   <h4> Service Description </h4>
-	   <p> <%= hostprofile.serviceDesc %> </p>
+   <br>
+	<div class="row">	   
+   	<strong style="color:#00D7AD"> My green points </strong>	
+		<p><%= simple_format(hostprofile.greenDesc, :style=>"color:#eee") %></p>
 	</div>
-	<div class="row host_info green" >
-	   <h4> My green points </h4>
-		<p> <%= hostprofile.greenDesc %> </p>
-	</div>
-	<% unless current_user?(@user) %>
-      <% if signed_in? %>
-      <div class="row host_info">
-   			 <% @review = Review.new%>
-   			 <%= form_for([@user, @review]) do |f| %>
-   			    <%= render 'shared/new_review', :f=>f%>
-   			<% end %>
-      </div> 
-    <% end %>
-<% end %>
+</div>	
+<br>
+<div class="filler">
+   
+</div>
+   

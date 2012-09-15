@@ -46,11 +46,22 @@ LocoApp::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  #config.assets.precompile += %w( search.js )
+  config.assets.precompile += Ckeditor.assets
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-
+  
+  #NOT originally in production, testing
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "thirtyflights.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "thirtyflights",
+    password: "tselanne"
+  }
   # Enable threaded mode
   # config.threadsafe!
 

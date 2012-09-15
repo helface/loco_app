@@ -1,38 +1,35 @@
 <%= provide(:title, 'search') %>
 <%= form_tag fill_location_path, method: 'get', class: "well form-inline" do %>
-<div id="name">
+<div>
    <%=render 'shared/country_city_select', :inline_search => true%>
 <%= submit_tag "Search", :name => nil, :class=>"bnt" %>
 </div>
 <%end%>
 
-<!--TODO: if link for service categories, city needs to be remembered -->
-<div class = "row" style="text-align: center">
-   <div class = "span12" style="text-align: center; margin-left:5px">
-      <div class="span2" style="margin: 0px -20px 0px -10px">
-          <%= link_to image_tag("all.png", :size => "90x80"), users_path %>   
-      </div>
-   <% Service.all.each do |s| %>
-      <div class="span2" style="margin: 0px -20px 0px -10px">
-         <% img = "#{s.title.gsub(' ', '_')}.png" %>
-         <%= link_to image_tag(img, :size=>"90x80"), filter_path(:category => s.id) %>
-      </div>
-   <% end %>
+<div class= "span12" style="text-align: left; margin-left:10px">
+   <div class="span2" id="brick-align">
+       <%= link_to image_tag("all.png"), users_path %>   
    </div>
+<% Service.all.each do |s| %>
+   <div class="span2" id="brick-align">
+      <% img = "#{s.title.gsub(' ', '_')}.png" %>
+      <%= link_to image_tag(img), filter_path(:category => s.id) %>
+   </div>
+<% end %>
 </div>
-<div class="filler"></div>
 
-
-<div class="row">
+<div class="row">   
+   <div class="filler"> </div>
+   
    <%servicename = @service.try(:title) || "host"%> 
    <% if @users.empty? %>
-      <div id="name">
       <div class="span10">
          <h3> <%= ":( Sorry, there are currently no #{servicename}s in #{@city.name}, #{@country.name}." %></h3>
       </div>         
    <%else%>
-      <div class="span12" style="padding:10px 0px; margin-left:18px">   
-         <h3><%= "#{servicename.capitalize}s in #{@city.name}, #{@country.name}(#{@users.count})" %></h3>
+      <div class="span12" style="padding:10px 0px; margin-left:18px">  
+         <h3 style="color:#666"><%= "#{pluralize(@users.count, servicename)} in #{@city.name}, #{@country.name} " %></h3>
+         <hr size="3" style="margin-top:4px">
          <%= will_paginate %>  
             <% n = 0 %>     
             <div class="row" style="margin-top: 20px">

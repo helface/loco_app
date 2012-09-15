@@ -14,7 +14,7 @@
 
 class User < ActiveRecord::Base
   
-  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation, :profile_pic_id
+  attr_accessible :firstname, :lastname, :email, :password, :password_confirmation, :profile_pic_id, :self_intro
   has_secure_password
   has_many :images, :dependent => :destroy
   
@@ -35,13 +35,17 @@ class User < ActiveRecord::Base
   
   has_many :forumposts, dependent: :destroy
   
+  #has requested appointments with hosts
+  has_many :requested_appts, class_name: "Appointment", foreign_key: "traveler_id", dependent: :destroy
+  
   #has many messages
-  has_many :received_msgs, class_name:"Message", foreign_key: "recipient_id", :conditions =>['removed_by_recipient = ?', false]
-  has_many :sent_msgs, class_name: "Message", foreign_key: "sender_id", :conditions =>['removed_by_sender = ?', false]
+  has_many :received, class_name:"Message", foreign_key: "recipient_id"
+  has_many :sent, class_name: "Message", foreign_key: "sender_id"
   
   before_save :create_tokens
   before_save {|user| user.email = email.downcase}
   
+  attr_writer :old_password
   #TODO remove these for production
   #validates :firstname, presence:true, length:{maximum: 20}
   #validates :lastname, presence: true, length:{maximum: 20}
@@ -49,15 +53,43 @@ class User < ActiveRecord::Base
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   #validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
+  validates_uniqueness_of :email
+  
 
   #validates :password, length:{minimum: 6}
   #validates :password_confirmation, presence: true
   
   MAX_NUM_PICTURES = 7;
   
+  def sent_msgs
+    self.sent.where(:owner_id => self.id) 
+  end
+  
+  def received_msgs
+    self.received.where(:owner_id => self.id)
+  end
+  
   def calc_host_avg_score
-     score_sum = 0
-     review_sum = 0
+     count = self.inverse_reviews.count
+     if count == 0
+        return 0
+     else
+        debugger
+        avg = self.inverse_reviews.collect(&:score).sum.to_f/count if count > 0     
+        return (avg * 10).round.to_f / 10
+     end
+  end
+  
+  def meetups_completed
+     if self.hostprofile
+        return self.completed_count + self.hostprofile.completed_count
+     else
+        return self.completed_count  
+     end
+  end
+  
+  def id_num
+    self.id
   end
   
   def calc_guest_abg_score

@@ -1,26 +1,36 @@
+<div class="span8 offset1" style="padding-left:50px; background-color:#eee">   
+<div class="filler">
+   
+</div>
 <%= form_for(@user) do |f| %>
- <%= render 'shared/error_messages' %>
-  <div class="field">
-    <%= f.label :email %><br />
+ <h3>Sign Up</h3>
+ 
+ <%= render 'shared/error_messages', :obj=>@user %>
+ <div class="filler"></div>
+  <div class="field" id ="personalform">
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
+  <div class="field" id ="personalform">
+    <%= f.label :password %>
     <%= f.password_field :password %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+  <div class="field" id ="personalform">
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
-  <div class="field">
-    <%= f.label :firstname %><br />
+  <div class="field" id ="personalform">
+    <%= f.label :firstname %>
     <%= f.text_field :firstname %>
   </div>
-  <div class="field">
-    <%= f.label :lastname %><br />
+  <div class="field" id ="personalform">
+    <%= f.label :lastname %>
     <%= f.text_field :lastname %>
   </div>
-  <div class="actions">
-    <%= f.submit  "create account", class: "btn btn-large btn-primary" %>
+  <br>
+  <div class="actions" >
+    <%= f.submit  "create account", id: "pink-button" %>
   </div>
 <% end %>
+</div>
+

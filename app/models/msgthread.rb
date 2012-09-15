@@ -12,11 +12,7 @@ def find_recipient_id(current_user)
 end
 
 def self.build_message_thread(message)
- # @message = current_user.sent_msgs.build(params[:message])
-  #@message.recipient_id = params[:user_id]
-  
   #create a thread container if message starts a new thread
-  
   if message.thread_id.nil?		
     @msgthread = Msgthread.create!(participant1_id: message.sender_id, 
                                     participant2_id: message.recipient_id,
@@ -29,7 +25,9 @@ def self.build_message_thread(message)
   else
     @msgthread = Msgthread.find_by_id(message.thread_id)
   end
+  
   return @msgthread
+
 end
 
 end

@@ -1,0 +1,87 @@
+    <div class="edit_link">
+         <%= link_to "Back", session[:prev] %>
+      </div>
+      <br>
+   <div class="span11" >
+     
+      <div class= "row">
+         <div class="span4" style="margin-left: 0px" >
+            <% if is_appt_host?(@appointment) %>
+               <%= link_to image_tag(find_display_imgurl(@traveler.id, "thumb"), size: "40x40"), user_path(@traveler) %>	  
+            <% else %>
+               <%= link_to image_tag(find_display_imgurl(@host.id, "thumb"), size: "40x40"), user_path(@host) %>	  
+            <% end %>
+            <% if is_appt_host?(@appointment) %>
+               <strong style="margin-left:5px"> Meetup request from <%= link_to "#{@traveler.firstname.capitalize}", user_path(@traveler)%> </strong>
+            <% else %>
+              <strong style="margin-left:5px"> Meetup request for <%= link_to "#{@host.firstname.capitalize}", user_path(@host), :id=>"lighter"%> </strong>
+            <% end %>
+         </div> 
+      </div>
+      <div class="filler">
+         
+      </div>
+      <div class="row host_info" style="border-radius: 5px; background-color:#888; border-bottom:1px solid #eee" >
+         <div id="appt-status-bar">
+                <% status = @appointment.status %>
+                <% if is_appt_host?(@appointment) %>
+                   <% if status == Status::CHECK_SENT %>
+                      <i class="icon-pencil" style="color: #aaa; padding-right:5px "></i>
+                      <b id="meeting_active"><%= link_to "Available", user_appointment_make_available_path(current_user, @appointment), id: "response" %></b> <small id="hint">|</small>
+                      <b id="meeting_inactive"><%= link_to "Unavailable", user_appointment_make_unavailable_path(current_user, @appointment), id: "response" %></b>
+                   <% elsif status == Status::AVAILABLE || status == Status::NOT_AVAILABLE || status == Status::CANCELED || status == Status::REJECTED || status == Status::COMPLETED || status == Status::EXPIRED %>
+                      <small id="light"> <%= @appointment.return_status_str(current_user.id) %> </small>
+                   <% elsif status == Status::BOOKED%>
+                      <small id="light"><%= @appointment.return_status_str(current_user.id) %> </small>                                      
+                         <% if DateTime.now - @appointment.date > 2.days%>
+                         <%= link_to "cancel", user_appointment_cancel_appointment_path(current_user, @appointment), class: "btn btn-danger"%>                                           
+                      <% end %>    
+                   <% end %>
+                <% elsif is_appt_traveler?(@appointment) %>
+                   <% if status == Status::CHECK_SENT || status == Status::CANCELED || status == Status::COMPLETED || status == Status::NOT_AVAILABLE || status == Status::REJECTED || status == Status::EXPIRED %>
+                      <small id="light"><%= @appointment.return_status_str(current_user.id) %> </small>
+                   <% elsif status == Status::AVAILABLE %>
+                      <i class="icon-pencil" style="color: #aaa; padding-right:5px "></i>
+                      <b id="meeting_active">
+                      <%= link_to "Book", user_appointment_book_appointment_path(current_user, @appointment), id: "response" %> </b> <small id="light">|</small> <b id="meeting_inactive">
+                      <%= link_to "Nevermind", user_appointment_reject_appointment_path(current_user, @appointment), id: "response"%></b>
+                      
+                   <% elsif status == Status::BOOKED && DateTime.now.to_date > @appointment.date %>
+                      <i class="icon-pencil" style="color: #aaa; padding-right:5px "></i>
+                      <b id="meeting_active"> <%= link_to "Complete", user_appointment_complete_appointment_path(current_user, @appointment), id: "response" %> </b>
+                   <% elsif status == Status::BOOKED && @appointment.date - DateTime.now.to_date >= 2 %>               <i class="icon-pencil" style="color: #aaa; padding-right:5px "></i>
+                      <b id="meeting_inactive">
+                      <%= link_to "Cancel", user_appointment_cancel_appointment_path(current_user, @appointment), id: "response"%></b>
+                   <% elsif status == Status::BOOKED %>
+                      <small id="light"><%= @appointment.return_status_str(current_user.id) %> </small>
+                   <% end %>
+                <% end %>
+       </div>
+       <div class="row">            
+            <div class="span3">
+               <div class="row" style="margin-left: 0px">
+                  <strong style="color:white">Meetup date </strong><br> 
+                  <small style="color: #B8DCFF"><%= @appointment.date.strftime("%A, %b %d. %Y")%></small><br>
+               </div>
+               <% if @appointment.time %>
+               <div class="row" style="margin-left: 0px">
+                  <br>
+                  <strong style="color:white">Meetup time </strong> <br> 
+                  <small style="color: #B8DCFF"><%= @appointment.time.empty? ? "unspecified" : @appointment.time %> </small>    
+               </div>
+               <% end %>
+            </div>
+            
+            <div class="span7">
+               <div class="row">
+                  <%= image_tag find_display_imgurl(@traveler.id, "thumb"), size: "40x40" %>	 
+                  <%= image_tag find_display_imgurl(@host.id, "thumb"), size: "40x40" %> 
+               </div>
+               
+               <div class="filler"></div>    
+               <div class="row">
+                  <%= simple_format(@appointment.message, style: "color:#eee") %>
+               </div>
+            </div>
+         </div>
+</div>

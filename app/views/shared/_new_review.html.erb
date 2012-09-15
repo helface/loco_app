@@ -1,32 +1,24 @@
-<% if !current_user?(@user) && signed_in? %>
-<div style= "padding: 0px">
-    <%= f.label :did_you_find_the_service_as_advertised? %>
-    <%= f.select :accuracy, 1..5 %>
-    <%= f.label :did_you_find_your_host_friendly_and_helpful? %> 
-    <%= f.select :friendliness, 1..5 %> 
-    <%= f.label :how_enjoyable_was_your_overall_experience? %>
-    <%= f.select :enjoybility, 1..5 %>
-    <%= f.label :how_easy_was_arranging_the_meetup? %>
-    <%= f.select :easiness, 1..5 %>
-    <%= f.label :please_leave_any_comments_you_have, "Please Leave Any Comments You Have" %>
-    <%= f.text_area :content, id: 'inline_review', placeholder: "write your review..."%> 
-    <!-- %= f.hidden_field :reviewer_id, value: current_user.id % -->
-	 <!-- %= f.hidden_field :reviewee_id, value: @user.id% -->
-    <div class="filler"></div>
-    <div class="row alert alert-info" style="margin-left: 0px; margin-right:115px">
-       <div class="span4" style="padding-top: 5px">
-          <p> would you recommend <%= "#{@user.firstname}"%>? </p>
+   <div class="edit-section">
+      <p style="color:#78B858"> Please rate on a scale of 1 to 5, 1 being terrible and 5 being excellent. </p>
+      <div id="clear_float">
+         <small><%= f.input :accuracy, :collection => 1..5, :as => :radio, :label=> "Did you find the service as advertised?" %></small>
+      </div>
+       <div id="clear_float">
+         <%= f.input :friendliness, :collection => 1..5, :label=>"Did you find your host friendly and helpful?", :as => :radio %>   
        </div>
-       <div class="span2">
-          <%= f.radio_button :recommend, 'true', :label=>"asdf" %>
-          <%= f.label :recommend, "yes" %>
+       <div id="clear_float">
+          <%= f.input :easiness, :collection => 1..5, :label=>"How easy was arranging the meetup?", :as => :radio %>  
        </div>
-       <div class="span2">
-          <%= f.radio_button :recommend, 'false', :label=>"ewefe" %>
-          <%= f.label :recommend, "no" %>
+       <div id="clear_float">
+         <%= f.input :enjoybility, :collection => 1..5, :label=>"How enjoyable was your overall experience?", :as => :radio %> 
+       </div> 
+       <div id="clear_float" style="width:200px">
+          <%= f.input :recommend, :label=>"Would you recommend #{@user.firstname.capitalize} to other travelers?", :as=> :select%>
        </div>
-    </div>
-    
-    <%= f.submit "post" %>    
-</div>
-<% end %>
+
+      <div id="clear_float inline_review">
+         <%= f.input :content, label: "Leave a comment (optional)", :as=>"text", :input_html => {:id=>"inline_review"}, :placeholder=>"max 400 characters..."%>
+      </div> 
+      <%= f.input :is_host_review, :as => :hidden, :input_html => { :value => true } %>
+      <%= f.button :submit, "complete meeting", :id=>"", class: "btn btn-success" %>
+   </div>  

@@ -6,8 +6,10 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.5'
-gem 'state_machine', '1.1.2'
 gem 'paperclip', '3.0.4'
+gem 'simple_form', '2.0.2'
+gem 'ckeditor', '3.7.2'
+gem 'font-awesome-sass-rails', '2.0.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

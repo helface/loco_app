@@ -25,8 +25,8 @@ Service.create!(title: "adventure guide", desc: "you try not to die")
 Service.create!(title: "nightlife expert", desc: "you party")
 
 Language.delete_all
-Language.create!(name: "English", code: "EN" )
-Language.create!(name: "French", code: "FR")
+Language.create!(name: "English", code: "en" )
+Language.create!(name: "French", code: "fr")
 Language.create!(name: "German", code: "AL")
 Language.create!(name: "Chinese", code: "CH")
 Language.create!(name: "Japanese", code: "JP")

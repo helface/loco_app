@@ -1,15 +1,18 @@
 <% title = params[:folder] || ""%>
 <% provide(:title, title) %>
-<div class="span10">
+<div class="span11">
    <div class="row">
-
-      <h3><%= current_user.firstname.capitalize + "'s mailbox"%></h3>
+      <%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
+      <strong style="margin-left:10px"><%="Your messages"%></strong>
       <div class="filler"></div>
       <%= render 'shared/mailbox_nav' %>
-
+   </div>
+     
+   <div class="row">
+      <div class="email">     
       <%= will_paginate @messages%>
       <%= render @messages%>
       <%= will_paginate @messages%>
+      </div>   
    </div>
-   
 </div>

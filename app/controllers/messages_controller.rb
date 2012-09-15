@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
 before_filter :signed_in_user
+before_filter :is_owner, only: [:destroy, :show]
 
   def new
     @user = User.find(params[:user_id])
@@ -7,46 +8,50 @@ before_filter :signed_in_user
   end
 
   def create  
+    sender = current_user
     @recipient = User.find_by_id(params[:user_id])
-    @message = current_user.sent_msgs.build(params[:message])
+    @message = sender.sent.build(params[:message])
     @message.recipient_id = @recipient.id
-    @msgthread = Msgthread.build_message_thread(@message)
-    @message.thread_id = @msgthread.id
-    if @message.save
+    @message.owner_id = sender.id   
+    @message_copy = @message.copy_message(@recipient.id) #making a copy of email for the recipient   
+    @thread = Msgthread.build_message_thread(@message)
+    @message.thread_id = @message_copy.thread_id = @thread.id
+    if @message.save && @message_copy.save
       flash[:success] = "your message has been sent"
-      redirect_to user_msgthread_path(current_user, @msgthread)
+      redirect_to user_message_path(@recipient, @message)
     else
       flash[:error] = "Sorry, we were unable to send your message"
       redirect_to current_user
     end
   end
 
-  def show
+  def show    
+    message = Message.find_by_id(params[:id])
+    message.toggle!(:read) unless message.read
+    @thread = Msgthread.find_by_id(message.thread_id)
+    @recipient = User.find_by_id(params[:user_id])    
+    @messages = @thread.messages.where(:owner_id => current_user.id).order('created_at DESC')
   end
   
   def destroy
     @message = Message.find_by_id(params[:id])
     @thread = Msgthread.find_by_id(@message.thread_id)
-    if current_user.id == @message.recipient_id && !@message.removed_by_recipient
-      @message.toggle!(:removed_by_recipient)
-    elsif current_user.id == @message.sender_id && !@message.removed_by_sender
-      @message.toggle!(:removed_by_sender)
+    @message.destroy
+    if @thread.messages.empty?
+       @thread.destroy
     end
-    
-    #delete thread if all messages in the thread have been deleted
-    if @message.removed_by_recipient && @message.removed_by_sender
-      @message.destroy
-      if @thread.messages.empty?
-        @thread.destroy
-      end
-    end 
-    redirect_to mailbox_path(current_user, folder: "inbox")
+    redirect_to mailbox_path(current_user, folder: params[:folder])  
     
   end
   
 end
 
 private
+
+   def is_owner
+     message = Message.find_by_id(params[:id])
+     current_user.id == message.owner_id
+   end
 
 #def unique_to_from
 #  if User.find(params[:message][:recipient_id]) == current_user

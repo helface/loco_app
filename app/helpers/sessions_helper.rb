@@ -60,7 +60,11 @@ module SessionsHelper
   end
     
   def store_location
-      session[:return_to] = request.fullpath
+     session[:return_to] = request.fullpath
+  end
+  
+  def store_nav_history
+     session[:prev] = request.fullpath
   end
   
 private

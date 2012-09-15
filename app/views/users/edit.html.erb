@@ -1,7 +1,17 @@
-<%= render 'shared/edit_tabs'%>
+<% provide(:title, 'edit host profile') %>
 
-<div class="span8">
-   <%= render 'form_edit' %>
+<div class="span10">
+   <div class="row vertical-align:middle">
+      <%= image_tag find_display_imgurl(@user.id, "thumb"), id: "profile-thumb" %>	  
+      <strong style="font-size:1.3em; margin-left:10px">Your settings</strong>
+   </div> 
+   <div class="filler"></div>
+
+   <div class="row">
+      <%= render 'shared/edit_tabs'%>
+   </div>
+   
+   <%= render 'form_edit' %> 
 </div>
 
 

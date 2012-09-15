@@ -1,1 +1,34 @@
-<%= render 'forumpost'%>
+<div class="filler"></div>
+<div class="row">
+   <div class="span1">
+      <%= link_to (image_tag find_display_imgurl(@post.user_id, "thumb"), size: "50x50"), user_path(User.find_by_id(@post.user_id)) %>	
+   </div>
+   <div class="span6">
+      <h3><%=User.find(@post.user_id).firstname.capitalize%></h3>
+      <small style="color:grey">posted <%= @post.created_at.to_date %> </small>
+   </div>
+</div>
+<div class="filler"></div>
+<div class="row">  
+   <div class="span9 microposts">
+      <h4 style="display: inline"><%= @post.title.capitalize %></h4> for <small style="color: #3a87ad"><%= @post.date.to_formatted_s(:long) %> </small>
+      <hr style="margin-top: 3px">
+       <div class="row">
+          <div class="span7">
+             <%= @post.content %>
+           </div>
+       </div>     
+   </div> 
+</div>
+<div class="filler"></div>
+<div class="row">
+    <div class="span9" id="messageform">
+		   <h3>RE: <%= @post.title%></h3>
+			<%= form_for(:message, url: create_response_forumpost_path) do |f| %>
+		 		<div class="field">
+		    		<%= f.text_area :body%>
+		 		</div>		
+				<%= f.submit "Respond", class: "btn" %>
+			<% end %>
+    </div>
+</div>

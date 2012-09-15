@@ -1,16 +1,16 @@
 <div class="row">
-   <div class="span7" style="background-color: purple; margin-left:10px">
-      <div class="thumbnail">
+   <div class="span7" style="margin-left:10px">
+      <div class="thumbnail no_link">
          <% if @user.images.empty? %>
-            <%= image_tag "http://placehold.it/260x180", id: "displayimg" %> <!-- TODO: change default -->
-            <div id="name" style="height: 18px">
+            <%= image_tag "full_hat.png", id: "displayimg" %> <!-- TODO: change default -->
+            <div id="caption" style="font-style:normal">
                <%= link_to "add image", edit_user_path(@user) %>
             </div>
          <% else %>
             <% firstimg = Image.find_by_id(@user.profile_pic_id) || @user.images.first %>
             <%= link_to image_tag(firstimg.photo.url(:large), id: "displayimg", :data=>{:id=>firstimg.id}), image_path(firstimg) %>            
             <div id="caption">    
-               <p id="displaycaption" style="height: 18px"><%= firstimg.caption %></p>
+               <p id="displaycaption"><%= firstimg.caption %></p>
             </div>
          <% end %>
        </div>

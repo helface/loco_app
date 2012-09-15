@@ -1,14 +1,40 @@
 body {
   background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
+  color: #555;
+  font-family: helvetica, verdana, arial, sans-serif;
   font-size: 13px;
   line-height: 18px; }
 
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+p, ol, ul {
+  font-family: helvetica, verdana, arial, sans-serif;
   font-size: 13px;
-  line-height: 18px; }
+  line-height: 18px; 
+  color: #444;
+
+  &.content{
+	font-size: 14px;
+	color:#555;
+  };
+}
+
+p#hint{
+  color:#999;	
+  display:inline;
+}
+
+h3, strong{
+	font-family: arial, verdana, helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 19px;
+	color: #667;
+}
+
+strong{
+	font-family: arial, verdana, helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	color: #667;
+}
 
 pre {
   background-color: #eee;
@@ -16,12 +42,37 @@ pre {
   font-size: 11px; }
 
 a {
-  color: #000;
-  &:visited {
-    color: #666; }
+  &:visited, & {
+    color: #555; }
   &:hover {
-    color: #fff;
-    background-color: #000; } }
+    color: #aaa;
+    text-decoration: none;
+  } 
+}
+
+a.lighter {
+	&:visited, & {
+		color:white;
+	};
+	
+	&:hover {
+		color: #eee;
+	};
+}
+
+small{
+	font-family: verdana, helvetica, arial, sans-serif;
+}
+
+small#hint{
+	color:#999;
+	font-size:11px;
+}
+
+small#light{
+	color:#888;
+	font-size:1em;
+}
 
 div {
   &.field, &.actions {

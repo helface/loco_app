@@ -1,6 +1,21 @@
 namespace :db do
     desc "fill db with sample users"
     task populate: :environment do
+        users = User.all
+        users.each do |u|
+          u.destroy
+        end
+        
+        profiles = Hostprofile.all
+        profiles.each do |p|
+          p.destroy
+        end
+        
+        reviews = Review.all
+        reviews.each do |r|
+          r.destroy
+        end
+        
         User.create!(firstname: "fake",
                      lastname: "fake",
                      email: "fake@gmail.com",

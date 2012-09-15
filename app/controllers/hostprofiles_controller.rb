@@ -52,11 +52,12 @@ class HostprofilesController < ApplicationController
     # PUT /users/1.json
     def update
       @hostprofile = Hostprofile.find_by_id(params[:id])
+      @user = @hostprofile.user
       if @hostprofile.update_attributes(params[:hostprofile])
           flash[:success] = "Profile successfully updated"
           redirect_to current_user
       else
-          redirect_to 'edit'
+          render 'edit'
       end
     end
 

@@ -1,0 +1,50 @@
+<% provide(:title, "title") %>
+
+<%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
+<strong style="font-size:1.3em; margin-left:10px"><%="Your meetups"%></strong>
+
+<div class="filler"></div>
+<%= render "meetups_nav" %> 
+ 
+<div class="span10">
+   <div class="row">
+      <% if params[:folder] == "traveler" || params[:folder].nil?%>
+         <% if @requested_appts.empty? %>
+             You have not contacted any hosts recently.
+         <% end %>
+        
+         <% if @requested_appts.booked.count > 0 %>
+            <h3 style="color:#1DB882">Booked</h3>
+            <hr noshade id="appt-divider">
+            <%= render @requested_appts.booked unless @requested_appts.nil? %>
+         <% end %>
+         <div class="filler"></div>
+         <% if @requested_appts.pending.count > 0 %>
+            <h3 style="color:#EB6C2C">Pending</h3>
+            <hr noshade id="appt-divider">
+            <%= render @requested_appts.pending %>
+         <% end %>
+      <% elsif params[:folder] == "host" %>
+         <% if @appt_requests.empty? %>
+            You don't have any host requests at this time.
+         <% end %>
+      
+         <% if @appt_requests.booked.count > 0 %>
+            <h3 style="color:#1DB882">Booked</h3>
+            <hr noshade id="appt-divider">
+            <%= render @appt_requests.booked unless @appt_requests.nil?%>
+         <% end %>
+         <div class="filler"></div>
+         <% if @appt_requests.pending.count > 0 %>
+            <h3 style="color:coral">Pending</h3>
+            <hr noshade id="appt-divider">
+            <%= render @appt_requests.pending unless @appt_requests.nil? %>
+         <% end %>
+      <% elsif params[:folder] == "history"%>
+         <%= render @requested_appts.inactive%>
+         <%= render @appt_requests.inactive unless @appt_requests.nil? %>
+      <% end %>
+      
+   </div>
+   
+</div>

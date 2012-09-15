@@ -1,13 +1,24 @@
 LocoApp::Application.routes.draw do
 
+ 
+  mount Ckeditor::Engine => '/ckeditor'
+
   get "images/new"
   get "images/create"
   get "images/destroy"
 
+  
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
-    resources :msgthreads, only: [:create, :show, :destroy]
     resources :reviews, only: [:new, :create, :destroy]
+    resources :appointments do
+      get :make_available
+      get :cancel_appointment
+      get :reject_appointment
+      get :make_unavailable
+      get :book_appointment
+      get :complete_appointment
+    end
     
     member do
       get :mailfriend
@@ -48,6 +59,7 @@ LocoApp::Application.routes.draw do
   match 'filter', to: 'users#filter'
   match 'fill_location', to:'locations#fill_location'
   match 'updateprofile', to:'hostprofiles#update'
+  match 'meetups', to:'appointments#index'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

@@ -14,7 +14,8 @@
 //= require jquery_ujs
 //= require jquery.purr
 //= require best_in_place
-//= require jquery.tokeninput
+//= require ckeditor/init
 //= require jquery-ui
+//= require jquery.tokeninput
 //= require bootstrap
 //= require_tree .

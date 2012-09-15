@@ -1,47 +1,44 @@
-<!--TODO: Add link for message -->
 <% profile = user.hostprofile%>
    <div class="span4">
        <div class="thumbnail" id="badge">
          <%= link_to image_tag(find_display_imgurl(user.id, "medium")), user%>
-         <div class="row">
-            <div class="span2">
-               <h5><%=user.firstname.capitalize %>
-               <i class="icon-ok" style="color:green"></i>
-               <small style="color:green"><%= profile.recommend_count%></small>
-               <i class="icon-remove"></i>
-               <small style="color:red"><%= profile.unrecommend_count%></small>
-               <%= %>
-               </h5>       
-            </div>
-            <div class="span2" style="margin-left: 8px; text-align:right">
-            <span class="label"><%= Service.find_by_id(profile.service).title%></span>
-            </div>
+         <div id="overlay">
+              
+               <%if profile.exchange_type == "money"%>
+                  <div id="service-title" style="color:#FF4697">                 
+                   <%= "$#{profile.price}"%> <%= profile.currency %>
+               <% elsif profile.exchange_type =="language practice" %>
+                  <div style="color:#00E1E1" id="service-title"><%= "practice #{profile.language_practice.downcase}" unless profile.language_practice.nil?%>
+               <% else %>
+                  <div style="color:#00E1E1" id="service-title">     
+                  <%= profile.exchange_type%>
+               <% end %>
+                  </div>
          </div>
-         <div class="row" style="margin-top:3px">
-            <div class="span4" style="margin-left: 8px; text-align: right">
-               <div style="color: #4863A0; font-weight:bold; font-size: 0.9em">
-               <% profile.languages.each do |l|%>
-                     <%= Language.find_by_id(l).name %>
+         <div class="row" style="top: -28px">
+            <div class="span4">
+               <b><%=user.firstname.capitalize %></b>
+               <i id="icons" class="meetups-comp icon-globe"></i>
+               <small id="hint"><%=profile.completed_count%></small>
+               <i id ="icons" class="response-rate icon-circle-arrow-right" ></i>
+               <small id="hint"> <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%" %> </small> <small class="language_list"> <% profile.languages.each do |l|%>
+                     <%= Language.find_by_id(l).try(:code) %>
                      <%= "," if profile.languages.last != l%>
-               <% end %> 
-               </div>               
+               <% end %> </small>
             </div>
+               
          </div>
-         <div class="row">            
-            <%if profile.exchange_type == "money"%>
-               <div class="span3" style="color:#ee5f5b; margin-top:8px">                 
-               <b> <%= "asking for #{profile.price} #{profile.currency}"%> </b>
-            <% else %>
-               <div class="span3" style="color:#51a351; margin-top:8px">     
-               <b><%= profile.exchange_type%></b>
-            <% end %>
-            </div>
+         <div class="row" style="top: -28px">
+            <div class="span2">
+               <%= render "shared/rating", :score => profile.score %><small id="hint"> <%= "(#{user.inverse_reviewees.count})" %> </small>
+            </div>        
          </div>
-         <div class="row">
-            <div class="span4" style="margin-top:0px">
-               <div style="background-color:white; width: 93%; height: 60px; padding: 5px">
-                  <%= truncate(profile.serviceDesc, length:140)%>
-               </div> 
+         <div class="row" style="top: -15px">                        
+             <div class="span3" style="font-size:1.1em">    
+                <%= Service.find_by_id(profile.service).try(:title)%>
+             </div>
+            <div class="span4 intro" style="font-family: calibri; font-size: 14px; color:#777">
+               <%= profile.intro%>
             </div>   
          </div>
        </div>

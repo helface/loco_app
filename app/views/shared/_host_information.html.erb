@@ -1,31 +1,44 @@
-<h3> Please enter your personal information </h3>
-<div class="filler"></div>
-<div class="field">
-  <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
-</div>
-<div class="field">
-   <%= f.label :telephone %>
-   <%= f.text_field :tele, :value => @hostprofile.tele %>
-</div>
-<div class="field">
-   <%= f.label :enter_the_languages_you_can_hold_a_conversation_in %>
-   <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@hostprofile.languages)} %>
-</div>
-<div class="field">
-   <%= f.label :what_type_of_service_are_you_providing? %>
-   <% selected = @hostprofile.service || Service.first.id %>
-   <%= f.collection_select :service, Service.all, :id, :title, :selected=>selected %>
- <p id="service_desc">
-   <%= Service.find_by_id(selected).try(:desc) %>
- </p>
-</div>
-<div class="field">
-   <%= f.label :exchanging_service_for %>
-   <% selected = @hostprofile.exchange_type || "money"%>
-   <%= f.select :exchange_type, Hostprofile::EXCHANGE_TYPES, {}, :selected=>selected%>
-   <% visibility = (selected=="money") ? "block" : "hidden" %>
-   <div id="exchange_option" class="field" style= "<%= "display: #{visibility}" %>" >
-         <%= f.text_field :price, :placeholder=>"enter price" %>
-         <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd") %>
-   </div> 
+<h3 class="row">Personal information</h3>
+<div class="row host_info">
+   <div class="edit-section">
+      <div class="field" id="personalform">
+        <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
+      </div>
+      <div class="field" id="personalform">
+         <%= f.label :telephone %>
+         <%= f.text_field :tele, :value => @hostprofile.tele %>
+      </div>
+      <div class="field" id="personalform">
+         <%= f.label :enter_the_languages_you_can_hold_a_conversation_in %>
+         <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@hostprofile.languages)} %>
+      </div>
+      <br>
+      <div class="field" id="personalform">
+         <%= f.label :what_type_of_service_are_you_providing? %>
+         <% selected = @hostprofile.service || Service.first.id %>
+         <%= f.collection_select :service, Service.all, :id, :title, :selected=>selected %>       
+      </div>  
+      <div class="field" style="color:#5EB038; height:30px; border-radius:3px; margin-top:-10px; width:400px">
+         <i class="icon-info-sign"></i>
+         <small id="service_desc">
+            <%= Service.find_by_id(selected).try(:desc) %>
+         </small>
+      </div>
+      <br>
+      <div class="field" id="personalform">
+         <%= f.label :exchanging_service_for %>
+         <% selected = @hostprofile.exchange_type || "money"%>
+         <%= f.select :exchange_type, Hostprofile::EXCHANGE_TYPES, {}, :selected=>selected, :style=>"width:200px"%>
+         <% price_opt_visibility = (selected=="money") ? "block" : "none" %>
+         <% lang_opt_visibility = (selected=="language practice") ? "block" : "none" %>
+         <div id="price_opt" class="field" style= "<%= "display: #{price_opt_visibility}" %>" >
+            <%= f.text_field :price, :placeholder=>"enter price" %>
+            <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %>
+         </div> 
+         <% @languages = Language.order(:name)%>           
+           <div id="lang_opt" class="field" style= "<%= "display: #{lang_opt_visibility}" %>" >
+             <%= f.collection_select :language_practice, @languages, :name, :name, {:include_blank => "select a language"}, {selected: @hostprofile.language_practice} %> 
+           </div>
+      </div>
+   </div>
 </div>

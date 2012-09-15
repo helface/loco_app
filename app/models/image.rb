@@ -6,6 +6,7 @@ class Image < ActiveRecord::Base
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
+  validates :caption, length: {maximum: 100}
   
   def clear_photo
     self.photo = nil

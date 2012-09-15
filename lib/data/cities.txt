@@ -2,8 +2,8 @@ CA|Toronto
 CA|Vancouver
 CA|Montreal
 US|Seattle
-US|NewYork
-US|SanFrancisco
+US|New York
+US|San Francisco
 PT|Lisbon
 PT|Porto
 ES|Sevilla

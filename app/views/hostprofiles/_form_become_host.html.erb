@@ -1,7 +1,10 @@
 <%= form_for @hostprofile do |f| %>
+  <%= render "shared/error_messages", :obj=> @hostprofile %>
   <%= render "shared/#{@hostprofile.current_step}", :f => f %>
-  <div class="actions">
-     <%= f.submit "back", class: "btn btn-primary", name: "back_button" unless @hostprofile.first_step? %>
-     <%= f.submit "next", class: "btn btn-primary", name: "next_button" %>
-  </div>
+     
+ <div class="row">
+   <%= f.submit "back", name: "back_button" unless @hostprofile.first_step? %>
+   <%= f.submit "next", name: "next_button" %>     
+ </div>
+   
 <% end %>

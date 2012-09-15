@@ -1,0 +1,19 @@
+<% int_score = (score * 10) / 10 %>
+<% dec_score = (score * 10).to_i % 10 %>
+<b style="color:#E8A317">
+<% int_score.to_i.times do %> 
+   <i class="icon-star"></i>   
+<% end %>
+
+<% if dec_score <3 %>
+   <i class="icon-star-empty"></i>   
+<% elsif dec_score >7%>
+   <i class="icon-star"></i>   
+<% else %>
+   <i class="icon-star-half"></i>   
+<% end %>
+<%leftover = 4-int_score.to_i%>
+<% leftover.times do %>
+   <i class="icon-star-empty"></i>   
+<% end %>
+</b> 

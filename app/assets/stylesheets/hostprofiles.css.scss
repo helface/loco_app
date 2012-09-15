@@ -1,3 +1,81 @@
 // Place all the styles related to the hostprofiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.appt_tag{
+	border-radius: 3px; 
+	background-color: #14C4EB; 
+	margin-left: -5px; padding: 10px 10px; 
+	border-bottom: 2px solid #ddd;
+	
+	p{
+		font-size: 1.2em;
+		color:white
+	};
+	
+	a:link {
+		font-weight: bold; 
+		font-size:1.3em; 
+		color: #F5F57B;
+	};
+	
+	a:visited{
+		color: #FFFF96;
+	}
+	
+	a:hover{
+		color:#8CFFE3;
+		background-color:transparent;
+		text-decoration:none;
+	}
+}
+
+.side-profile{
+	background-color: #F8F8F8; 
+	height: 385px;
+}
+
+.service_tab{
+	margin-left: 8px; 
+	text-align:right; 
+	margin-top: -6px;
+	
+	small{
+		border-bottom:1px solid #bbb; 
+		border-radius: 4px; 
+		background-color: #999; 
+		padding: 5px 5px 3px 7px; 
+		color: white;
+	}
+}
+
+.intro{
+	width: 93%; 
+	height: 55px; 
+	padding-top: 5px; 
+	color:#666;
+}
+
+.language_list{
+	margin-left: 15px; 
+	color: #777; 
+	font-size: 0.9em;
+}
+
+#badge_divider{
+	margin-left:14px; 
+	width: 300px; 
+	color: white; 
+	margin-bottom:0px; 
+	margin-top:15px
+}
+
+#easy_edit{
+	margin-left: -2px;
+	margin-top: 5px;
+	
+	td.title-align{
+		vertical-align: bottom; 
+		padding-left: 5px;
+	}
+}
