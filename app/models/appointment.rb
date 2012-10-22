@@ -102,7 +102,6 @@ class Appointment < ActiveRecord::Base
   end
   
   def deactivate_appointment
-    debugger
     self.status = Status::DEACTIVATED unless self.status == Status::BOOKED
     self.save
   end

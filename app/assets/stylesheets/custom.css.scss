@@ -7,7 +7,7 @@ $navbarLinkColor: #eee;*/
 $heroUnitBackground: #554;
 $navbarBackground: #888;
 $heroUnitLeadColor: #114;
-$placeholderText: #114;
+$placeholderText: #aaa;
 $bodyBackgrond: black;
 
 @import "bootstrap";
@@ -40,7 +40,14 @@ $bodyBackgrond: black;
 /* miscellaneous */
 body {
 	padding-top: 80px; 
-	height:100%
+	height:100%;
+	-webkit-input-placeholder{
+		color: #ccc;
+	}
+	
+	-moz-placeholder{
+		color: #ccc;
+	}
 }
 
 .homepage {
@@ -434,11 +441,9 @@ aside {
 #personalform{
 	input{
 		width:200px;
+		height:40px;
 	};
 	
-	input#hostprofile_language_tokens{
-		height:95px;
-	}
 	label{
 	   font-weight:normal;	
 	   color: #666;

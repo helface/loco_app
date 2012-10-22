@@ -132,7 +132,7 @@ before_filter :location_specified, only: :index
       flash[:success] = "Welcome!"
       redirect_to @user
     else
-      flash[:error] = "Confirmation failed"
+      flash[:error] = "Confirmation failed: #{@user.errors.messages}"
       redirect_to signin_path
     end
   end

@@ -7,28 +7,21 @@
     <div class="edit-section">
       <%= simple_form_for @user do |f| %>   
          <%= render 'shared/error_messages', :obj=>@user %>           
-         <div class="field" class= "edit_link" id="personalform">      
-            <div style="height:80px" id="personalform">      
-               <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14%>
-            </div>
-            
-             <div style="height:80px" id="personalform">      
-                  <%= f.input :gender, collection: User::GENDER%>
-             </div>
-            
-             <%= f.input :language_tokens, label: "Enter the languages you can hold a conversation in", input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>
-             
-             <%= f.input :self_intro, label: "Introduce yourself to everyone", as: "text", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
+         <div class="field" id="personalform">      
+            <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14, input_html:{id: "short"}%>
+            <%= f.input :gender, collection: User::GENDER, input_html:{id: "short"} %> 
+         </div>      
+            <%= f.input :language_tokens, label: "Enter the languages you can hold a conversation in", input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>  
+         <div class="field" id="personalform">      
+            <%= f.input :self_intro, label: "Introduce yourself to everyone", as: "text", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
              
              <a name="picture"></a>        
             
-             <div style="height:80px">
-               <%= f.input :facebook, label: "Link to your Facebook page (optional)", input_html: {placeholder: "www.facebook.com/"} %>
-             </div>         
-          </div>
-          <br/>
-          <br/><%= f.button :submit, "save", id: "blue-button" %>
-          <% end %>
+             <%= f.input :facebook, label: "Link to your Facebook page (optional)", input_html: {placeholder: "www.facebook.com/"} %>
+         </div>
+         <br/><br/>
+         <%= f.button :submit, "save", id: "blue-button" %>
+         <% end %>
       </div>
     </div> 
 <% end %>

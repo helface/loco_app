@@ -5,7 +5,7 @@ class LanguagesController < ApplicationController
      @languages = Language.order(:name)
      respond_to do |format|  
        format.html
-       format.json {render json: @languages.where("name LIKE ?", "%#{params[:q]}%")}
+       format.json {render json: @languages.where("lower(name) LIKE ?", "%#{params[:q]}%")}
      end
   end
   

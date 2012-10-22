@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def default_title(page_title)
-    default_title = "locoapp"
+    default_title = "tiniHost"
     if page_title.empty?
       default_title
     else

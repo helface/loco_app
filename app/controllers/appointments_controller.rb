@@ -11,7 +11,6 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    debugger
     @user = User.find_by_id(params[:user_id])
     traveler = current_user
     host = User.find_by_id(params[:user_id])
