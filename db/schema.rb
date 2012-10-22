@@ -11,28 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022065922) do
+ActiveRecord::Schema.define(:version => 20121022082620) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
     t.integer  "host_id"
-    t.text     "message",            :limit => 400
+    t.text     "message"
     t.date     "date"
     t.string   "time"
     t.integer  "status"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
-    t.integer  "groupsize",                         :default => 1
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.integer  "groupsize",          :default => 1
     t.boolean  "flexible"
-    t.boolean  "host_completed",                    :default => false
-    t.boolean  "traveler_completed",                :default => false
+    t.boolean  "host_completed",     :default => false
+    t.boolean  "traveler_completed", :default => false
     t.string   "exchange_type"
     t.integer  "price"
     t.string   "currency"
     t.string   "language_practice"
   end
 
-  add_index "appointments", ["status", "date", "exchange_type"], :name => "index_appointments_on_status_and_date_and_exchange_type"
+  add_index "appointments", ["status", "date"], :name => "index_appointments_on_status_and_date"
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -62,7 +62,8 @@ ActiveRecord::Schema.define(:version => 20121022065922) do
   end
 
   add_index "forumposts", ["city_id", "created_at"], :name => "index_forumposts_on_city_id_and_created_at"
-  add_index "forumposts", ["date", "created_at"], :name => "index_forumposts_on_date_and_created_at"
+  add_index "forumposts", ["created_at"], :name => "index_forumposts_on_created_at"
+  add_index "forumposts", ["date"], :name => "index_forumposts_on_date"
   add_index "forumposts", ["user_id", "created_at"], :name => "index_forumposts_on_user_id_and_created_at"
 
   create_table "hostprofiles", :force => true do |t|
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20121022065922) do
   end
 
   add_index "hostprofiles", ["deactivated"], :name => "index_hostprofiles_on_deactivated"
+  add_index "hostprofiles", ["exchange_type"], :name => "index_hostprofiles_on_exchange_type"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
@@ -123,7 +125,8 @@ ActiveRecord::Schema.define(:version => 20121022065922) do
     t.boolean  "read",         :default => false
   end
 
-  add_index "messages", ["sender_id", "recipient_id"], :name => "index_messages_on_sender_id_and_recipient_id"
+  add_index "messages", ["recipient_id", "created_at"], :name => "index_messages_on_recipient_id_and_created_at"
+  add_index "messages", ["sender_id", "created_at"], :name => "index_messages_on_sender_id_and_created_at"
 
   create_table "msgthreads", :force => true do |t|
     t.integer  "participant2_id"
@@ -132,8 +135,6 @@ ActiveRecord::Schema.define(:version => 20121022065922) do
     t.datetime "updated_at",      :null => false
     t.string   "subject"
   end
-
-  add_index "msgthreads", ["participant1_id", "participant2_id"], :name => "index_msgthreads_on_participant1_id_and_participant2_id"
 
   create_table "reviews", :force => true do |t|
     t.string   "content"
