@@ -1,9 +1,10 @@
 <!-- TODO: change host path for production environment -->
-<p> Hello <%= @user.firstname %>, </p>
+<p> Hello <%= @user.firstname.capitalize %>, </p>
 
 <p> Thank you for registering with TiniHost. Please click on the link below or paste it into your browser to activate your account.</p>
 
-<%= link_to confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false), confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false) %>
+<p><%= link_to confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false), confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false) %> </p>
+<br/>
 
-<small>TiniHost Team<br>
-info@tinihost.com</small>
+TiniHost Team<br>
+info@tinihost.com

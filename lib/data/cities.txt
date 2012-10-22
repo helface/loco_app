@@ -1,15 +1,6 @@
 CA|Toronto
-CA|Vancouver
-CA|Montreal
 US|Seattle
 US|New York
 US|San Francisco
-PT|Lisbon
-PT|Porto
-ES|Sevilla
-ES|Barcelona
-ES|Madrid
-MA|Tangier
-MA|Rabat
-MA|Marrakech
-MA|Fez
+UK|London
+FR|Paris

@@ -1,24 +1,29 @@
-   <li>
+<% msgthread = Msgthread.find(message.thread_id) %>
+<%= link_to user_message_path(msgthread.find_recipient_id(current_user), message) do %>   
+
+   <li id="link-block">
+      
    <div class="span1" style="margin: 5px 0px">
    	<% if params[:folder] == 'sent'%>
    		<% user = User.find(message.recipient_id) %>		
    	<% else %>	
    	   <% user = User.find_by_id(message.sender_id)%>
    	<% end %>
-   	<%= link_to image_tag( find_display_imgurl(user.id, "thumb"), id: "profile-thumb"), user_path(user) %>	
+   	<%= image_tag( find_display_imgurl(user.id, "thumb"), id: "profile-thumb") %>	
    </div>
    <div class="span2" style="width:10%; padding-top:20px; margin:5px 0px;">
-      <%= link_to user.firstname.capitalize, user_path(user) %>
+      <%= user.firstname.capitalize %>
    </div>
-   <div class="span6 no_link" style="margin: 5px 0px">
-      <% msgthread = Msgthread.find(message.thread_id) %>
+   
+   <div class="span6" style="margin: 5px 0px">
    	   <% if !message.read %>
    	    <i class="icon-envelope-alt" style="color:#45E0AA"></i>
    	   <% end %>
-   	   <%= link_to "#{message.subject}", user_message_path(msgthread.find_recipient_id(current_user), message) %>
+   	   <%= message.subject %>
    	    <br> 
    	<p id="hint" style="padding-top: 5px"><%= truncate(message.body, length: 160)%></p>
    </div>
+   
    <div class="span2" style="text-align:right">
       <span class="timestamp">
          <% if message.created_at < Date.today %>
@@ -30,5 +35,8 @@
        <%= link_to '<i class="icon-trash" style="color:#e0467c"></i>'.html_safe, user_message_path(current_user, message, folder: params[:folder]), :confirm=>"Are you sure you want to delete this message?", :method=> :delete%>
    </div>
    <br>
+   
 </li>
+<% end %>
+
    

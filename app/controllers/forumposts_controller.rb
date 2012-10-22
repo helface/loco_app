@@ -2,6 +2,7 @@ class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
   def index
+    store_nav_history
     @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
     unless params[:city_country_location].nil?
       if find_location(params[:city_country_location])
@@ -9,7 +10,7 @@ include ForumpostsHelper
         @posts = @city.forumposts.order('created_at DESC').paginate(page: params[:page], per_page: 15)
       else
         flash[:error] = "Sorry, we don't have entries for #{params[:city_country_location]} yet"
-        redirect_to forum_path
+        redirect_to board_path
       end
     else
       @posts = Forumpost.order('created_at DESC').paginate(page: params[:page], per_page: 15)
@@ -20,7 +21,7 @@ include ForumpostsHelper
     @post = Forumpost.new
   end
   
-  def create
+  def create    
      #TODO: have the posts automatically expire in 7 days
     @post = current_user.forumposts.build(params[:forumpost]) 
     if @post.save 
@@ -61,6 +62,7 @@ include ForumpostsHelper
   
   def show
     @post = Forumpost.find(params[:id])
+    @user = @post.user
   end
 
   def respond

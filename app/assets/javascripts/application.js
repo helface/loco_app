@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.purr
-//= require best_in_place
-//= require ckeditor/init
+//= require jquery.ui.datepicker
 //= require jquery-ui
 //= require jquery.tokeninput
-//= require bootstrap
+//= require bootstrap-dropdown
+//= require bootstrap-alert
+//= require bootstrap-button
 //= require_tree .

@@ -1,14 +1,14 @@
 <% profile = user.hostprofile%>
    <div class="span4">
        <div class="thumbnail" id="badge">
-         <%= link_to image_tag(find_display_imgurl(user.id, "medium")), user%>
+         <%= link_to image_tag(find_display_imgurl(user.id, "medium"), id: "main"), user%>
          <div id="overlay">
               
                <%if profile.exchange_type == "money"%>
                   <div id="service-title" style="color:#FF4697">                 
-                   <%= "$#{profile.price}"%> <%= profile.currency %>
+                   <%= "asking for $#{profile.price}"%> <%= profile.currency %>
                <% elsif profile.exchange_type =="language practice" %>
-                  <div style="color:#00E1E1" id="service-title"><%= "practice #{profile.language_practice.downcase}" unless profile.language_practice.nil?%>
+                  <div style="color:#1EC8EA" id="service-title"><%= "wants to practice #{profile.language_practice.downcase}" unless profile.language_practice.nil?%>
                <% else %>
                   <div style="color:#00E1E1" id="service-title">     
                   <%= profile.exchange_type%>
@@ -17,25 +17,33 @@
          </div>
          <div class="row" style="top: -28px">
             <div class="span4">
-               <b><%=user.firstname.capitalize %></b>
-               <i id="icons" class="meetups-comp icon-globe"></i>
+               <b style="margin-right:5px"><%=user.firstname.capitalize %></b>
+                  <%= image_tag "completed.png", size: "18x18" %>
                <small id="hint"><%=profile.completed_count%></small>
-               <i id ="icons" class="response-rate icon-circle-arrow-right" ></i>
-               <small id="hint"> <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%" %> </small> <small class="language_list"> <% profile.languages.each do |l|%>
-                     <%= Language.find_by_id(l).try(:code) %>
-                     <%= "," if profile.languages.last != l%>
-               <% end %> </small>
+               <%= image_tag "response.png", size: "18x18" %> 
+               <small id="hint"> <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%" %> </small> 
+               <div style="text-align:right; right: -167px; top: -15px; width: 120px">
+                  <small class="languag_list"> 
+                  <% if !user.languages.nil? %>
+                     <% user.languages.each do |l|%>
+                           <%= Language.find_by_id(l).code%>
+                           <%="," if user.languages.last != l %>
+                     <% end %> 
+                  <% end %>
+                  </small>
+               </div>        
             </div>
                
          </div>
-         <div class="row" style="top: -28px">
+         <div class="row" style="top: -45px">
             <div class="span2">
-               <%= render "shared/rating", :score => profile.score %><small id="hint"> <%= "(#{user.inverse_reviewees.count})" %> </small>
+               <%= render "shared/rating", :score => profile.score %><small id="hint"> <%= "(#{user.inverse_reviews.count})" %> </small>
             </div>        
          </div>
-         <div class="row" style="top: -15px">                        
+         <% service_title = Service.find_by_id(profile.service).title %>
+         <div class="row" style="top: -15px"> 
              <div class="span3" style="font-size:1.1em">    
-                <%= Service.find_by_id(profile.service).try(:title)%>
+                <b><%= service_title.capitalize%></b>
              </div>
             <div class="span4 intro" style="font-family: calibri; font-size: 14px; color:#777">
                <%= profile.intro%>

@@ -1,0 +1,60 @@
+<div id="appt-status-bar">
+       <% status = appointment.status %>
+       
+<!-- status message for host -->
+       <% if is_appt_host?(appointment) %>
+          <% if status == Status::CHECK_SENT %>
+             <p><%= "Tell #{traveler.firstname.capitalize} if you are available for the meetup." %></p>         
+             <div id="meeting_active"><%= link_to "Available", user_appointment_make_available_path(current_user, appointment), id: "response" %></div><div id="meeting_inactive"><%= link_to "Unavailable", user_appointment_make_unavailable_path(current_user, appointment), id: "response" %></div>
+          <% elsif status == Status::AVAILABLE || status == Status::CANCELED || status == Status::COMPLETED || status == Status::EXPIRED %>
+             <p> You have responded already. <%= "Now waiting for #{traveler.firstname.capitalize} to get back to you." %></p>
+             <small id="light"> <%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif status == Status::REJECTED %>    
+             <p> <%= "#{traveler.firstname.capitalize} decided to cancel the meeting request." %></p>
+             <small id="light"> <%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif status == Status::NOT_AVAILABLE %>
+             <p> You responded unavailable. Meeting request has been inactivated.</p>
+             <small id="light"> <%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif status == Status::BOOKED && Date.today > appointment.date %>
+              <p> Now that you've done the meetup, review your experience and complete the meetup.</p>
+              <div id="meeting_active"> 
+              <%= link_to "Review", user_appointment_complete_appointment_path(current_user, appointment), id: "response" %> </div>
+           <% elsif status == Status::BOOKED && appointment.date - DateTime.now.to_date >= 2 %>              
+              <p> Your meetup is now booked! You have until two days before the meetup to cancel the appointment.</p>
+              <div id="meeting_inactive">
+              <%= link_to "Cancel", user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel this meeting?", id: "response"%></div>
+           <% elsif status == Status::BOOKED %>
+              <p> Your meetup is booked! </p>
+              <small id="light"> Too late to cancel. </small>
+           <% end %>          
+          
+<!-- status message for traveler -->
+       <% elsif is_appt_traveler?(appointment) %>
+          <% if status == Status::CHECK_SENT%>
+             <p> Your request has been sent. <%="Please wait for #{host.firstname.capitalize} to respond." %></p>
+             <small id="light"><%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif status == Status::CANCELED || status == Status::COMPLETED || status == Status::REJECTED || status == Status::EXPIRED %>
+             <small id="light"><%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif  status == Status::NOT_AVAILABLE %>
+             <p> <%= "#{host.firstname.capitalize} responded unavailable."%> Your meeting request is inactivated. </p>
+             <small id="light"><%= appointment.return_status_str(current_user.id) %> </small>
+          <% elsif status == Status::AVAILABLE %>
+             <p> <%= "#{host.firstname.capitalize}"%> responded available! You can now book your appointment or say no thanks. </p>
+             <div id="meeting_active">
+             <%= link_to "Book", user_appointment_book_appointment_path(current_user, appointment), id: "response" %> </div><div id="meeting_inactive">
+             <%= link_to "Nevermind", user_appointment_reject_appointment_path(current_user, appointment), id: "response"%></div>
+             <!--TODO: take out equal sign -->
+          <% elsif status == Status::BOOKED && DateTime.now.to_date >= appointment.date %>
+             <p> Now that you've done the meetup, review your experience and complete the meetup.</p>
+             <div id="meeting_active"> 
+             <%= link_to "Review", user_appointment_complete_appointment_path(current_user, appointment), id: "response" %> </div>
+          <% elsif status == Status::BOOKED && appointment.date - DateTime.now.to_date >= 2 %>              
+             <p> Your meetup is now booked! You have until two days before the meetup to cancel the appointment.</p>
+             <div id="meeting_inactive">
+             <%= link_to "Cancel", user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel this meeting?", id: "response"%></div>
+          <% elsif status == Status::BOOKED %>
+             <p> Your meetup is booked! </p>
+             <small id="light"> Too late to cancel. </small>
+          <% end %>
+       <% end %>
+</div>

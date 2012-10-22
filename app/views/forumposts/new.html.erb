@@ -1,10 +1,16 @@
  <div class='filler'></div>
-   <div class="row">
-      <div class="span10" id="messageform">
+ <div class="span10">
+    <div class="row">
+       <%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
+       <strong style="margin-left:10px"><%="Post a request"%></strong>
+   </div>
+   <div class='filler'></div>
+   
+   <div class="row" id="messageform">     
          <%= form_for @post, do |f| %>
          <%= render 'shared/error_messages', :obj=>@post%>
          
-         <div id="name">
+         <div id="personalform">
             <%=render 'shared/country_city_select', :f=>f, :inline_search => false %>
          </div>
          <% if Time.now.month > 11 %>
@@ -16,9 +22,9 @@
             When do you want to meetup?
          </div>
          
-         <div class="field">
+         <div id="personalform">
             
-            <%= f.date_select :date, {:start_year => Time.now.year, :end_year => end_time}, {:style=>"width:100px"}%>
+            <%= f.text_field :date %>
          </div>
           <div class="field">
                <%= f.text_field :title, :placeholder=>"title...", :style=>"width:80%"%>
@@ -27,10 +33,11 @@
             <%= f.text_area :content, :placeholder=>"What are you looking for?", :style=>"width:80%; height:150px"%>
          </div>	
          <div class="actions">
-            <%= f.submit  "Post", class: "btn btn-primary" %>
+            <%= f.submit  "Post", id: "blue-button" %>
          </div>
          <%end%>
       </div>
    </div>
 
+</div>
 

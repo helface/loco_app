@@ -1,0 +1,11 @@
+<div class="span11 host_info" id="review" >
+   <% reviewer = User.find(travelerreview.reviewer_id) %>   
+   <span class="timestamp">
+      <small> Posted by </small>   
+      <%= link_to reviewer.firstname.capitalize, user_path(reviewer) %>
+      on <%= travelerreview.created_at.strftime("%b %d, %Y")%> <br>
+   	<%= render "shared/rating", :score => travelerreview.score %>        
+   </span> 
+   <br>	
+	<p> <%= simple_format(travelerreview.comment, :style=>"color:#555") %> </p>
+</div>

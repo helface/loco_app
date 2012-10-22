@@ -3,9 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 #alert("newsrc")
 
-jQuery ->
-   $('.best_in_place').best_in_place()
-   
+jQuery ->   
    thumbrange = (num) -> 
       $("#imgthumb#{num}").click ->
          # caption = $("#imgthumb#{num}").attr("caption")
@@ -23,8 +21,3 @@ jQuery ->
          $("#displayimg").wrap(img_path)
          
    thumbrange x for x in [1..7]
-   
-   $("#change_password").click ->
-      $("#password_update").show()
-      
-      

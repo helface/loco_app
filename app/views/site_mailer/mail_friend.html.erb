@@ -1,14 +1,30 @@
-<p> Dear friend, </p>
-
-<p> Your friend 
-<%= "#{@recommender.firstname} #{@recommender.lastname}" %> at <%= @user.email %> wants to recommend: <p>
-	
-<%= link_to "#{@user.firstname}", user_url(@user, host: 'localhost:3000')%>
-
-<p> From TiniHost. Go check it out.
-<% unless @note.empty? %>   
-<%= "#{@recommender.firstname} says..." %>
-<div id="name">
-<%= "#{@note}"%>
-<% end %>
+<div class="container">
+   <div class="span 8" style="margin-left:10px">
+      <div class="row">
+         <p> Dear friend, </p>
+         <div class="edit-link">
+            <p>Your friend <%= @recommender.firstname.capitalize %> (<%= @user.email %>) wants you to checkout <%= link_to "#{@user.firstname.capitalize}", user_url(@user, host: 'localhost:3000')%> from <%= link_to "TiniHost", "localhost:3000" %> for your next trip! </p>
+         </div>
+      </div>
+      
+      <% unless @note.empty? %>   
+         <div class="filler"></div>
+         <div class="row">
+            <div class="span6" style="width: 500px; margin: 15px; padding:10px; background-color:#eee">
+               <%= @recommender.firstname.capitalize %> says:
+               <p><%= "#{@note}"%></p>
+            </div>
+         </div>   
+      <% end %>      
+      <div class="filler"></div>
+      
+      <div class="row">
+         Please visit us at www.Tinihost.com to learn more.   
+      </div>
+      <div class="filler"></div>
+      <div class="row">
+         <br/>
+         <small> TiniHost Team </small>    
+      </div>
+   </div>
 </div>

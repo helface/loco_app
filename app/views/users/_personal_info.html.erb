@@ -1,23 +1,29 @@
 <% profile = @user.hostprofile%>
 
-<table id="easy_edit">
-   <tr>
-      <td style="vertical-align:bottom">
-            <strong><i style="color: #00D66F" class="icon-user"></i>
-            <%= @user.firstname.capitalize%> </strong>
-      </td>
-      <td class="title-align edit_link">
-         <% if current_user?(@user) %>
-            <small> <%= link_to "edit", edit_user_path(@user), class: "edit_link" %> </small>
-         <% end %>
-      </td>      
-   </tr>
-</table>
-<p id="hint"> traveler<%= ", host" if profile %> </p><br>
+<div class="easy_edit">
+   <%= image_tag("hat.png", alt: "user", style: "width: 18px; margin-left:-5px") %>
+   <strong> <%= @user.firstname.capitalize%> </strong>
 
+   <% if current_user?(@user) %>
+      <small class="edit_link"><%= link_to "edit", edit_user_path(@user, view: "general") %></small>
+   <% end %>
+</div>
+<small id="hint"> 
+   <%= "#{@user.calc_age} /" unless @user.birthday.nil? %> <%=" #{User::GENDER.invert[@user.gender]} /" unless @user.gender.nil? %> traveler<%= " / host" if profile %> 
+</small><br/>
+<% if !@user.languages.nil? %>
+   <% @user.languages.each do |l|%>
+     <small id="hint"> 
+        <%= Language.find_by_id(l).try(:name) %>
+     </small>   
+   <% end %>
+   <br>
+<% end %>
+<%= render "shared/rating", :score => @user.traveler_score %>
+<small id="review_count"> <%= pluralize(@user.treviews_received.count, "review") %> as traveler </small>
 <!-- render information for non-host users -->
 <% if !host_user?(@user)%>
-   <br>
+   <br/>
    <i id="icons" class="meetups-comp icon-globe"></i>
    <small id="review_count"><%= pluralize(@user.meetups_completed, 'meetup') %> completed</small><br>
    <i id="icons" class="review icon-pencil"></i>
@@ -32,15 +38,13 @@
       <% elsif @user.self_intro.empty? %>
          <% prompt = "Lovely picture! Now add a short self introduction." %>   
       <% end %>
-
          <% if !prompt.empty? %>
          <div class="edit_link">
             Profile incomplete <br>
-            <p id="hint" class="edit_link"><%= "#{prompt}"%> <br>
-            <small class="edit_link"> <%= link_to "edit", edit_user_path(@user), class: "edit_link" %> </small>
+            <p id="hint"><%= "#{prompt}"%> </p><br/>
+            <small class="edit_link"> <%= link_to "edit", edit_user_path(@user, view: 'general'), class: "edit_link" %> </small>
             </p>
          </div>
-         <br>
          <% end %>
          <div class="edit_link">
             <%= "You are not a host yet" %></h3>
@@ -54,54 +58,50 @@
    <% end %>   
    
 <!-- render information for host users -->   
-<% else %>
-   <% profile.languages.each do |l|%>
-   <small style="color: gray"> 
-      <%= Language.find_by_id(l).try(:name) %>
-   </small>   
-   <% end %>         
-
-   <div style="height:10px"></div>
-
-   <table id="easy_edit">
-      <tr>
-         <td><strong><i style="color:pink" class="icon-glass"></i> <%= Service.find_by_id(profile.service).title.capitalize%> </strong ></td>
-         <td class="edit_link title-align">
+<% else %>       
+   <br/>
+   <% service =  Service.find_by_id(profile.service).title %>
+   <% img = "#{service.gsub(' ', '_')}2.png" %>
+   <div style="height:5px"></div>
+   <div id="easy_edit">
+      <%= image_tag(img, alt: "#{service}", :style=>"width: 18p; margin-left:-5px") %>         
+          <strong style="margin-left:px"><%= service.capitalize%> </strong >
             <% if current_user?(@user) %>
-               <small> <%= link_to "edit", edit_hostprofile_path(@user.hostprofile), class: "edit_link" %> </small>
+               <small class="edit_link"> <%= link_to "edit", edit_hostprofile_path(@user.hostprofile), class: "edit_link" %> </small>
             <% end %>
-         </td>
-      </tr>
-   </table>
+         </div>
 
-   <small style="color: gray"> <%= profile.city.name%>, <%= profile.city.country.name%>  </small>
+   <small id="hint"> <%= profile.city.name%>, <%= profile.city.country.name%>  </small>
    <br>
    
-   <div style="height:18px"></div>
-   <div class = "appt_tag">
-      <% if profile.exchange_type == "money"%>
-        <p><%= "$#{profile.price} #{profile.currency}"%></p>
-      <% elsif profile.exchange_type =="language practice" %>
-        <p><%= "Practice #{profile.language_practice}"%></p>
-      <% else %>
-        <p><%= profile.exchange_type.capitalize %></p>
-      <% end %>
-      <% if !current_user?(@user) %>
-         <%= link_to "Check Availability", new_user_appointment_path(@user)%>         
-      <% end %>
-   </div>  
-   <br>
    <%= render "shared/rating", :score => profile.score %>
-   <small id="review_count"> <%= "#{@user.inverse_reviewees.count} reviews" %></small>
-   <br>
-  
-     <i id="icons" class="review icon-pencil"></i>
-     <small id="review_count"><%= pluralize(@user.reviews.count, 'review') %> written </small><br>
-     <i id="icons" class="meetups-comp icon-globe"></i>
-         <small id="review_count"><%= pluralize(profile.completed_count, 'meetup') %> completed</small><br>
-   <i id="icons" class="recommend icon-hand-up"></i>
-   <small id="review_count"> <%= "#{profile.calc_recommend_rate}%"%> recommended</small> <br>
-   <i id ="icons" class="response-rate icon-circle-arrow-right" ></i>
-   <small id="review_count"> <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%" %> response rate</small> <br>
-  
+   <small id="review_count"> <%= pluralize(@user.inverse_reviews.count, "review") %> as host <br/></small>
+   <br/>
+   <%= image_tag "review.png", id: "stats-icon" %>
+   <small id="icon-text"><%= pluralize(@user.reviews.count + @user.treviews_written.count, 'review') %> written </small><br>
+   <%= image_tag "completed.png", id: "stats-icon" %>
+   <small id="icon-text"><%= pluralize(profile.completed_count, 'meetup') %> completed</small><br/>
+   <%= image_tag "recommended.png", id: "stats-icon" %>
+   <small id="icon-text"> <%= "#{profile.calc_recommend_rate}%"%> recommended</small> <br>
+   <%= image_tag "response.png", id: "stats-icon"%>
+  <small id="icon-text"> <%= profile.calc_response_rate.nil? ? "na" : "#{profile.calc_response_rate}%" %> response rate </small><br>
+   <div style="height:18px"></div>
+   <% if profile.exchange_type == "money"%>
+      <% exchange = "Asking for $#{profile.price} #{profile.currency}"%>
+   <% elsif profile.exchange_type =="language practice" %>
+      <% exchange = "Asking to practice #{profile.language_practice}"%>
+   <% else %>
+      <% exchange = profile.exchange_type.capitalize %>
+   <% end %>
+    
+   <% if !current_user?(@user) %>
+      <%= link_to new_user_appointment_path(@user) do%>
+         <div class = "appt_tag">
+            <p> <%= "#{exchange}" %></p>
+            <strong>Request Meetup</strong>         
+         </div>
+      <% end %>
+   <% else %>
+      <strong>  <%= "#{exchange}" %>  </strong>
+   <% end %>
 <% end %>

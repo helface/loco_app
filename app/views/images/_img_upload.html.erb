@@ -1,3 +1,6 @@
+<% if @image.nil? %>
+   <% @image = Image.new %>
+<% end %>
 <%= form_for(@image, :html=>{:multipart=>true}) do |img| %>
 <div> 
       <%if img.object.new_record? %>
@@ -6,11 +9,7 @@
             <small> Upload a picture </small><br>
             <%= img.file_field :photo %>
          </div>
-         <div class="field" >
-            <small> Enter caption (optional) </small><br>
-            <%= img.text_area :caption, style: "width: 400px; height: 50px", placeholder: "100 characters ..."%>
-         </div>
       <%end%>
 </div>
-   <%= img.submit "upload", id: "pink-button" %>
+   <%= img.submit "upload", id: "blue-button" %>
 <%end%>

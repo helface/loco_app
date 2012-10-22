@@ -1,26 +1,24 @@
 <div class="row">
    <div class="span7" style="margin-left:10px">
-      <div class="thumbnail no_link">
+      <div>
          <% if @user.images.empty? %>
-            <%= image_tag "full_hat.png", id: "displayimg" %> <!-- TODO: change default -->
-            <div id="caption" style="font-style:normal">
-               <%= link_to "add image", edit_user_path(@user) %>
+            <%= image_tag "full_hat.png", id: "displayimg" %> 
+            <div class="edit_link" id="caption" style="text-align:center; position:relative; opacity:0.8; top:-32px; left:0px; background: #444">
+               <%= link_to "Add image", edit_user_path(@user, anchor: "picture") unless !current_user?(@user) %>
             </div>
          <% else %>
             <% firstimg = Image.find_by_id(@user.profile_pic_id) || @user.images.first %>
             <%= link_to image_tag(firstimg.photo.url(:large), id: "displayimg", :data=>{:id=>firstimg.id}), image_path(firstimg) %>            
-            <div id="caption">    
-               <p id="displaycaption"><%= firstimg.caption %></p>
-            </div>
+            
          <% end %>
        </div>
    </div> <!-- end of display image -->
-   <%if @user.images.count > 1%>
+   <%if @user.images.count > 0%>
       <div class="span1">
          <% n = 0 %>
             <% @user.images.each do |img|%>
                <div class="span2" style="text-align:left; margin-left:-10px">
-                  <%= image_tag img.photo.url(:medium), class: "thumbnail thumbindex", id: "imgthumb#{n+=1}", :data=>{:caption=>img.caption, :id=>img.id} %>
+                  <%= image_tag img.photo.url(:medium), class: "thumbnail thumbindex", id: "imgthumb#{n+=1}", :data=>{:id=>img.id} %>
                </div>
             <% end %>
       </div>

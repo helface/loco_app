@@ -16,7 +16,7 @@
 						<%= msg.hidden_field :recipient_id, value: @user.id %>
 						<%= msg.hidden_field :thread_id, value: @msgthread.id %>
 						<% end %>
-				<%= f.submit "post", class: "btn btn-large btn-primary" %>
+				<%= f.submit "post", id: "blue-button" %>
 			<% end %>
 		</div>
         </section>

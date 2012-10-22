@@ -1,8 +1,8 @@
 <% provide(:title, 'find a host') %>
-<%= form_tag fill_location_path, method: 'get', class: "well form-inline" do %>
-<div id="name">
+<%= form_tag fill_location_path, method: 'get', class: "wel form-inlin" do %>
+<div id="personalform">
    <%=render 'shared/country_city_select', :inline_search => true%>
-<%= submit_tag "Search", :name => nil, :class=>"bnt" %>
+<%= submit_tag "Search", :name => nil, :id=>"blue-button", :style=>"width: 70px" %>
 </div>
 <%end%>
 <div class="filler"></div>

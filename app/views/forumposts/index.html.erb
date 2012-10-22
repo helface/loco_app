@@ -1,7 +1,9 @@
-<%= form_tag forum_path, method: 'get' do %>
-   <div>
+<% provide(:title, "meetups") %>
+
+<%= form_tag board_path, method: 'get' do %>
+   <div id="personalform">
    <%=render 'shared/country_city_select', :inline_search => true%>
-   <%= submit_tag "filter your location", :name => nil, :class=>"bnt" %>
+   <%= submit_tag "filter your location", :name => nil, :id=>"blue-button", :style=>"width: 145px" %>
    </div>
 <%end%>
 <div class="filler"></div>
@@ -18,8 +20,8 @@
    </div>
    <div class="span4" style="text-align:right">
       <% if signed_in? %>
-      <div style="background-color: green, padding:10px, color:white">
-         <%= link_to "Post a request", new_forumpost_path, class: "btn" %>
+      <div>
+         <%= link_to "Post a request", new_forumpost_path, id: "pink-button" %>
       </div>
       <% end %>
    </div>

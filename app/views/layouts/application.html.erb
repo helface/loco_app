@@ -2,22 +2,48 @@
 <html>
 <head>
   <title> <%= default_title(yield(:title)) %> </title>
+  <%= favicon_link_tag "hat-favicon.ico" %>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application" %>   
   <%= csrf_meta_tags %>
 </head>
-<body style="">
+<body>
    <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
          <div class="container">
-            <div style="height:15px">
-               <%= link_to "tiniHOST", '/', :style=>"position:absolute; padding-top:20px; color:white; font-size:2em; font-weight:bold" %>
+            <div style="height:5px; padding-top:5px; padding-bottom:5px">
+               <%= link_to image_tag("tinihost.png", alt: "Tinihost logo") , root_path%>         
             </div>
-   
             <nav>
-               <ul class="nav pull-right">
-                  <li><%= link_to "about", '/about' %></li>
-                  <li> <%= link_to "hosts", hosts_path, id: "lighter" %></li>
+               <ul class="nav pull-right" style="margin-top:5px">
+                  <li>
+                     <div class="blocknav">
+                        <%= link_to '/about' do %>
+
+                           <b>Learn </b><br/>
+                         <small> how it works </small>
+                         <% end %>
+                     </div>
+                  </li>
+                  <li>
+                  <div class="blocknav">
+                     <%= link_to hosts_path do %>
+                        <b>Search</b><br/>
+                      <small> for hosts </small>
+                      <% end %>     
+                  </div>  
+                  </li>
+                   <% if !signed_in? %>
+                      <li>
+                           <div class="blocknav">
+                              <%= link_to signup_path do %>
+                                 <b>Join </b><br/>
+                               <small> tiniHost </small>
+                               <% end %>
+                           </div>
+                        </li>
+                     <% end %>
+                  
                   <% if signed_in? %>
                      <%= render 'shared/signedin_header' %>
 				      <% else %>
@@ -43,7 +69,6 @@
    </div>			
    <div class="filler"></div>
    <div class="container">
-      <%= request.fullpath %>
    </div>
 </body>
 </html>

@@ -1,5 +1,4 @@
 US|United States
 CA|Canada
-PT|Portugal
-MA|Morocco
-ES|Spain
+FR|France
+UK|United Kingdoms

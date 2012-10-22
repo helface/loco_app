@@ -1,12 +1,12 @@
 <% unless !signed_in? %>
-<div class="nav nav-tabs">
+<div class="nav nav-tabs edit_link">
    <% if params[:folder] == 'traveler' || params[:folder].nil? %>
       <li class="active">
    <% else %>
       <li>
    <% end %>
    <% count = @requested_appts.active.count > 0 ? "(#{@requested_appts.active.count})" : ""%>
-	<%= link_to "as traveler #{count}", user_appointments_path(current_user, :folder => 'traveler') %>
+	<%= link_to "As traveler #{count}", user_appointments_path(current_user, :folder => 'traveler') %>
 	</li>
    <% if  @appt_requests  %>
    <% if params[:folder] == "host" %>
@@ -15,7 +15,7 @@
 	   <li>
 	<% end %>
 	<% count = @appt_requests.active.count > 0 ? "(#{@appt_requests.active.count})" : ""%>
-	<%= link_to "as host #{count}", user_appointments_path(current_user, :folder => 'host') unless !current_user.is_host? %>
+	<%= link_to "As host #{count}", user_appointments_path(current_user, :folder => 'host') unless !current_user.is_host? && @appt_requests.active.count == 0%>
 	</li>
 	<% end %>
 	<% if params[:folder] == "history" %>
@@ -23,7 +23,7 @@
 	<% else %>
 	   <li>
 	<% end %>
-	<%= link_to "history", user_appointments_path(current_user, :folder => 'history') %>
+	<%= link_to "Previous meetups", user_appointments_path(current_user, :folder => 'history') %>
 	</li>
 	      
 </div>

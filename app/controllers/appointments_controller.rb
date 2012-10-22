@@ -1,19 +1,29 @@
 class AppointmentsController < ApplicationController
+  before_filter :signed_in_user
   before_filter :correct_user, only:[:index] 
   before_filter :is_appt_host, only: [:make_available, :make_unavailable]
-  before_filter :is_appt_traveler, only: [:book_appointment, :reject_appointment, :complete_appointment]
+  before_filter :is_appt_traveler, only: [:book_appointment, :reject_appointment]
   def new
     @user = User.find_by_id(params[:user_id])
+    @profile = @user.hostprofile
+    @exchange_type = @user.hostprofile.exchange_type
     @appointment = Appointment.new
   end
 
   def create
+    debugger
     @user = User.find_by_id(params[:user_id])
     traveler = current_user
     host = User.find_by_id(params[:user_id])
     @appointment = traveler.requested_appts.build(params[:appointment])
+    
     if host.hostprofile
-       @appointment.host_id = host.hostprofile.id
+       profile = host.hostprofile
+       @appointment.host_id = profile.id
+       @appointment.exchange_type = profile.exchange_type
+       @appointment.currency = profile.currency
+       @appointment.price = profile.price
+       @appointment.language_practice = profile.language_practice
     else
        redirect_to root_path
        return
@@ -40,12 +50,11 @@ class AppointmentsController < ApplicationController
     store_nav_history
     
     @user = User.find_by_id(params[:user_id])
-    @requested_appts = @user.requested_appts.order('updated_at DESC').paginate(page: params[:page], per_page: 7)
+    @requested_appts = @user.requested_appts.order('date ASC').paginate(page: params[:page], per_page: 7)
     
     @appt_requests = @user.hostprofile.try(:appt_requests)
     if @appt_requests
-      @appt_requests = @appt_requests.order('updated_at DESC').paginate(page: params[:page], per_page:7)
-      
+      @appt_requests = @appt_requests.order('date ASC').paginate(page: params[:page], per_page:7)
       @appt_requests.each do |req|    
           req.expire_appointment
       end
@@ -62,7 +71,7 @@ class AppointmentsController < ApplicationController
     profile = Hostprofile.find_by_id(@appointment.host_id)
     if @appointment.make_available
        profile.increment_response_count
-       redirect_to user_appointment_path(current_user, @appointment)
+       redirect_to session[:prev]
     else
        flash[:error] = "appointment failed"
        redirect_to root_path
@@ -73,7 +82,7 @@ class AppointmentsController < ApplicationController
      profile = Hostprofile.find_by_id(@appointment.host_id)
      if @appointment.make_unavailable
        profile.increment_response_count  
-       redirect_to user_appointment_path(current_user, @appointment)
+       redirect_to session[:prev]
      else
        flash[:error] = "appointment failed"
        redirect_to root_path
@@ -82,35 +91,37 @@ class AppointmentsController < ApplicationController
   
   def book_appointment
      @appointment.book_appointment
-     redirect_to user_appointment_path(current_user, @appointment)
+     redirect_to session[:prev]
   end
   
   def reject_appointment
      @appointment.reject_appointment
-     redirect_to user_appointment_path(current_user, @appointment)
+     redirect_to session[:prev]
   end
 
   def cancel_appointment
      @appointment = Appointment.find_by_id(params[:appointment_id])
      @appointment.cancel_appointment
-     redirect_to user_appointment_path(current_user, @appointment)
+     redirect_to session[:prev]
   end
   
+  #TODO: remove commented out lines
   def complete_appointment       
      @appointment = Appointment.find_by_id(params[:appointment_id])
-     profile = Hostprofile.find_by_id(@appointment.host_id)
-     @user = Hostprofile.find_by_id(@appointment.host_id).user     
-     #render "reviews/new_host_review"
-     redirect_to new_user_review_path(@user)
-     #if @appointment.complete_appointment
-      #  profile = Hostprofile.find_by_id(@appointment.host_id)
-       # @user = Hostprofile.find_by_id(@appointment.host_id).user
-      #  profile.increment_completed_count  
-       # @review = Review.new
-        #render "response"
-     #else
-      #  redirect_to root_path
-     #end
+     @user = User.find_by_id(params[:user_id])     
+     if @appointment.complete_appointment(current_user.id)
+        profile = Hostprofile.find_by_id(@appointment.host_id)
+        @user = Hostprofile.find_by_id(@appointment.host_id).user
+        profile.increment_completed_count  
+        if params[:review] == "host"
+           redirect_to new_user_review_path(@user)  
+        else
+           redirect_to new_user_travelerreview_path(@user)
+        end
+     else
+        flash[:error] = "Sorry, meeting could not be completed, #{@appointment.errors.full_messages}"
+        redirect_to root_path
+     end
   end
   
   private

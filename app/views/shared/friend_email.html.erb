@@ -1,8 +1,18 @@
-<%= form_tag mailfriend_user_path(@user), :method=>'post' do %>
-<%= label_tag "friend's email:" %>
-<%= text_field_tag "email"%>
-<%= label_tag "add a note (optional)"%>
-<%= text_field_tag "note"%>
-<%= submit_tag "email", :name => nil %>
-<% end %>
-	
+<div class="row">
+   <div class="span9" id="messageform">  
+   <%= form_tag mailfriend_user_path(@user), :method=>'post' do %>
+   <div id="personalform">
+      <%= label_tag "friend's email:" %>
+        <%= text_field_tag "email"%>
+   </div>
+   <div id="personalform">
+      <%= label_tag "Note"%>
+      <%= text_area_tag "note"%>
+   </div>
+   
+   <%= submit_tag "email", :name => nil, id: "blue-button" %>
+   <% end %>
+   </div>
+</div>
+
+   

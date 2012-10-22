@@ -2,13 +2,13 @@
 <div class="span8 signup-block">
    <div class="row">
       <div class="span3 offset1">
-         <h3> Sign in</h3>
+         <b><h3>Sign in</h3><b>
       </div>
    </div>
      
    <div class="row">
       <br>
-      <div class="span3 offset1 no_link">
+      <div class="span3 offset1">
          <%= form_for(:session, :url=> sessions_path) do |f| %>
       		<div id="personalform" >
       		   <%= f.label :email, :style=>"color:#ddd" %>
@@ -22,7 +22,7 @@
       	<% end %>
       </div>
    	
-   	<div class="span3 no_link">
+   	<div class="span3">
          <div id="signup">
              <p style="font-size:1.2em"> Don't have an account? </p>
              <div class="filler"></div><br>

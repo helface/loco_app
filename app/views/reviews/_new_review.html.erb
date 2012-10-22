@@ -1,0 +1,23 @@
+   <div class="edit-section">
+      <strong> Please rate on a scale of 1 to 5, from terrible to excellent. </strong>
+      <div id="clear_float">
+         <small><%= f.input :accuracy, :collection => 1..5, :as => :radio, :label=> "Did you find the service as advertised?" %></small>
+      </div>
+       <div id="clear_float">
+         <%= f.input :friendliness, :collection => 1..5, :label=>"Did you find your host friendly and helpful?", :as => :radio %>   
+       </div>
+       <div id="clear_float">
+          <%= f.input :easiness, :collection => 1..5, :label=>"How easy was arranging the meetup?", :as => :radio %>  
+       </div>
+       <div id="clear_float">
+         <%= f.input :enjoybility, :collection => 1..5, :label=>"How enjoyable was your overall experience?", :as => :radio %> 
+       </div> 
+       <div id="clear_float" style="width:200px">
+          <%= f.input :recommend, :label=>"Would you recommend #{@user.firstname.capitalize} to other travelers?", :as=> :select%>
+       </div>
+
+      <div id="clear_float inline_review">
+         <%= f.input :content, label: "Leave a comment (optional)", :as=>"text", :input_html => {:id=>"inline_review"}, :placeholder=>"max 400 characters..."%>
+      </div> 
+      <%= f.button :submit, "complete meeting", :id=>"blue-button" %>
+   </div>  

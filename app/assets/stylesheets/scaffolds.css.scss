@@ -1,14 +1,14 @@
 body {
   background-color: #fff;
   color: #555;
-  font-family: helvetica, verdana, arial, sans-serif;
+  font-family: arial, helvetica, verdana, arial, sans-serif;
   font-size: 13px;
   line-height: 18px; }
 
-p, ol, ul {
+ol, ul {
   font-family: helvetica, verdana, arial, sans-serif;
   font-size: 13px;
-  line-height: 18px; 
+  line-height: 15px; 
   color: #444;
 
   &.content{
@@ -17,12 +17,22 @@ p, ol, ul {
   };
 }
 
+p{
+	font-family: arial, verdana, helvetica, sans-serif;
+   font-size: 13px;
+   color:444;
+   line-height:16px;
+}
 p#hint{
   color:#999;	
   display:inline;
 }
 
-h3, strong{
+p#white{
+  color:white;	
+}
+
+h3{
 	font-family: arial, verdana, helvetica, sans-serif;
 	font-weight: normal;
 	font-size: 19px;
@@ -30,10 +40,39 @@ h3, strong{
 }
 
 strong{
-	font-family: arial, verdana, helvetica, sans-serif;
+	font-family: helvetica, arial, verdana, sans-serif;
 	font-weight: normal;
 	font-size: 18px;
 	color: #667;
+	
+	&#white{
+		color:white;
+	}
+}
+
+.blocknav{
+	padding: 0px 5px; 
+	text-align: center; 
+	width: 65px; 
+	margin-right: 30px;
+	small{
+		font-size:10px
+	}
+	a, a:visited {
+		color: #FF6666;
+		
+		small{
+			color: #fff;
+		}
+	}
+	
+	a:hover{
+		color: #fff;
+		
+		small{
+			color:#FF6666;
+		}
+	}
 }
 
 pre {
@@ -60,6 +99,17 @@ a.lighter {
 	};
 }
 
+a.navlink{
+	&:visited, & {
+		color: #888;
+		text-decoration: underline;
+	};
+	
+	&:hover{
+		text-decoration:none;
+	}
+}
+
 small{
 	font-family: verdana, helvetica, arial, sans-serif;
 }
@@ -72,6 +122,12 @@ small#hint{
 small#light{
 	color:#888;
 	font-size:1em;
+}
+
+small#icon-text{
+	font-family: helvetica, arial, verdana, sans-serif;
+	color:#888;
+	font-size:0.9em;
 }
 
 div {

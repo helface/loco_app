@@ -27,6 +27,7 @@ before_filter :location_specified, only: :index
     @user = User.find(params[:id])
     @token = params[:token]  
     @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 10)
+    @treviews = @user.treviews_received.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /users/new
@@ -41,19 +42,19 @@ before_filter :location_specified, only: :index
 
   # GET /users/1/edit
   def edit
-    @hostprofile = @user.hostprofile
+    store_nav_history
     @image = Image.new
+    @user = User.find(params[:id])
+    @hostprofile = @user.hostprofile
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    if @user.save
-        debugger
-        
+    if @user.save        
         flash[:success] = "Congratulations! A confirmation email has been sent to your inbox for activation."
-        SiteMailer.signup_confirmation(@user).deliver
+        status = SiteMailer.signup_confirmation(@user).deliver
         redirect_to signin_path
     else
         render 'new'
@@ -62,10 +63,10 @@ before_filter :location_specified, only: :index
 
   # PUT /users/1
   # PUT /users/1.json
-  def update   
+  def update        
      if params[:controller] == 'users'
         @user = User.find_by_id(params[:id])
-        if params[:user][:old_password]
+        if !params[:user][:old_password].nil?
           if !@user.authenticate(params[:user][:old_password])
             flash[:error] = "Must enter your current password correctly"
             redirect_to edit_user_path(@user)
@@ -77,11 +78,13 @@ before_filter :location_specified, only: :index
         if @user.update_attributes(params[:user])
            flash[:success] = "Profile successfully updated"
            sign_in @user
-           respond_with @user, location: user_path(@user)
+           redirect_to session[:prev]
+           return
+           #respond_with @user, location: user_path(@user)
         else
            flash.now[:error] = "failed to update profile"
-           render 'edit'
         end
+        render 'edit'
      end
   end
 
@@ -89,9 +92,8 @@ before_filter :location_specified, only: :index
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(:profile_pic_id => params[:img_id])
       flash[:success] = "Profile picture successfully updated"
-      debugger
       sign_in @user
-      redirect_to edit_user_path(@user)
+      redirect_to @user
     end
   end
   # DELETE /users/1

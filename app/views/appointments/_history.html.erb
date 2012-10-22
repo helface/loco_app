@@ -1,0 +1,25 @@
+<% profile = Hostprofile.find_by_id(appointment.host_id) %>
+<% host = profile.user unless profile.nil? %>
+<% traveler = User.find_by_id(appointment.traveler_id) %>
+  
+   <div class="row host_info" style="background-color:#eee">
+   <div class="span2">  
+      <%= link_to image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb"), user_path(traveler) %>
+      <%= link_to image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb"), user_path(host)%>
+      
+   </div>
+   <div class="span3 edit_link">
+      <% if is_appt_host?(appointment) %>
+          Meetup request from <%= link_to "#{traveler.firstname.capitalize}", user_path(traveler) %>
+      <% else %>
+          Meetup request for <%= link_to "#{host.firstname.capitalize}", user_path(host) %>
+      <% end %><br/><br/>
+   </div>
+   <div class="span2">   
+      <%= appointment.date.strftime("%a, %b %d. %Y") %><br/>
+      <%=" #{City.find_by_id(host.hostprofile.city_id).name}, #{Country.find_by_id(host.hostprofile.country_id).name}"%><br/>
+      <small id="hint"><%= appointment.return_status_str(current_user.id) %></small>
+      
+   </div>
+   </div>
+   

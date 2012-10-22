@@ -2,7 +2,7 @@
 <% provide(:title, title) %>
 <div class="span11">
    <div class="row">
-      <%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
+      <%= image_tag find_display_imgurl(current_user.id, "thumb"), id: "profile-thumb" %>	  
       <strong style="margin-left:10px"><%="Your messages"%></strong>
       <div class="filler"></div>
       <%= render 'shared/mailbox_nav' %>

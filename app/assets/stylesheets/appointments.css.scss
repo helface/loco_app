@@ -3,18 +3,119 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #appt-status-bar{
-   position:relative;
-   top: -10px;
-   right:-630px;
 	margin-left: 0px; 
 	text-align: center;
-	background-color:#eee;
-	padding:0px;
-	width:21%;
-	padding: 8px 0px;
-	border-bottom-right-radius: 4px;
-	border-bottom-left-radius: 4px;
+	background-color:#aaa;
+	padding: 0px;
+	border-radius: 0px;
 	
+	p{
+		text-align: left;
+		padding:5px;
+		border-bottom: 4px solid #888;
+		height: 75px;
+		color:white;
+		margin-bottom:0px;
+	}
+	
+	i{
+		color:white;
+		padding-right:0px;
+	}
+	
+	#meeting_inactive
+	{	
+		padding:6px 0px;
+		width: 170px;
+		color: #eee;
+		background: #C24641;
+		position:relative;		
+		/* Safari 4-5, Chrome 1-9 */
+	   background: -webkit-gradient(radial, center center, 0, center center, 460, from(#E0645F), to(#C24641));
+
+	  /* Safari 5.1+, Chrome 10+ */
+		background: -webkit-radial-gradient(circle, #E0645F, #C24641);
+
+	  /* Firefox 3.6+ */ 
+	  background: -moz-radial-gradient(circle, #E0645F, #C24641);
+
+	  /* IE 10 */ 
+	  background: -ms-radial-gradient(circle, #E0645F, #C24641);
+		a:visited, a {
+			color:#eee;
+		};
+	}
+	
+	#meeting_active
+	{
+		width: 170px;
+		position:relative;
+		padding: 6px 0px;
+		color:#eee;
+		text-align:center;
+		background: #1DB882;
+      
+		/* Safari 4-5, Chrome 1-9 */
+	   background: -webkit-gradient(radial, center center, 0, center center, 460, from(#1DB882), to(#14A46E));
+
+	  /* Safari 5.1+, Chrome 10+ */
+		background: -webkit-radial-gradient(circle, #1DB882, #14A46E);
+
+	  /* Firefox 3.6+ */ 
+	  background: -moz-radial-gradient(circle, #1DB882, #14A46E);
+
+	  /* IE 10 */ 
+	  background: -ms-radial-gradient(circle, #1DB882, #14A46E);
+		
+		a:visited, a {
+			color:#eee
+		};		
+		
+	}
+	
+}
+a.appt-block{
+	&:hover{
+		background-color:#999
+	};
+}
+.appt-block{
+	border-radius: 5px; 
+	background-color:#888; 
+	border-bottom:1px solid #eee;
+	
+	strong{
+		color: white;
+		font-size:1.1em;
+	} 
+	&:hover{
+		background-color:#999
+	};
+}
+
+.booked-block
+{
+	background: #eee;
+	color: #555;
+	
+	b{
+		color:#444;
+	}
+	&:hover{
+		background: #ccc;
+	};
+	
+	a, a:hover, a:visited{
+		color:#555;
+	}
+}
+#meeting_pending
+{
+	color:coral;
+	
+	a:visited, a{
+		color:coral;
+	}
 }
 
 #status-tab{
@@ -35,4 +136,16 @@
 	margin-top: 3px;
 	size: 3;
 	width: 100%;
+}
+
+#bottom-border{
+	border-bottom: 1px solid #ddd
+}
+.dark-gray-block{
+	border-radius: 3px; 
+	background-color:#999;
+}
+
+.dark-gray-block:hover{
+	background-color:#bbb;
 }

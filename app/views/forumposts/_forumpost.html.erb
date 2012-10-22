@@ -17,23 +17,28 @@
       </li>
       <br>
       <% end %>
-      <li>
-      <div class ="row" >
-      <div class="span1">
-            <%= link_to image_tag(find_display_imgurl(p.user_id, "thumb"), size: "50x40"), user_path(p.user_id) %>	
+      <%= link_to forumpost_path(p) do %>
+      
+      <li id="link-block">
+         
+      <div class ="row">
+         <div class="span1">
+            <%= image_tag(find_display_imgurl(p.user_id, "thumb"), size: "50x40")%>	
          </div>
 
-         <div class="span7">
+         <div class="span9">
              <div>
-                <b><%= link_to p.title.capitalize, forumpost_path(p) %> </b>
-                <span class="timestamp" style="color:#3a87ad">
+                <b> <%=p.title.capitalize%> </b>
+                <span class="timestamp" style="color:#3B9C9C">
                 for <%= p.date.to_formatted_s(:long) unless p.date.nil?%>
                 </span>
              </div>
              <small><%= City.find_by_id(p.city_id).name %></small><br>
              <small style="font-size:0.9em; color:gray"> responses <%= p.responded_count %></small>         
-         </div>
+         </div>  
       </div> 
-      </li>    
+      </li>  
+      <% end %>
+        
    <%end%>
 </div>

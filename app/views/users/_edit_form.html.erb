@@ -1,0 +1,71 @@
+ <div class="filler"></div> 
+ <% if params[:view] == "general" %>
+ 
+ <h3 class="row"> General information </h3> 
+ 
+ <div class="row host_info">
+    <div class="edit-section">
+      <%= simple_form_for @user do |f| %>   
+         <%= render 'shared/error_messages', :obj=>@user %>           
+         <div class="field" class= "edit_link" id="personalform">      
+            <div style="height:80px" id="personalform">      
+               <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14%>
+            </div>
+            
+             <div style="height:80px" id="personalform">      
+                  <%= f.input :gender, collection: User::GENDER%>
+             </div>
+            
+             <%= f.input :language_tokens, label: "Enter the languages you can hold a conversation in", input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>
+             
+             <%= f.input :self_intro, label: "Introduce yourself to everyone", as: "text", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
+             
+             <a name="picture"></a>        
+            
+             <div style="height:80px">
+               <%= f.input :facebook, label: "Link to your Facebook page (optional)", input_html: {placeholder: "www.facebook.com/"} %>
+             </div>         
+          </div>
+          <br/>
+          <br/><%= f.button :submit, "save", id: "blue-button" %>
+          <% end %>
+      </div>
+    </div> 
+<% end %>
+     
+ <% if params[:view] == "picture" %>
+  <div class="row host_info">
+    <div class="edit-section edit_link">
+       <p>You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.</p>
+       <div class="row">
+          <br>
+          <% @user.images.each do |img|%>      
+          <div class="span1">
+             <%= link_to image_tag(img.photo.url(:thumb), class: "thumbnail thumbindex" ), image_path(img) %>
+          </div>
+          <% end %>
+       </div>
+       <div class="filler"></div>
+       <%=render 'images/img_upload'%>
+    </div>
+  </div>
+ <% end %> 
+ <% if params[:view] == "security" %>
+ <div class="row host_info" id="edit-section">
+    <div class="edit-section">
+       <%= simple_form_for(@user) do |f| %>
+          <%= render 'shared/error_messages', :obj=>@user %>
+          <div class="field edit_link">
+              <%= f.input :old_password, label: "Enter your current password" %>
+           </div>
+           <div class="field edit_link">
+                <%= f.input :password, label: "Set a new password" %>
+             </div>
+             <div class="field edit_link">
+                    <%= f.input :password_confirmation, label: "Confirm new password" %>
+                 </div>
+          <%= f.button :submit, "update", :id=>"blue-button" %>
+       <% end %>
+    </div>
+ </div>
+ <% end %>

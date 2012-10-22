@@ -1,63 +1,49 @@
 <% profile = Hostprofile.find_by_id(appointment.host_id) %>
 <% host = profile.user unless profile.nil? %>
-<div class="row" style="margin-bottom: 15px">
-<div class="span10 host_info" id="review" style="border-radius: 3px; background-color:#999;">
-   <div class="span1">
-      <div class="row" style="padding-bottom:5px">
-         <%= image_tag find_display_imgurl(appointment.traveler_id, "thumb"), size: "40x40" %>	  
+<% traveler = User.find_by_id(appointment.traveler_id) %>
+   <%= link_to user_appointment_path(current_user, appointment, fullview:true) do %>
+      <div class="row host_info appt-block">
+         <div class="row">            
+            <div class="span2" >
+               <p style="color: #B8DCFF"><%=" #{City.find_by_id(host.hostprofile.city_id).name}, #{Country.find_by_id(host.hostprofile.country_id).name}"%></p>
+               
+               <div class="row" style="margin-left: 0px">
+                  <p id="white">Group size: <small style="color: #B8DCFF"><%= appointment.groupsize %></small></p>
+               </div>
+               <div class="row" style="margin-left: 0px">
+                  <p id="white">Meetup date: <br/><small style="color: #B8DCFF"><%= appointment.date.strftime("%a, %b %d. %Y")%><br/><%= appointment.flexible == true ? "flexible": "" %></small></p>
+               </div>
+               <% if !appointment.time.empty? %>
+               <div class="row" style="margin-left: 0px">
+                  <p id="white">Meetup time: <br/><small style="color: #B8DCFF"><%= appointment.time.empty? ? "unspecified" : appointment.time %> </small></p>
+               </div>
+               <% end %>
+            </div>
+            
+            <div class="span4" style="margin-left: 0px; margin-right:10px;">
+               <div class="row" style="height: 150px; margin-left:0px">
+               <% if is_appt_host?(appointment) %>
+                   <strong> Meetup request from <%= "#{traveler.firstname.capitalize}" %> </strong>
+               <% else %>
+                   <strong> Meetup request for <%= "#{host.firstname.capitalize}" %> </strong>
+               <% end %><br/>
+               <p style="color:#FFD119"><%if appointment.exchange_type == "money"%>
+                   <%= "Asking for $#{appointment.price}"%> <%= appointment.currency %>
+               <% elsif appointment.exchange_type =="language practice" %>
+                  <%= "Wants to practice #{appointment.language_practice.downcase}" unless appointment.language_practice.nil?%>
+               <% else %>
+                  Exchange: <%= appointment.exchange_type%>
+               <% end %></p>
+               <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
+               <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%>	  
+               <br/>                      
+               <div> <%= truncate simple_format(appointment.message, style: "color:#eee"), length: 150 %> </div>
+               </div>
+               
+            </div>  
+            <div class="span2" style="background: blue; margin: 0px; padding: 0px; width: 170px">
+                  <%= render 'status_tab', appointment: appointment, traveler: traveler, host: host %>
+            </div>          
+         </div>  
       </div>
-      <div class="row">
-         <%= image_tag find_display_imgurl(host.id, "thumb"), size: "40x40" unless host.nil? %>	  
-      </div> 
-   </div>
-   <div class="span5">
-      <div class="row" >
-         <strong style="font-size:1.1em; color:white">
-         <% if is_appt_host?(appointment) %>    
-            <%= link_to "Request from #{User.find_by_id(appointment.traveler_id).firstname.capitalize}", user_appointment_path(current_user, appointment), :class=>"lighter" %> 
-         <% else %>
-            <%= link_to "Request for #{host.firstname.capitalize}", user_appointment_path(current_user, appointment), :class=>"lighter" %>
-         <% end %>  
-         </strong>
-      </div>
-      <div class="row" style="color: #B8DCFF">
-         <%= appointment.date.strftime("%A, %b %d")%><br>
-         <%= appointment.time%>
-      </div>
-      <br>
-      <div class="row" style="color:#eee">
-         <%= truncate(appointment.message, length:220) %>
-      </div>
-   </div>
-   <br>
-   <div id="status-tab">
-      <% status = appointment.status%>
-      <% if status == Status::CANCELED || status == Status::NOT_AVAILABLE || status == Status::REJECTED || status == Status::EXPIRED %>
-         <small id="light">      
       <% end %>
-      <% if is_appt_host?(appointment) %>
-         <% if status == Status::BOOKED && Date.today > appointment.date %>
-            <small id ="light">
-         <% elsif status == Status::BOOKED%>
-            <small id="meeting_active">
-         <% elsif status == Status::AVAILABLE %>
-            <small id="light"> 
-         <% elsif status== Status::CHECK_SENT %>   
-            <b id="meeting_pending"> 
-         <% end %>
-      <% else %>
-         <% if status == Status::BOOKED && Date.today > appointment.date %>
-            <small id="meeting_pending">
-         <% elsif status == Status::BOOKED%>
-            <small id="meeting_active">
-         <% elsif status == Status::AVAILABLE %>
-            <small id="meeting_pending">
-         <% elsif status== Status::CHECK_SENT %>
-            <small id="light">       
-         <% end %>
-      <% end %>
-      <%=link_to appointment.return_status_str(current_user.id), user_appointment_path(current_user, appointment)%>
-      </small>  </b>    
-   </div>
-</div>
-</div>

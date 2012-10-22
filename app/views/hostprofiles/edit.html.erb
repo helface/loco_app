@@ -9,27 +9,40 @@
       <%= render 'shared/edit_tabs'%>
    </div>
 
-   <div class="row host_info">
+   <div class="row">
       <%if @user.is_host?%>
-      <div class="edit-section">
-      By removing your host status, we will erase all of your host profile information from our system. Should you ever want to become host again, you will have to re-enter all your information. Click the red button to proceed.
-         <div id="name" style="text-align: right; height: 45px">
-            <%= button_to 'Remove my host status', hostprofile_path(@hostprofile), method: "delete", :class => "btn btn-large btn-danger" %>
+         <div class="span10" >
+            <div class="row red-link">
+              <%= link_to '#', id: "deactivate_host" do %>
+              <i class="icon-exclamation-sign"></i> Deactivate my host status         
+              <% end %>
+            </div>
          </div>
-      </div>	
-   	<% end %>
+         <br/>
+         
+         <div class="edit-section" style="display:none; margin-top:5px" id="deactivate_host_block">
+         <div style="background-color:#FFF5F0; padding:10px; border-radius: 3px;">
+            <p id="hint">Aww, we will miss you! All your host information will be kept such that you may reactivate your host status at any time. Travelers will no longer see your host information and you will not be listed in any search results. <br/><br/><b>Please note that any booked meetups you have will remain active until they are completed.</b></p>
+               <div id="name" style="text-align: right; height: 45px">
+                  <%= button_to 'Deactivate', deactivate_hostprofile_path(@hostprofile), method: "get", :id => "pink-button" %>
+               </div>        
+         </div>       
+         </div>
+      <% elsif @user.hostprofile.deactivated == true %>
+         <small id="hint">Your host status is currently deactivated.</small>
+         <%= button_to 'Re-activate my host status', reactivate_hostprofile_path, method: "get", id: "pink-button" %>
+      <% end %>
    </div>
      
    <div class="filler"></div>
-   
    <%= form_for @hostprofile do |f| %>
          <%= render "shared/error_messages", :obj=> @hostprofile %>
          
-         <%= render 'shared/host_information', :f => f%>
+         <%= render 'host_information', :f => f%>
          <br>
-         <%= render 'shared/service_information', :f => f%>
+         <%= render 'service_information', :f => f%>
         <div class="row">
-        <p><%= f.submit 'update', id: "pink-button"%></p>
+        <p><%= f.submit 'update', id: "blue-button"%></p>
    </div>
    <% end %>
 </div>

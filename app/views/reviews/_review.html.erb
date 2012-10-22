@@ -5,9 +5,9 @@
       <%= link_to reviewer.firstname.capitalize, user_path(reviewer) %>
       on <%= review.created_at.strftime("%b %d, %Y")%> <br>
       <% if review.recommend %>  
-        <i id="icons" class="recommend icon-hand-up"></i> Recommended 
+        <i id="icons" class="recommend icon-ok-sign"></i> Recommended 
       <% else %>
-        <i id="icons" class="unrecommend icon-hand-down"></i> Not recommended  
+        <i id="icons" class="unrecommend icon-remove-sign"></i> Not recommended  
       <% end %>
       <br>
       <% if !review.score.nil? %>

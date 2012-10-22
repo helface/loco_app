@@ -1,50 +1,86 @@
-<% provide(:title, "title") %>
+<% provide(:title, "meetups") %>
 
-<%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
-<strong style="font-size:1.3em; margin-left:10px"><%="Your meetups"%></strong>
+<div class="filler"></div>
+
+<%= image_tag find_display_imgurl(current_user.id, "thumb"), id: "profile-thumb" %>	  
+<strong><%="Your meetups"%></strong>
 
 <div class="filler"></div>
 <%= render "meetups_nav" %> 
- 
-<div class="span10">
+<div class="span12">
    <div class="row">
-      <% if params[:folder] == "traveler" || params[:folder].nil?%>
-         <% if @requested_appts.empty? %>
-             You have not contacted any hosts recently.
+      <div class="span8">
+         <% if params[:folder] != "history" %>
+            <div class="row">
+               <h3 style="color:coral">Pending</h3>
+               <hr noshade id="appt-divider">
+            </div>
+         <% end %>   
+         <% if params[:folder] == "traveler" || params[:folder].nil?%>
+            <% if @requested_appts.pending.empty? %>
+                <div class="row">
+                   You have not contacted any hosts recently. 
+                </div>
+            <% end %>
+            <%= render @requested_appts.pending, fullview: false %>    
+         <% elsif params[:folder] == "host" %>
+            <% if @appt_requests.pending.empty? %>
+            <div class="row">
+               You have no pending requests at the moment.
+            </div>
+            <% end %>
+            <%= render @appt_requests.pending, fullview: false unless @appt_requests.nil? %>
+         <% elsif params[:folder] == "history"%>
+            <% appts = @requested_appts.inactive unless @requested_appts.nil? %>
+            <% appts = appts + @appt_requests.try(:inactive) unless @appt_requests.nil? %>
+            <% appts.each do |a| %>
+               <%= render "history", appointment: a %>
+            <% end %>
          <% end %>
-        
-         <% if @requested_appts.booked.count > 0 %>
-            <h3 style="color:#1DB882">Booked</h3>
-            <hr noshade id="appt-divider">
-            <%= render @requested_appts.booked unless @requested_appts.nil? %>
-         <% end %>
-         <div class="filler"></div>
-         <% if @requested_appts.pending.count > 0 %>
-            <h3 style="color:#EB6C2C">Pending</h3>
-            <hr noshade id="appt-divider">
-            <%= render @requested_appts.pending %>
-         <% end %>
-      <% elsif params[:folder] == "host" %>
-         <% if @appt_requests.empty? %>
-            You don't have any host requests at this time.
+      </div>
+      
+      <!-- only have the booked section on the page if we are not in history -->
+      <% if params[:folder] != "history" %>
+      <div class="span4">
+         <h3 style="color:#1DB882">Booked</h3>
+         <hr noshade id="appt-divider">
+      
+         <% if params[:folder] == "traveler" || params[:folder].nil?%>
+            <% appointments = @requested_appts.booked  %> 
+            <% incompletes = @requested_appts.traveler_incomplete %>
+         <% elsif params[:folder] == "host" %>
+            <% appointments = @appt_requests.booked %>
+            <% incompletes = @appt_requests.host_incomplete %>
          <% end %>
       
-         <% if @appt_requests.booked.count > 0 %>
-            <h3 style="color:#1DB882">Booked</h3>
-            <hr noshade id="appt-divider">
-            <%= render @appt_requests.booked unless @appt_requests.nil?%>
+         <% if !incompletes.empty? %>
+            <div id="bottom-border">
+               <strong> Needs review</strong>
+            </div>             
+            <% incompletes.each do |a| %>      
+               <%= render 'meetup_booked', appointment: a %>
+            <% end %>
+            <br/>
          <% end %>
-         <div class="filler"></div>
-         <% if @appt_requests.pending.count > 0 %>
-            <h3 style="color:coral">Pending</h3>
-            <hr noshade id="appt-divider">
-            <%= render @appt_requests.pending unless @appt_requests.nil? %>
-         <% end %>
-      <% elsif params[:folder] == "history"%>
-         <%= render @requested_appts.inactive%>
-         <%= render @appt_requests.inactive unless @appt_requests.nil? %>
-      <% end %>
-      
+         <% if !appointments.empty? %>
+            <div id="bottom-border">
+               <strong>
+                   <%= appointments.first.date.strftime("%a, %b %d, %Y") %>
+               </strong>
+               <% date = appointments.first.date %>                
+            </div>
+            <% appointments.each do |a| %>                    
+               <% if a.date != date %>
+                  <div id="bottom-border">
+                     <br/>
+                     <strong><%= a.date.strftime("%a, %b %d, %Y") %></strong>
+                  </div>
+                  <% date = a.date %>
+                <% end %>
+                <%= render 'meetup_booked', appointment: a %>
+               <% end %>
+            <% end %>
+      <% end %>      
+      </div>
    </div>
-   
 </div>

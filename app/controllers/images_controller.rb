@@ -18,10 +18,10 @@ class ImagesController < ApplicationController
           sign_in @user
         end
         flash[:success] = "your image has been uploaded"
-        redirect_to current_user
+        redirect_to session[:prev]
       else
-        flash[:error] = "Sorry, we were not able to upload your picture"
-        redirect_to current_user
+        flash[:error] = "Sorry, we were not able to upload your picture #{@image.errors.full_messages}"
+        redirect_to session[:prev]
       end
   end
   
@@ -40,6 +40,6 @@ class ImagesController < ApplicationController
     user.set_default_profile_pic
     user.save
     sign_in user
-    redirect_to edit_user_path(current_user)
+    redirect_to session[:prev]
   end
 end

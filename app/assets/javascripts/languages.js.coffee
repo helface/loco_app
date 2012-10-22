@@ -8,3 +8,9 @@ jQuery ->
       preventDuplicates: true
       hintText: 'input your languages'
       prePopulate: $('#hostprofile_language_tokens').data('load')
+
+   $('#user_language_tokens').tokenInput '/languages.json'
+      theme:'facebook'
+      preventDuplicates: true
+      hintText: 'input your languages'
+      prePopulate: $('#user_language_tokens').data('load')

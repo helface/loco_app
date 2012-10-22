@@ -2,7 +2,7 @@
 <%= render 'shared/mailbox_nav' %>
 
 <div class="span11">    
-   <div class="row no_link" style="border-color:#F5FFF0">      
+   <div class="row" style="border-color:#F5FFF0">      
    	<div class="span1" style="margin-left:0px">
          <%= link_to image_tag(find_display_imgurl(@recipient.id, "thumb")), user_path(@recipient) %>  	   
    	</div>
@@ -56,7 +56,7 @@
 				<%= f.hidden_field :subject, value: "Re: #{@thread.subject}" %>
 				<%= f.hidden_field :thread_id, value: @thread.id%>
 				<br>
-		      <%= f.submit "Reply", class: "btn" %>			
+		      <%= f.submit "Reply", id: "blue-button" %>			
 		<% end %>
    </div>
 </div>

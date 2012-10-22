@@ -1,34 +1,43 @@
 <%= provide(:title, 'search') %>
-<%= form_tag fill_location_path, method: 'get', class: "well form-inline" do %>
-<div>
+<div class="filler">
+   
+</div>
+<%= form_tag fill_location_path, method: 'get', class: "" do %>
+<div id="personalform">
    <%=render 'shared/country_city_select', :inline_search => true%>
-<%= submit_tag "Search", :name => nil, :class=>"bnt" %>
+<%= submit_tag "Search", :name => nil, id: "blue-button", :style=>"width: 70px" %>
 </div>
 <%end%>
 
-<div class= "span12" style="text-align: left; margin-left:10px">
-   <div class="span2" id="brick-align">
-       <%= link_to image_tag("all.png"), users_path %>   
-   </div>
-<% Service.all.each do |s| %>
-   <div class="span2" id="brick-align">
-      <% img = "#{s.title.gsub(' ', '_')}.png" %>
-      <%= link_to image_tag(img), filter_path(:category => s.id) %>
-   </div>
-<% end %>
+<br/>
+<div class= "span12" style="text-align: left; margin-left:0px">
+   <div class="row">
+      <% Service.all.each do |s| %>
+         <% img = "#{s.title.gsub(' ', '_')}.png" %>
+         <%= link_to filter_path(:category => s.id) do %>
+            <% if params[:category].to_i == s.id %>
+            <div class="menu_item" id="active">
+            <% else %>
+            <div class="menu_item">
+            <% end %>
+               <%= image_tag(img, alt: s.title) %>         
+      		   <div class="menu-label"><%= s.title %></div>
+      	   </div>
+   	   <% end %>  
+      <% end %>
+    </div>  
 </div>
-
 <div class="row">   
-   <div class="filler"> </div>
-   
+   <br/>
    <%servicename = @service.try(:title) || "host"%> 
    <% if @users.empty? %>
       <div class="span10">
-         <h3> <%= ":( Sorry, there are currently no #{servicename}s in #{@city.name}, #{@country.name}." %></h3>
+         <br/>
+         <strong> <%= ":( Sorry, there are currently no #{servicename}s in #{@city.name}, #{@country.name}." %></strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
       </div>         
    <%else%>
       <div class="span12" style="padding:10px 0px; margin-left:18px">  
-         <h3 style="color:#666"><%= "#{pluralize(@users.count, servicename)} in #{@city.name}, #{@country.name} " %></h3>
+         <strong><%= "#{pluralize(@users.count, servicename)} in #{@city.name}, #{@country.name} " %></strong> <small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
          <hr size="3" style="margin-top:4px">
          <%= will_paginate %>  
             <% n = 0 %>     

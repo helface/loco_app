@@ -11,18 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120915015215) do
+ActiveRecord::Schema.define(:version => 20121022065922) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
     t.integer  "host_id"
-    t.text     "message",     :limit => 400
+    t.text     "message",            :limit => 400
     t.date     "date"
     t.string   "time"
     t.integer  "status"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.integer  "groupsize",                         :default => 1
+    t.boolean  "flexible"
+    t.boolean  "host_completed",                    :default => false
+    t.boolean  "traveler_completed",                :default => false
+    t.string   "exchange_type"
+    t.integer  "price"
+    t.string   "currency"
+    t.string   "language_practice"
   end
+
+  add_index "appointments", ["status", "date", "exchange_type"], :name => "index_appointments_on_status_and_date_and_exchange_type"
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -30,22 +40,6 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.datetime "updated_at", :null => false
     t.integer  "country_id"
   end
-
-  create_table "ckeditor_assets", :force => true do |t|
-    t.string   "data_file_name",                  :null => false
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.integer  "assetable_id"
-    t.string   "assetable_type",    :limit => 30
-    t.string   "type",              :limit => 30
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-  end
-
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "countries", :force => true do |t|
     t.string   "name"
@@ -68,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
   end
 
   add_index "forumposts", ["city_id", "created_at"], :name => "index_forumposts_on_city_id_and_created_at"
+  add_index "forumposts", ["date", "created_at"], :name => "index_forumposts_on_date_and_created_at"
   add_index "forumposts", ["user_id", "created_at"], :name => "index_forumposts_on_user_id_and_created_at"
 
   create_table "hostprofiles", :force => true do |t|
@@ -75,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.text     "serviceDesc"
     t.string   "exchange_type"
     t.string   "greenDesc"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "user_id"
     t.integer  "city_id"
     t.integer  "country_id"
@@ -85,18 +80,20 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.integer  "contacted_count",   :default => 0
     t.integer  "responded_count",   :default => 0
     t.integer  "service"
-    t.string   "languages"
     t.integer  "price"
     t.string   "currency"
     t.float    "score",             :default => 0.0
     t.string   "intro"
     t.integer  "completed_count",   :default => 0
     t.string   "language_practice"
+    t.boolean  "languages_filled",  :default => false
+    t.boolean  "deactivated",       :default => false
   end
+
+  add_index "hostprofiles", ["deactivated"], :name => "index_hostprofiles_on_deactivated"
 
   create_table "images", :force => true do |t|
     t.integer  "user_id"
-    t.string   "caption"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "photo_file_name"
@@ -104,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
   end
+
+  add_index "images", ["user_id"], :name => "index_images_on_user_id"
 
   create_table "languages", :force => true do |t|
     t.string   "name"
@@ -124,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.boolean  "read",         :default => false
   end
 
+  add_index "messages", ["sender_id", "recipient_id"], :name => "index_messages_on_sender_id_and_recipient_id"
+
   create_table "msgthreads", :force => true do |t|
     t.integer  "participant2_id"
     t.integer  "participant1_id"
@@ -132,11 +133,13 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.string   "subject"
   end
 
+  add_index "msgthreads", ["participant1_id", "participant2_id"], :name => "index_msgthreads_on_participant1_id_and_participant2_id"
+
   create_table "reviews", :force => true do |t|
     t.string   "content"
     t.integer  "reviewer_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "reviewee_id"
     t.boolean  "recommend"
     t.integer  "accuracy"
@@ -144,11 +147,10 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.integer  "easiness"
     t.integer  "friendliness"
     t.float    "score"
-    t.boolean  "is_host_review"
-    t.float    "guest_score"
   end
 
   add_index "reviews", ["created_at"], :name => "index_reviews_on_reviewee_id_and_created_at"
+  add_index "reviews", ["reviewee_id"], :name => "index_reviews_on_reviewee_id"
   add_index "reviews", ["reviewer_id", "created_at"], :name => "index_reviews_on_reviewer_id_and_created_at"
 
   create_table "services", :force => true do |t|
@@ -157,6 +159,17 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "travelerreviews", :force => true do |t|
+    t.string   "comment"
+    t.integer  "score"
+    t.integer  "reviewer_id"
+    t.integer  "reviewee_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "travelerreviews", ["reviewee_id"], :name => "index_travelerreviews_on_reviewee_id"
 
   create_table "users", :force => true do |t|
     t.string   "lastname"
@@ -173,6 +186,11 @@ ActiveRecord::Schema.define(:version => 20120915015215) do
     t.integer  "profile_pic_id"
     t.integer  "completed_count",    :default => 0
     t.string   "self_intro",         :default => ""
+    t.date     "birthday"
+    t.integer  "gender"
+    t.float    "traveler_score",     :default => 0.0
+    t.string   "languages"
+    t.string   "facebook"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"

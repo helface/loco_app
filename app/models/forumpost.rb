@@ -25,6 +25,6 @@ class Forumpost < ActiveRecord::Base
   private
   
   def correct_date
-    errors.add(:date, 'meeting date must be later than today') unless self.date > DateTime.now
+    errors.add(:date, 'meeting date must be later than today') unless self.date.nil? || self.date > DateTime.now
   end
 end

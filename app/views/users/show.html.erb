@@ -1,8 +1,6 @@
 <% provide(:title, @user.firstname) %>
 <p id="notice"><%= notice %></p>
-<div class="edit_link">
-   <%= link_to "Back to search results", session[:prev] %>
-</div>
+<%= render 'shared/history_nav' %>
 <br>
   
 <div class="row" >
@@ -10,11 +8,10 @@
    <div class="span4 side-profile">
       <div class="row" style="margin:5px 15px; height: 340px;">
          <%= render "personal_info" %>   
-      </div>
-          
-      <div class="row no_link" style="margin: 0px 15px">
-         <i id="message_icon" class="icon-envelope-alt"> <small id="review_count"><%= link_to 'message ', new_user_message_path(@user) %></small></i>
-         <i id="message_icon" class="icon-share-alt"> <small id="review_count"><%= link_to 'tell a friend', mailfriend_user_path(@user) %></small></i>               
+      </div>        
+      <div class="row" style="margin: 0px 15px">
+         <div id="message_icon" class="icon-envlope-alt"><%= link_to 'Message ', new_user_message_path(@user) %></div>
+         <div id="message_icon" class="icon-shre-alt"><%= link_to 'Tell a friend', mailfriend_user_path(@user) %></div>             
       </div>
    </div>
    <div class="span8"> 
@@ -23,23 +20,31 @@
 </div> 
 
 <div class="filler"> </div>
-<ul class="nav nav-tabs">
-   <% if params[:view] == "review" %>
+<ul class="nav nav-tabs edit_link">
+   <% if params[:view] == "treview" || params[:view] == "hreview" %>
      <li>
    <% else %>
      <li class="active">  
    <% end %> 
-   <%= link_to "profile", user_path(@user, view: "profile") %> </li>
-   
-   <% if params[:view] == "review" %>
+   <%= link_to "Profile", user_path(@user, view: "profile") %> </li>
+   <% if @user.is_host? %>  
+      <% if params[:view] == "hreview" %>
+         <li class="active">
+      <% else %>
+         <li>
+      <% end %>
+         <%= link_to "Reviews as host (#{@user.inverse_reviews.count})", user_path(@user, view: "hreview") %> </li>
+   <% end %>
+   <% if params[:view] == "treview" %>
       <li class="active">
    <% else %>
       <li>
    <% end %>
-      <%= link_to "reviews (#{@user.inverse_reviewees.count})", user_path(@user, view: "review") %> </li>
+   <%= link_to "Reviews as traveler (#{@user.treviews_received.count})", user_path(@user, view: "treview") %>
+   
 </ul>
 
-<% if params[:view] == "review" %>
+<% if params[:view] == "hreview" %>
 <div class="row">
    <div class="span10">
       <% if !@reviews.nil? %>
@@ -52,6 +57,16 @@
    </div> 
 </div>
 <%= will_paginate @reviews %>
+<% elsif params[:view] == "treview" %>
+  <% if !@treviews.nil? %>
+     <div class="row">
+        <%= render @treviews %>
+     </div>
+  <% else %>
+      <%= "#{@user.firstname.capitalize} has no reviews at the moment." %>
+  <% end %>
+  <%= will_paginate @treviews %>
+  
 <% else %>
    <% if !host_user?(@user) %>
    <strong> About me </strong> <br>

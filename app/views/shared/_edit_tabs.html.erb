@@ -1,25 +1,40 @@
-<% provide(:title, "Edit") %> 
 <div class="filler"></div>
-<div class="nav nav-tabs">
-   <% if params[:controller] == "users" %>
-      <li class="active">
-   <% else %>
-     <li>
-   <% end %>
-   <%= link_to "General", edit_user_path(@user, :view=>"general") %>
-   </li>
-
+<div class="nav nav-tabs edit_link">
    
-   <% if params[:controller] == "hostprofiles" %>
-      <li class ="active"> 
+   <% if params[:view] == "general" %>
+      <li class="active">
    <% else %>
       <li>
    <% end %>
-   
-   <% if @user.is_host? %>
-      <%= link_to "Host profile", edit_hostprofile_path(@hostprofile, :view=>"profile") %>
+   <%= link_to "General", edit_user_path(@user, :view=>"general") %>
+     </li>
+   <% if params[:controller] == "hostprofiles" %>
+        <li class ="active"> 
+     <% else %>
+        <li>
+     <% end %>
+
+     <% if @user.is_host? || @hostprofile.try(:deactivated) == true%>
+        <%= link_to "Host profile", edit_hostprofile_path(@hostprofile, :view=>"profile") %>
+     <% else %>
+        <%= link_to "Become a host", becomehost_path, :style=>"color: #FF7285; font-weight: bold " %>
+     <% end %>
+     </li>       
+     
+  
+   <% if params[:view] == "picture" %>
+      <li class="active">
    <% else %>
-      <%= link_to "Become a host", becomehost_path, :style=>"color: #7D053F; font-weight: bold " %>
-   <% end %>
-   </li>       
+      <li>
+   <% end %>       
+   <%= link_to "Pictures", edit_user_path(@user, :view=>"picture") %>
+   </li>
+   <% if params[:view] == "security" %>
+      <li class="active">
+   <% else %>
+      <li>
+   <% end %>       
+   <%= link_to "Security", edit_user_path(@user, :view=>"security") %>
+   </li>
+
 </div>

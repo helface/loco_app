@@ -10,8 +10,16 @@
 	</div>	
 </div>
 <div class="span4 host_info" style="background-color:#777; border-radius: 3px; padding: 20px 15px 10px 35px; margin-left:0px">    
+   <% if !@user.facebook.nil? && !@user.facebook.empty? %>
+   <div class="row edit_link">
+      <strong style="color:white"> Facebook </strong><br/>
+      <%= link_to "#{@user.facebook}", "http://#{@user.facebook}" %>    
+   </div>
+   <br/>
+   
+   <% end %>
   	<div class="row"> 
-  	   <strong style="color: #ccc"> About me </strong>	   
+  	   <strong style="color: white"> About me </strong>	   
   	   <% if @user.self_intro.empty? %>
          <div class="edit_link">
             No self introduction yet. 
@@ -21,9 +29,9 @@
         	   <p><%= simple_format(@user.self_intro, :style=>"color:#eee") %></p>
       <% end %>
 	</div>
-   <br>
+   <br/>
 	<div class="row">	   
-   	<strong style="color:#00D7AD"> My green points </strong>	
+   	<strong style="color:#00D7AD"> <i class="icon-leaf"></i> My green points </strong>	
 		<p><%= simple_format(hostprofile.greenDesc, :style=>"color:#eee") %></p>
 	</div>
 </div>	

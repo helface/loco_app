@@ -44,4 +44,7 @@ jQuery ->
          $('#price_opt').hide()
          $('#lang_opt').hide()
 
+   $("#deactivate_host").click ->
+      $("#deactivate_host_block").show()
+
       

@@ -1,7 +1,8 @@
 class Hostprofile < ActiveRecord::Base
-  attr_accessible :language_tokens, :intro, :tele, :languages, :serviceDesc, :service, :aboutme
+  attr_accessible :language_tokens, :intro, :tele, :serviceDesc, :service, :aboutme
   attr_accessible :price, :greenDesc, :city_id, :country_id, :currency, :exchange_type, :language_practice
   
+  has_many :appt_requests, class_name: "Appointment", foreign_key: "host_id", dependent: :destroy
   scope :by_service, lambda { |service| where(:service => service) }
   belongs_to :user
   belongs_to :city
@@ -10,18 +11,16 @@ class Hostprofile < ActiveRecord::Base
   attr_writer :current_step
   
   #has appointment requests from travelers
-  has_many :appt_requests, class_name: "Appointment", foreign_key: "host_id", dependent: :destroy
   
-  validates_presence_of :languages, :serviceDesc
+  #validates_presence_of :languages, :serviceDesc
   validates :greenDesc, presence: true, length: {maximum: 500}
   validates :intro, presence: true, length: {maximum: 140}
   validates :serviceDesc, presence:true, length: {maximum: 2000}
   validates_presence_of :city_id, :country_id
-  validates_presence_of :price, :currency, :if => :exchange_is_money
-  validates_presence_of :language_practice, :if =>:exchange_is_lang
-  
-  #TODO: validate price and language practice on exchange type selected
-  
+  validates_presence_of :price, :currency, :if => :exchange_is_money?
+  validates_presence_of :language_practice, :if =>:exchange_is_lang?
+  validate :language_filled
+   
   #before_validation do |hostprofile|
    # hostprofile.languages.reject!(&:blank?) if hostprofile.languages
   #end
@@ -30,6 +29,10 @@ class Hostprofile < ActiveRecord::Base
   EXCHANGE_TYPES = ['money', 'making a new friend (free)', 'language practice', 'negotiable']
   CURRENCIES = ['usd', 'euro']
   
+  def language_filled
+    errors.add(:language_tokens, 'Host must enter languages they can speak') unless self.languages_filled
+  end
+ 
   def calc_response_rate
      if self.contacted_count == 0
         return 0
@@ -72,10 +75,6 @@ class Hostprofile < ActiveRecord::Base
      self.save
   end  
   
-  def language_tokens=(langs)
-    self.languages = langs.split(",")
-  end
-  
   def current_step
     @current_step || steps.first
   end
@@ -102,11 +101,11 @@ class Hostprofile < ActiveRecord::Base
   
   private
   
-  def exchange_is_money
+  def exchange_is_money?
     exchange_type == "money"
   end
   
-  def exchange_is_lang
+  def exchange_is_lang?
     exchange_type == "language practice"
   end
   

@@ -1,7 +1,8 @@
  <div class="filler"></div> 
  <h3 class="row"> General information </h3> 
  <div class="row host_info">
-    <div class="edit-section no_link">
+    <div class="edit-section">
+   
          <div class="field edit_link">
             <small> First name </small><br> 
             <strong> <%= best_in_place @user, :firstname, :type=>:input, :activator=> "#editfirst", :html_attrs => {size: 20} %> </strong>
@@ -13,20 +14,46 @@
             <strong> <%= best_in_place @user, :lastname, :type=>:input, :activator=> "#editlast", :html_attrs => {size: 30} %> </strong>
             <%= link_to 'edit', '#', id: "editlast" %>
          </div>
-          
          <div class="field edit_link">
             <small> Email </small> <br> 
             <strong><%= best_in_place @user, :email, :type=>:input, :activator=> "#editemail", :html_attrs => {size: 20} %> </strong>
             <%= link_to 'edit', '#', id: "editemail" %>            
          </div>
-         <br>
+         
          <div class="field edit_link">
-            <strong> Self introduction </strong> <%= link_to 'edit', '#', id: "editintro" %>            
-            <br> 
-         </div>        
-         <p style="color:#777; margin-top:3px"><%= best_in_place @user, :self_intro, :type=>:textarea, :nil => "You have no self intro", :sanitize=>"false", :activator=> "#editintro", :html_attrs => {class: "edit_link", :style=>"width:80%"} %> </p>            
-            
-    </div>
+            <small> Self introduction (optional) </small><br/>
+         <%= best_in_place @user, :self_intro, :type=>:textarea, :nil => "Add an self introduction", :sanitize=>"false", :activator=> "#editintro", :html_attrs => { class: "edit_link", :style=>"width:80%"} %> 
+         <% if @user.self_intro.nil? || @user.self_intro.empty? %>
+            <%= link_to '+', '#', id: "editintro" %> 
+         <% else %>
+            <%= link_to 'edit', '#', id: "editintro" %> 
+         <% end %>    
+         </div>  
+             
+         <a name="picture"></a>
+         
+         <div class="field edit_link">
+            <small> Facebook (optional)</small> <br> 
+            <%= best_in_place @user, :facebook, type: :textarea, :activator=> "#editfacebook", nil: "Link to Facebook profile"%>
+            <% if @user.facebook.nil? || @user.facebook.empty?%>
+               <%= link_to '+', '#', id: "editfacebook" %>            
+            <% else %>
+               <%= link_to 'edit', '#', id: "editfacebook" %>
+            <% end %>            
+         </div>              
+          <%= form_for @user do |f| %>
+
+             <div class="field edit_link">
+                <div class="field" id="personalform">
+                      <small> Enter the languages you can hold a conversation in </small>
+                      <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@user.languages)} %>
+                </div><br/>
+                <div id="langsave" style="display:none">
+                   <%= f.submit "save", :type=>"submit", id: "blue-button" %>
+                </div>
+             </div>
+             <% end %>    
+    </div>  
 </div>
  
  <div class="filler"></div>
@@ -58,14 +85,14 @@
               <%= f.password_field :old_password %>
            </div>
           <div class="field edit_link">
-             <small> Change your password </small><br>
+             <small> Set new password </small><br>
              <%= f.password_field :password %>
           </div>
           <div class="field edit_link">
               <small> Confirm new password </small><br>
               <%= f.password_field :password_confirmation %>
           </div>    
-          <%= f.submit "update", :id=>"pink-button", :style=>"margin-bottom:0px" %>
+          <%= f.submit "update", :id=>"blue-button", :style=>"margin-bottom:0px" %>
        <% end %>
     </div>
  </div>

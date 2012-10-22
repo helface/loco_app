@@ -5,7 +5,7 @@ $navbarLinkColor: #eee;*/
 
 /*figure out why this isn't working*/
 $heroUnitBackground: #554;
-$navbarBackground: #114;
+$navbarBackground: #888;
 $heroUnitLeadColor: #114;
 $placeholderText: #114;
 $bodyBackgrond: black;
@@ -25,6 +25,17 @@ $bodyBackgrond: black;
   box-sizing: border-box;
 }
 
+.navbar-inner {
+  background-color: #2c2c2c; 
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
 
 /* miscellaneous */
 body {
@@ -33,16 +44,20 @@ body {
 }
 
 .homepage {
-	text-align:center;
 	padding-top:80px;
-	background-color: #eea;
+	background-color: #eed;
 	padding-bottom: 50px;
+	border-radius:9px;
+	height: 400px;
+	
+	#location-button{
+		text-align:center;
+		margin-left:40px;
+	};
 	h2{
-		font-size: 1.6em;
-      text-align: center;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-		color: #070;
+		font-size: 1.7em;
+		color: #3B9C9C;
+		margin-left: 13%;
 	}
 }
 .filler{
@@ -50,14 +65,14 @@ body {
 }
 .thumbnail{
 	background-color: #bbb;
-	padding:2px;
+	padding:1px;
 }
 
 #badge{
 	background-color:#eee;
 	height:365px;
 	padding: 5px;
-	img{
+	img#main{
 		width:300px;
 		height: 220px;
 	}
@@ -72,14 +87,15 @@ body {
 	
 	#service-title{
 		font-size:1.1em;
-		font-family: arial, verdana;
+		font-family: helvetica, arial, verdana;
+		font-weight:bold;
 	}
 	#overlay{
 		text-align:right; 
 		padding-right: 5px; 
 		padding-top: 7px; 
 		position:relative; 
-		background-color:#444; 
+		background-color:#333; 
 		height:20px; 
 		top:-29px; 
 		opacity:0.8; 
@@ -93,20 +109,28 @@ body {
 	}
 }
 
-.edit_link{
-	font-size: 1em;
+.red-link{
+	a:link, a:visited{
+	   color: #FF5050;
+   }
+
+	a:hover{
+		background-color:transparent;
+		text-decoration: underline;
+	}
 	
-	a:link{
+	font-size:1.1em;
+	font-family: helvetica, arial
+}
+.edit_link{
+	
+	a:link, a:visited{
 	   color: #049cdb;
    }
 
 	a:hover{
 		background-color:transparent;
-		color:#eee;
-	}
-	
-	a:visited{
-		color:#049cdb;
+		text-decoration: underline;
 	}
 	
 	small{
@@ -179,23 +203,28 @@ div{
 	border-bottom: 1px solid #eee;
 }	
 #icons.recommend {
-	background-color:#6AFB92; 
+	background-color:#888; 
+	color:#5CFAA1;
 }
 	
 #icons.review{
-	background-color: #9AFFEE;
+	background-color: #888;
+	color: #F8FFB7;
 };
 
 #icons.unrecommend{
-	background-color: #FF8C8C;
+	background-color: #888;
+	color:#FF8C8C;
 };
 	
 #icons.response-rate{
-	background-color: #D3BCF5;
+	background-color: #888;
+	color: #F5B8F5;
 };
 	
 #icons.meetups-comp{
-	background-color:#D4F514;
+	background-color:#888;
+	color:#8ED0FF;
 };
 
 #icons.remove{
@@ -206,12 +235,22 @@ div{
 #message_icon
 {
 	color: white; 
-	background-color:#C6DEFF; 
+	background-color:#B2CAEB; 
 	padding: 5px;
 	margin-right: 10px;
 	margin-left: -3px;
 	border-radius: 3px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #eee;
+	
+	&:hover{
+		background-color: pink
+	};
+	
+	a, a:hover{
+		color:white;
+		font-size:11px;
+		text-decoration:none;
+	}
 }
 #review_count{
 	font-size: 0.8em; 
@@ -245,7 +284,8 @@ div{
 
 #displayimg{
 	width: 100%;
-	height: 350px;
+	height: 383px;
+	border: 1px solid #aaa;
 }
 
 #displayimg-nocap{
@@ -253,38 +293,16 @@ div{
 	height: 380px;
 }
 
-.no_link{
-	a:hover{
-		background-color:transparent;
-		text-decoration: none;
-	};
-}
-
-#meeting_pending
-{
-		a:visited, a{
-			color:coral;
-		}
-}
-#meeting_active
-{
-		a:visited, a {
-			color:#1DB882
-		};
-		
-}
 
 a#response:hover{
 	text-decoration: underline;
-	color:#555;
-}
-#meeting_inactive
-{	
-		a:visited, a {
-			color:#FF6E6E
-		};
+	color:#1F73D1;
 }
 
+img.navlink:hover{
+	background-color: white;
+	border-radius: 6px;
+}
 #caption{
 	padding:2px 5px 2px 5px;
 	color: white;
@@ -364,8 +382,9 @@ aside {
     }
 
 	 li#seperator{
-		background-color: #14C4EB;
+		background-color: #888;
 		padding: 5px;
+		border-radius:3px;
 	 };
 
     li.thread{
@@ -393,6 +412,10 @@ aside {
 	margin: 0px;
 }
 
+#profile-navbar{
+	width: 25px;
+	height: 22px;
+}
 #messageform{
 	background-color: #dff0d8; 
 	padding: 20px 0px 0 15px;
@@ -401,6 +424,11 @@ aside {
 		width: 80%;
 		height: 200px
 	}
+}
+
+#stats-icon{
+	width:18px;
+	height:17px;
 }
 
 #personalform{
@@ -421,6 +449,11 @@ aside {
 		height:40px;
 	}
 	
+	select#short{
+		width:130px;
+		height:40px;
+	}
+	
 	select#hostprofile_currency{
 		width:70px;
 		height:40px;
@@ -430,6 +463,9 @@ aside {
 		width: 80%;
 		height: 100px
 	}
+	
+	margin:5px 0px
+	
 }
 
 /* microposts */
@@ -506,7 +542,7 @@ ul.ui-autocomplete {
 .simple_form label {
   width:400px;
   text-align: left;
-  margin-top: 20px;
+  margin-top: 10px;
   display: inline-block;
   color:#555;
 }
@@ -520,6 +556,7 @@ ul.ui-autocomplete {
 
 .simple_form input[type='submit'] {
   margin-left: 0px;
+  background: none;
 }
 
 .simple_form div.boolean label {
@@ -530,7 +567,7 @@ ul.ui-autocomplete {
 .signup-block{
 	margin-left:15%; 
 	padding:30px 0px 30px 0px; 
-	background-color:#3B9C9C;
+	background-color:#3B9C99;
 	border-radius: 3px;
 	border-bottom: 2px solid #ccc;
 	
@@ -551,15 +588,31 @@ ul.ui-autocomplete {
 	}
 }
 
+#blue-button{
+	background-color:#28B7F4; 
+	padding:5px 15px; 
+	border:0px; 
+	color:white;
+	height:40px;
+}
+
 #pink-button{
-	background-color:#FFB9B3; 
+	background-color:#FF7285; 
 	padding:12px; 
 	border-radius: 3px; 
 	color:white; 
 	font-size:1.2em;
 	border: 0.5px solid #ddd;
+	margin-bottom:0px;
 }
 
+#blue-button:hover{
+	background-color: pink;
+}
+
+#pink-button:hover{
+   background-color:#8EE5FF;
+}
 .status-button{
 	padding:8px; 
 	border-radius: 3px; 
@@ -576,10 +629,66 @@ ul.ui-autocomplete {
 	
 }
 
-#blue-button{
-	background-color:#28B7F4; 
-	padding:5px 15px; 
-	border:0px; 
-	color:white;
+
+.menu_item {
+	width: 105px;
+	height: 60px;
+	display: inline-block;
+	background: gray;
+	border-radius: 7px;
+	margin: 0px 5px 0px 20px;
+	vertical-align:middle;
 }
 
+.menu_item#active{
+	background-color: #FF7285;
+}
+.menu_item:hover{
+	background-color:#FF7285;
+}
+
+
+.menu_itemd img {
+	position: relative;
+	left: 79px;
+	top:3px;
+
+}
+.menu_item img {
+	position: relative;
+	left: 27px;
+	top:10px;
+	width:55px;
+	height:40px;
+}
+
+.menu-labeld {
+	position:relative;
+	z-index:999;
+	margin-left: 5px;
+	font-family:helvetica, verdana;
+   font-size:15px;
+	left: 5px;
+	top: -9px;
+	width: 70px;
+	height:50px;
+	text-align:left;
+	font-size: 1.1em;
+	color: white;
+}
+.menu-label {
+	position:relative;
+	z-index:999;
+	margin-left: 5px;
+	font-family:helvetica, verdana;
+	left: 12px;
+	top: -35px;
+	width: 75px;
+	height:50px;
+	text-align:center;
+	font-size: 15px;
+	color: white;
+}
+#link-block:hover{
+	background: #eee;
+}

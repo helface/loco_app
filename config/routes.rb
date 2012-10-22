@@ -1,8 +1,4 @@
 LocoApp::Application.routes.draw do
-
- 
-  mount Ckeditor::Engine => '/ckeditor'
-
   get "images/new"
   get "images/create"
   get "images/destroy"
@@ -11,6 +7,7 @@ LocoApp::Application.routes.draw do
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :reviews, only: [:new, :create, :destroy]
+    resources :travelerreviews, only: [:new, :create, :destroy]
     resources :appointments do
       get :make_available
       get :cancel_appointment
@@ -28,7 +25,12 @@ LocoApp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:create, :destroy]
-  resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update]
+  resources :hostprofiles, only: [:new, :create, :destroy, :edit, :update] do
+     member do
+       get 'deactivate'
+       get 'reactivate'
+    end
+  end
   resources :mailbox, only: :show
   resources :languages, only: [:index]
   resources :forumposts do
@@ -54,7 +56,7 @@ LocoApp::Application.routes.draw do
   match '/becomehost', to: 'hostprofiles#new'
   match '/unbecomehost', to: 'hostprofiles#destroy', via: :delete
   match '/newthread', to: 'msgthreads#new'
-  match '/forum', to: 'forumposts#index'
+  match '/board', to: 'forumposts#index'
   match 'myposts', to: 'forumposts#manage_posts'
   match 'filter', to: 'users#filter'
   match 'fill_location', to:'locations#fill_location'

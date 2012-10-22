@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
 
 before_filter :signed_in_user, only: [:create, :new] 
-before_filter :admin_user, only: :destroy
 
 def new
   @user = User.find_by_id(params[:user_id])
@@ -19,7 +18,7 @@ def create
       user.hostprofile.update_recommend_count(params[:review][:recommend])
       user.hostprofile.calc_host_avg_score(@review.score, user.inverse_reviews.count)
       flash[:success] = "Review successfully submitted"
-      redirect_to user_path(params[:user_id])
+      redirect_to session[:prev]
    else
       flash[:error] = "Review could not be posted."
       render 'new'
@@ -28,6 +27,7 @@ def create
 end
     
 def destroy
+  @review = Review.find_by_id(params[:id])
   @review.destroy
 end
     
