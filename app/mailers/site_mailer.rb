@@ -1,5 +1,5 @@
 class SiteMailer < ActionMailer::Base
-  default from: "info@thirtyflights.com"
+  default from: "team@tiniHost.com"
   
   def signup_confirmation(user)
     @user = user

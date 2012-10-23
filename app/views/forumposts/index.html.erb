@@ -12,7 +12,7 @@
    <div class="span8">
       <h3>
       <% if !params[:city_country_location].nil? %>
-         <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
+         <%= "Requests in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
       <% else %>
          <%= "All recent posts"%>
       <% end %>
@@ -27,6 +27,10 @@
    </div>
 </div>
 <div class="span10 email" style="margin-top:15px">
+      <% if @posts.empty? %>
+      <hr>
+      There are no requests at this time.
+      <% end %>
       <%= will_paginate @posts%>
          <%= render 'forumpost' %>
       <%= will_paginate @posts %>

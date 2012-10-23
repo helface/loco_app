@@ -11,22 +11,15 @@
          <%= render 'shared/error_messages', :obj=>@post%>
          
          <div id="personalform">
+            <%=f.label :Where_are_you_going? %>
             <%=render 'shared/country_city_select', :f=>f, :inline_search => false %>
-         </div>
-         <% if Time.now.month > 11 %>
-            <% end_time = Time.now.year + 1 %>
-         <% else %>
-            <% end_time = Time.now.year %>
-         <% end %>
-         <div id="name">
-            When do you want to meetup?
          </div>
          
          <div id="personalform">
-            
+            <%=f.label :When_do_you_want_to_meet_up? %>
             <%= f.text_field :date %>
-         </div>
-          <div class="field">
+         </div><br/>
+          <div class="field" id="personalform">
                <%= f.text_field :title, :placeholder=>"title...", :style=>"width:80%"%>
             </div>
          <div class="field">

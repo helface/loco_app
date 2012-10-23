@@ -9,7 +9,7 @@ $navbarBackground: #888;
 $heroUnitLeadColor: #114;
 $placeholderText: #aaa;
 $bodyBackgrond: black;
-
+$navbarLinkColor:#ccc;
 @import "bootstrap";
 @import 'font-awesome';
 
@@ -25,6 +25,20 @@ $bodyBackgrond: black;
   box-sizing: border-box;
 }
 
+.sidebar{
+	border-radius:3px; 
+	border:1px solid #eee; 
+	margin-right:40px;
+	li{
+		a {
+			color:#999;
+		}
+	}
+		
+	li.active{
+			background:green;		   
+		}
+}
 .navbar-inner {
   background-color: #2c2c2c; 
   background-image: none;
@@ -613,6 +627,7 @@ ul.ui-autocomplete {
 	border:0px; 
 	color:white;
 	height:40px;
+	border-radius:3px;
 }
 
 #pink-button{

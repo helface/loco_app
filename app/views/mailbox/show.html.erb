@@ -9,7 +9,8 @@
    </div>
      
    <div class="row">
-      <div class="email">     
+      <div class="email">
+      <%= "You have no messages at this time." unless !@messages.empty? %>     
       <%= will_paginate @messages%>
       <%= render @messages%>
       <%= will_paginate @messages%>

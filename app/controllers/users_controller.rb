@@ -5,7 +5,6 @@ respond_to :html, :json
 before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend, :update_profile_pic]    
 before_filter :correct_user, only: [:edit, :update, :update_profile_pic]
 before_filter :location_specified, only: :index
-#TODO: figure out why this is being called for hostprofile destroy
 #before_filter :admin_user, only: :destroy
     
   # GET /users
@@ -13,11 +12,6 @@ before_filter :location_specified, only: :index
   def index  
       store_nav_history
       @users = @city.hosts.paginate(page: params[:page], per_page: 7)
-
-      #respond_to do |format|
-      #format.html # index.html.erb
-      #format.json { render json: @users }
-      #end
   end
 
   # GET /users/1
@@ -30,14 +24,9 @@ before_filter :location_specified, only: :index
     @treviews = @user.treviews_received.paginate(page: params[:page], per_page: 10)
   end
 
-  # GET /users/new
-  # GET /users/new.json
+
   def new
     @user = User.new
-      #respond_to do |format|
-      #format.html # new.html.erb
-      #format.json { render json: @user }
-      #end
   end
 
   # GET /users/1/edit
@@ -48,21 +37,19 @@ before_filter :location_specified, only: :index
     @hostprofile = @user.hostprofile
   end
 
-  # POST /users
-  # POST /users.json
+  
   def create
     @user = User.new(params[:user])
     if @user.save        
         flash[:success] = "Congratulations! A confirmation email has been sent to your inbox for activation."
-        status = SiteMailer.signup_confirmation(@user).deliver
+        MailerWorker.perform_async(@user.id)
         redirect_to signin_path
     else
         render 'new'
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
+  
   def update        
      if params[:controller] == 'users'
         @user = User.find_by_id(params[:id])
@@ -96,8 +83,8 @@ before_filter :location_specified, only: :index
       redirect_to @user
     end
   end
-  # DELETE /users/1
-  # DELETE /users/1.json
+ 
+ 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -168,7 +155,6 @@ private
       redirect_to(root_path) unless current_user.admin? && !current_user?(@user)
   end
   
-  #TODO: this code might need a bit of refactoring
   def location_specified
     @city = remembered_city
     @country = remembered_country

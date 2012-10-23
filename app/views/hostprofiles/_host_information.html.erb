@@ -9,7 +9,7 @@
          <%= f.text_field :tele, :value => @hostprofile.tele %>
       </div>
       <% if @user.languages.nil? || @user.languages.empty? %>
-      <div class="field" id="personalform">
+      <div class="field">
          <%= f.label :enter_the_languages_you_can_hold_a_conversation_in %>
          <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@user.languages)} %>
       </div>
