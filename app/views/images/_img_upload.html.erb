@@ -3,12 +3,10 @@
 <% end %>
 <%= form_for(@image, :html=>{:multipart=>true}) do |img| %>
 <div> 
-      <%if img.object.new_record? %>
-      
-         <div class="controls edit_link">
-            <small> Upload a picture </small><br>
-            <%= img.file_field :photo %>
-         </div>
+      <%if img.object.new_record? %>     
+         
+         <%= img.file_field :photo %>
+         
       <%end%>
 </div>
    <%= img.submit "upload", id: "blue-button" %>

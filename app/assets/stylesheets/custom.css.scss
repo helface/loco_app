@@ -310,10 +310,24 @@ img.navlink:hover{
 	background-color: white;
 	border-radius: 6px;
 }
-#caption{
-	padding:2px 5px 2px 5px;
-	color: white;
-	height: 22px;
+#img-overlay {
+   text-align:center; 
+   position:relative; 
+   opacity:0.8; 
+   top:-27px; 
+   left:1px; 
+   background: #444; 
+   border-left: 1px solid #eee; 
+   border-right: 1px solid #eee;
+   height:20px;
+   padding-top: 5px;
+}
+
+input#image_photo{
+	border: 0px;
+	padding:5px 0px;
+	color: #999;
+	margin-left:0px;
 }
 #footer {
 	padding-top:50px;

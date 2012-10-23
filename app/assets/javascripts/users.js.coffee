@@ -5,15 +5,7 @@
 
 jQuery ->   
    thumbrange = (num) -> 
-      $("#imgthumb#{num}").click ->
-         # caption = $("#imgthumb#{num}").attr("caption")
-         # oldcaption = $('#displaycaption').html()
-         caption = $(this).data("caption")
-         oldcaption = $('#displaycaption').html()
-         if caption
-            $("#displaycaption").replaceWith("<p id='displaycaption'>#{caption}</p>")
-         else if oldcaption
-            $("#displaycaption").replaceWith("<p id='displaycaption' style='height: 18px'></p>")   
+      $("#imgthumb#{num}").click ->  
          newsrc = $("#imgthumb#{num}").attr("src").replace('medium', 'large')
          id = $(this).data('id')
          $("#displayimg").replaceWith("<img id='displayimg' src='#{newsrc}' data-id='#{id}' />")

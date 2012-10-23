@@ -24,9 +24,9 @@
 <!-- render information for non-host users -->
 <% if !host_user?(@user)%>
    <br/>
-   <i id="icons" class="meetups-comp icon-globe"></i>
+   <%= image_tag "completed.png", id: "stats-icon" %>
    <small id="review_count"><%= pluralize(@user.meetups_completed, 'meetup') %> completed</small><br>
-   <i id="icons" class="review icon-pencil"></i>
+   <%= image_tag "review.png", id: "stats-icon" %>
    <small id="review_count"><%= pluralize(@user.reviews.count, 'review') %> written </small>
    <% if current_user?(@user) %> 
    <div class="filler"></div>

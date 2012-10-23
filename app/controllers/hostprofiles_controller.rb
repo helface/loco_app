@@ -86,7 +86,6 @@ class HostprofilesController < ApplicationController
     end
     
     def reactivate
-      debugger
       @hostprofile = Hostprofile.find_by_id(params[:id])
       @user = @hostprofile.user
       @hostprofile.toggle!(:deactivated)
