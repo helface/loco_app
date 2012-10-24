@@ -6,7 +6,7 @@ LocoApp::Application.routes.draw do
   get "images/create"
   get "images/destroy"
 
-  root to: "users#new"
+  root to: "pages#home"
   mount Sidekiq::Web, at: "/sidekiq"
   
   resources :users do
