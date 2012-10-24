@@ -1,1 +1,1 @@
-require 'sidekiq/capistrano'
+#require 'sidekiq/capistrano'

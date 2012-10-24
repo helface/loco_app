@@ -1,13 +1,13 @@
-require 'sidekiq/web'
-require "admin_constraint"
+#require 'sidekiq/web'
+#require "admin_constraint"
 
 LocoApp::Application.routes.draw do
   get "images/new"
   get "images/create"
   get "images/destroy"
 
-  root to: "pages#home"
-  mount Sidekiq::Web, at: "/sidekiq"
+ # root to: "pages#home"
+ # mount Sidekiq::Web, at: "/sidekiq"
   
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
