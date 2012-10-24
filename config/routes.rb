@@ -6,10 +6,8 @@ LocoApp::Application.routes.draw do
   get "images/create"
   get "images/destroy"
 
-  resources :snippets
-  root to: "snippets#new"
-  mount Sidekiq::Web => '/sidekiq'
-  # constraints: "AdminConstraint.new"
+  root to: "users#new"
+  mount Sidekiq::Web, at: "/sidekiq"
   
   resources :users do
     resources :messages, only: [:new, :show, :create, :destroy]
