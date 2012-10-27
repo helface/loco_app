@@ -31,7 +31,7 @@ LocoApp::Application.configure do
     password: "tselanne"
   }
 
-  ENV["REDISTOGO_URL"] = 'redis://localhost:6379' 
+  ENV["REDISTOGO_URL"] = 'redis://username:password@my.host:6789' 
   
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
