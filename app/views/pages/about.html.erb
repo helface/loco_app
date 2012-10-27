@@ -41,35 +41,36 @@
       </ul>
       
    </div>
-   <div class="span8" style="margin-left:20px">
-      <div class="row">
-         <h3>How it works</h3>
-         
-      </div>
-   <div class="row">
-1. Decide where your next awesome trip will be. 
- <picture of places>
-</div>
-
-<div class="row">
-2. Check out all the available hosts in that area to show you a fun time, whether it'd be hiking to the mountains or taking you to the most happening bar in town.
-</div>
-
-<div class="row">
-   3. Request a meetup with the desired host by checking his/her availability
-</div>
-
-<div class="row">
+   <% if params[:view] == nil || params[:view] == "how"%>
+   <div class="span8 aboutpage">
+      <%= render "shared/how_it_works" %>
+   </div>
+   <% elsif params[:view] == "host" %>
+   <div class="span8 aboutpage">
+      <%= render "hostinfo" %>
+   </div>
+   <div class="filler"></div>
+   <% elsif params[:view] == "traveler" %>
+   <div class="span8 aboutpage">
+      <%= render "travelerinfo" %>
+   </div>
+   <% elsif params[:view] == "faq" %>
+   <div class="span8 aboutpage">
    
-4. Once the host responds available, you can book your meetup, and you're all set.  You can contact more than 1 host at a time to check for availability, just simply book the one you want.
+       <strong> Why are there only 6 cities listed? </strong><br/>
+       <h4>Because tiniHost is in what we call a bootstrapping phase. More cities will open up as we expand our user base.</h4><br/>
+       <strong> Where is the review button for users? </strong><br/>
+          <h4>The option to review a user only becomes available after you have completed a meetup with him or her. This is our way of trying to keep the reviews honest and reliable.</h4><br/>
+       <strong> Can I offer multiple host services (ie. translator and chauffeur)? </strong><br/>
+         <h4>No. Each host profile is associated with only one type of service to keep things straightforward. You can however advertise additional services in your own service description. </h4><br/>
+         <strong> Can I deactivate my host status after becoming a host? </strong><br/>
+             <h4>Yes. Go to your settings | hostprofile page. We retain all your host information after deactivation such that you can reactivate your host status at any time.</h4><br/><br/>
+       <strong> Will you share my information with any 3rd party? </strong><br/>
+        <h4>Never.</h4><br/>       
+          <strong> Can I sign in with Facebook? </strong><br/>
+             <h4>Soon. We will integrate with Facebook in v2.</h4><br/>
+   </div>
+       
+   <% end %>
 </div>
-
-<div class="row">
    
-5. After your meetup, complete the appointment and submit a short review of your experience. Your stats will be updated accordingly and your host will be super grateful for your awesome feedback :).
-</div>
-</div>
-</div>
-
-
-

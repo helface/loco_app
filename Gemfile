@@ -12,6 +12,8 @@ gem 'font-awesome-sass-rails', '2.0.0.0'
 gem 'sidekiq', '~> 2.4.0'
 gem 'sinatra', require: false
 gem 'slim', '~> 1.3.3'
+gem 'redis'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
