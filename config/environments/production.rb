@@ -20,6 +20,8 @@ LocoApp::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:f389f187c21e817e1284a972c7d137fa@angler.redistogo.com:9626' 
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
