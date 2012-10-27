@@ -42,7 +42,9 @@ before_filter :location_specified, only: :index
     @user = User.new(params[:user])
     if @user.save        
         flash[:success] = "Congratulations! A confirmation email has been sent to your inbox for activation."
-        MailerWorker.perform_async(@user.id)
+        SiteMailer.signup_confirmation(@user).deliver
+        #Enable when deploying sidekiq
+        #MailerWorker.perform_async(@user.id)
         redirect_to signin_path
     else
         render 'new'

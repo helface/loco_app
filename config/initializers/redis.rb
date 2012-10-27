@@ -1,4 +1,6 @@
-if Rails.env.production?
-   uri = URI.parse(ENV["REDISTOGO_URL"])
-   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-end
+#Enable this when deploying sidekiq background processing
+
+#if Rails.env.production?
+#   uri = URI.parse(ENV["REDISTOGO_URL"])
+#   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+#end
