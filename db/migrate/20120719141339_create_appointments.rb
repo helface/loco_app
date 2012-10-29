@@ -3,7 +3,7 @@ class CreateAppointments < ActiveRecord::Migration
     create_table :appointments do |t|
       t.integer :traveler_id
       t.integer :host_id
-      t.text :message, :limit=>400
+      t.text :message
       t.date :date
       t.string :time
       t.integer :status
