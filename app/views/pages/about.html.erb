@@ -1,12 +1,8 @@
 <% provide(:title, 'how it works')%>
-<div class="filler"></div>
 <div class="span11" style="margin-left:0px">
    <div class="row">
-      
    <div class="span3">
-      <div class="filler">
-         
-      </div>
+      <div class="filler"></div>
       <ul class="nav nav-list sidebar">
          <% if params[:view].nil? || params[:view] == "how"%>
             <li class="active">
@@ -56,7 +52,7 @@
    </div>
    <% elsif params[:view] == "faq" %>
    <div class="span8 aboutpage">
-   
+   <a id="limited_cities"></a>
        <strong> Why are there only 6 cities listed? </strong><br/>
        <h4>Because tiniHost is in what we call a bootstrapping phase. More cities will open up as we expand our user base.</h4><br/>
        <strong> Where is the review button for users? </strong><br/>

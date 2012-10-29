@@ -1,4 +1,4 @@
 US|United States
 CA|Canada
 FR|France
-UK|United Kingdoms
+UK|United Kingdom

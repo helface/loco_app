@@ -3,7 +3,7 @@
 
 <p> Thank you for registering with TiniHost. Please click on the link below or paste it into your browser to activate your account.</p>
 
-<p><%= link_to confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false), confirm_user_path(@user, token: @user.confirmation_token, host: "localhost:3000", only_path: false) %> </p>
+<p><%= link_to confirm_user_path(@user, token: @user.confirmation_token, only_path: false), confirm_user_path(@user, token: @user.confirmation_token, only_path: false) %> </p>
 <br/>
 
 TiniHost Team<br>

@@ -5,9 +5,7 @@
          <div class="row">       
             <h2> Where are you going?</h2>
          </div>    
-        
          <div class="filler"></div>               
-      
          <div class="row" id="location-button">
             <%= link_to image_tag("sanfran.png", alt: "San Francisco"), fill_location_path(city_country_location: "San Francisco, United States") %>
             <%= link_to image_tag("seattle.png", alt: "Seattle"), fill_location_path(city_country_location: "Seattle, United States") %>
@@ -19,7 +17,7 @@
          <div class="row" style="height:150px" id="location-button">
            <br>
             <!-- TODO: make this a link or a popup -->
-            <small id="light"> What about other cities? </small>
+            <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>
          </div>
          <div class="row" id="location-button">
             <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", class: "navlink", size: "50x50"), "https://www.facebook.com/TiniHost" %>   <strong>  </strong> <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", class: "navlink", size: "50x50"), "https://twitter.com/tinihost" %>           
