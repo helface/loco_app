@@ -16,13 +16,13 @@ open("lib/data/cities.txt") do |cities|
 end
 
 Service.delete_all
-Service.create!(title: "local insider", desc: "show you city")
-Service.create!(title: "meal companion", desc: "you have food")
-Service.create!(title: "chauffeur", desc: "you drive around")
-Service.create!(title: "translator", desc: "you translate")
-Service.create!(title: "shopping buddy", desc: "you go shopping")
-Service.create!(title: "adventure guide", desc: "you try not to die")
-Service.create!(title: "nightlife expert", desc: "you party")
+Service.create!(title: "local insider", desc: "You can show travelers around better than any giant tour company with ugly buses can.")
+Service.create!(title: "meal companion", desc: "Show off your cooking to travelers or share a meal with them at your favourite restaurant.")
+Service.create!(title: "chauffeur", desc: "Take travelers whereever they need to go, in your car, in your tuk tuk, in your space shuttle... ")
+Service.create!(title: "translator", desc: "Welcome travelers by helping them communicate with the locals.")
+Service.create!(title: "shopping buddy", desc: "Take travelers shopping, because you know the best shops and how to pay 20% less than the price tag.")
+Service.create!(title: "adventure guide", desc: "Guide risk taking travelers on the most amazing adventures your area has to offer. Do keep them safe though.")
+Service.create!(title: "nightlife expert", desc: "You know all the great bars, nightclubs, and parties. Show travelers how to hit the town local style.")
 
 Language.delete_all
 Language.create!(name: "English", code: "en" )

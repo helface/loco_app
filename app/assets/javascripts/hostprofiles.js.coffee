@@ -8,16 +8,13 @@ jQuery ->
    $('#hostprofile_service').change ->
       type = $('#hostprofile_service :selected').text()
       switch type
-         when "local insider" then $('#service_desc').replaceWith("<small id='service_desc'> take visitor around the city </small>")
-         when "meal companion" then $('#service_desc').replaceWith("<small id='service_desc'> share a meal, cook a meal, love a meal</small>")
-         when "shopping buddy" then $('#service_desc').replaceWith("<small id='service_desc'> go shopping together, show them the hard to find boutiques and the best sales. </small>")
-         when "translator" then $('#service_desc').replaceWith("<small id='service_desc'> help your guests by translating </small>")
-         when "schoefer" then $('#service_desc').replaceWith("<small id='service_desc'> drive your guests around </small>")
-         when "advanture guide" then $('#service_desc').replaceWith("<small id='service_desc'> you know the best spots, give them your expert advise </small>")
-         when "nightlife expert" then $('#service_desc').replaceWith("<small id='service_desc'> show them the best bars and hot spots to hang out </small>")
-         else
-            $('#service_desc').replaceWith("<p>asdfasdfasdfsadf</p>")
-
+         when "local insider" then $('#service_desc').replaceWith("<small id='service_desc'> You can show travelers around better than any giant tour company with ugly buses can. </small>")
+         when "meal companion" then $('#service_desc').replaceWith("<small id='service_desc'> Show off your cooking to travelers or share a meal with them at your favourite restaurant.</small>")
+         when "shopping buddy" then $('#service_desc').replaceWith("<small id='service_desc'> Take travelers shopping, because you know the best shops and how to pay 20% less than the price tag. </small>")
+         when "translator" then $('#service_desc').replaceWith("<small id='service_desc'> Welcome travelers by helping them communicate with the locals. </small>")
+         when "chauffeur" then $('#service_desc').replaceWith("<small id='service_desc'> Take travelers whereever they need to go, in your car, in your tuk tuk, in your space shuttle... </small>")
+         when "adventure guide" then $('#service_desc').replaceWith("<small id='service_desc'> Guide risk taking travelers on the most amazing adventures your area has to offer. Do keep them safe though. </small>")
+         when "nightlife expert" then $('#service_desc').replaceWith("<small id='service_desc'> You know all the great bars, nightclubs, and parties. Show travelers how to hit the town local style.</small>")
    
    cities = $('#hostprofile_city_id').html()
    console.log(cities)
