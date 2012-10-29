@@ -4,7 +4,7 @@
          <% if @user.images.empty? %>
             <%= image_tag "full_hat.png", id: "displayimg" %> 
             <div class="edit_link" id="img-overlay">
-               <%= link_to "Add image", edit_user_path(@user, anchor: "picture") unless !current_user?(@user) %>
+               <%= link_to "Add image", edit_user_path(@user, view: "picture", anchor: "picture") unless !current_user?(@user) %>
             </div>
          <% else %>
             <% firstimg = Image.find_by_id(@user.profile_pic_id) || @user.images.first %>

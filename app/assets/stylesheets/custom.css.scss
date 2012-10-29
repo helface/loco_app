@@ -49,6 +49,8 @@ $navbarLinkColor:#ccc;
 		color: #777;
 		font-size:1.3em;
 	}
+	
+
 }
 .aboutpage_dark{
 	margin-left:90px;
@@ -521,14 +523,15 @@ aside {
 }
 
 #personalform{
-	input{
+	input, input.password{
 		width:200px;
 		height:40px;
 	};
 	
 	label{
-	   font-weight:normal;	
+	   font-weight:bold;	
 	   color: #666;
+	   font-family: verdana, helvetica, arial;
 	};
 	
 	select{
@@ -544,6 +547,7 @@ aside {
 	select#hostprofile_currency{
 		width:70px;
 		height:40px;
+		margin-top:7px;
 	}
 	
 	textarea{

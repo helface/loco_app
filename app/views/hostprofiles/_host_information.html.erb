@@ -2,6 +2,7 @@
 <div class="row host_info">
    <div class="edit-section">
       <div class="field" id="personalform">
+        <%= f.label :where_do_you_live? %>
         <%= render 'shared/country_city_select', :f => f, :inline_search => false %>
       </div>
       <div class="field" id="personalform">
@@ -9,10 +10,10 @@
          <%= f.text_field :tele, :value => @hostprofile.tele %>
       </div>
       <% if @user.languages.nil? || @user.languages.empty? %>
-      <div class="field">
+      <div id="personalform" style="margin-top:15px">
          <%= f.label :enter_the_languages_you_can_hold_a_conversation_in %>
-         <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@user.languages)} %>
       </div>
+         <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@user.languages)} %>
       <br/>
       
       <% end %>

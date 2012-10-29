@@ -10,8 +10,11 @@
          <div class="field" id="personalform">      
             <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14, input_html:{id: "short"}%>
             <%= f.input :gender, collection: User::GENDER, input_html:{id: "short"} %> 
-         </div>      
-            <%= f.input :language_tokens, label: "Enter the languages you can hold a conversation in", input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>  
+         </div>   
+            <div id="personalform">
+               <label> Enter the languages you can hold a conversation in </label>
+            </div>   
+            <%= f.input :language_tokens, label: false, input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>  
          <div class="field" id="personalform">      
             <%= f.input :self_intro, label: "Introduce yourself to everyone", as: "text", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
              
@@ -28,8 +31,8 @@
      
  <% if params[:view] == "picture" %>
   <div class="row host_info">
-    <div class="edit-section edit_link">
-       <p>You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.</p>
+    <div class="edit-section" id="personalform">
+       <label>You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.</label>
        <div class="row">
           <br>
           <% @user.images.each do |img|%>      
@@ -45,18 +48,12 @@
  <% end %> 
  <% if params[:view] == "security" %>
  <div class="row host_info" id="edit-section">
-    <div class="edit-section">
+    <div class="edit-section" id="personalform">
        <%= simple_form_for(@user) do |f| %>
           <%= render 'shared/error_messages', :obj=>@user %>
-          <div class="field edit_link">
               <%= f.input :old_password, label: "Enter your current password" %>
-           </div>
-           <div class="field edit_link">
-                <%= f.input :password, label: "Set a new password" %>
-             </div>
-             <div class="field edit_link">
-                    <%= f.input :password_confirmation, label: "Confirm new password" %>
-                 </div>
+              <%= f.input :password, label: "Set a new password" %>
+              <%= f.input :password_confirmation, label: "Confirm new password" %><br/>
           <%= f.button :submit, "update", :id=>"blue-button" %>
        <% end %>
     </div>

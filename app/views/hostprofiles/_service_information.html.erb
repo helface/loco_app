@@ -2,17 +2,25 @@
 <div class="row host_info"> 
 <div class="edit-section">
    <div class="field" id="personalform">
-      <small> <%= f.label :provide_a_140_character_intro_for_your_search_badge %> </small>
+      <%= f.label :provide_a_140_character_intro_for_your_search_badge %>
+      <div style="width: 600px">
+          <small id="light">
+             This short description will be displayed on your profile badge listed as part of search results. </small>
+      </div>
       <%= f.text_area :intro %>
     </div>
      <div class="field" id="personalform">
        <%= f.label :Service_Description %>
-       Tell travelers what you are offering. Describe the kind of experience they will get with you as their tini host. 
+       <div style="width: 600px">
+         <small id="light">Tell travelers what you are offering. Describe the kind of experience they will get with you as their host. </small>
+       </div>
+       
        <%= f.text_area :serviceDesc, :toolbar=>'Basic' %>
      </div>
      <div class="field" id="personalform">
        <%= f.label :green_points %>
-       TiniHost encourages everyone to be environmentally aware when traveling. Tell travelers how you encourage environmentally conscious practices. It can be as simple as using public transportation to get around.
+       <div style="width: 600px">
+          <small id="light">TiniHost encourages everyone to be environmentally responsible when traveling. Tell travelers how you would promote environmentally responsible tourism. It can be as simple as using public transportation to get around.</small></div>
        <%= f.text_area :greenDesc, :toolbar=>'Basic' %>
      </div>
 </div>
