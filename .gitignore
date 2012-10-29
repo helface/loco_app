@@ -20,3 +20,6 @@ doc/
 .DS_Store
 bundler_stubs/
 db/structure.sql
+
+#ignore scripts
+*.bash

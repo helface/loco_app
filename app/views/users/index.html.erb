@@ -30,7 +30,7 @@
    <% if @users.empty? %>
       <div class="span10">
          <br/>
-         <strong> <%= ":( Sorry, there are currently no #{servicename}s in #{@city.name}, #{@country.name}." %></strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
+         <strong> :( Sorry, there are currently <%= "#{pluralize(0, servicename)} in #{@city.name}, #{@country.name}." %> </strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
       </div>         
    <%else%>
       <div class="span12" style="padding:10px 0px; margin-left:18px">  
