@@ -1,5 +1,11 @@
-<% provide(:title, "meetups") %>
+<% provide(:title, "Request a meetup") %>
 
+<div class="row"> 
+   <div class="span10" style="background:#777; padding:10px; border-radius:3px; margin-top:-10px">
+       <strong id="white"> Travelers! Too lazy to go searching for a host? <br/> <br/> Post a request here of what you are looking for. Hosts will respond if they can offer what you are looking for. </strong>
+   </div>
+</div>
+<br/>
 <%= form_tag board_path, method: 'get' do %>
    <div id="personalform">
    <%=render 'shared/country_city_select', :inline_search => true%>
