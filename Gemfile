@@ -9,6 +9,7 @@ gem 'bootstrap-will_paginate', '0.0.5'
 gem 'paperclip', '~> 3.3.0'
 gem 'simple_form', '~> 2.0.2'
 gem 'font-awesome-sass-rails', '2.0.0.0'
+gem 'aws-sdk'
 #gem 'sidekiq', '~> 2.4.0'
 #gem 'sinatra', require: false
 #gem 'slim', '~> 1.3.3'
