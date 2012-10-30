@@ -73,7 +73,7 @@
    <% if @user.self_intro.empty? %>
       <div class="edit_link">
          No self introduction yet. 
-         <small> <%= link_to 'Enter one.', edit_user_path(@user, view: "general") if current_user?(@user) %> </small>
+         <small> <%= link_to 'Enter one.', edit_user_path(@user, view:"general") if current_user?(@user) %> </small>
       </div>   
    <% else %>
         <div class="span11" style="margin-left:0px; margin-top:10px">

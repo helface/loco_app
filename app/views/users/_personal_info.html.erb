@@ -1,7 +1,7 @@
 <% profile = @user.hostprofile%>
 
 <div class="easy_edit">
-   <%= image_tag("hat.png", alt: "user", style: "width: 18px; margin-left:-5px") %>
+   <%= image_tag("hat.png", alt: "user", style: "width: 18px; margin-left:-5px; margin-top:-5px") %>
    <strong> <%= @user.firstname.capitalize%> </strong>
 
    <% if current_user?(@user) %>
@@ -64,7 +64,7 @@
    <% img = "#{service.gsub(' ', '_')}2.png" %>
    <div style="height:5px"></div>
    <div id="easy_edit">
-      <%= image_tag(img, alt: "#{service}", :style=>"width: 18p; margin-left:-5px") %>         
+      <%= image_tag(img, alt: "#{service}", :style=>"width: 18p; margin-left:-5px; margin-top:-5px") %>         
           <strong style="margin-left:px"><%= service.capitalize%> </strong >
             <% if current_user?(@user) %>
                <small class="edit_link"> <%= link_to "edit", edit_hostprofile_path(@user.hostprofile), class: "edit_link" %> </small>
