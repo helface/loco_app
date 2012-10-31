@@ -31,6 +31,7 @@ class Appointment < ActiveRecord::Base
   validates :groupsize, :numericality=>{:only_integer => true, :greater_than_or_equal_to=>1}
   
   TIME = ["Morning", "Noon", "Afternoon", "Evening", "Night"]
+  
   def return_status_str(current_user_id)
      if is_host?(current_user_id)
         if self.status == Status::BOOKED && Date.today > self.date  
@@ -112,7 +113,7 @@ class Appointment < ActiveRecord::Base
     if DateTime.now - self.updated_at.to_datetime > 1.day && self.status == Status::AVAILABLE
        self.status = Status::EXPIRED
        self.save
-    elsif (DateTime.now.to_date > self.date) && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
+    elsif (Date.today == self.date) && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
        self.status = Status::EXPIRED
        self.save
     end

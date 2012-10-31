@@ -11,11 +11,11 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require bootstrap-dropdown
+//= require bootstrap-alert
+//= require bootstrap-button
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery-ui
 //= require jquery.tokeninput
-//= require bootstrap-dropdown
-//= require bootstrap-alert
-//= require bootstrap-button
 //= require_tree .

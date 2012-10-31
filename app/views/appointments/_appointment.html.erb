@@ -37,7 +37,7 @@
                <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
                <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%>	  
                <br/>                      
-               <div> <%= truncate simple_format(appointment.message, style: "color:#eee"), length: 150 %> </div>
+               <div style="margin-top:5px"> <%= truncate simple_format(appointment.message, style: "color:#eee"), length: 150 %> </div>
                </div>
                
             </div>  
