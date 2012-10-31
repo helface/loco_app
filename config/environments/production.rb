@@ -64,8 +64,8 @@ LocoApp::Application.configure do
     domain: "tinihost.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "team@tinihost.com",
-    password: "Ts8Pk9rc"
+    user_name: ENV['USER_NAME'],
+    password: ENV['EMAIL_PASSWORD']
   }
   # Enable threaded mode
   # config.threadsafe!
