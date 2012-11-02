@@ -20,14 +20,14 @@
                    You have not contacted any hosts recently. 
                 </div>
             <% end %>
-            <%= render @requested_appts.pending, fullview: false %>    
+            <%= render @requested_appts.pending%>    
          <% elsif params[:folder] == "host" %>
             <% if @appt_requests.pending.empty? %>
             <div class="row">
                You have no pending requests at the moment.
             </div>
             <% end %>
-            <%= render @appt_requests.pending, fullview: false unless @appt_requests.nil? %>
+            <%= render @appt_requests.pending unless @appt_requests.nil? %>
          <% elsif params[:folder] == "history"%>
             <% appts = @requested_appts.inactive unless @requested_appts.nil? %>
             <% appts = appts + @appt_requests.try(:inactive) unless @appt_requests.nil? %>

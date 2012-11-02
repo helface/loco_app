@@ -1,6 +1,6 @@
 <% host = appointment.host.user %>
 <% traveler = appointment.traveler %>
-   <%= link_to user_appointment_path(current_user, appointment, fullview:true) do %>
+   <%= link_to user_appointment_path(current_user, appointment) do %>
       <div class="row host_info appt-block">
          <div class="row">            
             <div class="span2" >

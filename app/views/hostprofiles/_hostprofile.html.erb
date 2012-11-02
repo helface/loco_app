@@ -13,7 +13,7 @@
    <% if !@user.facebook.nil? && !@user.facebook.empty? %>
    <div class="row edit_link">
       <strong style="color:white"> Facebook </strong><br/>
-      <%= link_to "#{@user.facebook}", "http://#{@user.facebook}" %>    
+      <%= link_to "#{@user.facebook}", "#{@user.facebook}" %>    
    </div>
    <br/>
    

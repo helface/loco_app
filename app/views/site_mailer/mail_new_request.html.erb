@@ -1,0 +1,19 @@
+<!-- TODO: change host path for production environment -->
+<p> Hello <%= @host.firstname.capitalize %>, </p>
+
+<p> You have a new meetup request from <%= @traveler.firstname.capitalize %> for <%= @appointment.date.strftime("%a, %b %d. %Y")%>.</p>
+
+<% if @appointment.message? %>
+<div class="span7">
+   Message: <br/>
+   <%= @appointment.message %>
+</div>
+<% end %>
+<br/>
+To view your meetup:
+
+<p><%= link_to user_appointment_path(@traveler, @appointment, only_path: false), user_appointment_path(@traveler, @appointment, only_path: false) %> </p>
+<br/>
+
+TiniHost<br/>
+<%= link_to "www.tinihost.com", "http://www.tinihost.com" %>

@@ -29,6 +29,7 @@ class AppointmentsController < ApplicationController
     if @appointment.save
       @user.hostprofile.increment_contact_count
       @appointment.make_check
+      SiteMailer.mail_new_request(traveler, @user, @appointment).deliver
       flash[:success] = "your request has been sent"
       redirect_to user_appointment_path(traveler, @appointment)
     else
@@ -68,6 +69,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find_by_id(params[:appointment_id])
     if @appointment.make_available
        @appointment.host.increment_response_count
+       SiteMailer.mail_available(@appointment.traveler, @appointment.host.user, @appointment).deliver
        redirect_to session[:prev]
     else
        flash[:error] = "appointment failed"
@@ -88,7 +90,9 @@ class AppointmentsController < ApplicationController
   
   def book_appointment
      @appointment = Appointment.find_by_id(params[:appointment_id])
-     @appointment.book_appointment
+     if @appointment.book_appointment
+       SiteMailer.mail_booked(@appointment.traveler, @appointment.host.user, @appointment).deliver
+     end
      redirect_to session[:prev]
   end
   
