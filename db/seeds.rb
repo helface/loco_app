@@ -9,9 +9,9 @@ end
 City.delete_all
 open("lib/data/cities.txt") do |cities|
   cities.read.each_line do |city|
-    code, name = city.chomp.split ("|")
+    code, name, timezone = city.chomp.split ("|")
     cid = Country.find_by_code(code).id
-    City.create!(:name => name, :country_id => cid) unless cid.nil?
+    City.create!(:name => name, :country_id => cid, :timezone=>timezone) unless cid.nil?
   end
 end
 

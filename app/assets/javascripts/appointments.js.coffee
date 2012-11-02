@@ -8,4 +8,4 @@ jQuery ->
          altFormat: "yy-mm-dd"
          dateFormat: 'DD, d MM, yy'
          altField: $(this).next()
-         minDate: +1
+         minDate: +2

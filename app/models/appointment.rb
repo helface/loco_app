@@ -13,8 +13,8 @@ end
 
 class Appointment < ActiveRecord::Base
   attr_accessible :date, :time, :message, :groupsize, :flexible
-  belongs_to :traveler, class_name: "user"
-  belongs_to :host, class_name: "hostprofile"
+  belongs_to :traveler, class_name: "User"
+  belongs_to :host, class_name: "Hostprofile"
   scope :booked, :conditions => ["status = ? AND date >= ?", Status::BOOKED, Date.today]
   scope :host_incomplete, :conditions => ["status = ? AND host_completed = ? AND date < ?", Status::BOOKED, false, Date.today]
   scope :traveler_incomplete, :conditions => ["status = ? AND traveler_completed = ? AND date < ?", Status::BOOKED, false, Date.today] 
@@ -110,10 +110,13 @@ class Appointment < ActiveRecord::Base
   # expire the appointment if an available check is not responded to within a day
   # or if the date on the appointment has passed  
   def expire_appointment
-    if DateTime.now - self.updated_at.to_datetime > 1.day && self.status == Status::AVAILABLE
-       self.status = Status::EXPIRED
-       self.save
-    elsif (Date.today == self.date) && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
+    Time.zone = Time.zone = self.host.city.timezone   
+    #if DateTime.now - self.updated_at.to_datetime > 1.day && self.status == Status::AVAILABLE
+    #   self.status = Status::EXPIRED
+    #   self.save
+    
+    #if the appointment has not been booked on the day of, the appointment expires. 
+    if (DateTime.now.to_date >= self.date) && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
        self.status = Status::EXPIRED
        self.save
     end
@@ -127,6 +130,7 @@ class Appointment < ActiveRecord::Base
   end
   
   def complete_appointment(id)
+    Time.zone = Time.zone = self.host.city.timezone   
     #TODO: take out equal sign
     if self.status == Status::BOOKED && DateTime.now.to_date >= self.date
        if self.host_id == id
@@ -144,7 +148,8 @@ class Appointment < ActiveRecord::Base
   end
   
   def cancel_appointment
-    if self.status == Status::BOOKED && self.date - DateTime.now < 2.days
+    Time.zone = Time.zone = self.host.city.timezone   
+    if self.status == Status::BOOKED && self.date - DateTime.now.to_date >= 2
        self.status = Status::CANCELED 
        self.save
     else
@@ -163,12 +168,11 @@ class Appointment < ActiveRecord::Base
   private
   
   def correct_date
-    errors.add(:date, 'meeting date must be later than today') unless self.date >= DateTime.now.to_date || self.status == Status::EXPIRED || self.status == Status::COMPLETED || self.status == Status::BOOKED
+    errors.add(:date, 'meeting date must be 2 days in advance') unless self.date >= DateTime.now.to_date || self.status == Status::EXPIRED || self.status == Status::COMPLETED || self.status == Status::BOOKED
   end
   
   def is_host?(current_user_id)
-    host = Hostprofile.find_by_id(self.host_id).user
-    host.id == current_user_id
+    self.host.user.id == current_user_id
   end
   
   def is_traveler?(current_user_id)

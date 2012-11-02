@@ -1,6 +1,6 @@
-CA|Toronto
-US|Seattle
-US|New York
-US|San Francisco
-UK|London
-FR|Paris
+CA|Toronto|America/New_York
+US|Seattle|America/Los_Angeles
+US|New York|America/New_York
+US|San Francisco|America/Los_Angeles
+UK|London|London
+FR|Paris|Paris

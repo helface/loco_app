@@ -1,5 +1,5 @@
 class City < ActiveRecord::Base
-  attr_accessible :name, :country_id
+  attr_accessible :name, :country_id, :timezone
   belongs_to :country
   has_many :hostprofiles, conditions: ["deactivated = ?", false]
   has_many :hosts, through: :hostprofiles, source: :user

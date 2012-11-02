@@ -11,13 +11,12 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_id(params[:user_id])
     traveler = current_user
-    host = User.find_by_id(params[:user_id])
+    @user = User.find_by_id(params[:user_id])
     @appointment = traveler.requested_appts.build(params[:appointment])
     
-    if host.hostprofile
-       profile = host.hostprofile
+    if @user.hostprofile
+       profile = @user.hostprofile
        @appointment.host_id = profile.id
        @appointment.exchange_type = profile.exchange_type
        @appointment.currency = profile.currency
@@ -28,7 +27,7 @@ class AppointmentsController < ApplicationController
        return
     end
     if @appointment.save
-      host.hostprofile.increment_contact_count
+      @user.hostprofile.increment_contact_count
       @appointment.make_check
       flash[:success] = "your request has been sent"
       redirect_to user_appointment_path(traveler, @appointment)
@@ -39,9 +38,8 @@ class AppointmentsController < ApplicationController
 
   def show
     @appointment = Appointment.find_by_id(params[:id])
-    @traveler = User.find_by_id(@appointment.traveler_id)
-    profile = Hostprofile.find_by_id(@appointment.host_id)
-    @host = profile.user
+    @traveler = @appointment.traveler
+    @host = @appointment.host.user
     @user = User.find_by_id(params[:user_id])
   end
   
@@ -67,9 +65,9 @@ class AppointmentsController < ApplicationController
   end
   
   def make_available 
-    profile = Hostprofile.find_by_id(@appointment.host_id)
+    @appointment = Appointment.find_by_id(params[:appointment_id])
     if @appointment.make_available
-       profile.increment_response_count
+       @appointment.host.increment_response_count
        redirect_to session[:prev]
     else
        flash[:error] = "appointment failed"
@@ -78,9 +76,9 @@ class AppointmentsController < ApplicationController
   end
   
   def make_unavailable
-     profile = Hostprofile.find_by_id(@appointment.host_id)
+     @appointment = Appointment.find_by_id(params[:appointment_id])
      if @appointment.make_unavailable
-       profile.increment_response_count  
+       @appointment.host.increment_response_count  
        redirect_to session[:prev]
      else
        flash[:error] = "appointment failed"
@@ -89,11 +87,13 @@ class AppointmentsController < ApplicationController
   end
   
   def book_appointment
+     @appointment = Appointment.find_by_id(params[:appointment_id])
      @appointment.book_appointment
      redirect_to session[:prev]
   end
   
   def reject_appointment
+     @appointment = Appointment.find_by_id(params[:appointment_id])
      @appointment.reject_appointment
      redirect_to session[:prev]
   end
@@ -107,11 +107,12 @@ class AppointmentsController < ApplicationController
   #TODO: remove commented out lines
   def complete_appointment       
      @appointment = Appointment.find_by_id(params[:appointment_id])
-     @user = User.find_by_id(params[:user_id])     
+     @user = User.find_by_id(params[:user_id])
+          
      if @appointment.complete_appointment(current_user.id)
-        profile = Hostprofile.find_by_id(@appointment.host_id)
-        @user = Hostprofile.find_by_id(@appointment.host_id).user
-        profile.increment_completed_count  
+        #@user = Hostprofile.find_by_id(@appointment.host_id).user        
+        @appointment.host.increment_completed_count
+        
         if params[:review] == "host"
            redirect_to new_user_review_path(@user)  
         else
