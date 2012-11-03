@@ -70,6 +70,7 @@ class AppointmentsController < ApplicationController
     if @appointment.make_available
        @appointment.host.increment_response_count
        SiteMailer.mail_available(@appointment.traveler, @appointment.host.user, @appointment).deliver
+       flash[:success] = "Your appointment has been updated."
        redirect_to session[:prev]
     else
        flash[:error] = "appointment failed"
@@ -81,6 +82,7 @@ class AppointmentsController < ApplicationController
      @appointment = Appointment.find_by_id(params[:appointment_id])
      if @appointment.make_unavailable
        @appointment.host.increment_response_count  
+       flash[:success] = "Your appointment has been updated"
        redirect_to session[:prev]
      else
        flash[:error] = "appointment failed"
@@ -92,19 +94,24 @@ class AppointmentsController < ApplicationController
      @appointment = Appointment.find_by_id(params[:appointment_id])
      if @appointment.book_appointment
        SiteMailer.mail_booked(@appointment.traveler, @appointment.host.user, @appointment).deliver
+       flash[:success] = "Congradulations! Your appointment is now booked."
      end
      redirect_to session[:prev]
   end
   
   def reject_appointment
      @appointment = Appointment.find_by_id(params[:appointment_id])
-     @appointment.reject_appointment
+     if @appointment.reject_appointment
+       flash[:success] = "Your appointment has been inactivated"
+     end
      redirect_to session[:prev]
   end
 
   def cancel_appointment
      @appointment = Appointment.find_by_id(params[:appointment_id])
-     @appointment.cancel_appointment
+     if @appointment.cancel_appointment
+       flash[:success] = "your appointment has been canceled"
+     end
      redirect_to session[:prev]
   end
   
