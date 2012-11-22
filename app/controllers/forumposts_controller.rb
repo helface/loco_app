@@ -1,6 +1,9 @@
 class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
+before_filter :signed_in_user, only: [:create, :index, :show]
+before_filter :correct_user, only:[:destroy]
+
   def index
     store_nav_history
     @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
@@ -33,7 +36,8 @@ include ForumpostsHelper
   end
   
   def manage_posts
-    @posts = current_user.forumposts
+    store_nav_history
+    @posts = current_user.forumposts.order('created_at DESC').paginate(page: params[:page], per_page: 10)
     render 'manage_posts'
   end
   
@@ -46,7 +50,7 @@ include ForumpostsHelper
     #Make the response into an email thread for ongoing communication	
     @message = sender.sent.build(params[:message])
     @message.recipient_id = @post.user_id
-    @message.subject = "RE: #{@post.title}"
+    @message.subject = "Corkboard RE: #{@post.title}"
     @message.owner_id = sender.id
     @message_copy = @message.copy_message(@post.user_id) #making a copy of email for the recipient   
     @msgthread = Msgthread.build_message_thread(@message)
@@ -61,13 +65,20 @@ include ForumpostsHelper
   end
   
   def show
-    @post = Forumpost.find(params[:id])
+    @post = Forumpost.find_by_id(params[:id])
     @user = @post.user
   end
 
   def respond
-    @post = Forumpost.find(params[:id])
+    @post = Forumpost.find_by_id(params[:id])
     render 'respond_post'  
+  end
+  
+  def destroy
+    @post = Forumpost.find_by_id(params[:id])
+    @post.destroy
+    flash[:success] = "You post has been removed."
+    redirect_to session[:prev]
   end
   
   private
@@ -77,4 +88,10 @@ include ForumpostsHelper
     country = Country.find_by_id(post.country_id)
     city.is_city_of(country) unless city.nil? || country.nil?
   end
+  
+  def correct_user
+    post = Forumpost.find_by_id(params[:id])
+    current_user?(post.user)
+  end
+  
 end

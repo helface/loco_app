@@ -45,7 +45,7 @@ jQuery ->
       $("#deactivate_host_block").show()
 
    $("#hostprofile_intro").keydown( (e) ->
-       remaining = 140 - $("#hostprofile_intro").val().length
+       remaining = 139 - $("#hostprofile_intro").val().length
        $("#charcount").html(remaining)
     )
        

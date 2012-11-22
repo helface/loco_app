@@ -1,15 +1,15 @@
 
-<div class="span12" style="margin-left:0px; padding:0px"> 
+<div class="span12 host_info" style="margin-left:0px; padding:15px 0px 40px 0px; border: solid 1px #eee"> 
 
 
-<div class="span7" style="width: 57%; padding: 10px 20px 10px 5px">   
+<div class="span7" style="width: 57%; padding: 0px 20px 10px 20px">   
 	<div class="row" style="margin-top:0px">
 	   <strong>My Service </strong>
    	<br>
 	   <p><%= simple_format(hostprofile.serviceDesc, :class=>"content") %></p>
 	</div>	
 </div>
-<div class="span4 host_info" style="background-color:#777; border-radius: 3px; padding: 20px 15px 10px 35px; margin-left:0px">    
+<div class="span4">    
    <% if !@user.facebook.nil? && !@user.facebook.empty? %>
    <div class="row edit_link">
       <strong style="color:white"> Facebook </strong><br/>
@@ -18,25 +18,26 @@
    <br/>
    
    <% end %>
-  	<div class="row"> 
-  	   <strong style="color: white"> About me </strong>	   
+  	<div class="row" style="background-color:#ccc; padding: 10px;"> 
+  	   <b> About me </b>	   
   	   <% if @user.self_intro.empty? %>
          <div class="edit_link">
             No self introduction yet. 
             <small> <%= link_to 'Enter one.', edit_user_path(@user) if current_user?(@user) %> </small>
          </div>   
       <% else %>
-        	   <p><%= simple_format(@user.self_intro, :style=>"color:#eee") %></p>
+        	   <p><%= simple_format(@user.self_intro) %></p>
       <% end %>
 	</div>
    <br/>
-	<div class="row">	   
-   	<strong style="color:#00D7AD"> <i class="icon-leaf"></i> My green points </strong>	
-		<p><%= simple_format(hostprofile.greenDesc, :style=>"color:#eee") %></p>
+	<div class="row" style="background-color:#CCFFCC; padding: 10px;">	   
+   	<b> <i class="icon-leaf"></i> My green points </b>	
+		<p><%= simple_format(hostprofile.greenDesc) %></p>
 	</div>
 </div>	
 <br>
+</div>
+<br/>
 <div class="filler">
-   
 </div>
    

@@ -27,7 +27,7 @@
 <% if current_user.id != @post.user_id %>
 <div class="row">
     <div class="span9" id="messageform">
-		   <h3>RE: <%= @post.title%></h3>
+		   <h3>Corkboard RE: <%= @post.title%></h3>
 			<%= form_for(:message, url: create_response_forumpost_path) do |f| %>
 		 		<div class="field">
 		    		<%= f.text_area :body%>

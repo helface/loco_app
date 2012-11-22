@@ -14,28 +14,29 @@
             <%= link_to image_tag("london.png", alt: "London"), fill_location_path(city_country_location: "London, United Kingdom"), class: "seattle-icon" %>           
             <%= link_to image_tag("paris.png", alt: "Paris"), fill_location_path(city_country_location: "Paris, France") %>
          </div>
-         <div class="row" style="height:150px" id="location-button">
+         <div class="row" style="height:120px" id="location-button">
            <br>
             <!-- TODO: make this a link or a popup -->
             <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>
          </div>
          <div class="row" id="location-button">
-            <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "60x60"), "https://www.facebook.com/TiniHost" %>   <strong>  </strong> <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", size: "60x60"), "https://twitter.com/tinihost" %>           
+            <%= link_to image_tag("facebook2.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/TiniHost" %>
+            <%= link_to image_tag("twitter2.png", alt: "Tinihost twitter page", size: "100x100"), "https://twitter.com/tinihost" %>           
          </div>                 
          </div>
       </div>
    </div>
 </div>
 <br/>
-<div class="container">
-   <div class="center">
-      <div class="row" style="margin-left: 0px; padding: 40px 0px 50px 50px; background: #596E6E; border-radius: 6px">
-         <div class="span9 aboutpage_dark">
-      <%= render "shared/how_it_works" %>
-      </end>
+   <div class="container">
+      
+   <div class="center hero-unit sdf">
+      <div class="aboutpage_dark">
+         <%= render "shared/how_it_works" %>
+      </div>     
    </div>
-</div>
-<div id="footer" class="container">
+   </div>
+<div class="container">
    <div class="center hero-unit">
    </div>
 </div>

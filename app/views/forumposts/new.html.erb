@@ -17,7 +17,18 @@
          <div id="personalform">
             <%=f.label :When_do_you_want_to_meet_up? %>
             <%= f.text_field :date %>
-         </div><br/>
+         </div>
+         
+         <div id="personalform">
+            <%= f.label :Are_you_willing_to_pay?%>
+            <%= f.select :pay, Forumpost::WILL_PAY, {}, id: "short"%>
+         </div>
+         
+         <div id="personalform">
+            <small> Leave empty if you answered no </small><br/>
+               <%= f.text_field :price, :placeholder=>"enter price" %>
+               <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %>
+         </div>
           <div class="field" id="personalform">
                <%= f.text_field :title, :placeholder=>"title...", :style=>"width:80%"%>
             </div>

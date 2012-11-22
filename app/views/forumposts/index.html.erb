@@ -1,44 +1,28 @@
 <% provide(:title, "Request a meetup") %>
 
-<div class="row"> 
-   <div class="span10" style="background:#777; padding:10px; border-radius:3px; margin-top:-10px">
-       <strong id="white"> Travelers! Too lazy to go searching for a host? <br/> <br/> Post a request here of what you are looking for. Hosts will respond if they can offer what you are looking for. </strong>
-   </div>
-</div>
-<br/>
-<%= form_tag board_path, method: 'get' do %>
-   <div id="personalform">
-   <%=render 'shared/country_city_select', :inline_search => true%>
-   <%= submit_tag "filter your location", :name => nil, :id=>"blue-button", :style=>"width: 145px" %>
-   </div>
-<%end%>
-<div class="filler"></div>
+<%= render "corkboard_nav" %>
+
+<% if params[:view] != "traveler" %>
+
 
 <div class="row">
    <div class="span8">
       <h3>
       <% if !params[:city_country_location].nil? %>
-         <%= "Requests in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
+         <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
       <% else %>
          <%= "All recent posts"%>
-      <% end %>
-      </h3>
-   </div>
-   <div class="span4" style="text-align:right">
-      <% if signed_in? %>
-      <div>
-         <%= link_to "Post a request", new_forumpost_path, id: "pink-button" %>
-      </div>
-      <% end %>
+      <% end %></h3>      
    </div>
 </div>
 <div class="span10 email" style="margin-top:15px">
       <% if @posts.empty? %>
       <hr>
-      There are no requests at this time.
+      Corkboard is empty for <%= "#{@city.try(:name)}, #{@country.try(:name)}" %>.
       <% end %>
       <%= will_paginate @posts%>
          <%= render 'forumpost' %>
       <%= will_paginate @posts %>
 </div>
+<% end %>
 

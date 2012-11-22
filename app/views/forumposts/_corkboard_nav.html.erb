@@ -1,0 +1,44 @@
+<div class="row" style="margin-bottom:20px"> 
+   <div class="span12 top-banner" id="cork">
+      <div class="row">
+         <div class="span7">
+             <%= image_tag("traveler_pol.png") %>
+            <%= image_tag("host_pol.png") %>
+         </div>
+        
+         <div class="span5" id="overlay">
+            <div style="padding:25px; color:white">               
+            <strong id="white"> Welcome to the Corkboard!<br/><br/>
+               Seek and thou shall find.
+            </strong>
+            <br/>
+             <div class="filler"></div>
+             <div class="filler"></div>
+            <%= form_tag board_path(view: "host"), method: 'get' do %>
+               <div id="personalform">
+               <%=render 'shared/country_city_select', :inline_search => true%>
+               <%= submit_tag "filter city", :name => nil, :id=>"blue-button", :style=>"width: 80px" %>
+               </div>
+            <%end%>
+            </div>          
+         </div>
+      </div>     
+   </div>
+</div>
+<br/>
+<div class="nav nav-tabs tab_link">
+
+<% if params[:view] != "traveler" %>
+   <li class="active">
+<% else %>
+  <li>
+<% end %>
+
+<%= link_to "Corkboard", board_path(view: "host")%></li>
+<% if params[:view] == "traveler" %>
+   <li class="active"> 
+<% else %>
+   <li>
+<% end %>
+<%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
+</div>

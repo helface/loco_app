@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031050328) do
+ActiveRecord::Schema.define(:version => 20121104002200) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -56,10 +56,14 @@ ActiveRecord::Schema.define(:version => 20121031050328) do
     t.integer  "responded_count", :default => 0
     t.string   "title"
     t.string   "content"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "time"
     t.date     "date"
+    t.boolean  "pay",             :default => false
+    t.string   "currency"
+    t.boolean  "filled",          :default => false
+    t.integer  "price"
   end
 
   add_index "forumposts", ["city_id", "created_at"], :name => "index_forumposts_on_city_id_and_created_at"

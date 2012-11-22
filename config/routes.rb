@@ -38,7 +38,7 @@ LocoApp::Application.routes.draw do
   end
   resources :mailbox, only: :show
   resources :languages, only: [:index]
-  resources :forumposts do
+  resources :forumposts, only: [:new, :index, :show, :create, :destroy] do
     member do
       get 'respond'
       post 'create_response'

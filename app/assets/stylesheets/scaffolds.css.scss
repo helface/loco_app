@@ -53,32 +53,25 @@ strong{
 .blocknav{
 	padding: 0px 5px; 
 	text-align: center; 
-	width: 65px; 
+	width: 75px; 
 	margin-right: 30px;
 	small{
 		font-size:10px
 	}
 	a, a:visited {
-		color: #FF6666;
-		
-		small{
-			color: #fff;
-		}
+		color: #66CCFF;
 	}
 	
 	a:hover{
 		color: #fff;
-		
-		small{
-			color:#FF6666;
-		}
 	}
 }
 
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 11px; }
+  font-size: 11px; 
+}
 
 a {
   &:visited, & {

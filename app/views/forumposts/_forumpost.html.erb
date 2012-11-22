@@ -25,17 +25,25 @@
          <div class="span1">
             <%= image_tag(find_display_imgurl(p.user_id, "thumb"), size: "50x40")%>	
          </div>
-
-         <div class="span9">
+         <div class="span3">
+               <b><%= p.user.firstname.capitalize%></b><br/>
+               <small><%= "#{City.find_by_id(p.city_id).name}, #{Country.find_by_id(p.country_id).name}" %></small><br>
+               <p style="color:#FF9933"><%= "Willing to pay #{p.price}#{p.currency}" unless p.pay == false %> </p>
+         </div>
+         <div class="span6">
              <div>
                 <b> <%=p.title.capitalize%> </b>
                 <span class="timestamp" style="color:#3B9C9C">
                 for <%= p.date.to_formatted_s(:long) unless p.date.nil?%>
                 </span>
              </div>
-             <small><%= City.find_by_id(p.city_id).name %></small><br>
+             
              <small style="font-size:0.9em; color:gray"> responses <%= p.responded_count %></small>         
-         </div>  
+         </div> 
+         <div class="span1">
+            <%= link_to '<br/> <i class="icon-trash" style="color:#e0467c"></i>'.html_safe, p, :confirm=>"Are you sure you want to delete this post?", :method=> :delete unless p.user_id != current_user.id %>
+            
+         </div> 
       </div> 
       </li>  
       <% end %>

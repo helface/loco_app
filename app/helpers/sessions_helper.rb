@@ -17,12 +17,6 @@ module SessionsHelper
     end
   end
     
-  def not_user_self
-      if current_user?(@user)
-        redirect_to current_user
-      end
-  end
-  
   def confirmation_token(user)
     user.confirmation_token
   end

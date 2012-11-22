@@ -26,8 +26,8 @@
                   <small class="languag_list"> 
                   <% if !user.languages.nil? %>
                      <% user.languages.each do |l|%>
-                           <%= Language.find_by_id(l).code%>
-                           <%="," if user.languages.last != l %>
+                           <small style="background:#ccc; padding:0px 3px 2px 3px; border-radius:2px"><%= Language.find_by_id(l).code%></small>
+                           <%=" " if user.languages.last != l %>
                      <% end %> 
                   <% end %>
                   </small>
@@ -41,7 +41,7 @@
             </div>        
          </div>
          <% service_title = Service.find_by_id(profile.service).title %>
-         <div class="row" style="top: -15px"> 
+         <div class="row" style="top: -35px"> 
              <div class="span3" style="font-size:1.1em">    
                 <b><%= service_title.capitalize%></b>
              </div>

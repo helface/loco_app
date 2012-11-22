@@ -1,17 +1,14 @@
-<% if @posts.nil? %>
-   You currently have no forum posts
-<% else %>
-   <% @posts.each do |p|%>
-      <div id="name">
-         <%= p.title %>
-      </div>
-      <div id="name">
-         <%= p.content %>
-      </div>
-      <!--TODO: insert proper link here for delete-->
-      <%= link_to "delete", '#' %>
-   <% end %>
-<% end %>
-<div id="name">
-   <%= link_to "Post a request", new_forumpost_path %>
+<%= render "corkboard_nav" %>
+<br/>
+<div style="text-align:right">
+   <%= link_to "New post", new_forumpost_path, id: "pink-button" %>  
+</div>
+<div class="filler"></div>
+<div class="span10 email" style="margin-top:15px">
+      <% if @posts.empty? %>
+         You have not posted anything on the corkbaord yet. Go go, post a new request. 
+      <% end %>
+      <%= will_paginate @posts%>
+         <%= render 'forumpost' %>
+      <%= will_paginate @posts %>
 </div>

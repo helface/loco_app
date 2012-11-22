@@ -1,13 +1,27 @@
 <%= provide(:title, 'search') %>
-<%= form_tag fill_location_path, method: 'get', class: "" do %>
-<div id="personalform">
-   <%=render 'shared/country_city_select', :inline_search => true%>
-<%= submit_tag "Find", :name => nil, id: "blue-button", :style=>"width: 70px" %>
+<div class="row">
+   <div class="span12 top-banner" id="weave" style="height:70px">
+      <div class="row">
+         <div class="span5 offset1">
+            <br/>
+            <strong id="white">You can narrow your search by choosing the type of host you are looking for.</strong>
+         </div>   
+         <div class="span4 offset1">
+            <br/>
+            <%= form_tag fill_location_path, method: 'get', class: "wel form-inlin" do %>
+            <div id="personalform">
+               <%=render 'shared/country_city_select', :inline_search => true%>
+            <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %>
+            </div>
+            <%end%>               
+         </div>
+      <div>   
+    </div>         
+ </div>
 </div>
-<%end%>
-
+</div>
 <br/>
-<div class= "span12" style="text-align: left; margin-left:0px">
+<div class="span12 service-banner">
    <div class="row">
       <% Service.all.each do |s| %>
          <% img = "#{s.title.gsub(' ', '_')}.png" %>
@@ -25,7 +39,7 @@
     </div>  
 </div>
 <div class="row">   
-   <br/>
+   <br/><br/>
    <%servicename = @service.try(:title) || "host"%> 
    <% if @users.empty? %>
       <div class="span10">

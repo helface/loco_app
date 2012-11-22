@@ -18,5 +18,5 @@ jQuery ->
          
    $('#forumpost_date').datepicker
       dateFormat: 'yy-mm-dd'
-      minDate: +1
-      maxDate: +30
+      minDate: +2
+      maxDate: +60

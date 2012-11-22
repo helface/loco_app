@@ -19,27 +19,33 @@
                   <li>
                      <div class="blocknav">
                         <%= link_to '/about' do %>
-
-                           <b>Learn </b><br/>
-                         <small> how it works </small>
-                         <% end %>
+                        <div class="header-link-block">       
+                           <b>Learn </b>
+                           <p> how it works </p>
+                        </div>               
+                        <% end %>
                      </div>
                   </li>
                   <li>
                   <div class="blocknav">
                      <%= link_to hosts_path do %>
-                        <b>Search</b><br/>
-                      <small> for hosts </small>
-                      <% end %>     
+                        <div class="header-link-block">          
+                           <b>Search</b>
+                          <p> for hosts </p>
+                        </div>       
+                     <% end %>     
                   </div>  
                   </li>
                    <% if !signed_in? %>
                       <li>
-                           <div class="blocknav">
-                              <%= link_to signup_path do %>
-                                 <b>Join </b><br/>
-                               <small> tiniHost </small>
+                      <div class="blocknav">
+                         <%= link_to signup_path do %>
+                         <div class="header-link-block">
+                           
+                           <b>Join </b>
+                               <p> tiniHost </p>
                                <% end %>
+                           </div>
                            </div>
                         </li>
                      <% end %>

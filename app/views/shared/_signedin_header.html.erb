@@ -1,7 +1,11 @@
 <li> <div class="blocknav">
-      <%= link_to board_path do %>
-         <b>Request </b><br/>
-       <small> a host </small>
+      <%= link_to board_path(view: "host") do %>
+      <div class="header-link-block">
+         
+         <b>Corkboard </b>
+       <p>requests </p>
+       </div>
+       
        <% end %>     
    </div>  
    </li>

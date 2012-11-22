@@ -1,7 +1,6 @@
 <% profile = @user.hostprofile%>
 
 <div class="easy_edit">
-   <%= image_tag("hat.png", alt: "user", style: "width: 18px; margin-left:-5px; margin-top:-5px") %>
    <strong> <%= @user.firstname.capitalize%> </strong>
 
    <% if current_user?(@user) %>
@@ -13,21 +12,22 @@
 </small><br/>
 <% if !@user.languages.nil? %>
    <% @user.languages.each do |l|%>
-     <small id="hint"> 
+     <small id="hint" style="margin-right: 2px; color: white; padding:1px 0px 2px 3px; background:#999; border-radius:3px"> 
         <%= Language.find_by_id(l).try(:name) %>
      </small>   
    <% end %>
    <br>
 <% end %>
+
 <%= render "shared/rating", :score => @user.traveler_score %>
-<small id="review_count"> <%= pluralize(@user.treviews_received.count, "review") %> as traveler </small>
+<small id="hint"> <%= pluralize(@user.treviews_received.count, "review") %> as traveler </small>
 <!-- render information for non-host users -->
 <% if !host_user?(@user)%>
    <br/>
    <%= image_tag "completed.png", id: "stats-icon" %>
-   <small id="review_count"><%= pluralize(@user.meetups_completed, 'meetup') %> completed</small><br>
+   <small id="icon-text"><%= pluralize(@user.meetups_completed, 'meetup') %> completed</small><br>
    <%= image_tag "review.png", id: "stats-icon" %>
-   <small id="review_count"><%= pluralize(@user.reviews.count, 'review') %> written </small>
+   <small id="icon-text"><%= pluralize(@user.reviews.count, 'review') %> written </small>
    <% if current_user?(@user) %> 
    <div class="filler"></div>
    <% prompt = "" %>
@@ -62,20 +62,18 @@
    <br/>
    <% service =  Service.find_by_id(profile.service).title %>
    <% img = "#{service.gsub(' ', '_')}2.png" %>
-   <div style="height:5px"></div>
+   <div style="height:10px"></div>
    <div id="easy_edit">
-      <%= image_tag(img, alt: "#{service}", :style=>"width: 18p; margin-left:-5px; margin-top:-5px") %>         
           <strong style="margin-left:px"><%= service.capitalize%> </strong >
             <% if current_user?(@user) %>
                <small class="edit_link"> <%= link_to "edit", edit_hostprofile_path(@user.hostprofile), class: "edit_link" %> </small>
             <% end %>
          </div>
 
-   <small id="hint"> <%= profile.city.name%>, <%= profile.city.country.name%>  </small>
-   <br>
+    <small><%= profile.city.name%>, <%= profile.city.country.name%>  </small><br/>
    
    <%= render "shared/rating", :score => profile.score %>
-   <small id="review_count"> <%= pluralize(@user.inverse_reviews.count, "review") %> as host <br/></small>
+   <small id="hint"> <%= pluralize(@user.inverse_reviews.count, "review") %> as host <br/></small>
    <br/>
    <%= image_tag "review.png", id: "stats-icon" %>
    <small id="icon-text"><%= pluralize(@user.reviews.count + @user.treviews_written.count, 'review') %> written </small><br>
