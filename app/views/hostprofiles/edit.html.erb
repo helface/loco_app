@@ -1,10 +1,12 @@
-<div class="span10">
+<% provide(:title, 'Host profile settings') %>
+
+<div class="filler"></div>
+
+<%= render "shared/your_header", id:@user.id, text: "Your hostprofile" %>
+<br/>
+<div class="container" id="white">
    
-   <div class="row vertical-align:middle">
-      <%= image_tag find_display_imgurl(@user.id, "thumb"), id: "profile-thumb" %>	  
-      <strong style="margin-left:10px">Your hostprofile</strong>
-   </div>
-   <div class="filler"></div>
+<div class="span11">
    <div class="row">
       <%= render 'shared/edit_tabs'%>
    </div>
@@ -45,5 +47,6 @@
         <p><%= f.submit 'update', id: "blue-button"%></p>
    </div>
    <% end %>
+</div>
 </div>
 

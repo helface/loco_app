@@ -1,13 +1,16 @@
 <% title = params[:folder] || ""%>
 <% provide(:title, title) %>
+<%= render "shared/your_header", id: current_user.id, text: "Your messages" %>
+<br/>
+<div class="container" id="white">
+   
 <div class="span11">
+   <div class="filler"></div>
+   
    <div class="row">
-      <%= image_tag find_display_imgurl(current_user.id, "thumb"), id: "profile-thumb" %>	  
-      <strong><%="Your messages"%></strong>
-      <div class="filler"></div>
       <%= render 'shared/mailbox_nav' %>
-   </div>
-     
+      
+   </div>  
    <div class="row">
       <div class="email">
       <%= "You have no messages at this time." unless !@messages.empty? %>     
@@ -17,3 +20,5 @@
       </div>   
    </div>
 </div>
+</div>
+

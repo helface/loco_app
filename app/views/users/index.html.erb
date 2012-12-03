@@ -1,4 +1,6 @@
 <%= provide(:title, 'search') %>
+<div class="container">
+   
 <div class="row">
    <div class="span12 top-banner" id="weave" style="height:70px">
       <div class="row">
@@ -38,18 +40,25 @@
       <% end %>
     </div>  
 </div>
-<div class="row">   
-   <br/><br/>
+</div>
+<br/>
+<div class="container">
+   
+   <div class="row">   
+   
    <%servicename = @service.try(:title) || "host"%> 
    <% if @users.empty? %>
       <div class="span10">
-         <br/>
-         <strong> :( Sorry, there are currently <%= "#{pluralize(0, servicename)} in #{@city.name}, #{@country.name}." %> </strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
+         <strong id="white"> :( Sorry, there are currently <%= "#{pluralize(0, servicename)} in #{@city.name}, #{@country.name}." %> </strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small><br/>
       </div>         
    <%else%>
       <div class="span12" style="padding:10px 0px; margin-left:18px">  
-         <strong><%= "#{pluralize(@users.count, servicename)} in #{@city.name}, #{@country.name} " %></strong> <small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
-         <hr size="3" style="margin-top:4px">
+         <strong id="white"><%= "#{pluralize(@users.count, servicename.capitalize)} in #{@city.name}, #{@country.name} " %></strong> <small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
+      </div>
+   </div>
+</div>
+<div class="container">
+   
          <%= will_paginate %>  
             <% n = 0 %>     
             <div class="row" style="margin-top: 20px">
@@ -66,4 +75,10 @@
       <%= will_paginate %>
    <% end %>
         
+
+<div class="filler">
 </div>
+  
+</div>
+</div>
+

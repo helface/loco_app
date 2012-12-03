@@ -1,5 +1,8 @@
 body {
-  background-color: #fff;
+	background-color:rgba(234, 195, 206, 0.8); 
+	
+	background-color:rgba(191, 192, 164, 0.2); 
+
   color: #555;
   font-family: arial, helvetica, verdana, arial, sans-serif;
   font-size: 13px;
@@ -15,6 +18,14 @@ ol, ul {
 	font-size: 14px;
 	color:#555;
   };
+}
+
+.container#white{
+	background:white; 
+	height:100%; 
+	padding:5px; 
+	border: 2px #ddd solid;
+	margin-left:219px;
 }
 
 p{
@@ -92,6 +103,12 @@ a.lighter {
 	};
 }
 
+a.blocklink
+{
+	&:visited, a:hover, & {
+		color: #666;
+	};
+}
 a.navlink{
 	&:visited, & {
 		color: #888;

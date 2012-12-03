@@ -130,7 +130,6 @@ class Appointment < ActiveRecord::Base
   end
   
   def complete_appointment(id)
-    debugger
     Time.zone = Time.zone = self.host.city.timezone   
     #TODO: take out equal sign
     if self.status == Status::BOOKED && DateTime.now.to_date >= self.date

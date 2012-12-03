@@ -61,7 +61,6 @@
 	   </div>	
 	</header>
        
-	<div class="container">
 	   <div>
 	       <% flash.each do |key, value| %>
                <% if "#{key}" == "error" %>
@@ -71,8 +70,10 @@
                <% end %>
             <% end %>
 	   </div>   
-	   <div class="filler"></div>
+	   
       <%= yield %>	
+      <div class="filler">
+         
    </div>			
    <div class="container">
    </div>

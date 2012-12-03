@@ -1,8 +1,11 @@
-<% provide(:title, @user.firstname) %>
-<p id="notice"><%= notice %></p>
+<div class="container">
+
 <%= render 'shared/history_nav' %>
-<br>
-  
+</div>
+<div class="container" id="white">
+   
+<% provide(:title, @user.firstname) %>
+<p id="notice"><%= notice %></p>  
 <div class="row" >
    
    <div class="span4 side-profile">
@@ -87,3 +90,4 @@
 <% end %>
 
 <div class="filler"></div>
+</div>

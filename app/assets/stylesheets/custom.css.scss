@@ -4,7 +4,7 @@ $navbarText: #eee;
 $navbarLinkColor: #eee;*/
 
 /*figure out why this isn't working*/
-$heroUnitBackground: #554;
+$heroUnitBackground: #eee;
 $navbarBackground: #888;
 $heroUnitLeadColor: #114;
 $placeholderText: #aaa;
@@ -173,9 +173,7 @@ body {
 
 	padding:10px; 
 	border-radius:5px; 
-	margin-top:-10px;
 	width:96%;
-	border: solid 1px #ddd;
 	div#overlay{
 		position:relative;
 		margin: 5px 0px 0px 0px;
@@ -262,16 +260,11 @@ body {
 }
 
 .tab_link{
-	
-	a:link, a:visited{
+	a:link, a:visited, a:hover{
 	   color: #049cdb;
    }
 
 	font-size: 1.3em;
-	
-	small{
-		color:#666;
-	}
 }
 
 div{

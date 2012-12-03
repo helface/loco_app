@@ -1,5 +1,5 @@
 <% msgthread = Msgthread.find(message.thread_id) %>
-<%= link_to user_message_path(msgthread.find_recipient_id(current_user), message) do %>   
+<%= link_to user_message_path(msgthread.find_recipient_id(current_user), message), class: "blocklink" do %>   
 
    <li id="link-block">
       
