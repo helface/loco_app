@@ -1,11 +1,12 @@
- <div class="span10">
-    <div class="row">
-       <%= image_tag find_display_imgurl(current_user.id, "thumb"), size: "40x40" %>	  
-       <strong style="margin-left:10px"><%="Post a request"%></strong>
-   </div>
-   <div class='filler'></div>
+<div class='filler'></div>
+<%= render "shared/your_header", id: current_user.id, text:"Post a request" %>
+<br/>
+
+<div class="container" id="white">
    
-   <div class="row" id="messageform">     
+ <div class="span10 offset1"> 
+    <br/>
+   <div class="row">     
          <%= form_for @post, do |f| %>
          <%= render 'shared/error_messages', :obj=>@post%>
          
@@ -25,7 +26,7 @@
          </div>
          
          <div id="personalform">
-            <small> Leave empty if you answered no </small><br/>
+            <small> If yes, how much are you willing to pay?</small><br/>
                <%= f.text_field :price, :placeholder=>"enter price" %>
                <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %>
          </div>
@@ -41,6 +42,7 @@
          <%end%>
       </div>
    </div>
+</div>
 
 </div>
 

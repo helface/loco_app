@@ -3,17 +3,17 @@
 
 <%=render "shared/your_header", id: @user.id, text:"Your settings" %>
 <br/>
-<div class="container" id="white">
-   
-   <div class="span10">
+<div class="container" id="white">  
+   <div class="span10 offset1">
 
-   <div class="row edit_link">
-      <%= render 'shared/edit_tabs'%>
-   </div>
+      <div class="row edit_link">
+         <%= render 'shared/edit_tabs'%>
+      </div>
    
    <%= render 'edit_form' %> 
+  </div>
 </div>
-</div>
+<%= render "shared/footer" %>
 
 
 

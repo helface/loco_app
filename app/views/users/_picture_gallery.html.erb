@@ -17,7 +17,7 @@
          <% n = 0 %>
             <% @user.images.each do |img|%>
                <div class="span2" style="text-align:left; margin-left:-10px">
-                  <%= image_tag img.photo.url(:medium), class: "thumbnail thumbindex", id: "imgthumb#{n+=1}", :data=>{:id=>img.id} %>
+                  <%= image_tag img.photo.url(:thumb), class: "thumbnail thumbindex", id: "imgthumb#{n+=1}", :data=>{:id=>img.id} %>
                </div>
             <% end %>
       </div>

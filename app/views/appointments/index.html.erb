@@ -1,8 +1,12 @@
 <% provide(:title, "meetups") %>
 
-<%= image_tag find_display_imgurl(current_user.id, "thumb"), id: "profile-thumb" %>	  
-<strong><%="Your meetups"%></strong>
+<div class="filler"></div>   
+<%=render "shared/your_header", id: current_user.id, text:"Your meetups" %>
+<br/>
 
+<div class="container" id="white">
+   
+ 
 <div class="filler"></div>
 <%= render "meetups_nav" %> 
 <div class="span12">
@@ -39,7 +43,7 @@
       
       <!-- only have the booked section on the page if we are not in history -->
       <% if params[:folder] != "history" %>
-      <div class="span4">
+      <div class="span4" style="width:280px">
          <h3 style="color:#1DB882">Booked</h3>
          <hr noshade id="appt-divider">
       
@@ -80,5 +84,8 @@
             <% end %>
       <% end %>      
       </div>
+    
    </div>
+   <div class="filler"><br/></div>
+
 </div>

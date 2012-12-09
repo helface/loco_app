@@ -1,0 +1,21 @@
+<div class="filler"></div>
+  <div class="container footer" style="border-top: 1px solid #bbb; width: 100%; background:#ddd; padding:10px; margin:0px">
+     <div class="span2 offset2 edit_link">
+         <%= link_to "Terms of service", terms_of_service_path %><br/>
+         <%= link_to "Privacy information", privacy_path%> <br/>
+         <%= mail_to "team@tinihost.com", "Contact" %><br/>
+         <%= link_to "About", about_path %>   
+     </div>
+     <div class="span5">
+      © tiniHost is a service that connects travelers to locals for a more authentic and original travel experience. We encourage socially and environmentally aware travel practices. We aim to build a respectful and trustworthy global travel community. 
+     </div>
+     <div class="span2 offset">
+       <%= link_to image_tag("facebook2.png", alt: "Tinihost facebook page", size: "45x45", style: "padding:0px; margin:0px"), "https://www.facebook.com/tiniHost" %>
+         <%= link_to image_tag("twitter2.png", alt: "Tinihost twitter page", size: "45x45"), "https://twitter.com/tinihost" %> 
+      </div>         
+      <div class="span2">
+         tiniHost on Facebook
+         <div class="fb-like" data-href="http://www.tinihost.com" data-send="true" data-layout="button_count" data-width="50" data-show-faces="true" data-font="arial"></div><br/>
+      </div>               
+  </div>
+</div>

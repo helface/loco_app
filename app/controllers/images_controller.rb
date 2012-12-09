@@ -7,7 +7,7 @@ class ImagesController < ApplicationController
       @user = current_user
       if @user.at_max_picture?
         flash[:error] = "Sorry, you have reached the maximum number of allowed pictures. Please delete old pictures to make room for new ones."
-        redirect_to new_image_path
+        redirect_to edit_user_path(@user, :view => "picture")
         return
       end
       @image = @user.images.build(params[:image])
@@ -17,16 +17,26 @@ class ImagesController < ApplicationController
           @user.update_attributes(:profile_pic_id => @image.id)
           sign_in @user
         end
-        flash[:success] = "your image has been uploaded"
-        redirect_to session[:prev]
+        #redirect_to session[:prev]
+        render :action => 'crop', img: @image
       else
         flash[:error] = "Sorry, we were not able to upload your picture #{@image.errors.full_messages}"
-        redirect_to session[:prev]
+        redirect_to edit_user_path(@user, :view => "picture")
       end
   end
   
   def show
     @img = Image.find_by_id(params[:id])
+  end
+  
+  def update
+    @image = Image.find(params[:id])
+    
+    if @image.update_attributes(params[:image])   
+      @image.reprocess 
+      flash[:success] = "your image has been uploaded"
+      redirect_to session[:prev]
+    end
   end
 
   def destroy

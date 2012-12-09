@@ -4,15 +4,24 @@
   <title> <%= default_title(yield(:title)) %> </title>
   <%= favicon_link_tag "hat-favicon.ico" %>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>   
+  <%= javascript_include_tag "application" %>  
   <%= csrf_meta_tags %>
+  <%= yield(:head) %>
 </head>
 <body>
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));</script>
    <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
          <div class="container">
             <div style="height:5px; padding-top:5px; padding-bottom:5px">
-               <%= link_to image_tag("tinihost.png", alt: "Tinihost logo") , root_path%>         
+               <%= link_to image_tag("tinihost.png", alt: "tiniHost logo") , root_path%>         
             </div>
             <nav>
                <ul class="nav pull-right" style="margin-top:5px">
@@ -61,7 +70,7 @@
 	   </div>	
 	</header>
        
-	   <div>
+	   <div class="container">
 	       <% flash.each do |key, value| %>
                <% if "#{key}" == "error" %>
                   <%= content_tag(:div, value, class: "alert alert-error") %>
@@ -70,12 +79,7 @@
                <% end %>
             <% end %>
 	   </div>   
-	   
-      <%= yield %>	
-      <div class="filler">
-         
-   </div>			
-   <div class="container">
-   </div>
+      <%= yield %>
+     			
 </body>
 </html>

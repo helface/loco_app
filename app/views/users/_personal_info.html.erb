@@ -75,13 +75,13 @@
    <%= render "shared/rating", :score => profile.score %>
    <small id="hint"> <%= pluralize(@user.inverse_reviews.count, "review") %> as host <br/></small>
    <br/>
-   <%= image_tag "review.png", id: "stats-icon" %>
+   <%= image_tag "review.png", alt: "review count icon", id: "stats-icon" %>
    <small id="icon-text"><%= pluralize(@user.reviews.count + @user.treviews_written.count, 'review') %> written </small><br>
-   <%= image_tag "completed.png", id: "stats-icon" %>
+   <%= image_tag "completed.png", alt:"completed meetups icon", id: "stats-icon" %>
    <small id="icon-text"><%= pluralize(profile.completed_count, 'meetup') %> completed</small><br/>
-   <%= image_tag "recommended.png", id: "stats-icon" %>
+   <%= image_tag "recommended.png", alt: "recommended count icon", id: "stats-icon" %>
    <small id="icon-text"> <%= "#{profile.calc_recommend_rate}%"%> recommended</small> <br>
-   <%= image_tag "response.png", id: "stats-icon"%>
+   <%= image_tag "response.png", alt: "response rate icon", id: "stats-icon"%>
   <small id="icon-text"> <%= profile.calc_response_rate.nil? ? "na" : "#{profile.calc_response_rate}%" %> response rate </small><br>
    <div style="height:18px"></div>
    <% if profile.exchange_type == "money"%>

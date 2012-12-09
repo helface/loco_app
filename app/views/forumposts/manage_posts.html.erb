@@ -1,14 +1,21 @@
+<div class="container">
+   
 <%= render "corkboard_nav" %>
+</div>
+
+<div class="container" id="white">
+   
 <br/>
 <div style="text-align:right">
    <%= link_to "New post", new_forumpost_path, id: "pink-button" %>  
 </div>
 <div class="filler"></div>
-<div class="span10 email" style="margin-top:15px">
+<div class="span10 offset1 email" style="margin-top:15px">
       <% if @posts.empty? %>
          You have not posted anything on the corkbaord yet. Go go, post a new request. 
       <% end %>
       <%= will_paginate @posts%>
          <%= render 'forumpost' %>
       <%= will_paginate @posts %>
+</div>
 </div>

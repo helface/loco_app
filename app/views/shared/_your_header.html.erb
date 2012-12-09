@@ -1,7 +1,7 @@
 <div class="container">
    
-<div style="background-color:#555; border-radius:3px; padding:5px">
-     <%= image_tag find_display_imgurl(id, "thumb"), id: "profile-thumb" %>	  
-     <strong id="white" style="margin-left:10px"><%="#{text}"%></strong>
+<div>
+     <%= link_to (image_tag find_display_imgurl(id, "thumb"), id: "profile-thumb"), current_user %>	  
+     <strong style="margin-left:10px"><%="#{text}"%></strong>
 </div>
 </div>

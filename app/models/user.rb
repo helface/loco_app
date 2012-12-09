@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
   
   def active_meetup_count
     if self.hostprofile
-      self.hostprofile.appt_requests.active.count + self.requested_appts.active.count
+      self.hostprofile.appt_requests.active.where("host_completed = ?", false).count + self.requested_appts.active.where("traveler_completed = ?", false).count
     else
       self.requested_appts.active.count
     end

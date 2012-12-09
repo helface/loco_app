@@ -1,5 +1,8 @@
+<br/><br/>
+<div class="container" id="white">
+   
 <div class="row">
-   <div class="span9" id="messageform">  
+   <div class="span9 offset1" id="messageform">  
    <%= form_tag mailfriend_user_path(@user), :method=>'post' do %>
    <div id="personalform">
       <%= label_tag "friend's email:" %>
@@ -14,5 +17,7 @@
    <% end %>
    </div>
 </div>
+</div>
+
 
    

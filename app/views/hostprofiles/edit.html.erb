@@ -4,26 +4,19 @@
 
 <%= render "shared/your_header", id:@user.id, text: "Your hostprofile" %>
 <br/>
-<div class="container" id="white">
-   
-<div class="span11">
-   <div class="row">
-      <%= render 'shared/edit_tabs'%>
-   </div>
-
-   <div class="row">
+<div class="container">
       <%if @user.is_host?%>
          <div class="span10" >
-            <div class="row red-link">
+            <div class="row edit_link">
               <%= link_to '#', id: "deactivate_host" do %>
-              <i class="icon-exclamation-sign"></i> Deactivate my host status         
+              I want to deactivate my host status         
               <% end %>
             </div>
          </div>
          <br/>
          
          <div class="edit-section" style="display:none; margin-top:5px" id="deactivate_host_block">
-         <div style="background-color:#FFF5F0; padding:10px; border-radius: 3px;">
+         <div style="background:white; padding:10px; border-radius: 3px;">
             <p id="hint">Aww, we will miss you! All your host information will be kept such that you may reactivate your host status at any time. Travelers will no longer see your host information and you will not be listed in any search results. <br/><br/><b>Please note that any booked meetups you have will remain active until they are completed.</b></p>
                <div id="name" style="text-align: right; height: 45px">
                   <%= button_to 'Deactivate', deactivate_hostprofile_path(@hostprofile), method: "get", :id => "pink-button" %>
@@ -34,7 +27,16 @@
          <small id="hint">Your host status is currently deactivated.</small>
          <%= button_to 'Re-activate my host status', reactivate_hostprofile_path, method: "get", id: "pink-button" %>
       <% end %>
+</div>
+<br/>
+<div class="container" id="white">
+   
+<div class="span10 offset1">
+   <div class="row">
+      <%= render 'shared/edit_tabs'%>
    </div>
+
+   
      
    <div class="filler"></div>
    <%= form_for @hostprofile do |f| %>
@@ -49,4 +51,6 @@
    <% end %>
 </div>
 </div>
+
+<%= render "shared/footer" %>
 

@@ -1,10 +1,11 @@
 <% title = params[:folder] || ""%>
 <% provide(:title, title) %>
+<div class="filler"></div>
 <%= render "shared/your_header", id: current_user.id, text: "Your messages" %>
-<br/>
+<br/>   
+
 <div class="container" id="white">
-   
-<div class="span11">
+<div class="span10 offset1">
    <div class="filler"></div>
    
    <div class="row">
@@ -18,6 +19,9 @@
       <%= render @messages%>
       <%= will_paginate @messages%>
       </div>   
+   </div>
+   <div class="filler">
+      
    </div>
 </div>
 </div>

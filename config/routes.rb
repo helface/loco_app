@@ -44,17 +44,21 @@ LocoApp::Application.routes.draw do
       post 'create_response'
     end
   end
-  resources :images, only: [:new, :create, :destroy, :show]
+  resources :images, only: [:new, :create, :update, :destroy, :show]
   resources :locations, only: [:index]
   
   get "pages/home"
   get "pages/signup"
   get "pages/find"
   get "pages/about"
+  get "pages/terms_of_service"
+  get "pages/privacy"
   get "pages/signup"
   
   match '/about', to: 'pages#about'
   match '/hosts', to: 'pages#find'
+  match '/terms_of_service', to:"pages#terms_of_service"
+  match '/privacy', to: "pages#privacy"
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

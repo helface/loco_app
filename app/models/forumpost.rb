@@ -2,17 +2,17 @@ class Forumpost < ActiveRecord::Base
   attr_accessible :city_id, :country_id, :title, :content, :date, :price, :currency, :pay
   belongs_to :city
   belongs_to :user
+  validates_inclusion_of :pay, :in=>[false, true]
   
-  validates_presence_of :city_id, :country_id, :date, :pay
+  validates_presence_of :city_id, :country_id, :date
   validates_presence_of :content, length: {maximum: 400}
   validates_presence_of :title, length:{maximum: 70}
   validate :correct_date
   validates_presence_of :price, :currency, if: Proc.new{|forumpost| forumpost.pay == true}
   
-  before_save :verify_location
+  before_save :verify_location, Proc.new{|forumpost| forumpost.pay == false unless forumpost.pay == true}
   
-  WILL_PAY = {"no" => false, 'yes'=>true}
-  validates_inclusion_of :pay, :in=>[false, true]
+  WILL_PAY = {"no" => false, 'yes'=> true}
     
   def increment_respond_count
     self.increment!(:responded_count)  

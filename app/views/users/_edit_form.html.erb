@@ -1,9 +1,9 @@
- <div class="filler"></div> 
+<br/>
  <% if params[:view] == "general" %>
  
  <h3 class="row"> General information </h3> 
  
- <div class="row host_info">
+ <div class="row">
     <div class="edit-section">
       <%= simple_form_for @user do |f| %>   
          <%= render 'shared/error_messages', :obj=>@user %>           
@@ -28,9 +28,9 @@
       </div>
     </div> 
 <% end %>
-     
  <% if params[:view] == "picture" %>
-  <div class="row host_info">
+ <h3 class="row"> Pictures </h3> 
+  <div class="row">
     <div class="edit-section" id="personalform">
        <label>You have uploaded <b> <%= @user.images.count %> </b> out of 7(max) pictures.</label>
        <div class="row">
@@ -47,7 +47,9 @@
   </div>
  <% end %> 
  <% if params[:view] == "security" %>
- <div class="row host_info" id="edit-section">
+ <h3 class="row"> Password </h3> 
+ 
+ <div class="row " id="edit-section">
     <div class="edit-section" id="personalform">
        <%= simple_form_for(@user) do |f| %>
           <%= render 'shared/error_messages', :obj=>@user %>

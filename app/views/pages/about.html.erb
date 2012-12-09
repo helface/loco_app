@@ -1,74 +1,62 @@
 <% provide(:title, 'how it works')%>
-<div class="span11" style="margin-left:0px">
+<div class="container">
    <div class="row">
-   <div class="span3">
-      <div class="filler"></div>
-      <ul class="nav nav-list sidebar">
-         <% if params[:view].nil? || params[:view] == "how"%>
-            <li class="active">
-         <% else %>
-            <li>   
-         <% end %>
-         <%= link_to "How it works", about_path(view: "how") %>
-         </li>
-         
-         <% if params[:view] == "host"%>
-            <li class="active">
-         <% else %>
-            <li>   
-         <% end %>
-         <%= link_to "Host information", about_path(view: "host") %>
-         </li>
-         
-         <% if params[:view] == "traveler"%>
-            <li class="active">
-         <% else %>
-            <li>   
-         <% end %>
-         <%= link_to "Traveler information", about_path(view: "traveler") %></li>
-         
-         <% if params[:view] == "faq"%>
-            <li class ="active">
-         <% else %>
-            <li>   
-         <% end %>
-         <%= link_to "FAQ", about_path(view: "faq") %></li>
-         
-      </ul>
-      
+      <div class="span3 offset" style="width: 200px;">
+         <br/><br/>
+         <ul class="nav nav-list sidebar" style="background:white">
+            <% if params[:view].nil? || params[:view] == "how"%>
+               <li class="active">
+            <% else %>
+               <li>   
+            <% end %>
+            <%= link_to "How it works", about_path(view: "how") %>
+            </li>
+
+            <% if params[:view] == "host"%>
+               <li class="active">
+            <% else %>
+               <li>   
+            <% end %>
+            <%= link_to "Host information", about_path(view: "host") %>
+            </li>
+
+            <% if params[:view] == "traveler"%>
+               <li class="active">
+            <% else %>
+               <li>   
+            <% end %>
+            <%= link_to "Traveler information", about_path(view: "traveler") %></li>
+
+            <% if params[:view] == "faq"%>
+               <li class ="active">
+            <% else %>
+               <li>   
+            <% end %>
+            <%= link_to "FAQ", about_path(view: "faq") %></li>       
+         </ul>
+      </div>
+      <div class="span9" style="background: white; padding: 20px 10px 20px 30px; margin:0px">
+            <% if params[:view] == nil || params[:view] == "how"%>
+            <div class="span9 aboutpage_dark">
+               <%= render "shared/how_it_works" %>
+            </div>
+            <% elsif params[:view] == "host" %>
+            <div class="aboutpage">
+               <%= render "hostinfo" %>
+            </div>
+            <div class="filler"></div>
+            <% elsif params[:view] == "traveler" %>
+            <div class="aboutpage">
+               <%= render "travelerinfo" %>         
+            </div>
+            <% elsif params[:view] == "faq" %>
+            <%= render "faq" %>       
+            <% end %>
+      </div>
    </div>
-   <% if params[:view] == nil || params[:view] == "how"%>
-   <div class="span8 aboutpage">
-      <%= render "shared/how_it_works" %>
-   </div>
-   <% elsif params[:view] == "host" %>
-   <div class="span8 aboutpage">
-      <%= render "hostinfo" %>
-   </div>
-   <div class="filler"></div>
-   <% elsif params[:view] == "traveler" %>
-   <div class="span8 aboutpage">
-      <%= render "travelerinfo" %>
-   </div>
-   <% elsif params[:view] == "faq" %>
-   <div class="span8 aboutpage">
-   <a id="limited_cities"></a>
-       <strong> Why are there only 6 cities listed? </strong><br/>
-       <h4>Because tiniHost is in what we call a bootstrapping phase. More cities will open up as we expand our user base.</h4><br/>
-       <strong> Where is the review button for users? </strong><br/>
-          <h4>The option to review a user only becomes available after you have completed a meetup with him or her. This is our way of trying to keep the reviews honest and reliable.</h4><br/>
-       <strong> Can I offer multiple host services (ie. translator and chauffeur)? </strong><br/>
-         <h4>No. Each host profile is associated with only one type of service to keep things straightforward. You can however note additional services in your own service description. </h4><br/>
-         <strong> Can I deactivate my host status after becoming a host? </strong><br/>
-             <h4>Yes. Go to your settings | hostprofile page and click on deactivate my host status. We retain all your host information after deactivation such that you can reactivate your host status at any time.</h4><br/>
-       <strong> Will you share my information with any 3rd party? </strong><br/>
-        <h4>Never.</h4><br/>       
-       <strong> Can I sign in with Facebook? </strong><br/>
-         <h4>Soon. We will integrate with Facebook in v2.</h4><br/>
-         <strong> Can I filter my search results? </strong><br/>
-            <h4>Soon.</h4><br/>
-   </div>
-       
-   <% end %>
 </div>
-   
+
+</div>
+
+
+<%=render "shared/footer" %>

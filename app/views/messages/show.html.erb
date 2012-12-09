@@ -10,7 +10,7 @@
          <%= link_to image_tag(find_display_imgurl(@recipient.id, "thumb"), id:"profile-thumb"), user_path(@recipient) %>  	   
    	</div>
    	<div class="span6" style="padding-left:10px">
-   	   <p style="font-size:1.1em"> <i style="color: #00D66F" class="icon-user"></i>
+   	   TO:
          <%= link_to @recipient.firstname.capitalize, user_path(@recipient) %></p>
    	   <p style="font-size:1.3em"> <%= @thread.subject.capitalize %> </p>          
    	</div><br>      
@@ -24,27 +24,28 @@
    </div>
    
    <div class="row" style="margin-top: 15px; background-color:#F5F2E9">
-      
-      <div class="span10 email">
+      <div class="span10 offset1 email">
       <% @messages.each do |msg| %>
    	   <li class="thread">
-   	      <div class="row" style="text-align:right">
-	            <span class="timestamp">
-               <% if msg.created_at < Date.today %>
-                  <%= msg.created_at.strftime("%a, %b %d") %>  
-               <% else %>
-               	<%= msg.created_at.strftime("%I:%M %p") %>    
-               <% end %>
-               </span>
-	         </div>
+   	      <div class="row">
+	            
    	      <div class="span1" %>         	   
    	         <%= image_tag find_display_imgurl(msg.sender_id, "thumb"), id: "profile-thumb" %>	
    	      </div>
-   	      <div class="span9" style="padding-left:15px">
+   	      <div class="span8" style="padding-left:15px">
                <div id="name">
                   <%= simple_format(msg.body) %> 
                </div>
    	       </div>
+   	       <div class="span2 timestamp" style="text-align:right">
+   	          <% if msg.created_at < Date.today %>
+                   <%= msg.created_at.strftime("%a, %b %d") %>  
+                <% else %>
+                	<%= msg.created_at.strftime("%I:%M %p") %>    
+                <% end %>
+   	       </div>
+   	       </div>
+ 	         
    	    </li>
       <% end %>
      </div>     

@@ -5,7 +5,7 @@
    <% else %>
       <li>
    <% end %>
-   <% count = @requested_appts.active.count > 0 ? "(#{@requested_appts.active.count})" : ""%>
+   <% count = @requested_appts.active.where("traveler_completed = ?", false).count > 0 ? "(#{@requested_appts.active.count})" : ""%>
 	<%= link_to "As traveler #{count}", user_appointments_path(current_user, :folder => 'traveler') %>
 	</li>
    <% if  @appt_requests  %>
@@ -14,7 +14,7 @@
 	<% else %>
 	   <li>
 	<% end %>
-	<% count = @appt_requests.active.count > 0 ? "(#{@appt_requests.active.count})" : ""%>
+	<% count = @appt_requests.active.where("host_completed = ?" , false).count > 0 ? "(#{@appt_requests.active.count})" : ""%>
 	<%= link_to "As host #{count}", user_appointments_path(current_user, :folder => 'host') unless !current_user.is_host? && @appt_requests.active.count == 0%>
 	</li>
 	<% end %>

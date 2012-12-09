@@ -1,12 +1,17 @@
+<% provide(:title, "meetups") %>
+
 <% status = @appointment.status %>
 <% if is_appt_host?(@appointment) %>
     <% user = @traveler %>
  <% else %>
     <% user = @host %>
  <% end %>
+   
 <%= render "shared/history_nav" %> 
-<div class="filler"></div>
-<div class="span9">
+
+<div class="container" id="white">
+   
+<div class="span9 offset1">
    <div class="row" >
        <h3 style="border-bottom:1px solid #eee"><%=" #{City.find_by_id(@host.hostprofile.city_id).name}, #{Country.find_by_id(@host.hostprofile.country_id).name}"%></h3>
        <br/>
@@ -55,7 +60,7 @@
       </div>          
    </div>  
 </div>         
-<div class="span9" style="color:white">    
+<div class="span9 offset1" style="color:white">    
    <div class="row host_info" style="background-color:#aaa" >
        <b id="message_icon" style="width:55px"><%= link_to "Message", new_user_message_path(user) %></b><%= user.firstname.capitalize %> to discuss more.
        <br/><br/>
@@ -70,9 +75,9 @@
               <p> <%= "#{@traveler.firstname.capitalize} decided to not to book the meeting." %></p>
            <% elsif status == Status::NOT_AVAILABLE %>
               <p> You responded unavailable. Meeting request has been inactivated.</p>
-           <% elsif status == Status::BOOKED && Date.today > @appointment.date %>
+           <% elsif status == Status::BOOKED && @appointment.happened? %>
               <p>Your meetup should have taken place. Now it's time to review your experience and complete the meetup. Once you submit a short review, your stats and those of your traveler will be updated accordingly. Big thanks for your feedback!</p>              
-           <% elsif status == Status::BOOKED && @appointment.date - DateTime.now.to_date >= 2 %>              
+           <% elsif status == Status::BOOKED && @appointment.cancelable? %>              
               <p> Your meetup is now booked. Have a good time! Should you need to cancel the meetup, you have until 2 days before the meetup date to do so.</p>       
             <% elsif status == Status::BOOKED %>
                <p>Your meetup is booked! You can no longer cancel because a 2 day advance notice is required. </p>
@@ -90,14 +95,17 @@
               
              
               <!--TODO: take out equal sign -->
-            <% elsif status == Status::BOOKED && DateTime.now.to_date > @appointment.date %>
+            <% elsif status == Status::BOOKED && @appointment.happened? %>
               <p> Your meetup should have taken place. Now it's time to review your experience and complete the meetup. Once you submit a short review, your stats and those of your host will be updated. Big thanks for your feedback! </p>          
-            <% elsif status == Status::BOOKED && @appointment.date - DateTime.now.to_date >= 2 %>              
+            <% elsif status == Status::BOOKED && @appointment.cancelable? %>              
               <p> Your meetup is now booked. Have a good time! Should you need to cancel the meetup, you have until 2 days before the meetup date to do so.</p>      
             <% elsif status == Status::BOOKED %>
               <p>Your meetup is booked! You can no longer cancel because a 2 day advance notice is required.</p>
           <% end %>
        <% end %>
-    </div>     
-</div>     
+    </div>   
+    <br/><br/> 
+      
+</div>    
+</div>
       

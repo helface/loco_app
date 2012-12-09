@@ -10,15 +10,16 @@
 	</div>	
 </div>
 <div class="span4">    
+   
    <% if !@user.facebook.nil? && !@user.facebook.empty? %>
-   <div class="row edit_link">
-      <strong style="color:white"> Facebook </strong><br/>
+   <div class="row edit_link" style="background-color:#eee; padding: 10px;">
+      <b> Facebook </b><br/>
       <%= link_to "#{@user.facebook}", "#{@user.facebook}" %>    
    </div>
    <br/>
    
    <% end %>
-  	<div class="row" style="background-color:#ccc; padding: 10px;"> 
+  	<div class="row" style="background-color:#ddd; padding: 10px;"> 
   	   <b> About me </b>	   
   	   <% if @user.self_intro.empty? %>
          <div class="edit_link">

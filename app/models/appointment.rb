@@ -110,13 +110,8 @@ class Appointment < ActiveRecord::Base
   # expire the appointment if an available check is not responded to within a day
   # or if the date on the appointment has passed  
   def expire_appointment
-    Time.zone = Time.zone = self.host.city.timezone   
-    #if DateTime.now - self.updated_at.to_datetime > 1.day && self.status == Status::AVAILABLE
-    #   self.status = Status::EXPIRED
-    #   self.save
-    
     #if the appointment has not been booked on the day of, the appointment expires. 
-    if (DateTime.now.to_date >= self.date) && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
+    if self.expired?
        self.status = Status::EXPIRED
        self.save
     end
@@ -130,9 +125,7 @@ class Appointment < ActiveRecord::Base
   end
   
   def complete_appointment(id)
-    Time.zone = Time.zone = self.host.city.timezone   
-    #TODO: take out equal sign
-    if self.status == Status::BOOKED && DateTime.now.to_date >= self.date
+    if self.status == Status::BOOKED && self.happened?
        if self.host_id == id
          self.host_completed = true
        elsif self.traveler_id == id
@@ -148,8 +141,7 @@ class Appointment < ActiveRecord::Base
   end
   
   def cancel_appointment
-    Time.zone = Time.zone = self.host.city.timezone   
-    if self.status == Status::BOOKED && self.date - DateTime.now.to_date >= 2
+    if self.status == Status::BOOKED && self.cancelable?
        self.status = Status::CANCELED 
        self.save
     else
@@ -165,6 +157,22 @@ class Appointment < ActiveRecord::Base
     return self.traveler_completed
   end
   
+  def happened?
+      Time.zone = self.host.city.timezone 
+      DateTime.now.to_date > self.date
+    end
+
+  def cancelable?
+     Time.zone = self.host.city.timezone
+     self.date - DateTime.now.to_date > 1   
+  end
+  
+  def expired?
+    Time.zone = self.host.city.timezone
+    DateTime.now.to_date >= self.date && (self.status == Status::CHECK_SENT || self.status == Status::AVAILABLE)
+  end
+    
+  #Private methods
   private
   
   def correct_date
@@ -179,5 +187,6 @@ class Appointment < ActiveRecord::Base
      self.traveler_id == current_user_id  
   end
   
+ 
   
 end

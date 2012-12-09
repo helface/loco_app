@@ -43,17 +43,16 @@
 </div>
 <br/>
 <div class="container">
-   
    <div class="row">   
    
    <%servicename = @service.try(:title) || "host"%> 
    <% if @users.empty? %>
       <div class="span10">
-         <strong id="white"> :( Sorry, there are currently <%= "#{pluralize(0, servicename)} in #{@city.name}, #{@country.name}." %> </strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small><br/>
+         <strong> :( Sorry, there are currently <%= "#{pluralize(0, servicename)} in #{@city.name}, #{@country.name}." %> </strong><small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small><br/>
       </div>         
    <%else%>
       <div class="span12" style="padding:10px 0px; margin-left:18px">  
-         <strong id="white"><%= "#{pluralize(@users.count, servicename.capitalize)} in #{@city.name}, #{@country.name} " %></strong> <small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
+         <strong><%= "#{pluralize(@users.count, servicename.capitalize)} in #{@city.name}, #{@country.name} " %></strong> <small class="edit_link" id="light"> <%= link_to "see all", users_path, :style=>"text-decoration: underline" %></small>
       </div>
    </div>
 </div>

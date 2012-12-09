@@ -2,15 +2,15 @@
 <% host = profile.user unless profile.nil? %>
 <% traveler = User.find_by_id(appointment.traveler_id) %>
 <%= link_to user_appointment_path(current_user, appointment) do %>
-<div class="host_info booked-block" >
+<div class="booked-block" >
    <div class="row">
-       <div class="span3">
-          Meetup with
+       <div class="span3" style="width: 200px">
+          <b style="color:#E65C5C">Meetup with
              <% if is_appt_host?(appointment) %> 
                 <%= traveler.firstname.capitalize %>
              <% else %>
                 <%= host.firstname.capitalize %>
-             <% end %><br/>
+             <% end %></b><br/>
           <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
           <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%><br/>
            
@@ -20,7 +20,7 @@
              <%= appointment.time.empty? ? "" : "#{appointment.time}" %>
           <% end %>
        </div>
-       <div class="span1" style="margin-left:0px; margin-right:0px; text-align:right">
+       <div class="span1" style=" margin-left:5px; text-align:right">
           <div class="row">
              <% if appointment.date - Date.today >= 2%>
                <div class="row">
@@ -29,7 +29,7 @@
                <div class="row edit_link">
                   <b>
                   <%= link_to user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response" do%>
-                     <i class="icon-remove" style="font-size:0.8em; color:red"></i>Cancel
+                     <i class="icon-remove" style="color:red"></i> Cancel
                   <% end %>
                   </b>
                </div>
@@ -60,4 +60,5 @@
    </div>
       
 </div>    
-<% end %>      
+<% end %>     
+<br/> 

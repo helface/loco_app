@@ -6,21 +6,21 @@
             <%= image_tag "paris_pol.png" %>
          </div>
          
-         <div style="height:230px">
-            <div style="height:20px">
-
-            </div>  
-         <strong id="white">Dear travelers, <br/> <br/> Select your destination and start looking for the perfect TiniHost for your trip. <br/><br/> Bon Voyage!</strong><br/><br/>
-         <%= form_tag fill_location_path, method: 'get', class: "wel form-inlin" do %>
-         <div id="personalform">
-            <%=render 'shared/country_city_select', :inline_search => true%>
-         <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %>
+         <div class="span5" id="overlay" style=" height:230px">
+            <br/>
+            <div style="padding-left:15px"> 
+            <strong id="white">Dear travelers, <br/> <br/> Select your destination and start looking for the perfect tiniHost for your trip. 
+            <br/><br/> Bon Voyage!</strong>
+            <br/><br/>
+            <%= form_tag fill_location_path, method: 'get', class: "wel form-inlin" do %>
+            <div id="personalform">
+               <%=render 'shared/country_city_select', :inline_search => true%>
+            <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %>
+            </div>
+            <%end%>     
          </div>
-         <%end%>
-         
-         </div>
-         
       </div>
+      </div> 
    </div>
 </div>
 

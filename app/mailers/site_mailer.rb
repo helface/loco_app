@@ -3,7 +3,7 @@ class SiteMailer < ActionMailer::Base
   
   def signup_confirmation(user)
     @user = user
-    mail to: user.email, subject: "TiniHost signup confirmation"
+    mail to: user.email, subject: "tiniHost signup confirmation"
   end
   
   def mail_friend(email, current_user, user, note)
@@ -18,20 +18,20 @@ class SiteMailer < ActionMailer::Base
     @traveler = traveler
     @host = host
     @appointment = appointment
-    mail to:host.email, subject: "TiniHost - You have a new meetup request from #{traveler.firstname.capitalize}"
+    mail to:host.email, subject: "tiniHost - You have a new meetup request from #{traveler.firstname.capitalize}"
   end
   
   def mail_available(traveler, host, appointment)
     @traveler = traveler
     @host = host
     @appointment = appointment
-    mail to:traveler.email, subject: "TiniHost - #{host.firstname.capitalize} responded available to your meetup request"
+    mail to:traveler.email, subject: "tiniHost - #{host.firstname.capitalize} responded available to your meetup request"
   end
   
   def mail_booked(traveler, host, appointment)
      @traveler = traveler
      @host = host
      @appointment = appointment
-     mail to:host.email, subject: "TiniHost - #{traveler.firstname.capitalize} has booked a meetup with you!"
+     mail to:host.email, subject: "tiniHost - #{traveler.firstname.capitalize} has booked a meetup with you!"
    end
 end

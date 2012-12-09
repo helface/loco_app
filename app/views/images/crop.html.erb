@@ -1,0 +1,37 @@
+<% content_for (:head) do %>
+<%= stylesheet_link_tag "jquery.Jcrop" %>
+<%= javascript_include_tag "jquery.Jcrop.min" %>
+<script type="text/javascript">
+  $(function() {
+    $('#cropbox').Jcrop({
+       onChange: update_crop,
+       onSelect: update_crop,
+       setSelect: [0, 0, 540, 385],
+       aspectRatio: 0
+    });
+  });
+  
+  function update_crop(coords){
+     var ratio = <%= @image.img_geometry(:original).width %> / <%= @image.img_geometry(:large).width %>; 
+       $('#crop_x').val(Math.floor(coords.x * ratio));
+       $('#crop_y').val(Math.floor(coords.y * ratio));
+       $('#crop_w').val(Math.floor(coords.w * ratio));
+       $('#crop_h').val(Math.floor(coords.h * ratio));    
+  }
+</script>
+<% end %>
+<div class="container">
+   <div class="span10">
+      <br/>
+   <strong> For best result, crop your image to fit the gallery window. </strong> <br/><br/>  
+   
+<%= image_tag @image.photo.url(:large), :id => "cropbox" %> <br/>
+<%= form_for @image do |f| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+  <%= f.hidden_field attribute, id: attribute %>
+  <% end %>
+  <%= f.submit "Crop", id: "blue-button"%>
+<% end %>
+</div>
+
+</div>

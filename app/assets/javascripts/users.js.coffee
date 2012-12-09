@@ -6,7 +6,7 @@
 jQuery ->   
    thumbrange = (num) -> 
       $("#imgthumb#{num}").click ->  
-         newsrc = $("#imgthumb#{num}").attr("src").replace('medium', 'large')
+         newsrc = $("#imgthumb#{num}").attr("src").replace('thumb', 'large')
          id = $(this).data('id')
          $("#displayimg").replaceWith("<img id='displayimg' src='#{newsrc}' data-id='#{id}' />")
          img_path = "<a href='/images/#{id}'>"
