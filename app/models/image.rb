@@ -3,8 +3,9 @@ class Image < ActiveRecord::Base
   attr_accessible :photo, :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   has_attached_file :photo, :styles => {:thumb => "80x70#", :medium => "400x385#", :large => "700x700>"},
-                    :processors => [:cropper]
-                    
+                    :processors => [:cropper],
+                    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+                    :url => "/system/:attachment/:id/:style/:filename"
   validates_attachment_presence :photo
   validates_attachment_size :photo, :less_than => 1.megabytes
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
