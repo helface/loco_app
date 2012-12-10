@@ -18,4 +18,8 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require bootstrap-dropdown
+//= require jquery.color
+//= require jquery.Jcrop
+//= require jquery.Jcrop.min
+//= require jquery.min
 //= require_tree .
