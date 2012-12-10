@@ -46,7 +46,7 @@ LocoApp::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( search.js )
+  config.assets.precompile += ['jquery.color.js', 'jquery.Jcrop.js', 'jquery.Jcrop.min.js', 'jquery.min.js']
   #config.assets.precompile += Ckeditor.assets
 
   # Disable delivery errors, bad email addresses will be ignored
