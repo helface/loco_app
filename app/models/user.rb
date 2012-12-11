@@ -62,8 +62,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
   validates_uniqueness_of :email
 
-  validates :password, length:{minimum: 6}
-  validates :password_confirmation, presence: true
+  validates_presence_of :password, length:{minimum: 6}, if: Proc.new{|user| user.new_record?}
+  validates_presence_of :password_confirmation, presence: true, if: Proc.new{|user| user.new_record?}
   
   MAX_NUM_PICTURES = 7; 
   GENDER = {'female'=>1, "male" => 2}

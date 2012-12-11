@@ -83,6 +83,9 @@ before_filter :location_specified, only: :index
       flash[:success] = "Profile picture successfully updated"
       sign_in @user
       redirect_to @user
+    else
+      flash[:error] = "#{@user.errors.full_messages}"
+      redirect_to session[:prev]
     end
   end
  

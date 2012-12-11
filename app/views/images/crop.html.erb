@@ -1,7 +1,6 @@
 <div class="container">
    <div class="span10">
       <br/>
-      <% debugger %>
    <strong> For best result, crop your image to fit the gallery window. </strong> <br/><br/>  
 <%= image_tag @image.photo.url(:large), :data => {:ratio => @image.width_ratio}, :id => "cropbox" %> <br/>
 <%= form_for @image do |f| %>
