@@ -1,9 +1,11 @@
 <% provide(:title, 'become host') %>
-<div class="span10">
-   <div class="row vertical-align:middle">
-      <%= image_tag find_display_imgurl(@user.id, "thumb"), id: "profile-thumb" %>	  
-      <strong style="font-size:1.3em; margin-left:10px">Become a host</strong>
-   </div>
+<div class="filler"></div>
+
+<%= render "shared/your_header", id: current_user.id, text: "Become a host" %>
+<br/>
+<div class="container" id="white">
+
+<div class="span10 offset1">
    
    <div class="row">
       <%= render 'shared/edit_tabs'%>
@@ -12,3 +14,5 @@
    <br>
    <%= render 'form_become_host' %>
 </div>
+</div>
+
