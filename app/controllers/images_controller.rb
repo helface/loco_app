@@ -11,6 +11,7 @@ class ImagesController < ApplicationController
         return
       end
       @image = @user.images.build(params[:image])
+      @image.get_original_dimensions
       if @image.save
         #set default profile picture
         if @image == @user.images.first

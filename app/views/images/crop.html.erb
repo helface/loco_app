@@ -1,13 +1,12 @@
 <div class="container">
    <div class="span10">
       <br/>
+      <% debugger %>
    <strong> For best result, crop your image to fit the gallery window. </strong> <br/><br/>  
-<%= @image.img_geometry(:original).width %>
-<%= @image.img_geometry(:large).width %>
-<%= image_tag @image.photo.url(:large), :data => {:original => @image.img_geometry(:original).width, :large => @image.img_geometry(:large).width}, :id => "cropbox" %> <br/>
+<%= image_tag @image.photo.url(:large), :data => {:ratio => @image.width_ratio}, :id => "cropbox" %> <br/>
 <%= form_for @image do |f| %>
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-  <%= f.text_field attribute, id: attribute %>
+  <%= f.hidden_field attribute, id: attribute %>
   <% end %>
   <%= f.submit "Crop", id: "blue-button"%>
 <% end %>

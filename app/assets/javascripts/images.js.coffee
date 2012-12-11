@@ -4,10 +4,8 @@
 
 jQuery ->
 
-   update_crop = (coords) ->
-      orig = $('#cropbox').data('original')
-      large = $('#cropbox').data('large')
-      ratio = orig / large 
+   update_crop = (coords) ->    
+      ratio = $('#cropbox').data('ratio')
       $('#crop_x').val(Math.floor(coords.x * ratio))
       $('#crop_y').val(Math.floor(coords.y * ratio))
       $('#crop_w').val(Math.floor(coords.w * ratio))
