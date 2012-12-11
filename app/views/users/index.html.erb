@@ -57,24 +57,21 @@
    </div>
 </div>
 <div class="container">
-   
-         <%= will_paginate %>  
-            <% n = 0 %>     
-            <div class="row" style="margin-top: 20px">
-               <% @users.each do |u| %>
-                  <%= render u %>
-                  <% n+=1 %>
-                  <% if n % 3 == 0 %>
-                     </div>
-                     <div class="row" style="margin-top: 20px">
-                  <% end %>
-               <% end %>
+   <%= will_paginate %>  
+   <% n = 0 %>     
+   <div class="row">
+      <% @users.each do |u| %>
+         <%= render u %>
+         <% n+=1 %>
+         <% if n % 3 == 0 %>
             </div>
+            <div class="row">
+         <% end %>
+      <% end %>
       </div>
       <%= will_paginate %>
-   <% end %>
-        
-
+      </div>
+   <% end %>        
 <div class="filler">
 </div>
   

@@ -11,7 +11,7 @@ before_filter :location_specified, only: :index
   # GET /users.json
   def index  
       store_nav_history
-      @users = @city.hosts.paginate(page: params[:page], per_page: 7)
+      @users = @city.hosts.paginate(page: params[:page], per_page: 9)
   end
 
   # GET /users/1
