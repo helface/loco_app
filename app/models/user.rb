@@ -54,16 +54,16 @@ class User < ActiveRecord::Base
   
   validates_presence_of :languages, :if => :is_host? 
   #TODO remove these for production
-  #validates :firstname, presence:true, length:{maximum: 20}
-  #validates :lastname, presence: true, length:{maximum: 20}
+  validates :firstname, presence:true, length:{maximum: 20}
+  validates :lastname, presence: true, length:{maximum: 20}
   
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  #validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
+  validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
   validates_uniqueness_of :email
 
-  #validates :password, length:{minimum: 6}
-  #validates :password_confirmation, presence: true
+  validates :password, length:{minimum: 6}
+  validates :password_confirmation, presence: true
   
   MAX_NUM_PICTURES = 7; 
   GENDER = {'female'=>1, "male" => 2}
