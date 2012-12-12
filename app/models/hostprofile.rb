@@ -13,7 +13,7 @@ class Hostprofile < ActiveRecord::Base
   #has appointment requests from travelers
   
   #validates_presence_of :languages, :serviceDesc
-  validates :greenDesc, presence: true, length: {maximum: 500}
+  validates :greenDesc, presence: true, length: {maximum: 2000}
   validates :intro, presence: true, length: {maximum: 140}
   validates :serviceDesc, presence:true, length: {maximum: 2000}
   validates_presence_of :city_id, :country_id
