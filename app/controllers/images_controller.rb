@@ -14,7 +14,6 @@ class ImagesController < ApplicationController
       @image.get_original_dimensions
       if @image.save
         #set default profile picture
-        debugger
         if @image == @user.images.first
           @user.update_attributes(:profile_pic_id => @image.id)
           sign_in @user

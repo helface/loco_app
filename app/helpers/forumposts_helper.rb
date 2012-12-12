@@ -6,7 +6,6 @@ module ForumpostsHelper
   end
   
   def increment_respond_counter(id)
-    #debugger
     post = Forumpost.find(id)
     post.increment(:responded_count)   
   end

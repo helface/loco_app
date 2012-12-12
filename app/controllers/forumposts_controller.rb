@@ -26,7 +26,6 @@ before_filter :correct_user, only:[:destroy]
   
   def create    
      #TODO: have the posts automatically expire in 7 days
-    debugger
     @post = current_user.forumposts.build(params[:forumpost]) 
     if @post.save 
       flash[:success] = "Your post has been successfully posted"
