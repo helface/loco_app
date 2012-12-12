@@ -2,6 +2,7 @@ class Hostprofile < ActiveRecord::Base
   attr_accessible :language_tokens, :intro, :tele, :serviceDesc, :service, :aboutme
   attr_accessible :price, :greenDesc, :city_id, :country_id, :currency, :exchange_type, :language_practice
   
+  #has appointment requests from travelers
   has_many :appt_requests, class_name: "Appointment", foreign_key: "host_id", dependent: :destroy
   scope :by_service, lambda { |service| where(:service => service) }
   belongs_to :user
@@ -10,9 +11,6 @@ class Hostprofile < ActiveRecord::Base
   attr_accessor  :language_tokens
   attr_writer :current_step
   
-  #has appointment requests from travelers
-  
-  #validates_presence_of :languages, :serviceDesc
   validates :greenDesc, presence: true, length: {maximum: 2000}
   validates :intro, presence: true, length: {maximum: 140}
   validates :serviceDesc, presence:true, length: {maximum: 2000}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104002200) do
+ActiveRecord::Schema.define(:version => 20121212025309) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -75,25 +75,25 @@ ActiveRecord::Schema.define(:version => 20121104002200) do
     t.string   "tele"
     t.text     "serviceDesc"
     t.string   "exchange_type"
-    t.string   "greenDesc"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.text     "greenDesc",         :limit => 255
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "user_id"
     t.integer  "city_id"
     t.integer  "country_id"
-    t.integer  "recommend_count",   :default => 0
-    t.integer  "unrecommend_count", :default => 0
-    t.integer  "contacted_count",   :default => 0
-    t.integer  "responded_count",   :default => 0
+    t.integer  "recommend_count",                  :default => 0
+    t.integer  "unrecommend_count",                :default => 0
+    t.integer  "contacted_count",                  :default => 0
+    t.integer  "responded_count",                  :default => 0
     t.integer  "service"
     t.integer  "price"
     t.string   "currency"
-    t.float    "score",             :default => 0.0
+    t.float    "score",                            :default => 0.0
     t.string   "intro"
-    t.integer  "completed_count",   :default => 0
+    t.integer  "completed_count",                  :default => 0
     t.string   "language_practice"
-    t.boolean  "languages_filled",  :default => false
-    t.boolean  "deactivated",       :default => false
+    t.boolean  "languages_filled",                 :default => false
+    t.boolean  "deactivated",                      :default => false
   end
 
   add_index "hostprofiles", ["deactivated"], :name => "index_hostprofiles_on_deactivated"
