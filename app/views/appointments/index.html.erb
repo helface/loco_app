@@ -35,9 +35,13 @@
          <% elsif params[:folder] == "history"%>
             <% appts = @requested_appts.inactive unless @requested_appts.nil? %>
             <% appts = appts + @appt_requests.try(:inactive) unless @appt_requests.nil? %>
+            <div class="span9">
+               
             <% appts.each do |a| %>
                <%= render "history", appointment: a %>
             <% end %>
+            </div>
+            
          <% end %>
       </div>
       
