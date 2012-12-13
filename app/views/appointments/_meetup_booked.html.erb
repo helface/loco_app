@@ -2,7 +2,7 @@
 <% host = profile.user unless profile.nil? %>
 <% traveler = User.find_by_id(appointment.traveler_id) %>
 <%= link_to user_appointment_path(current_user, appointment) do %>
-<div class="booked-block" >
+<div class="booked-block">
    <div class="row">
        <div class="span3" style="width: 200px">
           <b style="color:#E65C5C">Meetup with
@@ -21,41 +21,39 @@
           <% end %>
        </div>
        <div class="span1" style=" margin-left:5px; text-align:right">
-          <div class="row">
-             <% if appointment.date - Date.today >= 2%>
-               <div class="row">
-                  <small>Booked</small>      
-               </div>
-               <div class="row edit_link">
-                  <b>
-                  <%= link_to '<i class="icon-remove" style="color:red"></i> Cancel'.html_safe, user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response"%>                     
-                  </b>
-               </div>
-             <% elsif Date.today > appointment.date %>
-                <% if is_appt_host?(appointment) %>   
-                   <% user = traveler %>
-                   <% title = "traveler" %>
-                <% else %>
-                   <% user = host %>
-                   <% title = "host" %>
-                <% end %>
-                <div class="row">
-                   <small>Happened</small>          
-                </div>
-                <div class="row edit_link">
-                   <b><%= link_to '<i class="icon-pencil"></i>       
-                     Review'.html_safe, user_appointment_complete_appointment_path(user, appointment, review: title)%>
-                   </b>
-                </div>
-                
-                <% else %>
+          <% if appointment.date - Date.today >= 2%>
+             <div class="row">
+                <small>Booked</small>      
+             </div>
+             <div class="row edit_link">
+                <b>
+                <%= link_to '<i class="icon-remove" style="color:red"></i> Cancel'.html_safe, user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response"%>                     
+                </b>
+              </div>
+           <% elsif Date.today > appointment.date %>
+              <% if is_appt_host?(appointment) %>   
+                <% user = traveler %>
+                <% title = "traveler" %>
+              <% else %>
+                <% user = host %>
+                <% title = "host" %>
+              <% end %>
+              <div class="row">
+                 <small>Happened</small>          
+              </div>
+              <div class="row edit_link">
+                <b>
+                <%= link_to '<i class="icon-pencil"></i> Review'.html_safe, user_appointment_complete_appointment_path(user, appointment, review: title)%>
+                </b>
+              </div>    
+           <% else %>
+              <div class="row">
                  <small>Booked </small>
-             <% end %>
-             <br/>
-         </div>
+              </div>
+           <% end %>
+          <br/>
        </div>
    </div>
-      
-</div>    
+</div>
 <% end %>     
 <br/> 
