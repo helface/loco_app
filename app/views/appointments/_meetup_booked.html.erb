@@ -11,19 +11,20 @@
              <% else %>
                 <%= host.firstname.capitalize %>
              <% end %>
-          </b><br/>
+          </b>
+          <br/>
           <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
-          <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%><br/>
-           
-          <%= "#{City.find_by_id(host.hostprofile.city_id).name}, #{Country.find_by_id(host.hostprofile.country_id).name}"%><br/>
+          <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%>
+          <br/> 
+          <%= "#{City.find_by_id(host.hostprofile.city_id).name}, #{Country.find_by_id(host.hostprofile.country_id).name}"%>
+          <br/>
           <%= appointment.date.strftime("%a, %b %d.") %>
           <% if appointment.time %>
              <%= appointment.time.empty? ? "" : "#{appointment.time}" %>
           <% end %>
        </div>
-       <div class="span1" style=" margin-left:5px; text-align:right">
-          <div class="row edit_link">
-          
+       <div class="span" style=" margin-left:-5px;">
+          <div class="edit_link">        
           <% if appointment.date - Date.today >= 2%>
                 <small>Booked</small><br/>      
                 <b>
