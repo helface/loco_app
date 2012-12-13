@@ -48,15 +48,10 @@
                    <% if !signed_in? %>
                       <li>
                       <div class="blocknav">
-                         <%= link_to signup_path do %>
-                            <div class="header-link-block">        
-                               <b>Join </b>
-                               <p> tiniHost </p>
-                            </div>
-                           <% end %>
+                         <%= link_to '<div class="header-link-block"> <b>Join </b> <p> tiniHost </p> </div>'.html_safe, signup_path%>
                        </div>
                        </li>
-                     <% end %>
+                    <% end %>
                   
                   <% if signed_in? %>
                      <%= render 'shared/signedin_header' %>
