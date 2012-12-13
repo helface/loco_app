@@ -10,7 +10,8 @@
                 <%= traveler.firstname.capitalize %>
              <% else %>
                 <%= host.firstname.capitalize %>
-             <% end %></b><br/>
+             <% end %>
+          </b><br/>
           <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
           <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%><br/>
            
@@ -21,15 +22,13 @@
           <% end %>
        </div>
        <div class="span1" style=" margin-left:5px; text-align:right">
+          <div class="row edit_link">
+          
           <% if appointment.date - Date.today >= 2%>
-             <div class="row">
-                <small>Booked</small>      
-             </div>
-             <div class="row edit_link">
+                <small>Booked</small><br/>      
                 <b>
                 <%= link_to '<i class="icon-remove" style="color:red"></i> Cancel'.html_safe, user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response"%>                     
                 </b>
-              </div>
            <% elsif Date.today > appointment.date %>
               <% if is_appt_host?(appointment) %>   
                 <% user = traveler %>
@@ -38,19 +37,14 @@
                 <% user = host %>
                 <% title = "host" %>
               <% end %>
-              <div class="row">
-                 <small>Happened</small>          
-              </div>
-              <div class="row edit_link">
+                 <small>Happened</small><br/>       
                 <b>
                 <%= link_to '<i class="icon-pencil"></i> Review'.html_safe, user_appointment_complete_appointment_path(user, appointment, review: title)%>
                 </b>
-              </div>    
            <% else %>
-              <div class="row">
                  <small>Booked </small>
-              </div>
            <% end %>
+          </div>
           <br/>
        </div>
    </div>
