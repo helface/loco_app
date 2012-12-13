@@ -28,9 +28,7 @@
                </div>
                <div class="row edit_link">
                   <b>
-                  <%= link_to user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response" do%>
-                     <i class="icon-remove" style="color:red"></i> Cancel
-                  <% end %>
+                  <%= link_to '<i class="icon-remove" style="color:red"></i> Cancel'.html_safe, user_appointment_cancel_appointment_path(current_user, appointment), confirm: "Are you sure you want to cancel the meetup?", id: "response"%>                     
                   </b>
                </div>
              <% elsif Date.today > appointment.date %>
@@ -45,10 +43,9 @@
                    <small>Happened</small>          
                 </div>
                 <div class="row edit_link">
-                   <b><%= link_to user_appointment_complete_appointment_path(user, appointment, review: title), do %>
-                    <i class="icon-pencil"></i>       
-                    Review
-                    <% end %></b>
+                   <b><%= link_to '<i class="icon-pencil"></i>       
+                     Review'.html_safe, user_appointment_complete_appointment_path(user, appointment, review: title)%>
+                   </b>
                 </div>
                 
                 <% else %>
