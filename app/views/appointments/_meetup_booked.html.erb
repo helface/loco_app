@@ -23,7 +23,8 @@
              <%= appointment.time.empty? ? "" : "#{appointment.time}" %>
           <% end %>
        </div>
-       <div class="span" style=" margin-left:-5px;">
+       <% end %>
+       <div class="span" style=" margin-left:-5px">
           <div class="edit_link">        
           <% if appointment.date - Date.today >= 2%>
                 <small>Booked</small><br/>      
@@ -50,5 +51,4 @@
        </div>
    </div>
 </div>
-<% end %>     
 <br/> 

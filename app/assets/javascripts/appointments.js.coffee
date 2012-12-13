@@ -9,3 +9,8 @@ jQuery ->
          dateFormat: 'DD, d MM, yy'
          altField: $(this).next()
          minDate: +2
+
+   $('#review_user').click -> 
+      url = $('#review_user').data('url')
+      alert(url)
+      window.location.replace(url)
