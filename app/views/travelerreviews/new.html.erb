@@ -18,7 +18,7 @@
                <small><%= f.input :score, :collection => 1..5, :as => :radio, :label=> "How would you rate your experience?" %></small>
             </div>
             <div id="clear_float inline_review">
-               <%= f.input :comment, label: "Leave a comment (optional)", :as=>"text", :input_html => {:id=>"inline_review"}, :placeholder=>"max 400 characters..."%>
+               <%= f.input :comment, label: "Leave a comment (optional)", :input_html => {:id=>"inline_review"}, :placeholder=>"max 400 characters..."%>
             </div> 
             <%= f.button :submit, "complete meeting", :id=>"blue-button" %>
          </div>

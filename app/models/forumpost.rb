@@ -5,7 +5,7 @@ class Forumpost < ActiveRecord::Base
   validates_inclusion_of :pay, :in=>[false, true]
   
   validates_presence_of :city_id, :country_id, :date
-  validates_presence_of :content, length: {maximum: 400}
+  validates_presence_of :content, length: {maximum: 2000}
   validates_presence_of :title, length:{maximum: 70}
   validate :correct_date
   validates_presence_of :price, :currency, if: Proc.new{|forumpost| forumpost.pay == true}

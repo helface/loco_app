@@ -16,7 +16,7 @@
             </div>   
             <%= f.input :language_tokens, label: false, input_html: { data: {load: Language.prefill_languages(@user.languages)}} %>  
          <div class="field" id="personalform">      
-            <%= f.input :self_intro, label: "Introduce yourself to everyone", as: "text", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
+            <%= f.input :self_intro, label: "Introduce yourself to everyone", input_html: {style: "margin-bottom:0px; padding-bottom:0px"} %>
              
              <a name="picture"></a>        
             

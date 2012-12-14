@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
     t.integer  "country_id"
     t.integer  "responded_count", :default => 0
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
     t.string   "time"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
   end
 
   create_table "reviews", :force => true do |t|
-    t.string   "content"
+    t.text     "content"
     t.integer  "reviewer_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
@@ -167,7 +167,7 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
   end
 
   create_table "travelerreviews", :force => true do |t|
-    t.string   "comment"
+    t.text     "comment"
     t.integer  "score"
     t.integer  "reviewer_id"
     t.integer  "reviewee_id"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
     t.boolean  "confirmed",          :default => false
     t.integer  "profile_pic_id"
     t.integer  "completed_count",    :default => 0
-    t.string   "self_intro",         :default => ""
+    t.text     "self_intro",         :default => ""
     t.date     "birthday"
     t.integer  "gender"
     t.float    "traveler_score",     :default => 0.0

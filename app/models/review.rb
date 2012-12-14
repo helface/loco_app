@@ -13,7 +13,7 @@ class Review < ActiveRecord::Base
    validates :friendliness, :numericality=>{:only_integer => true, :greater_than_or_equal_to=>1, :less_than_or_equal_to=>5}
    validates :enjoybility, :numericality=>{:only_integer => true, :greater_than_or_equal_to=>1, :less_than_or_equal_to=>5}
    validates :easiness, :numericality=>{:only_integer => true, :greater_than_or_equal_to=>1, :less_than_or_equal_to=>5}
-   
+   validates :content, length:{maximum: 2000}
    default_scope order: 'reviews.created_at DESC'
    
    validates_inclusion_of :recommend, :in=>[true, false]
