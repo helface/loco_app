@@ -4,33 +4,13 @@
 <%=render "shared/your_header", id: @user.id, text:"Your settings" %>
 <br/>
 <div class="container" id="white">  
-   <div class="span8 offset1">
+   <div class="span10 offset1">
 
       <div class="row edit_link">
          <%= render 'shared/edit_tabs'%>
       </div>
    
    <%= render 'edit_form' %> 
-  </div>
-  <div class="span2" style="margin-left:40px">
-     <div style="height:100px">
-      
-     </div><br/>
-   <i class="icon-user"></i> Deactivate account<br/><br/>
-   <div>
-      So you need to take a short break huh? No problem, we will wait for your return:). Could you give a brief explanation as to why you are deactivating your account? 
-      If you deactivate your account, you will no longer be able to use any of the features. We will keep all of your information just incase you want to reactivate later. If you want us to delete all of your information, please delete your account. 
-      
-      Are you sure you want to deactivate your account?
-   </div>
-   <i class="icon-trash"></i> Delete account
-   <div id="name">
-      NOOOOooooooooooooooooo, don't leave us!
-      
-      It's ok, you do what you have to do. To ease our broken heart, could you give us a short explanation as to why you're deleting your account? We would really appreciate it.
-       
-      If you delete your account, you will lose all of your information on this site and will no longer be able to log in. Your email address cannot be used to create a new account for one week for security reasons. Are you sure you want to delete your account?
-   </div>
   </div>
 </div>
 <%= render "shared/footer" %>
