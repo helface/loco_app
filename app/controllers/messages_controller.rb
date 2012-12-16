@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
 before_filter :signed_in_user
+before_filter :active_recipient, only:[:create]
 before_filter :is_owner, only: [:destroy, :show]
-
   def new
     @user = User.find(params[:user_id])
     @message = Message.new
@@ -53,9 +53,11 @@ private
      current_user.id == message.owner_id
    end
 
-#def unique_to_from
-#  if User.find(params[:message][:recipient_id]) == current_user
-#    redirect_to root_path
-#  end
-#end
+def active_recipient
+   @recipient = User.find_by_id(params[:user_id])
+   if !@recipient.active?
+     flash[:error] = "Sorry, the recipient is no longer an active user."  
+     redirect_to session[:prev]
+   end
+end
 

@@ -1,5 +1,4 @@
-<% profile = Hostprofile.find_by_id(appointment.host_id) %>
-<% host = profile.user unless profile.nil? %>
+<% host = appointment.host.user unless appointment.host.nil? %>
 <% traveler = User.find_by_id(appointment.traveler_id) %>
   
    <div class="row host_info" style="background-color:#eee">

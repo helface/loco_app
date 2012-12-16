@@ -2,7 +2,7 @@ class Review < ActiveRecord::Base
    attr_accessible :content, :recommend, :accuracy, :friendliness, :enjoybility, :easiness
    
    #TODO:remove this for production
-   attr_accessible :reviewer_id, :reviewee_id
+   #attr_accessible :reviewer_id, :reviewee_id
    
    belongs_to :reviewer, :class_name => "User"
    belongs_to :reviewee, :class_name => "User"  
@@ -17,15 +17,4 @@ class Review < ActiveRecord::Base
    default_scope order: 'reviews.created_at DESC'
    
    validates_inclusion_of :recommend, :in=>[true, false]
-  
-   def calculate_score
-   end
-   
-   def is_host_review?
-    self.is_host_review == true
-   end
-   
-   def is_guest_review?
-    self.is_host_review == false
-   end
 end

@@ -1,4 +1,4 @@
-<% provide(:title, "Request a meetup") %>
+<% provide(:title, "Corkboard") %>
 <div class="container">
    <%= render "corkboard_nav" %>
 </div>
@@ -6,46 +6,51 @@
 <% if params[:view] != "traveler" %>
 
 <div class="container" id="white">
-   <div class="nav nav-tabs tab_link">
+   <br/>
+   <div class="span11"> 
+      <div class="nav nav-tabs tab_link">
+         <% if params[:view] != "traveler" %>
+            <li class="active">
+         <% else %>
+           <li>
+         <% end %>
+         <%= link_to "Corkboard", board_path(view: "host")%></li>
+      
+         <% if params[:view] == "traveler" %>
+            <li class="active"> 
+         <% else %>
+            <li>
+         <% end %>
+         <%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
+      </div>
 
-   <% if params[:view] != "traveler" %>
-      <li class="active">
-   <% else %>
-     <li>
-   <% end %>
-
-   <%= link_to "Corkboard", board_path(view: "host")%></li>
-   <% if params[:view] == "traveler" %>
-      <li class="active"> 
-   <% else %>
-      <li>
-   <% end %>
-   <%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
+      <div class="row" style="">
+         <div class="span8">
+            <h3>
+            <% if !params[:city_country_location].nil? %>
+               <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
+            <% else %>
+               <%= "All recent posts"%>
+            <% end %>
+            </h3>      
+         </div>
+      </div>
+      <br/>
+      <div class='row email'>    
+         <% if @posts.empty? %>
+         <hr>
+            <% if @city.nil? %>
+               Corkboard is empty.
+            <% else %>
+               Corkboard is empty for <%= "#{@city.try(:name)}, #{@country.try(:name)}" %>.
+            <% end %>
+         <% end %>
+         <%= will_paginate @posts%>
+            <%= render 'forumpost' %>
+         <%= will_paginate @posts %>
+      </div>    
    </div>
-<div class="row">
-   <div class="span8">
-      <h3>
-      <% if !params[:city_country_location].nil? %>
-         <%= "Posts in #{@city.try(:name)}, #{@country.try(:name)} (#{@posts.count})"%>
-      <% else %>
-         <%= "All recent posts"%>
-      <% end %></h3>      
-   </div>
-</div>
-<div class="span10 email" style="margin-top:15px">
-      <% if @posts.empty? %>
-      <hr>
-      Corkboard is empty for <%= "#{@city.try(:name)}, #{@country.try(:name)}" %>.
-      <% end %>
-      <%= will_paginate @posts%>
-         <%= render 'forumpost' %>
-      <%= will_paginate @posts %>
-</div>
 <% end %>
-
-  
 </div>
-<div class="filler">
-
-</div>
+<div class="filler"></div>
 

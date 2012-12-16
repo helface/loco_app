@@ -8,7 +8,8 @@
       <%= simple_form_for @user do |f| %>   
          <%= render 'shared/error_messages', :obj=>@user %>           
          <div class="field" id="personalform">      
-            <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14, input_html:{id: "short"}%>
+            <%= f.input :birthday, label: "When were you born?", as: "date", start_year: Date.today.year - 80, end_year: Date.today.year - 14, prompt: "select", selected: "select", input_html:{id: "short"}%>
+           
             <%= f.input :gender, collection: User::GENDER, input_html:{id: "short"} %> 
          </div>   
             <div id="personalform">

@@ -8,7 +8,7 @@
    <% end %>
 </div>
 <small id="hint"> 
-   <%= "#{@user.calc_age} /" unless @user.birthday.nil? %> <%=" #{User::GENDER.invert[@user.gender]} /" unless @user.gender.nil? %> traveler<%= " / host" if profile %> 
+   <%= "#{@user.calc_age} /" unless @user.birthday.nil? %> <%=" #{User::GENDER.invert[@user.gender]} /" unless @user.gender.nil? %> traveler<%= " / host" if @user.is_host? %> 
 </small><br/>
 <% if !@user.languages.nil? %>
    <% @user.languages.each do |l|%>

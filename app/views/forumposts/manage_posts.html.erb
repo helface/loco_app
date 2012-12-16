@@ -4,18 +4,35 @@
 </div>
 
 <div class="container" id="white">
+   <div class="span10" style="margin-top:15px">
    
+   <div class="nav nav-tabs tab_link">
+      <% if params[:view] != "traveler" %>
+         <li class="active">
+      <% else %>
+        <li>
+      <% end %>
+      <%= link_to "Corkboard", board_path(view: "host")%></li>
+      
+      <% if params[:view] == "traveler" %>
+         <li class="active"> 
+      <% else %>
+         <li>
+      <% end %>
+      <%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
+   </div>
 <br/>
 <div style="text-align:right">
    <%= link_to "New post", new_forumpost_path, id: "pink-button" %>  
 </div>
 <div class="filler"></div>
-<div class="span10 offset1 email" style="margin-top:15px">
+<div class="row email">
       <% if @posts.empty? %>
          You have not posted anything on the corkbaord yet. Go go, post a new request. 
       <% end %>
       <%= will_paginate @posts%>
          <%= render 'forumpost' %>
       <%= will_paginate @posts %>
+</div>
 </div>
 </div>

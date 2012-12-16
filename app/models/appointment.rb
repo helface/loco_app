@@ -46,7 +46,7 @@ class Appointment < ActiveRecord::Base
            when Status::NOT_AVAILABLE then return "responded unavailable"   
            when Status::REJECTED then return "canceled"  
            when Status::EXPIRED then return "expired"
-           when Status::DEACTIVATED then return "host no longer active"
+           when Status::DEACTIVATED then return "user no longer active"
          end
       elsif is_traveler?(current_user_id)
          if self.status == Status::BOOKED && Date.today > self.date  
@@ -61,7 +61,7 @@ class Appointment < ActiveRecord::Base
             when Status::NOT_AVAILABLE then return "host not available"   
             when Status::REJECTED then return "canceled"  
             when Status::EXPIRED then return "expired"       
-            when Status::DEACTIVATED then return "host no longer active"
+            when Status::DEACTIVATED then return "user no longer active"
               
          end
       end
@@ -126,7 +126,7 @@ class Appointment < ActiveRecord::Base
   
   def complete_appointment(id)
     if self.status == Status::BOOKED && self.happened?
-       if self.host_id == id
+       if self.host.user.id == id
          self.host_completed = true
        elsif self.traveler_id == id
          self.traveler_completed = true
@@ -176,7 +176,7 @@ class Appointment < ActiveRecord::Base
   private
   
   def correct_date
-    errors.add(:date, 'meeting date must be 2 days in advance') unless self.date >= DateTime.now.to_date || self.status == Status::EXPIRED || self.status == Status::COMPLETED || self.status == Status::BOOKED
+    errors.add(:date, 'meeting date must be 2 days in advance') unless !self.date.nil? && (self.date >= DateTime.now.to_date || self.status == Status::EXPIRED || self.status == Status::COMPLETED || self.status == Status::BOOKED)
   end
   
   def is_host?(current_user_id)

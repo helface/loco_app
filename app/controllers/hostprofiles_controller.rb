@@ -1,7 +1,7 @@
 class HostprofilesController < ApplicationController
-  #TODO: fix these verifications!
   before_filter :not_host_already, only: [:new, :create]
-  before_filter :is_user_self, only: [:destroy, :deactivate, :reactivate]
+  before_filter :is_user_self, only: [:update, :edit, :deactivate, :reactivate]
+  before_filter :signed_in_user, only:[:new, :create, ]
     def new
       session[:form_params] ||= {}
       @user = current_user
@@ -53,27 +53,22 @@ class HostprofilesController < ApplicationController
     end
 
     def edit
-      store_nav_history
-      @hostprofile = Hostprofile.find_by_id(params[:id])
-      @user = @hostprofile.user    
+      store_nav_history   
     end
 
     # PUT /users/1
     # PUT /users/1.json
     def update      
-      @hostprofile = Hostprofile.find_by_id(params[:id])
-      @user = @hostprofile.user
-      if @hostprofile.update_attributes(params[:hostprofile])
+      if current_user?(@user) && @hostprofile.update_attributes(params[:hostprofile])
           flash[:success] = "Profile successfully updated"
           redirect_to session[:prev]
       else
+          flash[:error] = "Sorry, we could not update your profile at this time."
           render 'edit'
       end
     end
     
     def deactivate
-      @hostprofile = Hostprofile.find_by_id(params[:id])
-      @user = @hostprofile.user
       @hostprofile.toggle!(:deactivated)
       @user.toggle_host_status
       sign_in @user
@@ -86,25 +81,13 @@ class HostprofilesController < ApplicationController
     end
     
     def reactivate
-      @hostprofile = Hostprofile.find_by_id(params[:id])
-      @user = @hostprofile.user
       @hostprofile.toggle!(:deactivated)
       @user.toggle_host_status
       sign_in @user
       flash[:success] = "Welcome back! Your host status has been reactivated"
       redirect_to current_user    
     end
-    def destroy
-      if @hostprofile.destroy
-        current_user.toggle_host_status
-        sign_in current_user
-        flash[:success] = "Your host status has been removed."
-      else
-        flash[:error] = "sorry, host profile failed to delete"
-      end
-      redirect_to current_user
-    end
-
+    
     #making sure only non-hosts can become hosts
     #TODO: make this into a user class method
     def not_host_already
@@ -116,9 +99,7 @@ class HostprofilesController < ApplicationController
     #making sure that only the user self can delete his/her own profile
     def is_user_self
       @hostprofile = Hostprofile.find(params[:id])
-      unless current_user?(User.find(@hostprofile.user_id))
-        #unless @hostprofile.user_id == current_user.id       
-        redirect_to root_path
-      end
+      @user = @hostprofile.user
+      redirect_to root_path unless !@hostprofile.nil? && current_user?(@user)
     end
 end

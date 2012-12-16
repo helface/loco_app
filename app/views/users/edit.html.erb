@@ -4,13 +4,36 @@
 <%=render "shared/your_header", id: @user.id, text:"Your settings" %>
 <br/>
 <div class="container" id="white">  
-   <div class="span10 offset1">
+   <div class="span8 offset1">
 
       <div class="row edit_link">
          <%= render 'shared/edit_tabs'%>
       </div>
    
    <%= render 'edit_form' %> 
+  </div>
+   <div style="height:100px">
+     
+    </div><br/>
+  <div class="span2 edit_link" style="height: 100px; width: 160px; padding:10px; margin-left:30px; background:#ddd; border-bottom: 1px #ccc solid;">
+    
+   <br/>
+    <% if @user.is_host? %>
+       <i class="icon-remove" style="color:#e0467c"></i> <%= link_to 'Deactivate host status', edit_hostprofile_path(@user.hostprofile, deactivate: true) %>
+       <br/><br/>
+    <% elsif !@user.hostprofile.nil? %>
+        <%= link_to 'Reactivate host', reactivate_hostprofile_path(@user.hostprofile), id: "pink-button", confirm: "Are you sure you want to reactivate your host status?" %>
+    <div class="filler">
+      
+    </div>
+    <% else %>
+        <i class="icon-user" style="color:green"></i> <%= link_to 'Become a host', becomehost_path %>
+        <br/><br/>
+    <% end %>    
+    <div class="edit_link">
+      <i class="icon-remove" style="color:#e0467c"> </i> <%= link_to "Deactivate account", toggle_activation_user_path(@user) %>
+    </div>       
+    
   </div>
 </div>
 <%= render "shared/footer" %>

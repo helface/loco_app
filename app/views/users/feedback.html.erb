@@ -1,0 +1,18 @@
+<div class="container" id="white">
+   <div class="span10">
+   <%= render "shared/your_header", id: current_user.id, text: "Feedback" %>   
+   <br/><br/>
+   <strong>NOOooo, don't leave us! <br/><br/>
+   It's ok, you do what you have to do. To ease our broken heart, could you give us a short explanation as to why you're deleting your account? We would really appreciate it! </strong>
+<br/><br/>
+<%= simple_form_for [@user, @feedback] do |f| %>
+   <div id="personalform">
+      <%= f.input :content, label: "Your reason(s) for leaving", placeholder:"max 500 characters..." %>
+   </div>
+   <p id="hint">If you deactivate your account, you will lose all of your pictures, activate meetups, and corkboard posts. You will no longer be able to log in unless you reactivate your account. Are you sure you want to deactivate your account? </p><br/><br/>
+   <%= f.button :submit, "Deactivate", id: "pink-button", class: "pink-button" %>
+<% end %>
+</div>
+
+</div>
+

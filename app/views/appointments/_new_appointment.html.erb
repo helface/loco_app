@@ -13,7 +13,7 @@
          <%= f.input :date, :label=>"When do you want to meetup?", as: :datepicker%>
       </div>
       <div  id="personalform">
-         <%= f.input :flexible, as: :select, label: "Are you flexible with your date?", :input_html=>{:checked => true},selected: "false", :input_html=>{id: "short"}   %>   
+         <%= f.input :flexible, as: :select, label: "Are you flexible with your date?", selected: "false", :input_html=>{id: "short", :checked => true}   %>   
       </div>
       <div  id="personalform">
          <%= f.input :time, :collection => Appointment::TIME, :label=>"Approximate time of day you want to meeting at?", :prompt=>"select a time" %>   
@@ -22,7 +22,7 @@
          <%= f.input :groupsize, label: "What is your group size?", :input_html=>{id: "short"} %>
       </div>
       <div id="personalform">
-         <%= f.input :message, label: "Additional message", :as=>"text", :placeholder=>"max 400 characters..."%>
+         <%= f.input :message, label: "Additional message", :placeholder=>"max 400 characters..."%>
       </div>      
       <%= f.button :submit, "send request", :id=>"blue-button", :class=>"blue-button" %> 
    <% end %>

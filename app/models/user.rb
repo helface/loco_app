@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
   serialize :languages
   attr_accessor  :language_tokens
   attr_writer :old_password
-  
-  
+  scope :active, :conditions => ["deactivated = ?", false]
+   
   has_many :images, :dependent => :destroy
   
   #has many reviews
@@ -53,7 +53,6 @@ class User < ActiveRecord::Base
   before_save {|user| user.email = email.downcase}
   
   validates_presence_of :languages, :if => :is_host? 
-  #TODO remove these for production
   validates :firstname, presence:true, length:{maximum: 20}
   validates :lastname, presence: true, length:{maximum: 20}
   validates :self_intro, length:{maximum:2000}
@@ -62,7 +61,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
   validates_uniqueness_of :email
 
-  validates_presence_of :password, length:{minimum: 6}, if: Proc.new{|user| user.new_record?}
+  validates_presence_of :password, presence: true, length:{minimum: 6}, if: Proc.new{|user| user.new_record?}
   validates_presence_of :password_confirmation, presence: true, if: Proc.new{|user| user.new_record?}
   
   MAX_NUM_PICTURES = 7; 
@@ -118,26 +117,41 @@ class User < ActiveRecord::Base
      end
   end
   
-  def id_num
-    self.id
-  end
-  
   def language_tokens=(langs)
     self.languages = langs.split(",")
-  end
-  
-  def calc_guest_abg_score
   end
   
   def at_max_picture?
     self.images.count == MAX_NUM_PICTURES
   end
+  
   def toggle_host_status
     self.toggle!(:is_host)
   end
   
   def toggle_confirm_status
     self.toggle!(:confirmed)
+  end
+  
+  def deactivate_user
+    self.requested_appts.each do |a|
+      a.deactivate_appointment
+    end
+    self.forumposts.each do |f|
+      f.destroy
+    end
+    self.images.each do |i|
+      i.destroy
+    end
+    
+    if is_host?
+      appts = self.hostprofile.appt_requests || []
+      appts.each do |a|
+        a.deactivate_appointment
+      end
+      self.hostprofile.toggle!(:deactivated)
+      self.toggle_host_status
+    end
   end
   
   def confirm_status?(token) 
@@ -149,12 +163,16 @@ class User < ActiveRecord::Base
     end
   end
   
+  def active?
+    self.deactivated == false
+  end
+  
   def set_default_profile_pic
     if self.profile_pic_id.nil? 
       self.profile_pic_id = self.images.first.nil? ? nil : self.images.first.id  
     end
   end
-
+  
   private
 
   def create_tokens

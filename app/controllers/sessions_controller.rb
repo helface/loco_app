@@ -7,8 +7,12 @@ before_filter :confirmed_user, only: :create
 
   def create
     if @user && @user.authenticate(params[:session][:password])
-      sign_in @user
-      redirect_back_or @user
+      if @user.active?  
+        sign_in @user
+        redirect_back_or @user
+      else
+        redirect_to toggle_activation_user_path(@user)
+      end
     else
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'

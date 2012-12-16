@@ -1,21 +1,18 @@
 class UsersController < ApplicationController
-#TODO: correct signup email configuration
 #TODO: user friendly URL to hide user id. Use to_param or something similar
 respond_to :html, :json
 before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend, :update_profile_pic]    
-before_filter :correct_user, only: [:edit, :update, :update_profile_pic]
+before_filter :active_user, only: [:show]
+before_filter :correct_user, only: [:edit, :update, :update_profile_pic, :deactivate]
 before_filter :location_specified, only: :index
 #before_filter :admin_user, only: :destroy
     
-  # GET /users
-  # GET /users.json
+ 
   def index  
       store_nav_history
       @users = @city.hosts.paginate(page: params[:page], per_page: 9)
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
     session[:form_step] = session[:form_params] = nil
     @user = User.find(params[:id])
@@ -24,12 +21,10 @@ before_filter :location_specified, only: :index
     @treviews = @user.treviews_received.paginate(page: params[:page], per_page: 10)
   end
 
-
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
     store_nav_history
     @image = Image.new
@@ -37,7 +32,6 @@ before_filter :location_specified, only: :index
     @hostprofile = @user.hostprofile
   end
 
-  
   def create
     @user = User.new(params[:user])
     if @user.save        
@@ -50,7 +44,6 @@ before_filter :location_specified, only: :index
         render 'new'
     end
   end
-
   
   def update        
      if params[:controller] == 'users'
@@ -92,11 +85,49 @@ before_filter :location_specified, only: :index
  
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to users_path
-      # respond_to do |format|
-      #format.html { redirect_to users_url }
-      #format.json { head :no_content }
+    #@user.destroy
+    redirect_to root_path
+  end
+  
+  def toggle_activation
+    @user = User.find_by_id(params[:id])
+    if current_user?(@user) && @user.active?
+       @feedback = Feedback.new
+       @user = User.find_by_id(params[:id])
+       render 'feedback'
+    elsif !@user.active?
+      render 'reactivate'
+    else
+      redirect_to root_path
+    end
+  end
+  
+  def reactivate
+    @user = User.find_by_id(params[:id])
+    redirect_to root_path unless @user
+    if @user.authenticate(params[:user][:password]) && !@user.active?      
+       if @user.toggle!(:deactivated)
+          flash[:success] = "You account has been reactivated. Welcome back!"
+          sign_in @user
+          redirect_to @user
+       else
+          redirect_to root_path
+       end
+       #TODO: send reactivation mail
+    else
+      flash.now[:error] = "The password you have entered is incorrect. Please try again."
+      render "reactivate"
+    end
+  end
+  
+  def deactivate
+    if @user.active?
+       @user.toggle!(:deactivated)
+       @user.deactivate_user
+       sign_out
+       flash[:success] = "Your account has been deactivated. Come back soon!"
+    end
+    redirect_to root_path
   end
   
   def mailfriend
@@ -156,6 +187,14 @@ private
     end
   end
     
+  def active_user
+     @user = User.find_by_id(params[:id]) 
+     if !@user.active?
+       flash[:error] = "Sorry, this user is no longer active"
+       redirect_to session[:prev]
+     end
+  end
+  
   def admin_user
       redirect_to(root_path) unless current_user.admin? && !current_user?(@user)
   end

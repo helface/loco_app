@@ -9,10 +9,11 @@ LocoApp::Application.routes.draw do
  # root to: "pages#home"
  # mount Sidekiq::Web, at: "/sidekiq"
   
-  resources :users do
+  resources :users, only:[:new, :show, :index, :create, :edit, :update] do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :reviews, only: [:new, :create, :destroy]
     resources :travelerreviews, only: [:new, :create, :destroy]
+    resources :feedbacks, only: [:create]
     resources :appointments do
       get :make_available
       get :cancel_appointment
@@ -27,6 +28,9 @@ LocoApp::Application.routes.draw do
       post :mailfriend
       get :confirm
       get :update_profile_pic
+      get :toggle_activation
+      put :reactivate
+      get :deactivate
     end
   end
   resources :sessions, only: [:create, :destroy]

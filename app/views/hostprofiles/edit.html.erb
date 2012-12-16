@@ -15,7 +15,12 @@
          </div>
          <br/>
          
+         <% if params[:deactivate] == "true" %>
+         
+         <div class="edit-section" style="margin-top:5px" id="deactivate_host_block">
+         <% else %>
          <div class="edit-section" style="display:none; margin-top:5px" id="deactivate_host_block">
+         <% end %>
          <div style="background:white; padding:10px; border-radius: 3px;">
             <p id="hint">Aww, we will miss you! All your host information will be kept such that you may reactivate your host status at any time. Travelers will no longer see your host information and you will not be listed in any search results. <br/><br/><b>Please note that any booked meetups you have will remain active until they are completed.</b></p>
                <div id="name" style="text-align: right; height: 45px">

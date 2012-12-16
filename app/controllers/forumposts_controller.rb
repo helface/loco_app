@@ -1,9 +1,9 @@
 class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
-before_filter :signed_in_user, only: [:create, :index, :show]
+before_filter :signed_in_user, only: [:create, :index, :show, :manage_posts]
 before_filter :correct_user, only:[:destroy]
-
+before_filter :active_recipient, only: [:create_response]
   def index
     store_nav_history
     @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
@@ -92,6 +92,15 @@ before_filter :correct_user, only:[:destroy]
   def correct_user
     post = Forumpost.find_by_id(params[:id])
     current_user?(post.user)
+  end
+  
+  def active_recipient
+    @post = Forumpost.find(params[:id])
+    @recipient = User.find_by_id(@post.user_id)
+    if @recipient.nil? || !@recipient.active?
+      flash[:error] = "Sorry, the recipient is no longer an active user."
+      redirect_to session[:prev]
+    end
   end
   
 end

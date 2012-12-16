@@ -14,7 +14,6 @@ class AppointmentsController < ApplicationController
     traveler = current_user
     @user = User.find_by_id(params[:user_id])
     @appointment = traveler.requested_appts.build(params[:appointment])
-    
     if @user.hostprofile
        profile = @user.hostprofile
        @appointment.host_id = profile.id
@@ -121,7 +120,6 @@ class AppointmentsController < ApplicationController
      @user = User.find_by_id(params[:user_id])
           
      if @appointment.complete_appointment(current_user.id)
-        #@user = Hostprofile.find_by_id(@appointment.host_id).user        
         @appointment.host.increment_completed_count
         
         if params[:review] == "host"

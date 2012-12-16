@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212025309) do
+ActiveRecord::Schema.define(:version => 20121216170948) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
   create_table "countries", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -197,6 +203,7 @@ ActiveRecord::Schema.define(:version => 20121212025309) do
     t.float    "traveler_score",     :default => 0.0
     t.string   "languages"
     t.string   "facebook"
+    t.boolean  "deactivated",        :default => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
