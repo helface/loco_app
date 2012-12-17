@@ -1,22 +1,41 @@
 <div class = "container">
+   <div class="filler">
+      
+   </div>
    <div class="homepage">      
-      <div class="span11">
-         <div class="row">       
-            <h2> Where are you going?</h2>
-         </div>    
-         <div class="filler"></div>               
+      <div class="span11">         
          <div class="row" id="location-button">
+            <div class="span5" style=" margin-left:0px; padding-right:40px; border-right:1px #eee solid">
+            
+            <h1> Travelers </h1><br/>
+            <strong>Where are you going?</strong><br/><br/>
             <%= link_to image_tag("sanfran.png", alt: "San Francisco"), fill_location_path(city_country_location: "San Francisco, United States") %>
             <%= link_to image_tag("seattle.png", alt: "Seattle"), fill_location_path(city_country_location: "Seattle, United States") %>
             <%= link_to image_tag("newyork.png", alt: "New York"), fill_location_path(city_country_location: "New York, United States") %>
             <%= link_to image_tag("toronto.png", alt: "Toronto"), fill_location_path(city_country_location: "Toronto, Canada") %>
             <%= link_to image_tag("london.png", alt: "London"), fill_location_path(city_country_location: "London, United Kingdom"), class: "seattle-icon" %>           
             <%= link_to image_tag("paris.png", alt: "Paris"), fill_location_path(city_country_location: "Paris, France") %>
+            <br><br/>
+            
+            <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>        
+            </div>
+            <div class="span5" style="margin-left:0px">
+               <h1> Locals </h1><br/>
+               <div class="span4" style="margin-left:40px">
+                  <strong> Become a tiniHost to make some friends, earn some money, or practice a new language. </strong><br/><br>
+               </div>
+               <%= image_tag "collage_host.png", alt: "adventures collage", size: "290x110"%><br/> 
+               <br/><br/>
+               <% if signed_in? %>
+                  <%= button_to "Join!", becomehost_path, id:"pink-button" unless current_user.is_host? %>
+               <% else %>
+                  <%= button_to "Join!", signup_path, id: "pink-button" %>
+              <% end %>                     
+            </div>
          </div>
-         <div class="row" style="height:120px" id="location-button">
-           <br>
-            <!-- TODO: make this a link or a popup -->
-            <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>
+         
+         
+         <div class="row" style="height:80px">
          </div>
          <div class="row" id="location-button">
             <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/tiniHost" %>
