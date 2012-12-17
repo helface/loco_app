@@ -27,7 +27,7 @@
                <%= image_tag "collage_host.png", alt: "adventures collage", size: "290x110"%><br/> 
                <br/><br/>
                <% if signed_in? %>
-                  <%= button_to "Join!", becomehost_path, id:"pink-button" unless current_user.is_host? %>
+                  <%= button_to "Become Host!", becomehost_path, id:"pink-button" unless current_user.is_host? %>
                <% else %>
                   <%= button_to "Join!", signup_path, id: "pink-button" %>
               <% end %>                     
