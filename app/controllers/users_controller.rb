@@ -45,28 +45,26 @@ before_filter :location_specified, only: :index
   end
   
   def update        
-     if params[:controller] == 'users'
-        @user = User.find_by_id(params[:id])
-        if !params[:user][:old_password].nil?
-          if !@user.authenticate(params[:user][:old_password])
-            flash[:error] = "Must enter your current password correctly"
-            redirect_to edit_user_path(@user)
-            return
-          else
-            params[:user].delete :old_password
-          end
-        end
-        if @user.update_attributes(params[:user])
-           flash[:success] = "Profile successfully updated"
-           sign_in @user
-           redirect_to session[:prev]
-           return
-           #respond_with @user, location: user_path(@user)
-        else
-           flash.now[:error] = "failed to update profile"
-        end
-        render 'edit'
-     end
+    @user = User.find_by_id(params[:id])
+    if !params[:user][:old_password].nil?
+      if !@user.authenticate(params[:user][:old_password])
+        flash[:error] = "Must enter your current password correctly"
+        redirect_to edit_user_path(@user)
+        return
+      else
+        params[:user].delete :old_password
+      end
+    end
+    if @user.update_attributes(params[:user])
+       flash[:success] = "Profile successfully updated"
+       sign_in @user
+       redirect_to session[:prev]
+       return
+       #respond_with @user, location: user_path(@user)
+    else
+       flash[:error] = "failed to update profile #{@user.errors.full_messages}"
+       redirect_to edit_user_path(@user, view: "general")     
+    end
   end
 
   def update_profile_pic

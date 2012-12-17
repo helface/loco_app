@@ -37,7 +37,12 @@
          <% lang_opt_visibility = (selected=="language practice") ? "block" : "none" %>
          <div id="price_opt" class="field" style= "<%= "display: #{price_opt_visibility}" %>" >
             <%= f.text_field :price, :placeholder=>"enter price" %>
-            <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %>
+            <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %> <br/>
+            <%= f.label :What_does_your_price_cover %>
+                 <div style="width: 600px">
+                     <small id="light">You selected money as your exchange type. Please tell the traveler what the amount would cover.</small>
+                 </div>
+                 <%= f.text_area :money_cover %>
          </div> 
          <% @languages = Language.order(:name)%>           
            <div id="lang_opt" class="field" style= "<%= "display: #{lang_opt_visibility}" %>" >

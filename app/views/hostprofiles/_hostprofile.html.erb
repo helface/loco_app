@@ -8,6 +8,17 @@
    	<br>
 	   <p><%= simple_format(hostprofile.serviceDesc, :class=>"content") %></p>
 	</div>	
+	<% if hostprofile.exchange_type == "money" %>
+	<div class="row">
+	<br/>
+	  	<hr>
+	</div>
+   <br/>
+	<div class="row">
+     <strong> What the fee will cover</strong>
+     <p> <%= simple_format(hostprofile.money_cover, :class=>"content") %></p>
+	</div>
+	<% end %>
 </div>
 <div class="span4">    
    
@@ -17,8 +28,8 @@
       <%= link_to "#{@user.facebook}", "#{@user.facebook}" %>    
    </div>
    <br/>
-   
    <% end %>
+   
   	<div class="row" style="background-color:#ddd; padding: 10px;"> 
   	   <b> About me </b>	   
   	   <% if @user.self_intro.empty? %>
@@ -30,8 +41,18 @@
         	   <p><%= simple_format(@user.self_intro) %></p>
       <% end %>
 	</div>
+   <% if !hostprofile.prof_exp.nil? && !hostprofile.prof_exp.empty? %>
    <br/>
+   
+      <div class="row" style="background-color:#ddd; padding: 10px">	   
+   	   <b> My qualifications </b>	
+		   <p><%= simple_format(hostprofile.prof_exp) %></p>
+		   </div>
+   <% end %>
+   <br/>
+   
 	<div class="row" style="background-color:#CCFFCC; padding: 10px;">	   
+      
    	<b> <i class="icon-leaf"></i> My green points </b>	
 		<p><%= simple_format(hostprofile.greenDesc) %></p>
 	</div>

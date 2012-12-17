@@ -1,7 +1,8 @@
 class HostprofilesController < ApplicationController
   before_filter :not_host_already, only: [:new, :create]
   before_filter :is_user_self, only: [:update, :edit, :deactivate, :reactivate]
-  before_filter :signed_in_user, only:[:new, :create, ]
+  before_filter :signed_in_user, only: [:new, :create]
+  before_filter :profile_exists, only: [:update, :edit]
     def new
       session[:form_params] ||= {}
       @user = current_user
@@ -53,13 +54,11 @@ class HostprofilesController < ApplicationController
     end
 
     def edit
-      store_nav_history   
+      store_nav_history          
     end
 
-    # PUT /users/1
-    # PUT /users/1.json
-    def update      
-      if current_user?(@user) && @hostprofile.update_attributes(params[:hostprofile])
+    def update   
+      if @hostprofile.update_attributes(params[:hostprofile])
           flash[:success] = "Profile successfully updated"
           redirect_to session[:prev]
       else
@@ -101,5 +100,12 @@ class HostprofilesController < ApplicationController
       @hostprofile = Hostprofile.find(params[:id])
       @user = @hostprofile.user
       redirect_to root_path unless !@hostprofile.nil? && current_user?(@user)
+    end
+    
+    private
+    
+    def profile_exists
+      @hostprofile = Hostprofile.find_by_id(params[:id])
+      redirect_to root_path unless @hostprofile
     end
 end

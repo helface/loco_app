@@ -15,9 +15,14 @@
        <%= f.label :Service_Description %>
        <div style="width: 600px">
          <small id="light">Tell travelers what you are offering. Describe the kind of experience they will get with you as their host. </small>
-       </div>
-       
+       </div>   
        <%= f.text_area :serviceDesc%>
+     </div>
+     <div class="field" id="personalform">
+          <%= f.label :What_relevant_experiences_do_you_have? %>
+          <div style="width: 600px">
+              <small id="light">Tell us if you have any professions certifications or prior experiences hosting or guiding tourists.</small></div>
+          <%= f.text_area :prof_exp %>
      </div>
      <div class="field" id="personalform">
        <%= f.label :green_points %>

@@ -1,5 +1,5 @@
 class Hostprofile < ActiveRecord::Base
-  attr_accessible :language_tokens, :intro, :tele, :serviceDesc, :service, :aboutme
+  attr_accessible :language_tokens, :intro, :tele, :serviceDesc, :service, :aboutme, :money_cover, :prof_exp
   attr_accessible :price, :greenDesc, :city_id, :country_id, :currency, :exchange_type, :language_practice
   
   #has appointment requests from travelers
@@ -11,12 +11,13 @@ class Hostprofile < ActiveRecord::Base
   attr_accessor  :language_tokens
   attr_writer :current_step
   
-  validates :greenDesc, presence: true, length: {maximum: 2000}
+  validates :greenDesc, :serviceDesc, presence: true, length: {maximum: 2000}
   validates :intro, presence: true, length: {maximum: 140}
-  validates :serviceDesc, presence:true, length: {maximum: 2000}
+  validates :prof_exp, length: {maximum: 500}
   validates_presence_of :city_id, :country_id
   validates_presence_of :price, :currency, :if => :exchange_is_money?
   validates_presence_of :language_practice, :if =>:exchange_is_lang?
+  validates_presence_of :money_cover, :if => :exchange_is_money?
   validate :language_filled
    
   #before_validation do |hostprofile|

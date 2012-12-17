@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216170948) do
+ActiveRecord::Schema.define(:version => 20121217012442) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(:version => 20121216170948) do
     t.string   "language_practice"
     t.boolean  "languages_filled",  :default => false
     t.boolean  "deactivated",       :default => false
+    t.text     "money_cover"
+    t.text     "prof_exp"
   end
 
   add_index "hostprofiles", ["deactivated"], :name => "index_hostprofiles_on_deactivated"
