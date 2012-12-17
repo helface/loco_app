@@ -189,7 +189,7 @@ private
     
   def active_user
      @user = User.find_by_id(params[:id]) 
-     if !@user.active?
+     if @user && !@user.active?
        flash[:error] = "Sorry, this user is no longer active"
        redirect_to session[:prev]
      end
