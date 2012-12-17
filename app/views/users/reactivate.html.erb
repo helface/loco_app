@@ -3,7 +3,6 @@
       <br/>
       <strong>Your account is currently deactivated. To sign in, you would have to reactivate your account.</strong> <br/><br/> 
       <strong>Please enter your password to reactivate your account.</strong> <br/><br/>
-      <% puts "***********#{@user.id}*****************"%>
       <%= form_for @user, url: reactivate_user_path(@user) do |f| %>
             <div id="personalform">
          		<%= f.label :password, :style=>"color:#ddd" %>

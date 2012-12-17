@@ -15,7 +15,6 @@ before_filter :location_specified, only: :index
 
   def show
     session[:form_step] = session[:form_params] = nil
-    @user = User.find(params[:id])
     @token = params[:token]  
     @reviews = @user.inverse_reviews.paginate(page: params[:page], per_page: 10)
     @treviews = @user.treviews_received.paginate(page: params[:page], per_page: 10)
