@@ -1,10 +1,18 @@
-<!-- TODO: change host path for production environment -->
-<p> Hello <%= @user.firstname.capitalize %>, </p>
+<div class="span8">
+   <%= link_to image_tag("tinihost2.png", alt:"tinihost logo"), "http://www.tinihost.com" %>
+   <br/><br/>
+   <p> Hello <%= @user.firstname.capitalize %>, </p>
 
-<p> Thank you for registering with tiniHost. Please click on the link below or paste it into your browser to activate your account.</p>
+   <p> Thank you for registering with tiniHost. Please click on the link below or paste it into your browser to activate your account.</p>
 
-<p><%= link_to confirm_user_path(@user, token: @user.confirmation_token, only_path: false), confirm_user_path(@user, token: @user.confirmation_token, only_path: false) %> </p>
-<br/>
+   <p><%= link_to confirm_user_path(@user, token: @user.confirmation_token, only_path: false), confirm_user_path(@user, token: @user.confirmation_token, only_path: false) %> </p>
+   <br/>
 
-tiniHost Team<br>
-team@tinihost.com
+   tiniHost Team<br>
+   www.tiniHost.com
+   <hr/>
+   <p id="hint"> You are receiving this email because your email addressed was used to sign up for a tiniHost account recently. Please disregard if you are not the intended recipient. </p>
+   
+</div>
+
+

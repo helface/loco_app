@@ -1,9 +1,45 @@
 <% provide(:title, 'sign up') %>
+<br/>
 <div class="container">
-   <div class="filler"></div>
-
-   <div class="row">
-      <%= render 'form' %>
-   </div>
+   <h3> 
+      <%= image_tag "host.png", alt: "host hat", size: "50x50"%>
+      Sign Up
+   </h3>
 </div>
+<div class="filler">
+   
+</div>
+<div class="container" id="white">
+   <div class="span8 offset1">   
+   <div class="filler"></div>
+   <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', :obj=>@user %>
+
+     <div id ="personalform">
+       <%= f.label :email %>
+       <%= f.text_field :email %>
+       <br/>
+
+       <%= f.label :first_name %>
+       <%= f.text_field :firstname %>
+       <br/>
+
+       <%= f.label :last_name %>
+       <%= f.text_field :lastname %>
+       <br/>
+
+       <%= f.label :password %>
+       <%= f.password_field :password %>
+       <br/>
+
+       <%= f.label :confirm_password %>
+       <%= f.password_field :password_confirmation %>
+     </div>
+     <br>
+      <%= f.submit  "create account", id: "pink-button" %>
+   </div>
+   <% end %>
+</div>
+<%= render "shared/footer" %>
+
 
