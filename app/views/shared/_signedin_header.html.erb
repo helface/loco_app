@@ -19,14 +19,15 @@
     <%= link_to image_tag(find_display_imgurl(current_user.id, "thumb"), id: "profile-navbar", alt: "user profile thumb picture"), current_user %>
 	 <%= link_to current_user.firstname.capitalize, current_user %> 
 	 <%= link_to '<i class="icon-caret-down" id="dropdown" style="margin-left:5px; color:#ddd;  font-size:1.3em"></i>'.html_safe, "#"%>
+    <ul class="dropdown">
+         <i class="icon-caret-up" ></i>
+      	<li> <%= link_to "profile", current_user %></li>
+      	<li> <%= link_to "settings", edit_user_path(current_user, view: "general") %> </li>
+      	<hr style="margin:0px">
+      	<li> <%= link_to "sign out", signout_path, method: "delete" %> </li>
+    </ul>
 </div>
-   <ul class="dropdown">
-        <i class="icon-caret-up" ></i>
-     	<li> <%= link_to "profile", current_user %></li>
-     	<li> <%= link_to "settings", edit_user_path(current_user, view: "general") %> </li>
-     	<hr style="margin:0px">
-     	<li> <%= link_to "sign out", signout_path, method: "delete" %> </li>
-   </ul>
+   
 </div>
 
 
