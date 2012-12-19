@@ -803,7 +803,7 @@ ul.ui-autocomplete {
 	background: #eee;
 }
 
-header{
+.header{
 	position:fixed;
 	top:0px;
 	width: 100%;
@@ -812,7 +812,7 @@ header{
 	z-index:999;
 }
 
-header .nav{
+.header .nav{
 	padding: 0px 5px; 
 	padding-top:5px;
 	text-align: center; 
@@ -824,10 +824,10 @@ header .nav{
    color:#eed;
 }
 
-header .nav:hover{
+.header .nav:hover{
 	background:#FF7285;
 }
-header .header-menu{
+.header .header-menu{
 	position:relative;
 	top:35px; 
 	a, a:visited{
