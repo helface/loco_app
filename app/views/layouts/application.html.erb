@@ -13,7 +13,6 @@
   <meta property="og:site_name" content="tiniHost" />
   <meta property="fb:admins" content="122610127" />
   <meta property="og:description" content="tiniHost connects travelers and locals for a more authentic, personal, and responsible travel experience."/>
-  
   <%= yield(:head_tags) %>
 </head>
 <body>
@@ -24,52 +23,46 @@
      js = d.createElement(s); js.id = id;
      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
      fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));</script>
-   <header class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-         <div class="container">
-            <div style="height:5px; padding-top:5px; padding-bottom:5px">
+   }(document, 'script', 'facebook-jssdk'));
+   </script>
+
+   <header>
+      <div class="container">
+         <div class="row">
+            <div class="span3">
                <%= link_to image_tag("tinihost.png", alt: "tiniHost logo") , root_path%>         
             </div>
-            <nav>
-               <ul class="nav pull-right" style="margin-top:5px">
-                  <li>
-                     <div class="blocknav">
-                        <%= link_to '/about' do %>
-                        <div class="header-link-block">       
-                           <b>Learn </b>
-                           <p> how it works </p>
-                        </div>               
-                        <% end %>
-                     </div>
-                  </li>
-                  <li>
-                  <div class="blocknav">
-                     <%= link_to hosts_path do %>
-                        <div class="header-link-block">          
-                           <b>Search</b>
-                          <p> for hosts </p>
-                        </div>       
-                     <% end %>     
-                  </div>  
-                  </li>
-                   <% if !signed_in? %>
-                      <li>
-                      <div class="blocknav">
-                         <%= link_to '<div class="header-link-block"> <b>Join </b> <p> tiniHost </p> </div>'.html_safe, signup_path%>
-                       </div>
-                       </li>
-                    <% end %>
-                  
-                  <% if signed_in? %>
-                     <%= render 'shared/signedin_header' %>
-				      <% else %>
-	                  <li><%= link_to "sign in ", signin_path %></li>
-                  <% end %>
-	            </ul>
-	         </nav>
-	       </div>
-	   </div>	
+            <%= link_to '/about' do %>
+            <div class="span1 nav">     
+            
+               <b>Learn </b><br/>
+               how it works
+               </div>
+            <% end %>
+            <%= link_to hosts_path do %>
+            <div class="span1 nav">
+                  <b>Search</b><br/>
+                  for hosts
+            </div>  
+            <% end %>
+               
+         
+            <%= link_to board_path(view: "host") do %>
+            <div class="span1 nav" style=" border-right: 1px solid #777"> 
+               <b>Corkboard </b>
+               requests
+            </div>    
+            <% end %>     
+            <% if signed_in? %>
+               <%= render 'shared/signedin_header' %>
+			   <% else %>
+			      <div class="span5 header-menu"> 
+              
+                  <%= link_to "sign in ", signin_path %>
+               </div>
+            <% end %>
+	      </div>
+	      </div>      
 	</header>
        
 	   <div class="container">

@@ -7,8 +7,7 @@
    <% end %>
    <br>
    <% @posts.each do |p| %>
-   <%= link_to forumpost_path(p), class: "blocklink" do %>    
-   
+   <%= link_to forumpost_path(p), class: "blocklink" do %>       
       <% if p.created_at.to_date != date %>
          </div> 
          <br>
@@ -42,7 +41,7 @@
          </div> 
          <% end %>
          <div class="span1" style="font-size:1.3em; padding-top:0px; margin-left:0px">
-            <%= link_to '<br/> <i class="icon-trash" style="color:#e0467c"></i>'.html_safe, p, :confirm=>"Are you sure you want to delete this post?", :method=> :delete unless p.user_id != current_user.id %>
+            <%= link_to '<br/> <i class="icon-trash" style="color:#e0467c"></i>'.html_safe, p, :confirm=>"Are you sure you want to delete this post?", :method=> :delete unless !signed_in? || p.user_id != current_user.id %>
          </div> 
       </div> 
    </li>          

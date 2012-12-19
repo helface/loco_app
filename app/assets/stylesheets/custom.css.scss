@@ -150,15 +150,6 @@ body {
 	margin-top:0px;
 	padding:15px 0px 35px 5px;
 }
-.header-link-block{
-	height: 45px;
-	b{
-		font-size:1.1em;
-	}
-	p{
-		color:#ddd;
-	}
-}
 
 .top-banner{
 	&#cork{
@@ -173,6 +164,7 @@ body {
 	padding:10px; 
 	border-radius:5px; 
 	width:96%;
+	
 	div#overlay{
 		position:relative;
 		margin: 5px 0px 0px 0px;
@@ -184,8 +176,6 @@ body {
 			color:#333;
 		}
 	}
-	
-
 }
 
 #badge{
@@ -219,7 +209,6 @@ body {
 		height:20px; 
 		top:-27px; 
 		opacity:0.8; 
-		z-index:5;
 		
 		small{
 			text-align:right; 
@@ -553,10 +542,7 @@ aside {
 	margin: 0px;
 }
 
-#profile-navbar{
-	width: 25px;
-	height: 22px;
-}
+
 #messageform{
 	background-color: #dff0d8; 
 	padding: 20px 0px 0 15px;
@@ -803,7 +789,6 @@ ul.ui-autocomplete {
 
 .menu-label {
 	position:relative;
-	z-index:999;
 	margin-left: 0px;
 	font-family:helvetica, verdana;
 	left: -10px;
@@ -816,4 +801,87 @@ ul.ui-autocomplete {
 }
 #link-block:hover{
 	background: #eee;
+}
+
+header{
+	position:fixed;
+	top:0px;
+	width: 100%;
+	height: 70px;
+	background:#444;
+	z-index:999;
+}
+
+header .nav{
+	padding: 0px 5px; 
+	padding-top:5px;
+	text-align: center; 
+	width: 75px; 
+   padding-left:15px;	
+   padding-right:15px;
+   height: 65px;
+   border-left:1px #777 solid;
+   color:#eed;
+}
+
+header .nav:hover{
+	background:#FF7285;
+}
+header .header-menu{
+	position:relative;
+	top:35px; 
+	a, a:visited{
+		color:#bbb
+	};
+	a:hover{
+		color:#eee;
+	}
+	text-align:right;	
+}
+
+
+#profile-navbar{
+	width: 25px;
+	height: 22px;
+}
+
+/* Dropdown menu for header*/
+.dropdown{
+	list-style:none;
+	float:left;
+	width:155px;
+	position:relative;
+	left:-35px;
+	top:-3px;
+	z-index: 99999;
+	display:none;
+	border-bottom:1px solid #ddd;	
+	i{
+		position:relative; 
+		top:7px; 
+		font-size:1.3em; 
+		left: -10px;
+		color:white
+	}	
+}
+
+.dropdown ul{
+		list-style:none;
+}
+
+.dropdown a, a:visited{
+	display:block;
+	padding:8px;
+	float:none;
+	padding-left:10px;
+	background:white;
+	opacity:1;	
+}
+.dropdown ul li{
+	padding-top:10px; /* Introducing a padding between the li and the a give the illusion spaced items */
+}
+
+.dropdown li:hover a{ /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
+	background:#FF7285;
+	color:white;
 }

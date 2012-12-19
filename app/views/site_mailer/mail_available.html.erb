@@ -1,16 +1,16 @@
-<!-- TODO: change host path for production environment -->
-<div class="container">
-   <div class="span9">
-      <p> Hello <%= @traveler.firstname.capitalize %>, </p>
+<div class="span9">
+   <p> Hello <%= @traveler.firstname.capitalize %>, </p>
 
-      <p> <%= @host.firstname.capitalize %> has responded available to your meetup request for <%= @appointment.date.strftime("%a, %b %d. %Y")%>. You may now go ahead and book the meetup! </p>
+   <p> <%= @host.firstname.capitalize %> has responded available to your meetup request for <%= @appointment.date.strftime("%a, %b %d. %Y")%>. You may now go ahead and book the meetup! </p>
 
-      To view your meetup:
+   To view your meetup:
 
-      <p><%= link_to user_appointment_path(@traveler, @appointment, only_path: false), user_appointment_path(@traveler, @appointment, only_path: false) %> </p>
-      <br/>
+   <p><%= link_to user_appointment_path(@traveler, @appointment, only_path: false), user_appointment_path(@traveler, @appointment, only_path: false) %> </p>
+   <br/>
 
-      tiniHost<br/>
-      <%= link_to "www.tinihost.com", "http://www.tinihost.com" %>
-   </div>
+   tiniHost<br/>
+   <%= link_to "www.tinihost.com", "http://www.tinihost.com" %>
+   <br/><br/>
+   <hr/>
+   <p style="color:#666"> You are receiving this email because you are signed up as a user on tiniHost.com with this email address. Please disregard if you are not the intended recipient. </p>
 </div>

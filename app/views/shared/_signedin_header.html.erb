@@ -1,38 +1,35 @@
-<li> 
-   <div class="blocknav">
-      <%= link_to board_path(view: "host") do %>
-      <div class="header-link-block">    
-         <b>Corkboard </b>
-         <p>requests </p>
-      </div>    
-      <% end %>     
-   </div>  
-</li>
-<li> <%= link_to mailbox_path(current_user, folder: "inbox") do %> 
+<div class="span5 header-menu">
+   
+<div class="span3">
+   
+<span>
+<%= link_to mailbox_path(current_user, folder: "inbox") do %> 
      inbox <%= "(#{current_user.messages.unread.count})" unless current_user.messages.unread.count == 0 %>
      <% end %>
-</li>
-<li> <%= link_to user_appointments_path(current_user) do %> 
+</span>
+<span style="margin-left:15px">
+<%= link_to user_appointments_path(current_user) do %> 
    meetups <%= "(#{current_user.active_meetup_count})" unless current_user.active_meetup_count == 0 %>
-   <% end %>
-</li>
-<li id="fat-menu" class="dropdown">
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <table style="margin-left:0px">
-         <tr>
-            <td style="position:relative; top:-3px; left: -5px">
-              <%= image_tag(find_display_imgurl(current_user.id, "thumb"), id: "profile-navbar") %>
-            </td>
-            <td style="vertical-align:top; padding-top:0px">
-      	     <%= current_user.firstname.capitalize %> <b class="caret">
-      	   </td>
-      	</tr>
-      </table>
-   </a>
-   <ul class="dropdown-menu">
+<% end %>
+</span>
+</div>
+ 
+
+
+<div class="span2" style="margin-left:0px;">
+    <%= link_to image_tag(find_display_imgurl(current_user.id, "thumb"), id: "profile-navbar", alt: "user profile thumb picture"), current_user %>
+	     <%= link_to current_user.firstname.capitalize, current_user %> 
+	     <%= link_to '<i class="icon-caret-down" id="dropdown" style="margin-left:5px; color:#ddd;  font-size:1.3em"></i>'.html_safe, "#"%>
+ 
+   <ul class="dropdown">
+      <i class="icon-caret-up" ></i>
    	<li> <%= link_to "profile", current_user %></li>
    	<li> <%= link_to "settings", edit_user_path(current_user, view: "general") %> </li>
-   	<li class="divider"> </li>
-   	<li> <%= link_to "Sign out", signout_path, method: "delete" %> </li>
+   	<hr style="margin:0px">
+   	<li> <%= link_to "sign out", signout_path, method: "delete" %> </li>
    </ul>
-</li>
+   </div>
+   
+</div>
+
+

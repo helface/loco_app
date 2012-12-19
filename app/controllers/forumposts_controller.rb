@@ -1,12 +1,12 @@
 class ForumpostsController < ApplicationController
 include ForumpostsHelper
 
-before_filter :signed_in_user, only: [:create, :index, :show, :manage_posts]
+before_filter :signed_in_user, only: [:create, :show, :manage_posts]
 before_filter :correct_user, only:[:destroy]
 before_filter :active_recipient, only: [:create_response]
   def index
     store_nav_history
-    @messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
+    #@messages = current_user.received_msgs.order('created_at DESC').paginate(page: params[:page], per_page: 10)  
     unless params[:city_country_location].nil?
       if find_location(params[:city_country_location])
         remember_destination(@city.id, @country.id)

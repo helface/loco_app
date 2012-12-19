@@ -1,4 +1,6 @@
 <!-- TODO: change host path for production environment -->
+<div class="span9">
+
 <p> Hello <%= @host.firstname.capitalize %>, </p>
 
 <p> <%= @traveler.firstname.capitalize %> has booked a meetup with you on <%= @appointment.date.strftime("%a, %b %d. %Y")%>.<br/> Please add this to your calendar so you don't forget! :)</p>
@@ -10,3 +12,7 @@ To view your meetup:
 
 tiniHost<br/>
 <%= link_to "www.tinihost.com", "http://www.tinihost.com" %>
+<br/><br/>
+  <hr/>
+  <p style="color:#666"> You are receiving this email because you are signed up as a host on tiniHost.com with this email address. Please disregard if you are not the intended recipient. </p>
+</div>

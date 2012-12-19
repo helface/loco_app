@@ -29,12 +29,14 @@
          <% end %>
          <%= link_to "Corkboard", board_path(view: "host")%></li>
       
-         <% if params[:view] == "traveler" %>
-            <li class="active"> 
-         <% else %>
-            <li>
+         <% if signed_in? %>
+            <% if params[:view] == "traveler" %>
+               <li class="active"> 
+            <% else %>
+               <li>
+            <% end %>
+            <%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
          <% end %>
-         <%= link_to "My posts", myposts_path(current_user, view:"traveler") %></li>
       </div>
 
       <div class="row" style="">

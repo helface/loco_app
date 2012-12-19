@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-
    update_crop = (coords) ->    
       ratio = $('#cropbox').data('ratio')
       $('#crop_x').val(Math.floor(coords.x * ratio))
