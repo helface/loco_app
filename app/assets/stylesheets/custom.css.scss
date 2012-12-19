@@ -869,7 +869,16 @@ ul.ui-autocomplete {
 		list-style:none;
 }
 
-.dropdown a, a:visited{
+.dropdown a{
+	display:block;
+	padding:8px;
+	float:none;
+	padding-left:10px;
+	background:white;
+	opacity:1;	
+}
+
+.dropdown a:visited {
 	display:block;
 	padding:8px;
 	float:none;
