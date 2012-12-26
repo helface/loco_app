@@ -11,34 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217012442) do
-  create_table "users", :force => true do |t|
-    t.string   "lastname"
-    t.string   "email"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.boolean  "admin",              :default => false
-    t.string   "firstname"
-    t.boolean  "is_host",            :default => false
-    t.string   "confirmation_token"
-    t.boolean  "confirmed",          :default => false
-    t.integer  "profile_pic_id"
-    t.integer  "completed_count",    :default => 0
-    t.text     "self_intro",         :default => ""
-    t.date     "birthday"
-    t.integer  "gender"
-    t.float    "traveler_score",     :default => 0.0
-    t.string   "languages"
-    t.string   "facebook"
-    t.boolean  "deactivated",        :default => false
-  end
-
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
-  
+ActiveRecord::Schema.define(:version => 20121223074552) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -211,5 +184,37 @@ ActiveRecord::Schema.define(:version => 20121217012442) do
   end
 
   add_index "travelerreviews", ["reviewee_id"], :name => "index_travelerreviews_on_reviewee_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "lastname"
+    t.string   "email"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.boolean  "admin",              :default => false
+    t.string   "firstname"
+    t.boolean  "is_host",            :default => false
+    t.string   "confirmation_token"
+    t.boolean  "confirmed",          :default => false
+    t.integer  "profile_pic_id"
+    t.integer  "completed_count",    :default => 0
+    t.text     "self_intro",         :default => ""
+    t.date     "birthday"
+    t.integer  "gender"
+    t.float    "traveler_score",     :default => 0.0
+    t.string   "languages"
+    t.string   "facebook"
+    t.boolean  "deactivated",        :default => false
+    t.string   "provider"
+    t.integer  "fb_id"
+    t.string   "fb_token"
+    t.datetime "fb_expires_at"
+    t.string   "fb_profilepic_url"
+  end
+
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end

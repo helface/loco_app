@@ -707,6 +707,11 @@ ul.ui-autocomplete {
 		color:white;
 	};
 	
+	h4{
+		margin-left: 85px;
+		color:#FF7285;
+	}
+	
 	label{
 		color:white;
 	};
@@ -714,7 +719,7 @@ ul.ui-autocomplete {
 	div#signup{
 		padding-left:35px; 
 		padding-bottom:0px; 
-		padding-top:15%; 
+		padding-top:5%; 
 		height: 180px; 
 		border-left:1px solid #6DCECE;
 	}
@@ -893,4 +898,17 @@ ul.ui-autocomplete {
 .dropdown li:hover a{ /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
 	background:#FF7285;
 	color:white;
+}
+
+#fb-hover{
+	background-image:url("fb_login_hover.png");
+	background-repeat: no-repeat;
+}
+
+#fb-login{
+	margin-top:0px;
+	padding:0px;
+}
+#fb-login:hover{
+	opacity:0;
 }

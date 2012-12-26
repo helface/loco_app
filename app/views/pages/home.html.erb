@@ -42,7 +42,7 @@
                <% if signed_in? %>
                   <%= button_to "Become Host!", becomehost_path, id:"pink-button" unless current_user.is_host? %>
                <% else %>
-                  <%= button_to "Join!", signup_path, id: "pink-button" %>
+                  <%= button_to "Join tiniHost!", signin_path, id: "pink-button" %>
               <% end %>                     
             </div>
          </div>

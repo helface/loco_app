@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   scope :active, :conditions => ["deactivated = ?", false]
    
   has_many :images, :dependent => :destroy
-  
   #has many reviews
   has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
   
@@ -61,12 +60,33 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format:{with:VALID_EMAIL_REGEX}, uniqueness: {case_sensitive:false}
   validates_uniqueness_of :email
 
-  validates_presence_of :password, presence: true, length:{minimum: 6}, if: Proc.new{|user| user.new_record?}
-  validates_presence_of :password_confirmation, presence: true, if: Proc.new{|user| user.new_record?}
+  validates :password, :password_confirmation, presence: true, length:{minimum: 6}, if: Proc.new{|user| user.new_record? && user.provider != "facebook"}
+  validates :fb_id, :fb_token, :fb_expires_at, presence: true, if: Proc.new{|user| user.provider == "facebook"}
   
   MAX_NUM_PICTURES = 7; 
   GENDER = {'female'=>1, "male" => 2}
 
+  def self.create_fbuser(auth)
+   user = where("email = ? AND provider != ?", auth.info.email, "facebook").first
+   return user unless user.nil?
+   
+   
+   User.where("provider = ? AND fb_id = ?", "facebook", auth.uid).first_or_initialize.tap do |user| 
+     user.email = auth.info.email
+     user.provider = auth.provider
+     user.firstname = auth.info.first_name
+     user.lastname = auth.info.last_name
+     user.email = auth.info.email
+     user.fb_token = auth.credentials.token
+     user.fb_expires_at = Time.at(auth.credentials.expires_at)  
+     user.fb_id = auth.uid
+     user.fb_profilepic_url = auth.info.image
+     user.confirmed = true
+     user.password_digest = "facebeook-authorized-account"
+     user.save!
+   end     
+  end
+  
   def calc_avg_traveler_score(score)
      count = self.treviews_received.count
      sum = (((count-1) * self.traveler_score + score ) / count).to_f unless count == 0

@@ -1,7 +1,7 @@
 
 <div class="span8 signup-block">
    <div class="row">
-      <div class="span3 offset1">
+      <div class="span2 offset1">
          <b><h3>Sign in</h3><b>
       </div>
    </div>
@@ -19,14 +19,20 @@
 
 <br>
       		<%= f.submit "Sign In", id: "blue-button"%>
+            
       	<% end %>
       </div>
    	
-   	<div class="span3">
+   	<div class="span4">  
          <div id="signup">
-             <p style="font-size:1.2em"> Don't have an account? </p>
-             <div class="filler"></div><br>
-             <%= link_to "Join tiniHost!", signup_path, id: "pink-button" %>
+            <p id="white"> Don't have an account? <%= link_to "Sign up here.", signup_path, class: "lighter" %><br/></p>
+         	<br/> 
+            <h4>OR </h4>
+            <br/><br/>
+      		<div id="fb-hover">
+                <%= link_to image_tag("fb_login.png", alt: "facebook login", id: "fb-login"), "/auth/facebook" %>    
+            </div>
+            <br/><br/>           
          </div>
       </div>
    </div>

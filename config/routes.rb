@@ -5,6 +5,7 @@ LocoApp::Application.routes.draw do
   get "images/new"
   get "images/create"
   get "images/destroy"
+  
 
  # root to: "pages#home"
  # mount Sidekiq::Web, at: "/sidekiq"
@@ -58,6 +59,10 @@ LocoApp::Application.routes.draw do
   get "pages/terms_of_service"
   get "pages/privacy"
   get "pages/signup"
+  
+  #Facebook login
+  match 'auth/:provider/callback', to: 'sessions#facebook_create'
+  match 'auth/failure', to: redirect('/')
   
   match '/about', to: 'pages#about'
   match '/hosts', to: 'pages#find'

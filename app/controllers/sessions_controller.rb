@@ -19,6 +19,17 @@ before_filter :confirmed_user, only: :create
     end
   end
   
+  def facebook_create
+    @user = User.create_fbuser(env["omniauth.auth"])
+    if @user
+      flash[:success] = "Welcome to tiniHost!"
+      sign_in @user
+      redirect_to @user
+    else
+      flash[:error] = "Sorry, login failed"
+    end
+  end
+  
 private
   
   def confirmed_user

@@ -13,7 +13,7 @@ class Image < ActiveRecord::Base
   def clear_photo
     self.photo = nil
   end
-    
+  
   def get_original_dimensions
     temp_orig = photo.queued_for_write[:original]
     temp_large = photo.queued_for_write[:large]
