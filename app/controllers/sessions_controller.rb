@@ -39,7 +39,7 @@ before_filter :confirmed_user, only: :create
     
     #user doesn't exist by email
     else
-      @user = User.find_by_fb_id(auth.id)
+      @user = User.find_by_fb_id(@auth.id)
       #if user is fb user but email is changed, update email and login
       if @user && @user.is_fb_user?
         @user.update_fb_user(@auth)
