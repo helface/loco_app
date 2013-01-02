@@ -66,25 +66,36 @@ class User < ActiveRecord::Base
   MAX_NUM_PICTURES = 7; 
   GENDER = {'female'=>1, "male" => 2}
 
-  def self.create_fbuser(auth)
-   user = where("email = ? AND provider != ?", auth.info.email, "facebook").first
-   return user unless user.nil?
-   
-   
-   User.where("provider = ? AND fb_id = ?", "facebook", auth.uid).first_or_initialize.tap do |user| 
-     user.email = auth.info.email
-     user.provider = auth.provider
-     user.firstname = auth.info.first_name
-     user.lastname = auth.info.last_name
-     user.email = auth.info.email
-     user.fb_token = auth.credentials.token
-     user.fb_expires_at = Time.at(auth.credentials.expires_at)  
-     user.fb_id = auth.uid
-     user.fb_profilepic_url = auth.info.image
-     user.confirmed = true
-     user.password_digest = "facebeook-authorized-account"
-     user.save!
-   end     
+  def update_fb_user(auth)
+    self.provider = auth.provider
+     self.firstname = auth.info.first_name
+     self.lastname = auth.info.last_name
+     self.fb_token = auth.credentials.token
+     self.fb_expires_at = Time.at(auth.credentials.expires_at)  
+     self.fb_id = auth.uid
+     self.fb_profilepic_url = auth.info.image
+     self.confirmed = true
+     self.password_digest = "facebeook-authorized-account"
+     self.save!
+     self.update_attributes(email: auth.info.email) 
+  end
+  
+  def create_fbuser(auth)
+     self.provider = auth.provider
+     self.firstname = auth.info.first_name
+     self.lastname = auth.info.last_name
+     self.email = auth.info.email
+     self.fb_token = auth.credentials.token
+     self.fb_expires_at = Time.at(auth.credentials.expires_at)  
+     self.fb_id = auth.uid
+     self.fb_profilepic_url = auth.info.image
+     self.confirmed = true
+     self.password_digest = "facebeook-authorized-account"
+     self.save!
+  end
+  
+  def is_fb_user?
+    self.provider == "facebook" && !self.fb_id.nil?
   end
   
   def calc_avg_traveler_score(score)

@@ -19,14 +19,43 @@ before_filter :confirmed_user, only: :create
     end
   end
   
-  def facebook_create
-    @user = User.create_fbuser(env["omniauth.auth"])
-    if @user
-      flash[:success] = "Welcome to tiniHost!"
+# if user has a non-facebook account, direct them to password sign in
+# if the user has a facebook account, log them in and update account information (including email)
+# if user is new, create a facebook account
+  def facebook_create  
+    @auth = env["omniauth.auth"]
+    @user = User.find_by_email(@auth.info.email)
+    
+    #fb user exists, update fb info and log in
+    if @user && @user.is_fb_user?
+      @user.update_fb_user(@auth)
       sign_in @user
-      redirect_to @user
+      redirect_back_or @user
+      
+    #user exists by email but not a fb user, redirect to password login 
+    elsif @user
+      flash[:error] = "You have already created an account with the email address associated with your Facebook account. Please log in with password." 
+      redirect_to signin_path
+    
+    #user doesn't exist by email
     else
-      flash[:error] = "Sorry, login failed"
+      @user = User.find_by_fb_id(auth.id)
+      #if user is fb user but email is changed, update email and login
+      if @user && @user.is_fb_user?
+        @user.update_fb_user(@auth)
+        sign_in @user
+        redirect_back_or @user
+        
+      
+      #create a new fb user
+      else
+        @user = User.new
+        @user.create_fbuser(@auth)
+        flash[:success] = "Welcome to tiniHost!"
+        sign_in @user
+        redirect_back_or @user
+        
+      end
     end
   end
   
