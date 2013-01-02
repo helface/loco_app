@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223074552) do
+ActiveRecord::Schema.define(:version => 20130102055619) do
 
   create_table "appointments", :force => true do |t|
     t.integer  "traveler_id"
@@ -207,7 +207,7 @@ ActiveRecord::Schema.define(:version => 20121223074552) do
     t.string   "facebook"
     t.boolean  "deactivated",        :default => false
     t.string   "provider"
-    t.integer  "fb_id"
+    t.string   "fb_id"
     t.string   "fb_token"
     t.datetime "fb_expires_at"
     t.string   "fb_profilepic_url"
