@@ -2,7 +2,7 @@
 <div class="span8 signup-block">
    <div class="row">
       <div class="span2 offset1">
-         <b><h3>Sign in</h3><b>
+         <b><h3>Sign in</h3></b>
       </div>
    </div>
      
@@ -25,15 +25,20 @@
    	
    	<div class="span4">  
          <div id="signup">
-            <p id="white"> Don't have an account? <%= link_to "Sign up here.", signup_path, class: "lighter" %><br/></p>
+            <b id="white"> Don't have an account?</b> <%= link_to "Sign up here.", signup_path, class: "lighter" %><br/></p>
          	<br/> 
             <h4>OR </h4>
-            <br/><br/>
+            <br/>
       		<div id="fb-hover">
                 <%= link_to image_tag("fb_login.png", alt: "facebook login", id: "fb-login"), "/auth/facebook" %>    
             </div>
-            <br/><br/>           
+            <br/>
+             <p style="font-size:12px; margin-top:10px">By signing up, you are agreeing to our <br/><%= link_to "terms of service", terms_of_service_path, class: "lighter" %> and our <%= link_to "privacy policy", privacy_path, class: "lighter" %>. </p>
          </div>
+         
       </div>
+       <div class="span4 offs">
+             
+         </div>  
    </div>
 </div>

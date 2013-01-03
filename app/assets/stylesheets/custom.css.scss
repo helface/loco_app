@@ -536,7 +536,7 @@ aside {
 }
 
 #profile-thumb{
-	width: 50px;
+	width: 58px;
 	height: 50px;
 	padding: 0px;
 	margin: 0px;
@@ -698,7 +698,7 @@ ul.ui-autocomplete {
 
 .signup-block{
 	margin-left:15%; 
-	padding:30px 0px 30px 0px; 
+	padding:30px 25px 0px 0px; 
 	background-color:#555;
 	border-radius: 3px;
 	border-bottom: 2px solid #ccc;
@@ -719,9 +719,13 @@ ul.ui-autocomplete {
 	div#signup{
 		padding-left:35px; 
 		padding-bottom:0px; 
-		padding-top:5%; 
-		height: 180px; 
+		padding-top:4%; 
+		height: 170px; 
 		border-left:1px solid #6DCECE;
+		color:#eee;
+		p, b{
+		  font-size:1.1em;
+		}
 	}
 }
 

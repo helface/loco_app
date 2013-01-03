@@ -79,11 +79,12 @@ a {
 a.lighter {
 	&:visited, & {
 		color:#eee;
+		text-decoration: underline;
+		
 	};
 	
 	&:hover {
-		color: #eee;
-		text-decoration: underline;
+		color: pink;
 	};
 }
 
