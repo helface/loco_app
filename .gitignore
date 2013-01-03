@@ -24,3 +24,4 @@ db/structure.sql
 #ignore scripts
 *.bash
 /public/system/photos/
+/config/initializers/devinit.rb
