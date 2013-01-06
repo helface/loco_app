@@ -13,8 +13,8 @@
              <% end %>
           </b>
           <br/>
-          <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb") %>
-          <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb")%>
+          <%= image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb", alt: "#{traveler.try(:firstname)} thumb") %>
+          <%= image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb", alt: "#{host.try(:firstname)} thumb")%>
           <br/> 
           <%= "#{City.find_by_id(host.hostprofile.city_id).name}, #{Country.find_by_id(host.hostprofile.country_id).name}"%>
           <br/>

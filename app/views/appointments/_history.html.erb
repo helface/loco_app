@@ -3,8 +3,8 @@
   
    <div class="row host_info" style="background-color:#eee">
    <div class="span2">  
-      <%= link_to image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb"), user_path(traveler) %>
-      <%= link_to image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb"), user_path(host)%>
+      <%= link_to image_tag(find_display_imgurl(appointment.traveler_id, "thumb"), id: "profile-thumb", alt: "#{traveler.try(:firstname)} thumbnail"), user_path(traveler) %>
+      <%= link_to image_tag(find_display_imgurl(host.id, "thumb"), id: "profile-thumb", alt: "#{host.try(:firstname)} thumbnail" ), user_path(host)%>
       
    </div>
    <div class="span3 edit_link">

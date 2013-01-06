@@ -19,9 +19,9 @@
    <div class="row" style="top: -28px">
       <div class="span4">
          <b style="margin-right:5px"><%=user.firstname.capitalize %></b>
-         <%= image_tag "completed.png", size: "18x18" %>
+         <%= image_tag "completed.png", size: "18x18", alt: "meetups completed count" %>
          <small id="hint"><%=profile.completed_count%></small>
-         <%= image_tag "response.png", size: "18x18" %> 
+         <%= image_tag "response.png", size: "18x18", alt: "response rate" %> 
          <small id="hint"> <%= profile.calc_response_rate.nil? ? "NA" : "#{profile.calc_response_rate}%" %> </small> 
          <div style="text-align:right; right: -167px; top: -15px; width: 120px">
             <small class="languag_list"> 
