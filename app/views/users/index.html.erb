@@ -12,7 +12,9 @@
 </script>
 <% end %>
 
-<%= provide(:title, 'find a host') %>
+<%= provide(:title, "hosts in #{@city.name}, #{@country.name}") %>
+<% provide(:description_tag, "hosts in #{@city.name}, #{@country.name}") %>
+
 <div class="container">
    
 <div class="row">

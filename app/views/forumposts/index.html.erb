@@ -11,7 +11,15 @@
   })();
 </script>
 <% end %>
-<% provide(:title, "request a host on the Corkboard") %>
+<% if @city && @country %>
+   <% provide(:title, "travelers seeking hosts in #{@city.name}, #{@country.name}") %>
+   <% provide(:description_tag, "travelers seeking hosts in #{@city.name}, #{@country.name}") %>
+   
+<% else %>
+  <% provide(:title, "travelers seekings hosts") %>
+  <% provide(:description_tag, "travelers seeking tiniHosts") %>
+<% end %>
+  
 <div class="container">
    <%= render "corkboard_nav" %>
 </div>

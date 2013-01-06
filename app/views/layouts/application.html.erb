@@ -2,6 +2,8 @@
 <html>
 <head>
   <title> <%= default_title(yield(:title)) %> </title>
+  <meta name="keywords" content= "<%= default_keywords(yield(:keyword_tags)) %>">
+  <meta name="description" content= "<%= default_description(yield(:description_tag)) %>">
   <%= favicon_link_tag "hat-favicon2.ico" %>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>  
