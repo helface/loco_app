@@ -59,7 +59,6 @@ before_filter :location_specified, only: :index
        flash[:success] = "Profile successfully updated"
        sign_in @user
        redirect_to session[:prev]
-       return
        #respond_with @user, location: user_path(@user)
     else
        flash[:error] = "failed to update profile #{@user.errors.full_messages}"

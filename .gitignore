@@ -20,6 +20,7 @@ doc/
 .DS_Store
 bundler_stubs/
 db/structure.sql
+prodlog
 
 #ignore scripts
 *.bash
