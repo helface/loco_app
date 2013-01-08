@@ -29,7 +29,7 @@
    <%= image_tag "review.png", id: "stats-icon" %>
    <small id="icon-text"><%= pluralize(@user.reviews.count, 'review') %> written </small>
    <% if current_user?(@user) %> 
-   <div class="filler"></div>
+   <br/><br/>
    <% prompt = "" %>
       <% if @user.images.empty? && @user.self_intro.empty?%>
          <% prompt = "Your profile is empty. Upload some pictures and tell us a bit about yourself." %> 
@@ -40,19 +40,18 @@
       <% end %>
          <% if !prompt.empty? %>
          <div class="edit_link">
-            Profile incomplete <br>
             <p id="hint"><%= "#{prompt}"%> </p><br/>
             <small class="edit_link"> <%= link_to "edit", edit_user_path(@user, view: 'general'), class: "edit_link" %> </small>
             </p>
          </div>
          <% end %>
-         <div class="edit_link">
-            <%= "You are not a host yet" %></h3>
+         <div>
+            <h3><%= "You are not a host yet!" %></h3>
             <% if current_user?(@user) %>
             <div style="color: #999">
                Learn more about this great opportunity to meet new friends and make some money showing off your neighborhood.
-            </div>
-            <small> <%= link_to 'become a host', becomehost_path %> </small>
+            </div><br/>
+            <small> <%= link_to 'Become a Host', becomehost_path, id: "pink-button" %> </small>
             <% end %>
          </div>
    <% end %>   
