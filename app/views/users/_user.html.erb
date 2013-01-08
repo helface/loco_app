@@ -27,7 +27,7 @@
             <small class="languag_list"> 
             <% if !user.languages.nil? %>
                <% user.languages.each do |l|%>
-                  <small style="background:#ccc; padding:0px 3px 2px 3px; border-radius:2px"><%= Language.find_by_id(l).code%></small>
+                  <small style="background:#ccc; padding:0px 3px 2px 3px; border-radius:2px"><%= Language.find_by_id(l).try(:code)%></small>
                   <%=" " if user.languages.last != l %>
                <% end %> 
             <% end %>

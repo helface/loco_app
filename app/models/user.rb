@@ -91,7 +91,6 @@ class User < ActiveRecord::Base
      self.fb_profilepic_url = auth.info.image
      self.confirmed = true
      self.password_digest = "facebeook-authorized-account"
-     debugger
      self.save!
   end
   
