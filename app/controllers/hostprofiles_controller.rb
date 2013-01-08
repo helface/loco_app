@@ -35,6 +35,7 @@ class HostprofilesController < ApplicationController
           redirect_to @user
           return
         else
+          logger.debug "\n tiniHostERROR-HOSTPROFILECREATE: Currentuser: #{current_user.id} || profile: #{@hostprofile} || Msg: #{@hostprofile.errors.try(:full_messages)}"
           flash.now[:error] = "Failed to create host profile"
           render 'new'
           return
@@ -62,7 +63,8 @@ class HostprofilesController < ApplicationController
           flash[:success] = "Profile successfully updated"
           redirect_to session[:prev]
       else
-          flash[:error] = "Sorry, we could not update your profile at this time."
+          logger.debug "\n tiniHostERROR-HOSTPROFILEUPDATE: Currentuser: #{current_user.id} || params: #{params[:hostprofile]} || Msg: #{@hostprofile.errors.try(:full_messages)}"
+          flash[:error] = "Sorry, we could not update your profile at this time. Error: #{@hostprofile.errors.try(:full_messages)}"
           render 'edit'
       end
     end

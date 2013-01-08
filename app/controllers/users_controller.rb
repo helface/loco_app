@@ -61,7 +61,8 @@ before_filter :location_specified, only: :index
        redirect_to session[:prev]
        #respond_with @user, location: user_path(@user)
     else
-       flash[:error] = "failed to update profile #{@user.errors.full_messages}"
+       logger.debug "\n tiniHostERROR-USERUPDATE: Currentuser: #{current_user.id} || params: #{params[:user]} || Msg: #{@user.errors.try(:full_messages)}"
+       flash[:error] = "failed to update profile #{@user.errors.full_messages} \n"
        redirect_to edit_user_path(@user, view: "general")     
     end
   end
@@ -73,6 +74,7 @@ before_filter :location_specified, only: :index
       sign_in @user
       redirect_to @user
     else
+      logger.debug "\n tiniHostERROR-PROFILEPICUPDATE: Currentuser: #{current_user.id} || params: #{params[:img_id]} || Msg: #{@user.errors.try(:full_messages)}"
       flash[:error] = "#{@user.errors.full_messages}"
       redirect_to session[:prev]
     end
