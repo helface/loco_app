@@ -13,11 +13,11 @@
   })();
 </script>
 <% end %>
+
 <div class = "container">
    <div class="filler">
-      
    </div>
-   <div class="homepage">      
+   <div class="row homepage">      
       <div class="span11" style="margin-left:40px">         
          <div class="row" id="location-button">
             <div class="span5" style=" padding-right:20px; border-right:1px #eee solid">       
@@ -49,15 +49,12 @@
               <% end %>                     
             </div>
          </div>
-         
-   <br/><br/><br/>  
-         <div class="row" id="location-button">
-            <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/tiniHost" %>
-            <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", size: "100x100"), "https://twitter.com/tinihost" %>           
-         </div>                 
-         </div>
       </div>
    </div>
+   <div class="row" style="text-align:center">    
+      <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/tiniHost" %>
+      <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", size: "100x100"), "https://twitter.com/tinihost" %>           
+   </div>                 
 </div>
 <br/>
 <div class="container">    
