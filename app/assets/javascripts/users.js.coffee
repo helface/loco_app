@@ -13,3 +13,7 @@ jQuery ->
          $("#displayimg").wrap(img_path)
          
    thumbrange x for x in [1..7]
+
+   $("#user_preview").click ->
+      url = $("#user_preview").data('url')
+      window.open(url, "Search badge preview", "height=500, width=350")

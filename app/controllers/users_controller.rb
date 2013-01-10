@@ -80,6 +80,10 @@ before_filter :location_specified, only: :index
     end
   end
  
+  def preview
+    @user = User.find_by_id(params[:id])
+    render "_user"
+  end
  
   def destroy
     @user = User.find(params[:id])

@@ -41,6 +41,10 @@ jQuery ->
          $('#price_opt').hide()
          $('#lang_opt').hide()
 
+   $("#host_description").click ->
+      url = $("#host_description").data('url')
+      window.open(url, "about", "height=700, width=700")
+
    $("#deactivate_host").click ->
       $("#deactivate_host_block").show()
 
@@ -48,7 +52,6 @@ jQuery ->
        remaining = 139 - $("#hostprofile_intro").val().length
        $("#charcount").html(remaining)
     )
-       
       
 
       

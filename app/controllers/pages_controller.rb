@@ -13,4 +13,8 @@ class PagesController < ApplicationController
   
   def privacy 
   end
+  
+  def hostduty
+    render '_hostinfo'
+  end
 end

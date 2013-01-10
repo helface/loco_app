@@ -8,7 +8,7 @@
              This short description will be displayed on your profile badge listed as part of search results. </small>
       </div>
       <% len = @hostprofile.intro.nil? ? 1 : @hostprofile.intro.length %>
-      <small id="hint" class="charcount" > Characters remaining: <span id="charcount"><%= 140 - len %> </span> </small><br/>
+      <small id="hint" style="color:red" class="charcount" > Characters remaining: <span id="charcount"><%= 140 - len %> </span> </small><br/>
       <%= f.text_area :intro, max_length: 140 %>
     </div>
      <div class="field" id="personalform">

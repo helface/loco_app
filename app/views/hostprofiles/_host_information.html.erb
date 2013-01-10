@@ -17,18 +17,12 @@
       <br/>
       
       <% end %>
-      <div class="field" id="personalform">
-         <%= f.label :what_type_of_service_are_you_providing? %>
+      <div class="edit_link" id="personalform">
+         <%= f.label :what_type_of_service_are_you_providing? %>  
          <% selected = @hostprofile.service || Service.first.id %>
-         <%= f.collection_select :service, Service.all, :id, :title, :selected=>selected %>       
+         <%= f.collection_select :service, Service.all, :id, :title, :selected=>selected %>  <%= link_to "see description", '#', class:"lighter", id: "host_description", data: {:url=> url_for(hostduty_path(anchor: 'host_duty'))} %>       
       </div>  
-      <div class="field" id="personalform" style="color:#5EB038; height:30px; border-radius:3px; margin-top:-10px; width:400px">
-         <i class="icon-info-sign"></i>
-         <small id="service_desc">
-            <%= Service.find_by_id(selected).try(:desc) %>
-         </small>
-      </div>
-      <br>
+      
       <div class="field" id="personalform">
          <%= f.label :exchanging_service_for %>
          <% selected = @hostprofile.exchange_type || "money"%>
@@ -40,7 +34,7 @@
             <%= f.select :currency, options_for_select(Hostprofile::CURRENCIES, selected: "usd"), :id => "currency" %> <br/>
             <%= f.label :What_does_your_price_cover %>
                  <div style="width: 600px">
-                     <small id="light">You selected money as your exchange type. Please tell the traveler what the amount would cover.</small>
+                     <small id="light">If you selected money as your exchange type. Please tell the traveler what the amount will cover.</small>
                  </div>
                  <%= f.text_area :money_cover %>
          </div> 

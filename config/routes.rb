@@ -32,6 +32,7 @@ LocoApp::Application.routes.draw do
       get :toggle_activation
       put :reactivate
       get :deactivate
+      get :preview
     end
   end
   resources :sessions, only: [:create, :destroy]
@@ -59,6 +60,7 @@ LocoApp::Application.routes.draw do
   get "pages/terms_of_service"
   get "pages/privacy"
   get "pages/signup"
+  get "pages/hostduty"
   
   #Facebook login
   match 'auth/:provider/callback', to: 'sessions#facebook_create'
@@ -68,6 +70,7 @@ LocoApp::Application.routes.draw do
   match '/hosts', to: 'pages#find'
   match '/terms_of_service', to:"pages#terms_of_service"
   match '/privacy', to: "pages#privacy"
+  match '/hostduty', to:"pages#hostduty"
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete

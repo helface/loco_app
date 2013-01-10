@@ -13,7 +13,7 @@ class Hostprofile < ActiveRecord::Base
   
   validates :greenDesc, :serviceDesc, presence: true, length: {maximum: 2000}
   validates :intro, presence: true, length: {maximum: 140}
-  validates :prof_exp, length: {maximum: 500}
+  validates :prof_exp, length: {maximum: 2000}
   validates_presence_of :city_id, :country_id
   validates_presence_of :price, :currency, :if => :exchange_is_money?
   validates_presence_of :language_practice, :if =>:exchange_is_lang?
