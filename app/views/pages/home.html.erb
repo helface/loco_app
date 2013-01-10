@@ -18,23 +18,30 @@
    <div class="filler">
    </div>
    <div class="row homepage">      
-      <div class="span11" style="margin-left:40px">         
-         <div class="row" id="location-button">
-            <div class="span5" style=" padding-right:20px; border-right:1px #eee solid">       
-               <h1> Travelers </h1><br/><br/>
-               <strong>Where are you going?</strong><br/><br/>
-               <div class="span5">
-                  <br/><br/><br/>
+      <div class="span11" style="background:yello; margin-left:60px;">         
+         <div class="row">
+            <div class="span5" style="background:pin; padding-right:40px; border-right:1px #eee solid">       
+               <h1> Travelers </h1><br/>
+               <div style="text-align:left" >
+                  <strong >A journey of a thousand miles must begin with a single step.
+              </strong> - <i>Lao Tzu</i>
+              <br/><br/>
+               </div>
+               <div class="filler">
+                  
+               </div>
+                  <br/><br/>
                   <%= form_tag fill_location_path, method: 'get' do %>
-                  <div id="personalform" style="margin-left:0px">
+                  
+                  <div id="personalform" >
+                     
                      <%=render 'shared/country_city_select', :inline_search => true%>
-                  <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %><br/>
+                  <%= submit_tag "Go!", :name => nil, :id=>"blue-button", :style=>"width: 70px" %><br/>
                   <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>           
                   </div>
                   <%end%>               
-               </div>
             </div>
-            <div class="span5" style="padding-left:10px;">
+            <div class="span5" style="padding-left:30px; background:gren">
                <h1> Locals </h1><br/>
                <div style="text-align:left">
                   <strong> Become a tiniHost to make some friends, earn some money, or practice a new language. </strong>
