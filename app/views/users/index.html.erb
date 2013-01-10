@@ -26,7 +26,7 @@
          </div>   
          <div class="span4 offset1">
             <br/>
-            <%= form_tag fill_location_path, method: 'get', class: "wel form-inlin" do %>
+            <%= form_tag fill_location_path, method: 'get' do %>
             <div id="personalform">
                <%=render 'shared/country_city_select', :inline_search => true%>
             <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %>
