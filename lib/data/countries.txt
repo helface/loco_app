@@ -2,3 +2,4 @@ US|United States
 CA|Canada
 FR|France
 UK|United Kingdom
+CH|China

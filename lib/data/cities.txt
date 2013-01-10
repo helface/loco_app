@@ -4,3 +4,4 @@ US|New York|America/New_York
 US|San Francisco|America/Los_Angeles
 UK|London|London
 FR|Paris|Paris
+CH|Hong Kong|Asia/Hong_Kong
