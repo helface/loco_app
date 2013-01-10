@@ -13,34 +13,35 @@
   })();
 </script>
 <% end %>
+
 <div class = "container">
    <div class="filler">
-      
    </div>
-   <div class="homepage">      
-      <div class="span11">         
+   <div class="row homepage">      
+      <div class="span11" style="margin-left:40px">         
          <div class="row" id="location-button">
-            <div class="span5" style=" margin-left:0px; padding-right:40px; border-right:1px #eee solid">
-            
-            <h1> Travelers </h1><br/>
-            <strong>Where are you going?</strong><br/><br/>
-            <%= link_to image_tag("sanfran.png", alt: "San Francisco"), fill_location_path(city_country_location: "San Francisco, United States") %>
-            <%= link_to image_tag("seattle.png", alt: "Seattle"), fill_location_path(city_country_location: "Seattle, United States") %>
-            <%= link_to image_tag("newyork.png", alt: "New York"), fill_location_path(city_country_location: "New York, United States") %>
-            <%= link_to image_tag("toronto.png", alt: "Toronto"), fill_location_path(city_country_location: "Toronto, Canada") %>
-            <%= link_to image_tag("london.png", alt: "London"), fill_location_path(city_country_location: "London, United Kingdom"), class: "seattle-icon" %>           
-            <%= link_to image_tag("paris.png", alt: "Paris"), fill_location_path(city_country_location: "Paris, France") %>
-            <br><br/>
-            
-            <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>        
-            </div>
-            <div class="span5" style="margin-left:0px">
-               <h1> Locals </h1><br/>
-               <div class="span4" style="margin-left:40px">
-                  <strong> Become a tiniHost to make some friends, earn some money, or practice a new language. </strong><br/><br>
+            <div class="span5" style=" padding-right:20px; border-right:1px #eee solid">       
+               <h1> Travelers </h1><br/><br/>
+               <strong>Where are you going?</strong><br/><br/>
+               <div class="span5">
+                  <br/><br/><br/>
+                  <%= form_tag fill_location_path, method: 'get' do %>
+                  <div id="personalform" style="margin-left:0px">
+                     <%=render 'shared/country_city_select', :inline_search => true%>
+                  <%= submit_tag "Find", :name => nil, :id=>"blue-button", :style=>"width: 70px" %><br/>
+                  <%= link_to "What about other cities?", about_path(view: "faq", anchor: "limited_cities") %>           
+                  </div>
+                  <%end%>               
                </div>
-               <%= image_tag "collage_host.png", alt: "adventures collage", size: "290x110"%><br/> 
-               <br/><br/>
+            </div>
+            <div class="span5" style="padding-left:10px;">
+               <h1> Locals </h1><br/>
+               <div style="text-align:left">
+                  <strong> Become a tiniHost to make some friends, earn some money, or practice a new language. </strong>
+               <br/><br>
+               </div>
+               <%= image_tag "collage_host.png", alt: "adventures collage", size: "250x100"%><br/> 
+               <br/>
                <% if signed_in? %>
                   <%= button_to "Become Host!", becomehost_path, id:"pink-button" unless current_user.is_host? %>
                <% else %>
@@ -48,19 +49,14 @@
               <% end %>                     
             </div>
          </div>
-         
-         
-         <div class="row" style="height:80px">
-         </div>
-         <div class="row" id="location-button">
-            <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/tiniHost" %>
-            <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", size: "100x100"), "https://twitter.com/tinihost" %>           
-         </div>                 
-         </div>
       </div>
    </div>
+   <div class="row" style="text-align:center">    
+      <%= link_to image_tag("facebook.png", alt: "Tinihost facebook page", size: "100x100"), "https://www.facebook.com/tiniHost" %>
+      <%= link_to image_tag("twitter.png", alt: "Tinihost twitter page", size: "100x100"), "https://twitter.com/tinihost" %>           
+   </div>                 
 </div>
-<br/><br/>
+<br/>
 <div class="container">    
    <div class="center hero-unit" style="border: 1px solid #ddd">
       <div class="aboutpage_dark offset1">
