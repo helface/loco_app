@@ -34,9 +34,10 @@
          <%=link_to "See my search badge", "#", id: "user_preview", data:{:url=> url_for(preview_user_path(@user))} %>
          <br/><br/>
       </div>
+      <% end %>
+   
   	<div class="row" style="background-color:#ddd; padding: 10px;"> 
   	  
-      <% end %>
   	   <b> About me </b>	   
   	   <% if @user.self_intro.empty? %>
          <div class="edit_link">
