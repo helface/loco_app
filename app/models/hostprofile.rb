@@ -1,6 +1,7 @@
 class Hostprofile < ActiveRecord::Base
   attr_accessible :language_tokens, :intro, :tele, :serviceDesc, :service, :aboutme, :money_cover, :prof_exp
   attr_accessible :price, :greenDesc, :city_id, :country_id, :currency, :exchange_type, :language_practice
+  attr_accessor :selfintro
   
   #has appointment requests from travelers
   has_many :appt_requests, class_name: "Appointment", foreign_key: "host_id", dependent: :destroy

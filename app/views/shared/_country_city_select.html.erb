@@ -5,7 +5,7 @@
   <%= text_field_tag "city_country_location", nil, :placeholder=>placeholder, :value=>value, :size=>156, :data=>{autocomplete_source: locations_path} %>
 -->
 
- <% @cities = City.order(:name) %>
+ <% @cities = City.order(:country_id) %>
  <% placeholder = location_is_specified ? "#{remembered_city.name}, #{remembered_country.name}" : 'where are you going?' %>
  <% value = location_is_specified ? placeholder : nil %>
  <% places = @cities.map{|c| "#{c.name}, #{Country.find_by_id(c.country_id).name}"} %>

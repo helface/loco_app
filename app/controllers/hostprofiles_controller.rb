@@ -13,12 +13,21 @@ class HostprofilesController < ApplicationController
     def create
       @user = current_user
       languages = params[:hostprofile][:language_tokens]
+      selfintro = params[:hostprofile][:selfintro]
       if !languages.nil? && !languages.empty? 
         @user.language_tokens = languages
         @user.save
-        sign_in @user
-        params[:hostprofile].delete :language_tokens    
+        params[:hostprofile].delete :language_tokens 
       end
+      if !selfintro.nil? && !selfintro.empty?
+        @user.self_intro = selfintro
+        @user.update_attributes(self_intro: selfintro)
+        params[:hostprofile].delete :selfintro   
+      end 
+      if languages || selfintro
+        sign_in @user
+      end 
+      
       session[:form_params].deep_merge!(params[:hostprofile]) if params[:hostprofile]
       @hostprofile = @user.build_hostprofile(session[:form_params])
       if !@user.languages.nil? && !@user.languages.empty?

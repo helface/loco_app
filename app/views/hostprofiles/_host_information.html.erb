@@ -15,7 +15,14 @@
       </div>
          <%= f.text_field :language_tokens, data: {load: Language.prefill_languages(@user.languages)} %>
       <br/>
+      <% end %>
+      <% if @user.self_intro.nil? || @user.self_intro.empty? %>
+      <div id="personalform" style="margin-top:15px">
+         <%= f.label :tell_us_a_bit_about_yourself %>
+         <%= f.text_area :selfintro%>
+      </div>
       
+      <br/>
       <% end %>
       <div class="edit_link" id="personalform">
          <%= f.label :what_type_of_service_are_you_providing? %>  
