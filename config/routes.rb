@@ -10,7 +10,7 @@ LocoApp::Application.routes.draw do
  # root to: "pages#home"
  # mount Sidekiq::Web, at: "/sidekiq"
   
-  resources :users, only:[:new, :show, :index, :create, :edit, :update] do
+  resources :users, only:[:new, :show, :index, :create, :edit, :update, :destroy] do
     resources :messages, only: [:new, :show, :create, :destroy]
     resources :reviews, only: [:new, :create, :destroy]
     resources :travelerreviews, only: [:new, :create, :destroy]
@@ -33,6 +33,7 @@ LocoApp::Application.routes.draw do
       put :reactivate
       get :deactivate
       get :preview
+      get :dashboard
     end
   end
   resources :sessions, only: [:create, :destroy]
@@ -83,6 +84,7 @@ LocoApp::Application.routes.draw do
   match 'fill_location', to:'locations#fill_location'
   match 'updateprofile', to:'hostprofiles#update'
   match 'meetups', to:'appointments#index'
+  match 'admin', to:'users#dashboard'
   root :to => 'pages#home'
 
   # The priority is based upon order of creation:

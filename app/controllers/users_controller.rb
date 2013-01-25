@@ -5,8 +5,15 @@ before_filter :signed_in_user, only: [:edit, :update, :destroy, :recommend, :upd
 before_filter :active_user, only: [:show]
 before_filter :correct_user, only: [:edit, :update, :update_profile_pic, :deactivate]
 before_filter :location_specified, only: :index
-#before_filter :admin_user, only: :destroy
+before_filter :admin_user, only: [:destroy, :dashboard]
     
+  def dashboard
+    @users = User.order('created_at DESC').paginate(page: params[:page], per_page: 20)
+    respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @users }
+    end
+  end
  
   def index  
       store_nav_history
@@ -87,8 +94,8 @@ before_filter :location_specified, only: :index
  
   def destroy
     @user = User.find(params[:id])
-    #@user.destroy
-    redirect_to root_path
+    @user.destroy
+    redirect_to admin_path
   end
   
   def toggle_activation
@@ -185,7 +192,7 @@ private
     #possibly due to the 1:1 association.
     if params[:controller]=="users"
        @user=User.find_by_id(params[:id])
-       redirect_to(root_path) unless current_user?(@user)
+       redirect_to(root_path) unless current_user?(@user) || current_user.admin == true
     end
   end
     

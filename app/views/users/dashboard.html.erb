@@ -1,0 +1,25 @@
+<div class="span12">
+
+<h3>Total user: <%= @users.count %></h3>
+<h3>Total hosts: <%= @users.where("is_host = ?", true).count %></h3><br/>
+<table class="admin-table">
+   <tr>
+        <td> <b>Firstname</b> </td>
+        <td> <b>Lastname</b> </td>
+        <td> <b>Host</b> </td> 
+        <td> <b>Joined on </b></td>     
+   </tr>
+<% @users.each do |user| %>
+  
+  <tr class="edit_link">
+    <td><%= user.firstname %></td>
+    <td><%= user.lastname %></td>
+    <td><%= user.is_host? %></td>
+    <td><%= user.created_at.strftime("%b %d %I:%M ") %></td>
+    
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table></div>
