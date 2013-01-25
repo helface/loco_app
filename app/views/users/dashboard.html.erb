@@ -2,6 +2,8 @@
 
 <h3>Total user: <%= @users.count %></h3>
 <h3>Total hosts: <%= @users.where("is_host = ?", true).count %></h3><br/>
+<%= will_paginate %>  
+
 <table class="admin-table">
    <tr>
         <td> <b>Firstname</b> </td>
@@ -9,6 +11,8 @@
         <td> <b>Host</b> </td> 
         <td> <b>Joined on </b></td>     
    </tr>
+   
+
 <% @users.each do |user| %>
   
   <tr class="edit_link">
@@ -22,4 +26,7 @@
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
-</table></div>
+</table>
+<%= will_paginate %>  
+
+</div>

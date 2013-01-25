@@ -8,7 +8,7 @@ before_filter :location_specified, only: :index
 before_filter :admin_user, only: [:destroy, :dashboard]
     
   def dashboard
-    @users = User.order('created_at DESC').paginate(page: params[:page], per_page: 20)
+    @users = User.order('created_at DESC').paginate(page: params[:page], per_page: 50)
     respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @users }
