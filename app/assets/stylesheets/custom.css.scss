@@ -149,12 +149,13 @@ body {
    }
 
    &#weave{
-	   background-image:url('ground.png'); 	
+	   background-image:url('paris.jpg'); 	
    }
-
-	padding:10px; 
+	&#weave-small{
+	   background-image:url('paristop.jpg'); 	
+   }
+	padding:10px 0px 10px 10px; 
 	border-radius:5px; 
-	width:96%;
 	
 	div#overlay{
 		position:relative;

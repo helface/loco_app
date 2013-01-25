@@ -7,7 +7,7 @@
       <div id="overlay">       
          <%if profile.exchange_type == "money"%>
              <div id="service-title" style="color:#FF4697">                 
-             <%= "asking for $#{profile.price}"%> <%= profile.currency %>
+             <%= "#{profile.price}"%> <%= profile.currency %>
          <% elsif profile.exchange_type =="language practice" %>
              <div style="color:#1EC8EA" id="service-title"><%= "wants to practice #{profile.language_practice.downcase}" unless profile.language_practice.nil?%>
          <% else %>
