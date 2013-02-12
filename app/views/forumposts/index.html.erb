@@ -10,6 +10,11 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+<style type='text/css'>@import url('http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css');</style>
+<script src='http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8">
+  BAROMETER.load('ZQ96jNO9qcjwTy2LZPtsC');
+</script>
 <% end %>
 <% if @city && @country %>
    <% provide(:title, "travelers seeking hosts in #{@city.name}, #{@country.name}") %>

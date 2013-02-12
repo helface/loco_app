@@ -13,7 +13,11 @@
   })();
 </script>
 <% end %>
-
+<style type='text/css'>@import url('http://getbarometer.s3.amazonaws.com/assets/barometer/css/barometer.css');</style>
+<script src='http://getbarometer.s3.amazonaws.com/assets/barometer/javascripts/barometer.js' type='text/javascript'></script>
+<script type="text/javascript" charset="utf-8">
+  BAROMETER.load('ZQ96jNO9qcjwTy2LZPtsC');
+</script>
 <div class = "container">
    <div class="filler">
    </div>
@@ -65,11 +69,16 @@
    </div>                 
 </div>
 <br/>
-<div class="container">    
-   <div class="center hero-unit" style="border: 1px solid #ddd">
-      <div class="aboutpage_dark offset1">
+<div class="container">   
+<div class="row">
+   <div style="background-color:#eed">
+      <div class="aboutpage_dark offset2">
+         <br/><br/>
+         
          <%= render "shared/how_it_works" %>
       </div>     
    </div>
+</div> 
+   
 </div>
 <%=render "shared/footer" %>
